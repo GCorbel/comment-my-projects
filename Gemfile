@@ -49,3 +49,4 @@ end
 
 gem 'devise'
 gem 'rb-readline'
+gem 'pjax_rails'
