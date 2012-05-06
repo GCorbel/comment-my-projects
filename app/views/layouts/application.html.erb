@@ -19,9 +19,11 @@
           <%= link_to "Comment My Projects", root_path, class: "brand" %>
           <div class="nav-collapse">
             <ul class="nav">
+              <li><%= link_to "Liste des projets", projects_path %></li>
+              <li><%= link_to "Ajouter un projet", new_project_path %></li>
               <% if user_signed_in? %>
-                <li><%= link_to "Deconnexion", destroy_user_session_path, method: :delete %></li>
                 <li><%= link_to "Gerer mon compte", edit_user_registration_path(current_user) %></li>
+                <li><%= link_to "Deconnexion", destroy_user_session_path, method: :delete %></li>
               <% else %>
                 <li><%= link_to "Inscription", new_user_registration_path %></li>
                 <li><%= link_to "Connexion", new_user_session_path %></li>
