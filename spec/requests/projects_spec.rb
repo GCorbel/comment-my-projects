@@ -15,5 +15,16 @@ describe 'Project' do
         page.should have_content("Votre projet a été ajouté")
       end
     end
+
+    context 'with invalid data' do
+      it 'show errors' do
+        sign_in
+
+        visit new_project_path
+        click_button "Créer"
+
+        page.body.should have_content("champ obligatoire")
+      end
+    end
   end
 end

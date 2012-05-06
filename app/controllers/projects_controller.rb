@@ -7,10 +7,14 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new
-    current_user.projects << @project
-    redirect_to(project_path(@project),
-                notice: "Votre projet a été ajouté")
+    @project = Project.new(params[:project])
+    if @project.valid? 
+      current_user.projects << @project
+      redirect_to(project_path(@project),
+                  notice: "Votre projet a été ajouté")
+    else
+      render :new
+    end
   end
 
   def show
