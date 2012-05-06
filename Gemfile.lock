@@ -92,7 +92,10 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     mime-types (1.18)
+    mocha (0.11.4)
+      metaclass (~> 0.0.1)
     multi_json (1.3.4)
     nokogiri (1.5.2)
     orm_adapter (0.0.7)
@@ -152,6 +155,11 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
+    shoulda-matchers (1.1.0)
+      activesupport (>= 3.0.0)
+    simple_form (2.0.2)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     spork (1.0.0rc3)
     spork-rails (3.2.0)
       rails (>= 3.0.0, < 3.3.0)
@@ -193,11 +201,14 @@ DEPENDENCIES
   factory_girl_rails
   fuubar
   jquery-rails
+  mocha
   pjax_rails
   rails (= 3.2.3)
   rb-readline
   rspec-rails
   sass-rails (~> 3.2.3)
+  shoulda-matchers
+  simple_form
   spork-rails
   sqlite3
   therubyracer

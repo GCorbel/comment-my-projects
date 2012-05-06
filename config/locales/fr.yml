@@ -173,9 +173,9 @@ fr:
     select:
       prompt: "Veuillez sélectionner"
     submit:
-      create: "Créer u utilisateur"
-      update: "Modifier cet utilisateur"
-      submit: "Enregistrer cet utilisateur"
+      create: "Créer"
+      update: "Modifier"
+      submit: "Valider"
 
   errors: &errors
     format: "%{attribute} : %{message}"
@@ -229,3 +229,6 @@ fr:
         password_confirmation: "Confirmation du mot de passe"
         remember_me: "Se souvenir de moi"
         current_password: "Mot de passe actuel"
+      project:
+        title: "Titre"
+        url: "Url"

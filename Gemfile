@@ -45,8 +45,11 @@ group :test do
   gem 'spork-rails'
   gem 'rspec-rails'
   gem 'fuubar'
+  gem 'mocha'
+  gem 'shoulda-matchers'
 end
 
 gem 'devise'
 gem 'rb-readline'
 gem 'pjax_rails'
+gem 'simple_form'
