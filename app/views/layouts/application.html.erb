@@ -38,23 +38,9 @@
       <div class="row">
         <div class="span9">
           <div data-pjax-container>
-          <% if flash[:notice].present? %>
-            <div class="alert alert-success">
-              <%= content_tag :div, flash[:notice] %>
-            </div>
-          <% end %>
-
-          <% if flash[:error].present? %>
-            <div class="alert alert-error">
-              <%= content_tag :div, flash[:error] %>
-            </div>
-          <% end %>
-
-          <% if flash[:alert].present? %>
-            <div class="alert alert-info">
-              <%= content_tag :div, flash[:alert] %>
-            </div>
-          <% end %>
+            <%= alert_box("success", flash[:notice]) %>
+            <%= alert_box("error", flash[:error]) %>
+            <%= alert_box("alert", flash[:alert]) %>
             <%= yield %>
           </div>
         </div>
