@@ -36,4 +36,13 @@ describe 'Project' do
       page.should have_content(project.url)
     end
   end
+
+  describe 'Show' do
+    it 'Show informations about the project' do
+      project = create(:project)
+      visit project_path(project)
+      page.should have_content(project.title)
+      page.should have_content(project.url)
+    end
+  end
 end

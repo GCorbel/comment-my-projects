@@ -1,6 +1,10 @@
 #encoding=utf-8
 class ProjectsController < ApplicationController
-  before_filter :authenticate_user!, except: :index
+  before_filter :authenticate_user!, except: [:index, :show]
+
+  def show
+    @project = Project.find(params[:id])
+  end
 
   def index
     @projects = Project.all
@@ -19,9 +23,5 @@ class ProjectsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
-    @project = Project.find(params[:id])
   end
 end

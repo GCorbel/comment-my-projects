@@ -14,6 +14,14 @@ describe ProjectsController do
     end
   end
 
+  describe "GET 'index'" do
+    it "render index template" do
+      Project.stubs(:find).returns(project)
+      get 'show'
+      should render_template('show')
+    end
+  end
+
   describe "GET 'new'" do
     it "returns http success" do
       sign_in user
