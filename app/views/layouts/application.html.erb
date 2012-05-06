@@ -37,6 +37,7 @@
     <div class="container">
       <div class="row">
         <div class="span9">
+          <div data-pjax-container>
           <% if flash[:notice].present? %>
             <div class="alert alert-success">
               <%= content_tag :div, flash[:notice] %>
@@ -54,7 +55,6 @@
               <%= content_tag :div, flash[:alert] %>
             </div>
           <% end %>
-          <div data-pjax-container>
             <%= yield %>
           </div>
         </div>
