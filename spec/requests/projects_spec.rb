@@ -27,4 +27,13 @@ describe 'Project' do
       end
     end
   end
+
+  describe 'Index' do
+    it 'Show the list of projects' do
+      project = create(:project)
+      visit projects_path
+      page.should have_content(project.title)
+      page.should have_content(project.url)
+    end
+  end
 end

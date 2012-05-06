@@ -1,6 +1,10 @@
 #encoding=utf-8
 class ProjectsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: :index
+
+  def index
+    @projects = Project.all
+  end
 
   def new
     @project = Project.new

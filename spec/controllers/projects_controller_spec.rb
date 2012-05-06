@@ -7,10 +7,16 @@ describe ProjectsController do
   let!(:project) { build_stubbed(:project) }
   let(:user) { stub(projects: []) }
 
-  before(:each) { sign_in user }
+  describe "GET 'index'" do
+    it "render index template" do
+      get 'index'
+      should render_template('index')
+    end
+  end
 
   describe "GET 'new'" do
     it "returns http success" do
+      sign_in user
       get 'new'
       should render_template('new')
     end
@@ -18,6 +24,7 @@ describe ProjectsController do
 
   describe "POST 'create'" do
     before(:each) do
+      sign_in user
       Project.stubs(:new).returns(project)
     end
 
