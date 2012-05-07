@@ -2,6 +2,8 @@
 require 'spec_helper'
 
 describe 'Project' do
+  let(:project) { create(:project) }
+
   describe 'Create' do
     context 'with valid data' do
       it 'add a new project' do
@@ -30,7 +32,7 @@ describe 'Project' do
 
   describe 'Index' do
     it 'Show the list of projects' do
-      project = create(:project)
+      project
       visit projects_path
       page.should have_content(project.title)
       page.should have_content(project.url)
@@ -39,7 +41,6 @@ describe 'Project' do
 
   describe 'Show' do
     it 'Show informations about the project' do
-      project = create(:project)
       visit project_path(project)
       page.should have_content(project.title)
       page.should have_content(project.url)
@@ -47,8 +48,6 @@ describe 'Project' do
   end
 
   describe 'Update' do
-    let(:project) { create(:project) }
-
     context "with valid data" do
       it 'update the project' do
         sign_in
