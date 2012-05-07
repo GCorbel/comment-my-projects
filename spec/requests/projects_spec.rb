@@ -49,15 +49,29 @@ describe 'Project' do
   describe 'Update' do
     let(:project) { create(:project) }
 
-    it 'update the project' do
-      sign_in
+    context "with valid data" do
+      it 'update the project' do
+        sign_in
 
-      visit edit_project_path(project)
-      fill_in("Titre", with: "Mon Projet")
-      fill_in("Url", with: "http://www.google.com")
-      click_button "Modifier"
+        visit edit_project_path(project)
+        fill_in("Titre", with: "Mon Projet")
+        fill_in("Url", with: "http://www.google.com")
+        click_button "Modifier"
 
-      page.should have_content("Votre projet a été modifié")
+        page.should have_content("Votre projet a été modifié")
+      end
+    end
+
+    context "with invalid data" do
+      it "show errors" do
+        sign_in
+
+        visit edit_project_path(project)
+        fill_in("Titre", with: "")
+        fill_in("Url", with: "")
+        click_button "Modifier"
+        page.should have_content("champ obligatoire")
+      end
     end
   end
 end

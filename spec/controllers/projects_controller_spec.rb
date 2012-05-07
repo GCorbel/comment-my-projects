@@ -101,5 +101,14 @@ describe ProjectsController do
         should set_the_flash[:notice].to("Votre projet a été modifié")
       end
     end
+
+    context "when invalid" do
+      before(:each) { project.stubs(:update_attributes).returns(false) }
+
+      it "render edit template" do
+        post 'update'
+        should render_template('edit')
+      end
+    end
   end
 end

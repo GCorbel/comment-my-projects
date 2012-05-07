@@ -32,9 +32,11 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
 
-    @project.update_attributes(params[:project])
-
-    redirect_to(project_path(@project),
-                notice: "Votre projet a été modifié")
+    if @project.update_attributes(params[:project])
+      redirect_to(project_path(@project),
+                  notice: "Votre projet a été modifié")
+    else
+      render :edit
+    end
   end
 end
