@@ -64,4 +64,42 @@ describe ProjectsController do
       end
     end
   end
+
+  describe "GET 'edit'" do
+    before(:each) do
+      sign_in user
+      Project.stubs(:find).returns(project)
+    end
+
+    it "render edit template" do
+      get 'edit'
+      should render_template('edit')
+    end
+  end
+
+  describe "POST 'update'" do
+    before(:each) do
+      sign_in user
+      Project.stubs(:find).returns(project)
+    end
+
+    context "when valid" do
+      before(:each) { project.stubs(:update_attributes).returns(true) }
+
+      it "redirect to project path" do
+        post 'update'
+        should redirect_to(project)
+      end
+
+      it "update the project" do
+        project.expects(:update_attributes)
+        post 'update'
+      end
+
+      it "set a flash message" do
+        post 'update'
+        should set_the_flash[:notice].to("Votre projet a été modifié")
+      end
+    end
+  end
 end

@@ -45,4 +45,19 @@ describe 'Project' do
       page.should have_content(project.url)
     end
   end
+
+  describe 'Update' do
+    let(:project) { create(:project) }
+
+    it 'update the project' do
+      sign_in
+
+      visit edit_project_path(project)
+      fill_in("Titre", with: "Mon Projet")
+      fill_in("Url", with: "http://www.google.com")
+      click_button "Modifier"
+
+      page.should have_content("Votre projet a été modifié")
+    end
+  end
 end

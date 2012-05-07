@@ -24,4 +24,17 @@ class ProjectsController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    @project = Project.find(params[:id])
+  end
+
+  def update
+    @project = Project.find(params[:id])
+
+    @project.update_attributes(params[:project])
+
+    redirect_to(project_path(@project),
+                notice: "Votre projet a été modifié")
+  end
 end
