@@ -73,4 +73,15 @@ describe 'Project' do
       end
     end
   end
+
+  describe 'Destroy' do
+    it 'Destroy the project' do
+      sign_in
+
+      visit project_path(project)
+      click_link "Supprimer"
+
+      page.should have_content("Votre projet a été supprimé")
+    end
+  end
 end

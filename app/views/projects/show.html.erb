@@ -1,2 +1,12 @@
 <h1><%= @project.title %></h1>
 <p>Url : <%= link_to(@project.url, @project.url) %></p>
+<% if signed_in? %>
+  <div class="form-actions">
+    <%= link_to "Modifier",edit_project_path(@project), :class => 'btn' %>
+    <%= link_to "Supprimer",
+                project_path(@project),
+                :method => 'delete',
+                :confirm => 'Êtes vous sûr?',
+                :class => 'btn btn-danger' %>
+  </div>
+<% end %>

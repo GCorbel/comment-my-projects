@@ -111,4 +111,27 @@ describe ProjectsController do
       end
     end
   end
+
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      sign_in user
+      Project.stubs(:find).returns(project)
+      project.stubs(:destroy)
+    end
+
+    it "redirect to projects path" do
+      delete 'destroy'
+      should redirect_to(projects_path)
+    end
+
+    it "delete the project" do
+      project.expects(:destroy)
+      delete 'destroy'
+    end
+
+    it "set a flash message" do
+      delete 'destroy'
+      should set_the_flash[:notice].to("Votre projet a été supprimé")
+    end
+  end
 end
