@@ -38,6 +38,7 @@ describe ProjectsController do
 
     context "with valid data" do
       before(:each) { project.stubs(:valid?).returns(true) }
+
       it "returns http success" do
         post 'create'
         should redirect_to(project)
