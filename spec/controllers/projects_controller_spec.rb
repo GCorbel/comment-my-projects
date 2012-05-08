@@ -14,8 +14,8 @@ describe ProjectsController do
     end
   end
 
-  describe "GET 'index'" do
-    it "render index template" do
+  describe "GET 'show'" do
+    it "render show template" do
       Project.stubs(:find).returns(project)
       get 'show'
       should render_template('show')
@@ -23,7 +23,7 @@ describe ProjectsController do
   end
 
   describe "GET 'new'" do
-    it "returns http success" do
+    it "render new template" do
       sign_in user
       get 'new'
       should render_template('new')
