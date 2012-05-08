@@ -22,7 +22,7 @@ describe 'Project' do
     context 'with invalid data' do
       it 'show errors' do
         click_button "Créer"
-        page.body.should have_content("champ obligatoire")
+        page.should have_content("champ obligatoire")
       end
     end
   end
