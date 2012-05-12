@@ -1,5 +1,7 @@
 CommentMyProjects::Application.routes.draw do
-  resources :projects
+  resources :projects do
+    resource :category_projects
+  end
 
   devise_for :users
 
