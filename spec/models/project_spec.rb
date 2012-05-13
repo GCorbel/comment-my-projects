@@ -17,7 +17,7 @@ describe Project do
     project = Project.create(title: "Title", url: "http://www.test.com")
     project.categories.first.label.should == "General"
     project.category_projects.first.description.should == 
-      "Description de votre projet"
+      "Title : <a href=\"http://www.test.com\">http://www.test.com</a>"
   end
 
   describe :to_s do

@@ -1,5 +1,6 @@
-<h1><%= @project.title %></h1>
-<p>Url : <%= link_to(@project.url, @project.url) %></p>
+<% @project.category_projects.each do |category_project| %>
+  <%= category_project.description %>
+<% end %>
 <% if signed_in? %>
   <div class="form-actions">
     <%= link_to('Ajouter une categorie',
