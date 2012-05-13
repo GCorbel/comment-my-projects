@@ -1,7 +1,7 @@
 <% @project.category_projects.each do |category_project| %>
   <%= category_project.description %>
 <% end %>
-<% if signed_in? %>
+<% if signed_in? && current_user == @project.user %>
   <div class="form-actions">
     <%= link_to('Ajouter une categorie',
                 new_project_category_projects_path(@project),
