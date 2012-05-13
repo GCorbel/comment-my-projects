@@ -238,3 +238,5 @@ fr:
         url: "Url"
       category:
         label: "Label"
+      category_project:
+        category: "Categorie"

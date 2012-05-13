@@ -4,7 +4,7 @@ require 'spec_helper'
 describe CategoryProjectsController do
   let(:user) { stub }
   let(:project) { build_stubbed(:project) }
-  let(:category_project) { stub }
+  let(:category_project) { stub(:save) }
 
   before(:each) do
     sign_in user
@@ -27,16 +27,30 @@ describe CategoryProjectsController do
     end
 
     context "with valid data" do
-      before(:each) { project.stubs(:valid?).returns(true) }
+      before(:each) { category_project.stubs(:save).returns(true) }
 
       it "returns http success" do
         post 'create'
         should redirect_to(project)
       end
 
+      it "Save the relation" do
+        category_project.expects(:save)
+        post 'create'
+      end
+
       it "set a flash message" do
         post 'create'
         should set_the_flash[:notice].to("La description a été ajoutée")
+      end
+    end
+
+    context "with invalid data" do
+      before(:each) { category_project.stubs(:save).returns(false) }
+
+      it "render new template" do
+        post 'create'
+        should render_template('new')
       end
     end
   end

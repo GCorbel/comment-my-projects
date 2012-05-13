@@ -12,8 +12,8 @@ class Project < ActiveRecord::Base
 
   def add_general_category
     category = Category.find_by_label 'General'
-    CategoryProject.create(category: category, 
-                           project: self,
+    CategoryProject.create(category_id: category, 
+                           project_id: self,
                            description: 'Description de votre projet'
                           )
   end

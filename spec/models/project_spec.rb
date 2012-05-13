@@ -19,4 +19,10 @@ describe Project do
     project.category_projects.first.description.should == 
       "Description de votre projet"
   end
+
+  describe :to_s do
+    subject { Category.new(label: "Category").to_s}
+
+    it { should == "Category" }
+  end
 end

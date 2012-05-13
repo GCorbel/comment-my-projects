@@ -1,9 +1,8 @@
 <%= simple_form_for @category_project, 
                     url: project_category_projects_path(@project) do |f| 
                   %>
-  <%= f.label :category, "Categorie" %>
-  <%= f.select :category, @categories.map {|c| [c.label, c.id]} %>
-  <%= f.label :description, "Description" %>
-  <%= f.text_area :description %>
+  <%= f.input :project_id, as: :hidden %>
+  <%= f.association :category, collection: @categories %>
+  <%= f.input :description, as: :text %>
   <%= f.button :submit, 'Valider' %>
 <% end %>
