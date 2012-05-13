@@ -1,6 +1,20 @@
-<% @project.category_projects.each do |category_project| %>
-  <%= category_project.description %>
-<% end %>
+<ul class="nav nav-tabs">
+  <% @project.category_projects.each_with_index do 
+              |category_project, index| %>
+    <li <%=raw index == 0 ? 'class="active"' : ''%>>
+      <%= link_to category_project.category.label, "##{category_project.category.label}" %>
+    </li>
+  <% end %>
+</ul>
+<div class="tab-content">
+  <% @project.category_projects.each_with_index do 
+                |category_project, index| %>
+    <div class="tab-pane <%= index == 0 ? 'active' : '' %>" 
+         id="<%= category_project.category.label%>">
+      <%= category_project.description %>
+    </div>
+  <% end %>
+</div>
 <% if signed_in? && current_user == @project.user %>
   <div class="form-actions">
     <%= link_to('Ajouter une categorie',
