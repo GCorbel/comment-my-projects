@@ -2,7 +2,8 @@
 require 'spec_helper'
 
 describe 'Project' do
-  let(:project) { create(:project) }
+  let(:user) { create(:user) }
+  let(:project) { create(:project, user: user) }
 
   describe 'Create' do
     before(:each) do
@@ -72,7 +73,7 @@ describe 'Project' do
 
   describe 'Destroy' do
     it 'Destroy the project' do
-      sign_in
+      sign_in project.user
       visit project_path(project)
       click_link "Supprimer"
       page.should have_content("Votre projet a été supprimé")
