@@ -35,7 +35,7 @@ describe 'CategoryProjects' do
     end
   end
 
-  context 'Upate' do
+  context 'Update' do
     before(:each) do
       category
       visit edit_project_category_project_path(project, category_project)
