@@ -103,4 +103,27 @@ describe CategoryProjectsController do
       end
     end
   end
+
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      sign_in user
+      CategoryProject.stubs(:find).returns(category_project)
+      category_project.stubs(:destroy)
+    end
+
+    it "redirect to projects path" do
+      delete 'destroy'
+      should redirect_to(project)
+    end
+
+    it "delete the project" do
+      category_project.expects(:destroy)
+      delete 'destroy'
+    end
+
+    it "set a flash message" do
+      delete 'destroy'
+      should set_the_flash[:notice].to("La description a été supprimée")
+    end
+  end
 end

@@ -12,6 +12,11 @@
     <div class="tab-pane <%= index == 0 ? 'active' : '' %>" 
          id="<%= category_project.category.label%>">
       <%= category_project.description %>
+      <%= link_to "Supprimer",
+                  project_category_project_path(category_project),
+                  method: 'delete',
+                  confirm: 'Êtes vous sûr?',
+                  class: 'btn btn-danger' %>
     </div>
   <% end %>
 </div>

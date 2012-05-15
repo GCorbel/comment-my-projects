@@ -57,6 +57,17 @@ describe 'CategoryProjects' do
     end
   end
 
+  describe 'Destroy' do
+    it 'Destroy the project' do
+      sign_in project.user
+      visit project_path(project)
+      within('.tab-pane') do
+        click_link "Supprimer"
+      end
+      page.should have_content("La description a été supprimée")
+    end
+  end
+
   def fill_form
     select('New Category', from: 'Categorie')
     fill_in('Description', with: 'New description')

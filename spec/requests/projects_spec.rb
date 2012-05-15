@@ -75,7 +75,9 @@ describe 'Project' do
     it 'Destroy the project' do
       sign_in project.user
       visit project_path(project)
-      click_link "Supprimer"
+      within('.form-actions') do
+        click_link "Supprimer"
+      end
       page.should have_content("Votre projet a été supprimé")
     end
   end

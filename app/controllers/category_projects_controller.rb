@@ -31,6 +31,12 @@ class CategoryProjectsController < ApplicationController
     end
   end
 
+  def destroy
+    @category_project = CategoryProject.find(params[:id])
+    @category_project.destroy
+    redirect_to(@project, notice: "La description a été supprimée")
+  end
+
   private
     def find_project_and_set_categories
       @project = Project.find(params[:project_id])
