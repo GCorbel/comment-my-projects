@@ -16,6 +16,21 @@ class CategoryProjectsController < ApplicationController
     end
   end
 
+  def edit
+    @category_project = CategoryProject.find(params[:id])
+    @categories << @category_project.category if @category_project
+  end
+
+  def update
+    @category_project = CategoryProject.find(params[:id])
+    if @category_project.update_attributes(params[:category_project])
+      redirect_to(@project, notice: "La description a été modifiée")
+    else
+      @categories << @category_project.category
+      render :edit
+    end
+  end
+
   private
     def find_project_and_set_categories
       @project = Project.find(params[:project_id])

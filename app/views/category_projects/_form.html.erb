@@ -1,0 +1,6 @@
+<%= simple_form_for [@project, @category_project] do |f| %>
+  <%= f.input :project_id, as: :hidden %>
+  <%= f.association :category, collection: @categories %>
+  <%= f.input :description, as: :text %>
+  <%= f.button :submit, 'Valider' %>
+<% end %>

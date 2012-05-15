@@ -7,7 +7,7 @@ describe CategoryProjectsController do
   let(:category_project) { stub(:save) }
 
   before(:each) do
-    sign_in user
+    sign_in
     Project.stubs(:find).returns(project)
   end
 
@@ -51,6 +51,55 @@ describe CategoryProjectsController do
       it "render new template" do
         post 'create'
         should render_template('new')
+      end
+    end
+  end
+
+  describe "GET 'edit'" do
+    before(:each) do
+      sign_in user
+      CategoryProject.stubs(:find)
+    end
+
+    it "render edit template" do
+      get 'edit'
+      should render_template('edit')
+    end
+  end
+
+  describe "POST 'update'" do
+    before(:each) do
+      sign_in user
+      CategoryProject.stubs(:find)
+                     .returns(category_project)
+      category_project.stubs(:category)
+    end
+
+    context "when valid" do
+      before(:each) { category_project.stubs(:update_attributes).returns(true) }
+
+      it "redirect to project path" do
+        post 'update'
+        should redirect_to(project)
+      end
+
+      it "update the project" do
+        category_project.expects(:update_attributes)
+        post 'update'
+      end
+
+      it "set a flash message" do
+        post 'update'
+        should set_the_flash[:notice].to("La description a été modifiée")
+      end
+    end
+
+    context "when invalid" do
+      before(:each) { category_project.stubs(:update_attributes).returns(false) }
+
+      it "render edit template" do
+        post 'update'
+        should render_template('edit')
       end
     end
   end

@@ -2,22 +2,27 @@
 require 'spec_helper'
 
 describe 'CategoryProjects' do
-  let(:project) { create(:project) }
+  let(:user) { create(:user) }
+  let(:project) { create(:project, user: user) }
+  let(:category) { create(:category, label: "New Category") }
+  let(:category_project) do
+    CategoryProject.create(project_id: project.id, 
+                           category_id: category.id, 
+                           description: "test")
+  end
+
 
   before(:each) { sign_in }
 
   context 'Create' do
     before(:each) do
-      create(:category, label: "New Category")
-      visit new_project_category_projects_path(project)
+      category
+      visit new_project_category_project_path(project)
     end
 
     context 'With valid data' do
       it 'Add a new category for a project' do
-        select('New Category', from: 'Categorie')
-        fill_in('Description', with: 'New description')
-        click_button 'Valider'
-
+        fill_form
         page.should have_content('La description a été ajoutée')
       end
     end
@@ -28,5 +33,22 @@ describe 'CategoryProjects' do
         page.should have_content("champ obligatoire")
       end
     end
+  end
+
+  context 'Upate' do
+    context 'With valid data' do
+      it 'Update the category for the project' do
+        category
+        visit edit_project_category_project_path(project, category_project)
+        fill_form
+        page.should have_content('La description a été modifiée')
+      end
+    end
+  end
+
+  def fill_form
+    select('New Category', from: 'Categorie')
+    fill_in('Description', with: 'New description')
+    click_button 'Valider'
   end
 end
