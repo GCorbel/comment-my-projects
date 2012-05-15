@@ -36,12 +36,23 @@ describe 'CategoryProjects' do
   end
 
   context 'Upate' do
+    before(:each) do
+      category
+      visit edit_project_category_project_path(project, category_project)
+    end
+
     context 'With valid data' do
       it 'Update the category for the project' do
-        category
-        visit edit_project_category_project_path(project, category_project)
         fill_form
         page.should have_content('La description a été modifiée')
+      end
+    end
+
+    context 'With invalid data' do
+      it 'Show error' do
+        fill_in('Description', with: '')
+        click_button 'Valider'
+        page.should have_content("champ obligatoire")
       end
     end
   end
