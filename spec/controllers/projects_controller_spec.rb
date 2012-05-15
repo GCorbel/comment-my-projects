@@ -15,10 +15,18 @@ describe ProjectsController do
   end
 
   describe "GET 'show'" do
+    let!(:comment) { build_stubbed(:comment) }
+
+    before(:each) { Project.stubs(:find).returns(project) } 
+
     it "render show template" do
-      Project.stubs(:find).returns(project)
       get 'show'
       should render_template('show')
+    end
+
+    it "create a new comment" do
+      Comment.expects(:new).returns(comment)
+      get 'show'
     end
   end
 
