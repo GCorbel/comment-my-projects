@@ -30,15 +30,6 @@ describe CommentsController do
         post 'create'
         should set_the_flash[:notice].to("Votre commentaire a été ajouté")
       end
-
-      context "when user is signed in" do
-        before(:each) { sign_in user }
-
-        it "add the user to comment" do
-          post 'create'
-          comment.user.should == user
-        end
-      end
     end
 
     context "with invalid data" do
@@ -47,6 +38,15 @@ describe CommentsController do
       it "render new template" do
         post 'create'
         should render_template('projects/show')
+      end
+    end
+
+    context "when user is signed in" do
+      before(:each) { sign_in user }
+
+      it "add the user to comment" do
+        post 'create'
+        comment.user.should == user
       end
     end
   end
