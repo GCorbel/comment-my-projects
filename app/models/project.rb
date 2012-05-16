@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   has_many(:categories, through: :category_projects)
   has_many :category_projects
+  has_many :comments
   belongs_to :user
 
   attr_accessible :title, :url

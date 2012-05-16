@@ -27,6 +27,10 @@
     </div>
   <% end %>
 </div>
+<% @project.comments.each do |comment| %>
+  <%= comment.username %>
+  <%= comment.message %>
+<% end %>
 <%= simple_form_for [@project, @comment] do |f| %>
   <%= f.input :username %>
   <%= f.association :category, collection: @project.categories %>

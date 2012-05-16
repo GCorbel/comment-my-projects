@@ -4,6 +4,18 @@ require 'spec_helper'
 describe 'Comments' do
   let!(:project) { create(:project) }
 
+  describe 'Index' do
+    it 'Show comments for the project' do
+      create(:comment, 
+             message: 'My Message',
+             username: 'My name', 
+             project: project)
+      visit project_path(project)
+      page.should have_content('My Message')
+      page.should have_content('My name')
+    end
+  end
+
   describe 'Create' do
     before(:each) { visit project_path(project) }
 
