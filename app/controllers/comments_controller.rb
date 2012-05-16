@@ -10,4 +10,11 @@ class CommentsController < ApplicationController
       render 'projects/show'
     end
   end
+
+  def destroy
+    project = Project.find(params[:project_id])
+    comment = Comment.find(params[:id])
+    comment.destroy
+    redirect_to(project, notice: 'Votre commentaire a été supprimé')
+  end
 end

@@ -28,8 +28,17 @@
   <% end %>
 </div>
 <% @project.comments.each do |comment| %>
-  <%= comment.username %>
-  <%= comment.message %>
+  <div id="comment_<%= comment.id %>">
+    <%= comment.username %>
+    <%= comment.message %>
+    <% if signed_in? && @project.user == current_user %>
+      <%= link_to 'Supprimer', 
+                  project_comment_path(@project, comment),
+                  method: 'delete', 
+                  confirm: 'Êtes vous sûr?', 
+                  class: 'btn btn-danger' %>
+    <% end %>
+  </div>
 <% end %>
 <%= simple_form_for [@project, @comment] do |f| %>
   <%= f.input :username %>
