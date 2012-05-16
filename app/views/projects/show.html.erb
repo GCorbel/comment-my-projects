@@ -31,7 +31,8 @@
   <div id="comment_<%= comment.id %>">
     <%= comment.username %>
     <%= comment.message %>
-    <% if signed_in? && @project.user == current_user %>
+    <% if signed_in? && ( @project.user == current_user || 
+                          comment.user == current_user) %>
       <%= link_to 'Supprimer', 
                   project_comment_path(@project, comment),
                   method: 'delete', 
