@@ -2,9 +2,9 @@
 require 'spec_helper'
 
 describe CommentsController do
-  let!(:project) { create(:project) }
-  let!(:comment) { create(:comment) }
-  let(:user) { create(:user) }
+  let!(:project) { build_stubbed(:project) }
+  let!(:comment) { build_stubbed(:comment) }
+  let(:user) { build_stubbed(:user) }
 
   describe "POST 'create'" do
     before(:each) do
@@ -13,7 +13,7 @@ describe CommentsController do
     end
 
     context "with valid data" do
-      before(:each) { comment.stubs(:valid?).returns(true) }
+      before(:each) { comment.stubs(:save).returns(true) }
 
       it "returns http success" do
         post 'create'
@@ -33,7 +33,7 @@ describe CommentsController do
     end
 
     context "with invalid data" do
-      before(:each) { comment.stubs(:valid?).returns(false) }
+      before(:each) { comment.stubs(:save).returns(false) }
 
       it "render new template" do
         post 'create'
@@ -42,7 +42,10 @@ describe CommentsController do
     end
 
     context "when user is signed in" do
-      before(:each) { sign_in user }
+      before(:each) do 
+        comment.stubs(:save)
+        sign_in user
+      end
 
       it "add the user to comment" do
         post 'create'
