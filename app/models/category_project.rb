@@ -6,5 +6,9 @@ class CategoryProject < ActiveRecord::Base
   validates :project, presence: true
   validates :description, presence: true
 
-  attr_accessible :description, :category_id, :project_id
+  attr_accessible :description,
+                  :category_id,
+                  :project_id,
+                  :category,
+                  :project
 end

@@ -14,9 +14,8 @@ class Project < ActiveRecord::Base
   def add_general_category
     link = ActionController::Base.helpers.link_to(url, url)
     category = Category.find_by_label 'General'
-    CategoryProject.create(category_id: category, 
-                           project_id: self,
-                           description: "#{title} : #{link}"
-                          )
+    CategoryProject.create(category: category,
+                           project: self,
+                           description: "#{title} : #{link}")
   end
 end
