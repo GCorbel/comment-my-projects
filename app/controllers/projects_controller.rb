@@ -44,7 +44,6 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    redirect_to(projects_path,
-                notice: "Votre projet a été supprimé")
+    redirect_to(root_path, notice: "Votre projet a été supprimé")
   end
 end

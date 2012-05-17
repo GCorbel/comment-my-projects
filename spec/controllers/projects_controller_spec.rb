@@ -130,7 +130,7 @@ describe ProjectsController do
 
     it "redirect to projects path" do
       delete 'destroy'
-      should redirect_to(projects_path)
+      should redirect_to(root_path)
     end
 
     it "delete the project" do
