@@ -12,7 +12,7 @@
     <div class="tab-pane <%= index == 0 ? 'active' : '' %>" 
          id="<%= category_project.category.label%>">
       <%= category_project.description %>
-      <% if signed_in? && current_user == @project.user %>
+      <% if signed_in? && current_user == @project.user && index != 0 %>
         <%= link_to "Modifier",
                     edit_project_category_project_path(
                       @project, category_project),

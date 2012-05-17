@@ -38,7 +38,32 @@ describe 'Project' do
   end
 
   describe 'Show' do
+    before(:each) do
+    end
+
+    context 'when there is only one description' do
+      it 'don\'t show the link to remove the description' do
+        sign_in project.user
+        visit project_path(project)
+        within('.tab-content') do
+          page.should_not have_css('a', text: 'Supprimer')
+        end
+      end
+    end
+
+    context 'when there is two description' do
+      it 'show a link to remove the description' do
+        sign_in project.user
+        create(:category_project, project: project)
+        visit project_path(project)
+        within('.tab-content') do
+          page.should have_css('a', text: 'Supprimer')
+        end
+      end
+    end
+
     it 'Show informations about the project' do
+      sign_in project.user
       visit project_path(project)
       page.should have_content(project.title)
       page.should have_content(project.url)
