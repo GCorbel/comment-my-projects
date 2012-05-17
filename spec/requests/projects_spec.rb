@@ -67,7 +67,7 @@ describe 'Project' do
       visit project_path(project)
       page.should have_content(project.title)
       page.should have_content(project.url)
-      page.should have_content("Title : Url")
+      page.should have_content("Title : <a href=\"Url\">Url</a>")
     end
   end
 
