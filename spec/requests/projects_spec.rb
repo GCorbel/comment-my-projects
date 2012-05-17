@@ -99,7 +99,6 @@ describe 'Project' do
   describe 'Destroy' do
     it 'Destroy the project' do
       sign_in project.user
-      create(:category_project, project: project)
       visit project_path(project)
       within('.form-actions') do
         click_link "Supprimer"

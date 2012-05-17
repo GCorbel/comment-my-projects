@@ -60,8 +60,9 @@ describe 'CategoryProjects' do
   describe 'Destroy' do
     it 'Destroy the project' do
       sign_in project.user
+      create(:category_project, project: project)
       visit project_path(project)
-      within('.tab-pane') do
+      within('.tab-content') do
         click_link "Supprimer"
       end
       page.should have_content("La description a été supprimée")
