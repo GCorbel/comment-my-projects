@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     if @project.comments << @comment
       redirect_to(@project, notice: 'Votre commentaire a été ajouté')
     else
+      @note = Note.new
       render 'projects/show'
     end
   end

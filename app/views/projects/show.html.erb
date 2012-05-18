@@ -12,21 +12,41 @@
     <div class="tab-pane <%= index == 0 ? 'active' : '' %>" 
          id="<%= category_project.category.label%>">
       <%=raw category_project.description %>
-      <% if signed_in? && current_user == @project.user && index != 0 %>
+      <% if signed_in? && current_user == @project.user %>
         <%= link_to "Modifier",
                     edit_project_category_project_path(
                       @project, category_project),
                     class: 'btn' %>
-        <%= link_to "Supprimer",
-                    project_category_project_path(
-                      @project, category_project),
-                    method: 'delete',
-                    confirm: 'Êtes vous sûr?',
-                    class: 'btn btn-danger' %>
+        <% unless index = 0 %>
+          <%= link_to "Supprimer",
+                      project_category_project_path(
+                        @project, category_project),
+                      method: 'delete',
+                      confirm: 'Êtes vous sûr?',
+                      class: 'btn btn-danger' %>
+        <% end %>
       <% end %>
     </div>
   <% end %>
 </div>
+<% if signed_in? && current_user == @project.user %>
+  <div class="form-actions">
+    <%= link_to('Ajouter une categorie',
+                new_project_category_project_path(@project),
+                class: 'btn') %>
+    <%= link_to "Modifier", edit_project_path(@project), class: 'btn' %>
+    <%= link_to "Supprimer",
+                project_path(@project),
+                method: 'delete',
+                confirm: 'Êtes vous sûr?',
+                class: 'btn btn-danger' %>
+  </div>
+<% end %>
+<%= simple_form_for [@project, @note] do |f| %>
+  <%= f.association :category, collection: @categories %>
+  <%= f.input :value, collection: (1..10) %>
+  <%= f.button :submit, 'Noter' %>
+<% end %>
 <% @project.comments.each do |comment| %>
   <div id="comment_<%= comment.id %>">
     <%= comment.username %>
@@ -46,17 +66,4 @@
   <%= f.association :category, collection: @project.categories %>
   <%= f.input :message %>
   <%= f.button :submit, 'Envoyer' %>
-<% end %>
-<% if signed_in? && current_user == @project.user %>
-  <div class="form-actions">
-    <%= link_to('Ajouter une categorie',
-                new_project_category_project_path(@project),
-                class: 'btn') %>
-    <%= link_to "Modifier", edit_project_path(@project), class: 'btn' %>
-    <%= link_to "Supprimer",
-                project_path(@project),
-                method: 'delete',
-                confirm: 'Êtes vous sûr?',
-                class: 'btn btn-danger' %>
-  </div>
 <% end %>
