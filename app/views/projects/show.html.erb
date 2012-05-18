@@ -17,7 +17,7 @@
                     edit_project_category_project_path(
                       @project, category_project),
                     class: 'btn' %>
-        <% unless index = 0 %>
+        <% unless index == 0 %>
           <%= link_to "Supprimer",
                       project_category_project_path(
                         @project, category_project),
