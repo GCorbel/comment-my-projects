@@ -29,9 +29,7 @@
 </div>
 <% @project.comments.each do |comment| %>
   <div id="comment_<%= comment.id %>">
-    <% unless signed_in? && comment.user == current_user %>
-      <%= comment.username %>
-    <% end %>
+    <%= comment.username %>
     <%= comment.message %>
     <% if signed_in? && ( @project.user == current_user || 
                           comment.user == current_user) %>
@@ -44,7 +42,7 @@
   </div>
 <% end %>
 <%= simple_form_for [@project, @comment] do |f| %>
-  <%= f.input :username %>
+  <%= f.input :username unless signed_in? %>
   <%= f.association :category, collection: @project.categories %>
   <%= f.input :message %>
   <%= f.button :submit, 'Envoyer' %>

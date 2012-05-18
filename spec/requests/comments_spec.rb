@@ -21,25 +21,35 @@ describe 'Comments' do
   end
 
   describe 'Create' do
-    before(:each) { visit project_path(project) }
+    context 'when not signed in' do
+      before(:each) { visit project_path(project) }
 
-    it 'Enable to create a new comment' do
-      within('#new_comment') do
-        fill_in('Nom', with: 'My name')
-        select('General', from: 'Categorie')
-        fill_in('Message', with: 'My Message')
-        click_button 'Envoyer'
+      it 'Enable to create a new comment' do
+        within('#new_comment') do
+          fill_in('Nom', with: 'My name')
+          select('General', from: 'Categorie')
+          fill_in('Message', with: 'My Message')
+          click_button 'Envoyer'
+        end
+
+        page.should have_content('Votre commentaire a été ajouté')
       end
 
-      page.should have_content('Votre commentaire a été ajouté')
+      context 'with invalid data' do
+        it 'show errors' do
+          within('#new_comment') do
+            click_button "Envoyer"
+            page.body.should have_content("champ obligatoire")
+          end
+        end
+      end
     end
 
-    context 'with invalid data' do
-      it 'show errors' do
-        within('#new_comment') do
-          click_button "Envoyer"
-          page.body.should have_content("champ obligatoire")
-        end
+    context 'when the user is signed in' do
+      it 'don''t show the username field' do
+        sign_in
+        visit project_path(project)
+        page.should_not have_css('input#comment_username')
       end
     end
   end
