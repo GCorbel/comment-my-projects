@@ -1,0 +1,21 @@
+<div class="row show-grid">
+  <div class="span12">
+    <h2>
+      <%= comment.user ? comment.user.username : comment.username %>
+      -
+      <%= comment.created_at.strftime('%d/%m/%Y %H:%M') %>
+    </h2>
+    <div id="comment_<%= comment.id %>">
+      <%= comment.message %>
+      <% if signed_in? && ( project.user == current_user || 
+                            comment.user == current_user) %>
+        <%= link_to 'Supprimer', 
+                    project_comment_path(project, comment),
+                    method: 'delete', 
+                    confirm: 'Êtes vous sûr?', 
+                    class: 'btn btn-danger' %>
+      <% end %>
+    </div>
+    <br/>
+  </div>
+</div>

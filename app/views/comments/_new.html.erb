@@ -1,0 +1,11 @@
+<div class="row show-grid">
+  <div class="span12">
+    <h1>Ajouter un commentaire</h1>
+    <%= simple_form_for [project, comment] do |f| %>
+      <%= f.input :username unless signed_in? %>
+      <%= f.association :category, collection: project.categories %>
+      <%= f.input :message %>
+      <%= f.button :submit, 'Envoyer' %>
+    <% end %>
+  </div>
+</div>

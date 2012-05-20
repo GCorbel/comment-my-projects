@@ -1,69 +1,26 @@
-<ul class="nav nav-tabs">
-  <% @project.category_projects.each_with_index do 
-              |category_project, index| %>
-    <li <%=raw index == 0 ? 'class="active"' : ''%>>
-      <%= link_to category_project.category.label, "##{category_project.category.label}" %>
-    </li>
-  <% end %>
-</ul>
-<div class="tab-content">
-  <% @project.category_projects.each_with_index do 
-                |category_project, index| %>
-    <div class="tab-pane <%= index == 0 ? 'active' : '' %>" 
-         id="<%= category_project.category.label%>">
-      <%=raw category_project.description %>
-      <% if signed_in? && current_user == @project.user %>
-        <%= link_to "Modifier",
-                    edit_project_category_project_path(
-                      @project, category_project),
-                    class: 'btn' %>
-        <% unless index == 0 %>
-          <%= link_to "Supprimer",
-                      project_category_project_path(
-                        @project, category_project),
-                      method: 'delete',
-                      confirm: 'Êtes vous sûr?',
-                      class: 'btn btn-danger' %>
-        <% end %>
+<div class="row show-grid">
+  <div class="span12">
+    <h1><%= @project.title %></h1>
+    <ul class="nav nav-tabs">
+      <% @project.category_projects.each_with_index do 
+                  |category_project, index| %>
+        <li <%=raw index == 0 ? 'class="active"' : ''%>>
+          <%= link_to category_project.category.label, "##{category_project.category.label}" %>
+        </li>
       <% end %>
+    </ul>
+    <div class="tab-content">
+      <%= render @project.category_projects, project: @project %>
+      <br/>
     </div>
-  <% end %>
+  </div>
 </div>
 <% if signed_in? && current_user == @project.user %>
-  <div class="form-actions">
-    <%= link_to('Ajouter une categorie',
-                new_project_category_project_path(@project),
-                class: 'btn') %>
-    <%= link_to "Modifier", edit_project_path(@project), class: 'btn' %>
-    <%= link_to "Supprimer",
-                project_path(@project),
-                method: 'delete',
-                confirm: 'Êtes vous sûr?',
-                class: 'btn btn-danger' %>
-  </div>
+  <%= render 'form_action', project: @project %>
 <% end %>
-<%= simple_form_for [@project, @note] do |f| %>
-  <%= f.association :category, collection: @categories %>
-  <%= f.input :value, collection: (1..10) %>
-  <%= f.button :submit, 'Noter' %>
-<% end %>
-<% @project.comments.each do |comment| %>
-  <div id="comment_<%= comment.id %>">
-    <%= comment.username %>
-    <%= comment.message %>
-    <% if signed_in? && ( @project.user == current_user || 
-                          comment.user == current_user) %>
-      <%= link_to 'Supprimer', 
-                  project_comment_path(@project, comment),
-                  method: 'delete', 
-                  confirm: 'Êtes vous sûr?', 
-                  class: 'btn btn-danger' %>
-    <% end %>
-  </div>
-<% end %>
-<%= simple_form_for [@project, @comment] do |f| %>
-  <%= f.input :username unless signed_in? %>
-  <%= f.association :category, collection: @project.categories %>
-  <%= f.input :message %>
-  <%= f.button :submit, 'Envoyer' %>
-<% end %>
+<%= render 'notes/new', 
+           project: @project,
+           note: @note,
+           categories: @categories %>
+<%= render @project.comments, project: @project %>
+<%= render 'comments/new', comment: @comment, project: @project %>

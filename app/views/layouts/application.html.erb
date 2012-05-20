@@ -21,31 +21,32 @@
             <ul class="nav">
               <li><%= link_to "Liste des projets", projects_path %></li>
               <li><%= link_to "Ajouter un projet", new_project_path %></li>
-              <% if user_signed_in? %>
-                <li><%= link_to "Gerer mon compte", edit_user_registration_path(current_user) %></li>
-                <li><%= link_to "Deconnexion", destroy_user_session_path, method: :delete %></li>
-              <% else %>
-                <li><%= link_to "Inscription", new_user_registration_path %></li>
-                <li><%= link_to "Connexion", new_user_session_path %></li>
-              <% end %>
+            </ul>
+            <ul class='nav pull-right'>
+              <li class='dropdown'>
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-user"></i>Utilisateur<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <% if user_signed_in? %>
+                    <li><%= link_to "Deconnexion", destroy_user_session_path, method: :delete %></li>
+                    <li><%= link_to "Modifier", edit_user_registration_path(current_user) %></li>
+                    <li><%= link_to "Supprimer", registration_path(:user), :confirm => "Êtes vous sûr?", :method => :delete %></li>
+                  <% else %>
+                    <li><%= link_to "Inscription", new_user_registration_path %></li>
+                    <li><%= link_to "Connexion", new_user_session_path %></li>
+                  <% end %>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-
     <div class="container">
-      <div class="row">
-        <div class="span9">
-          <div data-pjax-container>
-            <%= alert_box("success", flash[:notice]) %>
-            <%= alert_box("error", flash[:error]) %>
-            <%= alert_box("alert", flash[:alert]) %>
-            <%= yield %>
-          </div>
-        </div>
-        <div class="span3">
-        </div>
+      <div data-pjax-container>
+        <%= alert_box("success", flash[:notice]) %>
+        <%= alert_box("error", flash[:error]) %>
+        <%= alert_box("alert", flash[:alert]) %>
+        <%= yield %>
       </div>
     </div>
   </body>

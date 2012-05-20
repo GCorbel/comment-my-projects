@@ -1,0 +1,10 @@
+<div class="row show-grid">
+  <div class="span12">
+    <h1>Notes</h1>
+    <%= simple_form_for [project, note] do |f| %>
+      <%= f.association :category, collection: categories %>
+      <%= f.input :value, collection: (1..10) %>
+      <%= f.button :submit, 'Noter' %>
+    <% end %>
+  </div>
+</div>
