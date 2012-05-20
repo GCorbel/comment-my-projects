@@ -18,6 +18,7 @@
 <% if signed_in? && current_user == @project.user %>
   <%= render 'form_action', project: @project %>
 <% end %>
+<%= render 'notes/index', project: @project %>
 <%= render 'notes/new', 
            project: @project,
            note: @note,

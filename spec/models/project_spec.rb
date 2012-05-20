@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Project do
+  let(:project) { create(:project, title: "Title",
+                                   url: "http://www.test.com") }
+  let(:category) { create(:category) } 
+
   it { should have_many(:categories).through(:category_projects) }
   it { should have_many(:category_projects) }
   it { should have_many(:comments) }
@@ -16,7 +20,6 @@ describe Project do
   }
 
   it "have a category on creation" do
-    project = Project.create(title: "Title", url: "http://www.test.com")
     project.categories.first.label.should == "General"
     project.category_projects.first.description.should == 
       "Title : <a href=\"http://www.test.com\">http://www.test.com</a>"
@@ -26,5 +29,21 @@ describe Project do
     subject { Category.new(label: "Category").to_s}
 
     it { should == "Category" }
+  end
+  
+  describe :note_for do
+    it 'give notes for the project' do
+      CategoryProject.create(project: project,
+                              category: category,
+                              description: 'test')
+      Note.create(project: project, category: category, value: 8)
+      Note.create(project: project, category: category, value: 3)
+      Note.create(project: project, category: category, value: 3)
+      project.note_for(category).should == 4.7
+    end
+  end
+
+  it 'give a dash when the is no notes' do
+    project.note_for(category).should == "-"
   end
 end

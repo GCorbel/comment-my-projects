@@ -1,0 +1,5 @@
+<div id="notes">
+  <% project.categories.each do |category| %>
+    <%= category.label %> : <%= project.note_for(category) %>/10
+  <% end %>
+</div>

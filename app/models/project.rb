@@ -19,4 +19,10 @@ class Project < ActiveRecord::Base
                            project: self,
                            description: "#{title} : #{link}")
   end
+
+  def note_for(category)
+    values = notes.where(category_id: category.id).pluck(:value)
+    result = (values.sum / values.count.to_d).round(1)
+    result.nan? ? '-' : result
+  end
 end

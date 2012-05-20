@@ -4,5 +4,5 @@ class Note < ActiveRecord::Base
 
   validates :value, presence: true
 
-  attr_accessible :value, :project_id, :category_id
+  attr_accessible :value, :project_id, :category_id, :project, :category
 end
