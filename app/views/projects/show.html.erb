@@ -18,10 +18,12 @@
 <% if signed_in? && current_user == @project.user %>
   <%= render 'form_action', project: @project %>
 <% end %>
-<%= render 'notes/index', project: @project %>
-<%= render 'notes/new', 
-           project: @project,
-           note: @note,
-           categories: @categories %>
+<div class="row show-grid">
+  <%= render 'notes/index', project: @project %>
+  <%= render 'notes/new', 
+             project: @project,
+             note: @note,
+             categories: @categories %>
+</div>
 <%= render @project.comments, project: @project %>
 <%= render 'comments/new', comment: @comment, project: @project %>
