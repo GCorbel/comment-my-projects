@@ -1,6 +1,7 @@
 <div id="notes" class="span6">
   <h2>Notes du projet</h2>
   <% project.categories.each do |category| %>
-    <p><%= category.label %> : <%= project.note_for(category) %>/10</p>
+    <% note = project.note_for(category) %>
+    <p><%= category.label %> : <%= note ? "#{note}/10" : '-' %></p>
   <% end %>
 </div>

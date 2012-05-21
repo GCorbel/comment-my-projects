@@ -23,6 +23,6 @@ class Project < ActiveRecord::Base
   def note_for(category)
     values = notes.where(category_id: category.id).pluck(:value)
     result = (values.sum / values.count.to_d).round(1)
-    result.nan? ? '-' : result
+    result.nan? ? nil : result
   end
 end

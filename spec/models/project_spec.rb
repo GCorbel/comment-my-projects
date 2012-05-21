@@ -43,7 +43,7 @@ describe Project do
     end
   end
 
-  it 'give a dash when the is no notes' do
-    project.note_for(category).should == "-"
+  it 'give nil when the is no notes' do
+    project.note_for(category).should be_nil
   end
 end
