@@ -29,7 +29,7 @@
                   <% if user_signed_in? %>
                     <li><%= link_to "Deconnexion", destroy_user_session_path, method: :delete %></li>
                     <li><%= link_to "Modifier", edit_user_registration_path(current_user) %></li>
-                    <li><%= link_to "Supprimer", registration_path(:user), :confirm => "Êtes vous sûr?", :method => :delete %></li>
+                    <li><%= link_to "Supprimer", registration_path(:user), confirm: "Êtes vous sûr?", method: :delete %></li>
                   <% else %>
                     <li><%= link_to "Inscription", new_user_registration_path %></li>
                     <li><%= link_to "Connexion", new_user_session_path %></li>
