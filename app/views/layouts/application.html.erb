@@ -30,7 +30,7 @@
                           wrapper: :small do |f| %>
               <%= f.text_field :title,
                                class:'search-query',
-                               placeholder: 'Search' %>
+                               placeholder: 'Recherche' %>
               <%= f.button :submit if ENV['RAILS_ENV'] == "test" %>
             <% end %>
             <ul class='nav pull-right'>
