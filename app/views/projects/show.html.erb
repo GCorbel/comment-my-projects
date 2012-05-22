@@ -4,14 +4,15 @@
     <ul class="nav nav-tabs">
       <% @project.category_projects.each_with_index do 
                   |category_project, index| %>
-        <li <%=raw index == 0 ? 'class="active"' : ''%>>
-          <%= link_to category_project.category.label, "##{category_project.category.label}" %>
+                  <li <%=raw 'class="active"' if index == 0%>>
+          <%= link_to category_project.category.label,
+                      "##{category_project.category.label}",
+                      data: { toggle: 'tab' } %>
         </li>
       <% end %>
     </ul>
     <div class="tab-content">
       <%= render @project.category_projects, project: @project %>
-      <br/>
     </div>
   </div>
 </div>
