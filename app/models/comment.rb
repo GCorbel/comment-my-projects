@@ -8,10 +8,5 @@ class Comment < ActiveRecord::Base
   validates :message, presence: true
   validates :project, presence: true
   validates :category, presence: true
-  validates :username, presence: true, unless: :user?
-
-  private 
-    def user?
-      user.present?
-    end
+  validates :username, presence: true, if: 'user.nil?'
 end
