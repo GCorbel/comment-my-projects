@@ -5,6 +5,25 @@ describe 'Project' do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
 
+  describe 'Search' do
+    context 'When the is some results' do
+      it 'show result' do
+        create(:project, title: 'The first project')
+        create(:project, title: 'The second project')
+        create(:project, title: 'Another one')
+
+        visit root_path
+        within('#new_search') do
+          fill_in('search_title', with: 'PrOject')
+          click_button('submit')
+        end
+        page.should have_content('The first project')
+        page.should have_content('The second project')
+        page.should_not have_content('Another one')
+      end
+    end
+  end
+
   describe 'Create' do
     before(:each) do
       sign_in
@@ -13,9 +32,11 @@ describe 'Project' do
 
     context 'with valid data' do
       it 'add a new project' do
-        fill_in("Titre", with: "Mon Projet")
-        fill_in("Url", with: "http://www.google.com")
-        click_button "Créer"
+        within('#new_project') do
+          fill_in("Titre", with: "Mon Projet")
+          fill_in("Url", with: "http://www.google.com")
+          click_button "Créer"
+        end
         page.should have_content("Votre projet a été ajouté")
       end
     end

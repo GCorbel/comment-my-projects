@@ -9,7 +9,12 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    if params[:search]
+      @projects = Project.where("title like ?",
+                                "%#{params[:search][:title]}%")
+    else
+      @projects = Project.all
+    end
   end
 
   def new

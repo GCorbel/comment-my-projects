@@ -48,6 +48,7 @@ group :test do
   gem 'fuubar'
   gem 'mocha'
   gem 'shoulda-matchers'
+  gem 'launchy'
 end
 
 gem 'devise'

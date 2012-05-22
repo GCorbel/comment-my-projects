@@ -22,6 +22,17 @@
               <li><%= link_to "Liste des projets", projects_path %></li>
               <li><%= link_to "Ajouter un projet", new_project_path %></li>
             </ul>
+            <%= form_for SearchDecorator.new_project(params[:search]),
+                          as: :search,
+                          url: projects_path,
+                          html: { class: "navbar-search pull-left" }, 
+                          method: :get,
+                          wrapper: :small do |f| %>
+              <%= f.text_field :title,
+                               class:'search-query',
+                               placeholder: 'Search' %>
+              <%= f.button :submit if ENV['RAILS_ENV'] == "test" %>
+            <% end %>
             <ul class='nav pull-right'>
               <li class='dropdown'>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-user"></i>Utilisateur<b class="caret"></b></a>
