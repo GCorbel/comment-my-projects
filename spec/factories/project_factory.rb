@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :project do |f|
-    f.url "Url"
+  factory :project do
+    url "http://www.test.com"
     title "Title"
   end
 end

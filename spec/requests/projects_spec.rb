@@ -95,9 +95,7 @@ describe 'Project' do
     it 'Show informations about the project' do
       sign_in project.user
       visit project_path(project)
-      page.should have_content(project.title)
-      page.should have_content(project.url)
-      page.should have_content("Title : Url")
+      page.should have_content("#{project.title} : #{project.url}")
     end
   end
 
