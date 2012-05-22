@@ -6,13 +6,16 @@ describe CommentsController do
   let!(:comment) { build_stubbed(:comment) }
   let(:user) { build_stubbed(:user) }
 
-  before(:each) { Project.stubs(:find).returns(project) }
+  before(:each) do
+    Project.stubs(:find).returns(project)
+    comment.stubs(:save)
+  end
 
   describe "POST 'create'" do
     before(:each) { Comment.stubs(:new).returns(comment) }
 
     context "with valid data" do
-      before(:each) { comment.stubs(:save).returns(true) }
+      before(:each) { comment.stubs(:valid?).returns(true) }
 
       it "returns http success" do
         post 'create'
@@ -32,7 +35,7 @@ describe CommentsController do
     end
 
     context "with invalid data" do
-      before(:each) { comment.stubs(:save).returns(false) }
+      before(:each) { comment.stubs(:valid?).returns(false) }
 
       it "render new template" do
         post 'create'

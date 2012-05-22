@@ -3,7 +3,8 @@ class NotesController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @note = Note.new(params[:note])
-    if @project.notes << @note
+    if @note.valid?
+      @project.notes << @note
       redirect_to(project_path(@project), notice: "La note a été ajoutée")
     else
       @comment = Comment.new

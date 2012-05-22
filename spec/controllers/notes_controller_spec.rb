@@ -9,10 +9,11 @@ describe NotesController do
     before(:each) do
       Project.stubs(:find).returns(project)
       Note.stubs(:new).returns(note)
+      note.stubs(:save)
     end
 
     context "with valid data" do
-      before(:each) { note.stubs(:save).returns(true) }
+      before(:each) { note.stubs(:valid?).returns(true) }
 
       it "returns http success" do
         post 'create'
@@ -32,7 +33,7 @@ describe NotesController do
     end
 
     context "with invalid data" do
-      before(:each) { note.stubs(:save).returns(false) }
+      before(:each) { note.stubs(:valid?).returns(false) }
 
       it "render new template" do
         post 'create'
