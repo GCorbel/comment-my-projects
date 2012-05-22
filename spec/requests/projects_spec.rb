@@ -50,11 +50,20 @@ describe 'Project' do
   end
 
   describe 'Index' do
-    it 'Show the list of projects' do
-      project
-      visit projects_path
-      page.should have_content(project.title)
-      page.should have_content(project.url)
+    context 'When there is a project' do
+      it 'Show the list of projects' do
+        project
+        visit projects_path
+        page.should have_content(project.title)
+        page.should have_content(project.url)
+      end
+    end
+
+    context 'Whene the is no project' do
+      it 'Show a message' do
+        visit projects_path
+        page.should have_content('Désolé, aucun projet ne correspond à votre recherche. Veuillez recommencer.')
+      end
     end
   end
 
