@@ -5,7 +5,7 @@
 #= require pjax
 #= require bootstrap-wysihtml5-all
 $(document).ready ->
-  $('textarea').wysihtml5();
+  $('textarea').wysihtml5()
 
 $(document).on("pjax:end", () ->
   $('textarea').wysihtml5()
