@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     @project = Project.find(params[:project_id])
     @comment = Comment.new(params[:comment])
     @comment.user = current_user
+    @comment.project = @project
     if @comment.valid?
       @project.comments << @comment
       redirect_to(@project, notice: 'Votre commentaire a été ajouté')

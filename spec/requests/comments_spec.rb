@@ -4,11 +4,13 @@ require 'spec_helper'
 describe 'Comments' do
   let!(:project) { create(:project) }
   let(:user) { create(:user) }
+  let(:category) { create(:category) }
   let(:comment) do 
     create(:comment,
            message: 'My Message', 
            username: 'My name', 
-           project: project)
+           project: project,
+           category: category)
   end
 
   describe 'Index' do
