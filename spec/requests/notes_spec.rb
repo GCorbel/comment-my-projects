@@ -32,7 +32,7 @@ describe 'Notes' do
       it 'add a new note' do
         category1
         visit project_path(project)
-        select('New Category', from: 'Category')
+        select('New Category', from: 'Categorie')
         select('10', form: 'Note')
         click_button 'Noter'
         page.should have_content('La note a été ajoutée')
