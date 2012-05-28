@@ -5,7 +5,7 @@ describe ProjectsController do
   render_views 
 
   let!(:project) { build_stubbed(:project) }
-  let(:user) { stub(projects: []) }
+  let(:user) { build_stubbed(:user) }
 
   describe "GET 'index'" do
     it "render index template" do
@@ -61,7 +61,7 @@ describe ProjectsController do
     end
 
     context "with valid data" do
-      before(:each) { project.stubs(:valid?).returns(true) }
+      before(:each) { project.stubs(:save).returns(true) }
 
       it "returns http success" do
         post 'create'
@@ -81,7 +81,7 @@ describe ProjectsController do
     end
 
     context "with invalid data" do
-      before(:each) { project.stubs(:valid?).returns(false) }
+      before(:each) { project.stubs(:save).returns(false) }
 
       it "render new template" do
         post 'create'
