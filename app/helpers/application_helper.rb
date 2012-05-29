@@ -6,4 +6,12 @@ module ApplicationHelper
       content_tag :div, button_tag + message_tag , class: "alert alert-#{class_name}"
     end
   end
+
+  def page_title(title)
+    content_for(:title, title)
+  end
+
+  def browser_title(title = nil)
+    [(title if title.present?), "Comment My Projects"].compact.join(" - ")
+  end
 end

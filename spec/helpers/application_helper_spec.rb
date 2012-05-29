@@ -16,4 +16,26 @@ describe ApplicationHelper do
       it { should be_nil }
     end
   end
+
+  describe :page_title do
+    it "set a new title" do
+      helper.expects(:content_for).with(:title, "My Title")
+      helper.page_title("My Title")
+    end
+  end
+
+  describe :browser_title do
+    context "when there is a title" do
+      it "show the title" do
+        helper.browser_title("title").should == 
+          "title - Comment My Projects"
+      end
+    end
+
+    context "when there is no title" do
+      it "show the site name" do
+        helper.browser_title().should == "Comment My Projects"
+      end
+    end
+  end
 end
