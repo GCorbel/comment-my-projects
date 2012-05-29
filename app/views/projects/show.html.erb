@@ -1,7 +1,7 @@
-<% page_title(@project.title) %>
+<% page_title(@project) %>
 <div class="row show-grid">
   <div class="span12">
-    <h1><%= @project.title %></h1>
+    <h1><%= @project %></h1>
     <ul class="nav nav-tabs">
       <% @project.category_projects.each_with_index do 
                   |category_project, index| %>

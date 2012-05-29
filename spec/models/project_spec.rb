@@ -24,9 +24,9 @@ describe Project do
   end
 
   describe :to_s do
-    subject { Category.new(label: "Category").to_s}
+    subject { project.to_s}
 
-    it { should == "Category" }
+    it { should == project.title }
   end
 
   describe :to_param do
