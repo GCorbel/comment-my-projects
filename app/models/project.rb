@@ -25,4 +25,8 @@ class Project < ActiveRecord::Base
     return nil if values.empty?
     (values.sum / values.count.to_d).round(1)
   end
+
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
 end

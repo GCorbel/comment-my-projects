@@ -28,6 +28,12 @@ describe Project do
 
     it { should == "Category" }
   end
+
+  describe :to_param do
+    subject { project.to_param }
+
+    it { should == "#{project.id}-#{project.title.parameterize}" }
+  end
   
   describe :note_for do
     it 'give notes for the project' do
