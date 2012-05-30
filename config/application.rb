@@ -58,5 +58,6 @@ module CommentMyProjects
 
     config.generators.test_framework = :rspec
     config.middleware.use Rack::Pjax
+    config.assets.initialize_on_precompile = false
   end
 end
