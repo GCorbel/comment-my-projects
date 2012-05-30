@@ -57,5 +57,5 @@ end
 
 gem 'devise'
 gem 'rb-readline'
-gem 'pjax_rails'
+gem 'rack-pjax'
 gem 'simple_form'

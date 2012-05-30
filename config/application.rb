@@ -57,5 +57,6 @@ module CommentMyProjects
     config.assets.version = '1.0'
 
     config.generators.test_framework = :rspec
+    config.middleware.use Rack::Pjax
   end
 end

@@ -163,20 +163,10 @@ var pjax = $.pjax = function( options ) {
       if (result === false) return false
     }
 
-    if (!fire('pjax:beforeSend', [xhr, settings])) return false
+    if (!fire('pjax:beforeSend', [xhr, settings]))
+      return false
 
-    if (options.push && !options.replace) {
-      // Cache current container element before replacing it
-      containerCache.push(pjax.state.id, context.clone(true, true).contents())
-
-      window.history.pushState(null, "", options.url)
-    }
-
-    fire('pjax:start', [xhr, options])
-    // start.pjax is deprecated
-    fire('start.pjax', [xhr, options])
-
-    fire('pjax:send', [xhr, settings])
+    options.requestUrl = parseURL(settings.url).href
   }
 
   options.complete = function(xhr, textStatus) {
@@ -273,10 +263,25 @@ var pjax = $.pjax = function( options ) {
   }
 
   pjax.options = options
-  pjax.xhr = $.ajax(options)
+  var xhr = pjax.xhr = $.ajax(options)
 
-  // pjax event is deprecated
-  $(document).trigger('pjax', [pjax.xhr, options])
+  if (xhr.readyState > 0) {
+    // pjax event is deprecated
+    $(document).trigger('pjax', [xhr, options])
+
+    if (options.push && !options.replace) {
+      // Cache current container element before replacing it
+      containerCache.push(pjax.state.id, context.clone(true, true).contents())
+
+      window.history.pushState(null, "", options.url)
+    }
+
+    fire('pjax:start', [xhr, options])
+    // start.pjax is deprecated
+    fire('start.pjax', [xhr, options])
+
+    fire('pjax:send', [xhr, options])
+  }
 
   return pjax.xhr
 }
@@ -409,7 +414,7 @@ function extractContainer(data, xhr, options) {
 
   // Prefer X-PJAX-URL header if it was set, otherwise fallback to
   // using the original requested url.
-  obj.url = stripPjaxParam(xhr.getResponseHeader('X-PJAX-URL') || options.url)
+  obj.url = stripPjaxParam(xhr.getResponseHeader('X-PJAX-URL') || options.requestUrl)
 
   // Attempt to parse response html into elements
   var $data = $(data)
@@ -640,7 +645,6 @@ $.support.pjax =
   window.history && window.history.pushState && window.history.replaceState
   // pushState isn't reliable on iOS until 5.
   && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/)
-
 
 // Fall back to normalcy for older browsers.
 if ( !$.support.pjax ) {
