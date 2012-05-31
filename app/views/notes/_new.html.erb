@@ -1,7 +1,7 @@
 <div class="span6">
   <h2>Ajouter une note</h2>
   <%= simple_form_for [project, note] do |f| %>
-    <%= f.association :category, collection: categories %>
+    <%= f.association :category, collection: project.categories %>
     <%= f.input :value, collection: (1..10) %>
     <%= f.button :submit, 'Noter' %>
   <% end %>

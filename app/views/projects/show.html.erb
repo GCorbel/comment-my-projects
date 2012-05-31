@@ -24,8 +24,7 @@
   <%= render 'notes/index', project: @project %>
   <%= render 'notes/new', 
              project: @project,
-             note: @note,
-             categories: @categories %>
+             note: @note %>
 </div>
 <%= render @project.comments, project: @project %>
 <%= render 'comments/new', comment: @comment, project: @project %>
