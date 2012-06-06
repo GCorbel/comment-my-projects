@@ -30,7 +30,7 @@ describe 'Notes' do
   describe 'Create' do
     context 'with valid data' do
       it 'add a new note' do
-        category1
+        create(:category_project, project: project, category: category1)
         visit project_path(project)
         select('New Category', from: 'Categorie')
         select('10', form: 'Note')
