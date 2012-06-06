@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20120518192605) do
   create_table "category_projects", :force => true do |t|
     t.integer  "category_id"
     t.integer  "project_id"
-    t.string   "description"
+    t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

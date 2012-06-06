@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration
       t.references :user
       t.references :project
       t.references :category
-      t.text :message
+      t.text :message, limit: nil
       t.string :username
 
       t.timestamps

@@ -3,7 +3,7 @@ class CreateCategoryProjects < ActiveRecord::Migration
     create_table :category_projects do |t|
       t.references :category
       t.references :project
-      t.string :description
+      t.text :description, limit: nil 
 
       t.timestamps
     end
