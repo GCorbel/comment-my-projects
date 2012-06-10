@@ -9,8 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require bootstrap_and_overrides
  *= require bootstrap-wysihtml5
+ *= require bootstrap
+ *= require category_projects
+ *= home
  */
 form textarea {
   width: 100%;

@@ -1,30 +1,32 @@
-<% page_title(@project) %>
-<div class="row show-grid">
-  <div class="span12">
-    <h1><%= @project %></h1>
-    <ul class="nav nav-tabs">
-      <% @project.category_projects.each_with_index do 
-                  |category_project, index| %>
-                  <li <%=raw 'class="active"' if index == 0%>>
-          <%= link_to category_project.category.label,
-                      "##{category_project.category.label}",
-                      data: { toggle: 'tab' } %>
-        </li>
-      <% end %>
-    </ul>
-    <div class="tab-content">
-      <%= render @project.category_projects, project: @project %>
+<div id="project">
+  <% page_title(@project) %>
+    <div class="span12 left graybox">
+      <h1><%= @project %></h1>
+      <ul class="nav nav-tabs">
+        <% @project.category_projects.each_with_index do 
+                    |category_project, index| %>
+                    <li <%=raw 'class="active"' if index == 0%>>
+            <%= link_to category_project.category.label,
+                        "##{category_project.category.label}",
+                        data: { toggle: 'tab' } %>
+          </li>
+        <% end %>
+      </ul>
+      <div class="tab-content">
+        <%= render @project.category_projects, project: @project %>
+      </div>
     </div>
+  <% if signed_in? && current_user == @project.user %>
+    <%= render 'form_action', project: @project %>
+  <% end %>
+  <div class="span3 left">
+    <%= render 'notes/index', project: @project %>
+    <%= render 'notes/new', 
+               project: @project,
+               note: @note %>
+  </div>
+  <div class="span9">
+    <%= render @project.comments, project: @project %>
+    <%= render 'comments/new', comment: @comment, project: @project %>
   </div>
 </div>
-<% if signed_in? && current_user == @project.user %>
-  <%= render 'form_action', project: @project %>
-<% end %>
-<div class="row show-grid">
-  <%= render 'notes/index', project: @project %>
-  <%= render 'notes/new', 
-             project: @project,
-             note: @note %>
-</div>
-<%= render @project.comments, project: @project %>
-<%= render 'comments/new', comment: @comment, project: @project %>
