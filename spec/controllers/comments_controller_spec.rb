@@ -11,6 +11,14 @@ describe CommentsController do
     comment.stubs(:save)
   end
 
+  describe "GET 'new'" do
+    it "render new template" do
+      sign_in user
+      get 'new'
+      should render_template('new')
+    end
+  end
+
   describe "POST 'create'" do
     before(:each) { Comment.stubs(:new).returns(comment) }
 

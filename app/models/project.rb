@@ -33,4 +33,8 @@ class Project < ActiveRecord::Base
   def to_s
     title
   end
+
+  def root_comments
+    comments.where(ancestry: nil)
+  end
 end

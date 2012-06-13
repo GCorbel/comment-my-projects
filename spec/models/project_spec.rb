@@ -50,4 +50,19 @@ describe Project do
   it 'give nil when the is no notes' do
     project.note_for(category).should be_nil
   end
+
+  describe :root_comments do
+    it 'give root comments for the project' do
+      comment = Comment.create(message: 'test',
+                               username: 'test',
+                               category_id: category)
+      project.comments << comment
+      Comment.create(message: 'test2',
+                     parent_id: comment,
+                     username: 'test2',
+                     category_id: category,
+                     parent_id: project)
+      project.root_comments.size.should == 1
+    end
+  end
 end

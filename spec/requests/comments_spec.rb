@@ -57,6 +57,21 @@ describe 'Comments' do
     end
   end
 
+  describe 'Create a response' do
+    it 'create a response for a comment' do
+      comment
+      visit project_path(project)
+      click_link 'Répondre'
+      fill_in('Nom', with: 'My name')
+      fill_in('Message', with: 'My answer')
+      click_button 'Envoyer'
+      page.should have_content('Votre commentaire a été ajouté')
+      within("#comment_#{comment.id}") do
+        page.should have_content('My answer')
+      end
+    end
+  end
+
   describe 'Delete' do
     before(:each) { sign_in user }
 
