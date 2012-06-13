@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @comment.project = @project
     if @comment.valid?
-      @project.comments << @comment
+      @project.add_comment(@comment)
       redirect_to(@project, notice: 'Votre commentaire a été ajouté')
     else
       @note = Note.new

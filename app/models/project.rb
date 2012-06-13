@@ -37,4 +37,8 @@ class Project < ActiveRecord::Base
   def root_comments
     comments.where(ancestry: nil)
   end
+
+  def add_comment(comment)
+    comments << comment
+  end
 end

@@ -31,9 +31,8 @@ describe CommentsController do
       end
 
       it "add the new comment to the project" do
-        lambda do
-          post 'create'
-        end.should change(project.comments, :size).by(1)
+        project.expects(:add_comment).with(comment)
+        post 'create'
       end
 
       it "set a flash message" do

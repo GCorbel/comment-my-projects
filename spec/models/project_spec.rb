@@ -2,8 +2,11 @@ require 'spec_helper'
 
 describe Project do
   let(:project) { create(:project, title: "Title",
-                                   url: "http://www.test.com") }
+                         url: "http://www.test.com") }
   let(:category) { create(:category) } 
+  let(:comment) { create(:comment,
+                         project_id: project,
+                         category_id: category) }
 
   it { should have_many(:categories).through(:category_projects) }
   it { should have_many(:category_projects) }
@@ -34,12 +37,12 @@ describe Project do
 
     it { should == "#{project.id}-#{project.title.parameterize}" }
   end
-  
+
   describe :note_for do
     it 'give notes for the project' do
       CategoryProject.create(project: project,
-                              category: category,
-                              description: 'test')
+                             category: category,
+                             description: 'test')
       Note.create(project: project, category: category, value: 8)
       Note.create(project: project, category: category, value: 3)
       Note.create(project: project, category: category, value: 3)
@@ -53,9 +56,6 @@ describe Project do
 
   describe :root_comments do
     it 'give root comments for the project' do
-      comment = Comment.create(message: 'test',
-                               username: 'test',
-                               category_id: category)
       project.comments << comment
       Comment.create(message: 'test2',
                      parent_id: comment,
@@ -63,6 +63,14 @@ describe Project do
                      category_id: category,
                      parent_id: project)
       project.root_comments.size.should == 1
+    end
+  end
+
+  describe :add_comment do
+    it 'add a new comment' do
+      lambda do
+        project.add_comment(comment)
+      end.should change(project.comments, :size).by(1)
     end
   end
 end
