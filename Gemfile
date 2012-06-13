@@ -55,8 +55,15 @@ group :test do
   gem 'launchy'
 end
 
+group :development, :test do
+  gem 'pry', '0.9.8.4'
+  gem 'pry-remote', '0.1.1'
+  gem 'pry-nav', '0.2.0'
+end
+
 gem 'devise'
 gem 'rb-readline'
 gem 'rack-pjax'
 gem 'simple_form'
 gem 'google-analytics-rails'
+gem 'acts_as_commentable_with_threading'
