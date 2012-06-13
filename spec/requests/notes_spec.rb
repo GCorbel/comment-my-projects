@@ -32,9 +32,11 @@ describe 'Notes' do
       it 'add a new note' do
         create(:category_project, project: project, category: category1)
         visit project_path(project)
-        select('New Category', from: 'Categorie')
-        select('10', form: 'Note')
-        click_button 'Noter'
+        within('#new_note') do
+          select('New Category', from: 'Categorie')
+          select('10', form: 'Note')
+          click_button 'Noter'
+        end
         page.should have_content('La note a été ajoutée')
       end
     end
