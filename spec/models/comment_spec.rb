@@ -23,6 +23,7 @@ describe Comment do
 
   it "send an email to the project owner" do
     lambda do
+      comment.user = user2
       comment.save
     end.should change(ActionMailer::Base.deliveries, :size).by(1)
   end
@@ -79,6 +80,17 @@ describe Comment do
                              parent_id: comment_1
                             )
         end.should change(ActionMailer::Base.deliveries, :size).by(1)
+      end
+    end
+
+    context 'when the comment\'s owner is the project owner' do
+      it 'don''t send a mail' do
+      lambda do
+        create(:comment,
+               project: project,
+               category: category,
+               user: project.user)
+        end.should_not change(ActionMailer::Base.deliveries, :size)
       end
     end
   end

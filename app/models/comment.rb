@@ -17,7 +17,9 @@ class Comment < ActiveRecord::Base
     
   private 
     def send_mail_to_project_owner
-      CommentMailer.send_mail_to_project_owner(project.user, project).deliver
+      unless project.user == user
+        CommentMailer.send_mail_to_project_owner(project.user, project).deliver
+      end
     end
 
     def send_mail_to_creator_of_parents
