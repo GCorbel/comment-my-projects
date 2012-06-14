@@ -1,10 +1,12 @@
 <div class="graybox"> 
   <h1>Ajouter un commentaire</h1>
   <%= simple_form_for [project, comment] do |f| %>
-    <%= f.input :parent_id,
-                input_html: { value: comment.parent_id },
-                as: :hidden          
-    %>
+    <% if comment.ancestry %>
+      <%= f.input :ancestry,
+                  input_html: { value: comment.parent_id },
+                  as: :hidden          
+      %>
+    <% end %>
     <%= f.input :username unless signed_in? %>
     <% if comment.is_root? %>
       <%= f.association :category, collection: project.categories %>

@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_filter :find_project
 
   def new
-    @comment = Comment.new(parent_id: params[:parent_id])
+    @comment = Comment.new(ancestry: params[:ancestry])
   end
   
   def create

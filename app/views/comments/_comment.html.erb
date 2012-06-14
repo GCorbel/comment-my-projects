@@ -8,7 +8,7 @@
     <%=raw comment.message %>
     <%= link_to 'Répondre', 
                 new_project_comment_path(project,
-                                         parent_id: comment),
+                                         ancestry: comment),
                 class: 'btn' %>
     <% if signed_in? && ( project.user == current_user || 
                           comment.user == current_user) %>
