@@ -24,7 +24,7 @@ class Comment < ActiveRecord::Base
       user_ids = ancestors.pluck(:user_id).compact.uniq
       user_ids.delete(user.id) if user
       user_ids.each do |id|
-        CommentMailer.answer_to_comment(User.find(id)).deliver
+        CommentMailer.send_mail_to_creator_of_parents(User.find(id)).deliver
       end
     end
 end
