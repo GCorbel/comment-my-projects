@@ -10,14 +10,22 @@ describe Comment do
   it { should validate_presence_of(:category) }
   it { should validate_presence_of(:username) }
 
-  let(:project) { build(:project) }
   let(:category) { build(:category) }
   let(:user) { build(:user) }
+  let(:user2) { build(:user) }
+  let(:user3) { build(:user) }
+  let(:project) { build(:project, user: user) }
   let(:comment) { build(:comment,
                         project: project,
                         category: category,
                         user: user,
                         username: nil) }
+
+  it "send an email to the project owner" do
+    lambda do
+      comment.save
+    end.should change(ActionMailer::Base.deliveries, :size).by(1)
+  end
 
   context 'when the comment have a user' do
     it "don't validate presence of username" do
@@ -30,6 +38,48 @@ describe Comment do
       comment.category = nil
       comment.ancestry = 1
       comment.should be_valid
+    end
+
+    context 'when the parent have a user' do
+      it 'send a mail' do
+        comment_1 = create(:comment, project: project, user: user3, category: category) 
+        lambda do
+          comment_2 = create(:comment,
+                             project: project,
+                             category: category,
+                             user: user2,
+                             parent_id: comment_1
+                            )
+        end.should change(ActionMailer::Base.deliveries, :size).by(2)
+      end
+    end
+
+    context 'when the parent don\'t have user' do
+      it 'don''t send a mail' do
+        comment_1 = create(:comment, project: project, username: 'test', category: category) 
+        lambda do
+          comment_2 = create(:comment,
+                             project: project,
+                             category: category,
+                             user: user2,
+                             parent_id: comment_1
+                            )
+        end.should change(ActionMailer::Base.deliveries, :size).by(1)
+      end
+    end
+
+    context 'when the parent owner an the comment\s owner is the same' do
+      it 'don''t send a mail' do
+        comment_1 = create(:comment, project: project, user: user3, category: category) 
+        lambda do
+          comment_2 = create(:comment,
+                             project: project,
+                             category: category,
+                             user: user3,
+                             parent_id: comment_1
+                            )
+        end.should change(ActionMailer::Base.deliveries, :size).by(1)
+      end
     end
   end
 end
