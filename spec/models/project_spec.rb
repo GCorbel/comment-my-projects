@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe Project do
   let(:project) { create(:project, title: "Title",
-                         url: "http://www.test.com") }
+                         url: "http://www.test.com",
+                         user: user) }
+  let(:user) { create(:user) } 
   let(:category) { create(:category) } 
   let(:comment) { create(:comment,
                          project_id: project,

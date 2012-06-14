@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe 'Comments' do
-  let!(:project) { create(:project) }
+  let!(:project) { create(:project, user: user) }
   let(:user) { create(:user) }
   let(:category) { create(:category) }
   let(:comment) do 
