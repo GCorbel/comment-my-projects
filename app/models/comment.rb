@@ -17,14 +17,15 @@ class Comment < ActiveRecord::Base
     
   private 
     def send_mail_to_project_owner
-      CommentMailer.send_mail_to_project_owner(project.user).deliver
+      CommentMailer.send_mail_to_project_owner(project.user, project).deliver
     end
 
     def send_mail_to_creator_of_parents
       user_ids = ancestors.pluck(:user_id).compact.uniq
       user_ids.delete(user.id) if user
       user_ids.each do |id|
-        CommentMailer.send_mail_to_creator_of_parents(User.find(id)).deliver
+        user = User.find id
+        CommentMailer.send_mail_to_creator_of_parents(user, project).deliver
       end
     end
 end
