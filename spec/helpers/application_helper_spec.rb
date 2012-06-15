@@ -38,4 +38,11 @@ describe ApplicationHelper do
       end
     end
   end
+  
+  describe :markdown do
+    it "convert a markdown to html" do
+      helper.markdown("**test**").should ==
+        "<p><strong>test</strong></p>\n"
+    end
+  end
 end

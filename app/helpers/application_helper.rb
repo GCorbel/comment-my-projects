@@ -14,4 +14,9 @@ module ApplicationHelper
   def browser_title(title = nil)
     [(title if title.present?), "Comment My Projects"].compact.join(" - ")
   end
+
+  def markdown(code)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    raw(markdown.render(code))
+  end
 end

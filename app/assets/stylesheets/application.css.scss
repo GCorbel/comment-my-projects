@@ -10,10 +10,10 @@
  *
  *= require_self
  *= require bootstrap_and_overrides
- *= require bootstrap-wysihtml5
  *= require bootstrap
  *= require category_projects
  *= home
+ *= require markdown
  */
 form textarea {
   width: 100%;

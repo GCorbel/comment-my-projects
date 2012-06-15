@@ -1,15 +1,20 @@
 #= require jquery
 #= require jquery_ujs
 #= require twitter/bootstrap
-#= require_tree .
 #= require jquery.pjax
-#= require bootstrap-wysihtml5-all
+#= require_tree ../../../vendor/assets/javascripts/markdown/
+#= require_tree .
 $(document).ready ->
-  $('textarea').wysihtml5()
+  InitMarkdown()
 
 $(document).on("pjax:end", () ->
-  $('textarea').wysihtml5()
+  InitMarkdown()
 )
 
 jQuery ->
   $('a:not([data-method=delete]):not([data-remote]):not([data-behavior]):not([data-skip-pjax])').pjax('[data-pjax-container]')
+
+InitMarkdown = () ->
+  converter1 = Markdown.getSanitizingConverter()
+  editor1 = new Markdown.Editor(converter1)
+  editor1.run()

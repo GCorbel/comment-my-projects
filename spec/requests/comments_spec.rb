@@ -31,7 +31,7 @@ describe 'Comments' do
           within('#new_comment') do
             fill_in('Nom', with: 'My name')
             select('General', from: 'Categorie')
-            fill_in('Message', with: 'My Message')
+            fill_in('wmd-input', with: 'My Message')
             click_button 'Envoyer'
           end
           page.should have_content('Votre commentaire a été ajouté')
@@ -63,7 +63,7 @@ describe 'Comments' do
       visit project_path(project)
       click_link 'Répondre'
       fill_in('Nom', with: 'My name')
-      fill_in('Message', with: 'My answer')
+      fill_in('wmd-input', with: 'My answer')
       click_button 'Envoyer'
       page.should have_content('Votre commentaire a été ajouté')
       within("#comment_#{comment.id}") do

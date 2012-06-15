@@ -5,7 +5,7 @@
     <%= comment.created_at.strftime('%d/%m/%Y %H:%M') %>
   </h2>
   <div>
-    <%=raw comment.message %>
+    <%= markdown comment.message %>
     <%= link_to 'Répondre', 
                 new_project_comment_path(project,
                                          ancestry: comment),
