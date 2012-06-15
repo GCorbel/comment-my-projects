@@ -17,7 +17,7 @@
       </div>
     </div>
   <% if signed_in? && current_user == @project.user %>
-    <%= render 'form_action', project: @project %>
+    <%= render 'projects/form_action', project: @project %>
   <% end %>
   <div class="span3 left">
     <%= render 'notes/index', project: @project %>
