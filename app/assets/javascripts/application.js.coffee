@@ -16,5 +16,8 @@ jQuery ->
 
 InitMarkdown = () ->
   converter1 = Markdown.getSanitizingConverter()
-  editor1 = new Markdown.Editor(converter1)
+  editor1 = new Markdown.Editor(converter1, '', { title: 'Markdown?', handler: markdownHelp })
   editor1.run()
+
+markdownHelp = () ->
+  window.open('http://fr.wikipedia.org/wiki/Markdown')
