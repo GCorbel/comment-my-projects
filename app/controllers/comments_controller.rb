@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   
   def create
     @comment = Comment.new(params[:comment])
+    @comment.parent = Comment.find(@comment.ancestry)
     @comment.user = current_user
     @comment.project = @project
     if @comment.valid?
