@@ -50,7 +50,7 @@ describe 'CategoryProjects' do
 
     context 'With invalid data' do
       it 'Show error' do
-        fill_in('Description', with: '')
+        fill_in('wmd-input', with: '')
         click_button 'Valider'
         page.should have_content("champ obligatoire")
       end
@@ -71,7 +71,7 @@ describe 'CategoryProjects' do
 
   def fill_form
     select('New Category', from: 'Categorie')
-    fill_in('Description', with: 'New description')
+    fill_in('wmd-input', with: 'New description')
     click_button 'Valider'
   end
 end
