@@ -70,17 +70,17 @@ describe CommentsController do
     end
 
     it "redirect to project path" do
-      delete 'destroy'
+      delete 'destroy', id: comment.id
       should redirect_to(project)
     end
 
     it "delete the comment" do
       comment.expects(:destroy)
-      delete 'destroy'
+      delete 'destroy', id: comment.id
     end
 
     it "set a flash message" do
-      delete 'destroy'
+      delete 'destroy', id: comment.id
       should set_the_flash[:notice].to("Votre commentaire a été supprimé")
     end
   end

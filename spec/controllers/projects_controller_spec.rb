@@ -4,8 +4,10 @@ require 'spec_helper'
 describe ProjectsController do
   render_views 
 
-  let!(:project) { build_stubbed(:project) }
+  let!(:project) { build_stubbed(:project, user: user) }
   let(:user) { build_stubbed(:user) }
+
+  before(:each) { sign_in user }
 
   describe "GET 'index'" do
     it "render index template" do
@@ -36,19 +38,18 @@ describe ProjectsController do
     before(:each) { Project.stubs(:find).returns(project) } 
 
     it "render show template" do
-      get 'show'
+      get 'show', id: project.id
       should render_template('show')
     end
 
     it "create a new comment" do
       Comment.expects(:new).returns(comment)
-      get 'show'
+      get 'show', id: project.id
     end
   end
 
   describe "GET 'new'" do
     it "render new template" do
-      sign_in user
       get 'new'
       should render_template('new')
     end
@@ -56,7 +57,6 @@ describe ProjectsController do
 
   describe "POST 'create'" do
     before(:each) do
-      sign_in user
       Project.stubs(:new).returns(project)
     end
 
@@ -92,19 +92,17 @@ describe ProjectsController do
 
   describe "GET 'edit'" do
     before(:each) do
-      sign_in user
       Project.stubs(:find).returns(project)
     end
 
     it "render edit template" do
-      get 'edit'
+      get 'edit', id: project.id
       should render_template('edit')
     end
   end
 
   describe "POST 'update'" do
     before(:each) do
-      sign_in user
       Project.stubs(:find).returns(project)
     end
 
@@ -112,17 +110,17 @@ describe ProjectsController do
       before(:each) { project.stubs(:update_attributes).returns(true) }
 
       it "redirect to project path" do
-        post 'update'
+        post 'update', id: project.id
         should redirect_to(project)
       end
 
       it "update the project" do
         project.expects(:update_attributes)
-        post 'update'
+        post 'update', id: project.id
       end
 
       it "set a flash message" do
-        post 'update'
+        post 'update', id: project.id
         should set_the_flash[:notice].to("Votre projet a été modifié")
       end
     end
@@ -131,7 +129,7 @@ describe ProjectsController do
       before(:each) { project.stubs(:update_attributes).returns(false) }
 
       it "render edit template" do
-        post 'update'
+        post 'update', id: project.id
         should render_template('edit')
       end
     end
@@ -139,23 +137,22 @@ describe ProjectsController do
 
   describe "DELETE 'destroy'" do
     before(:each) do
-      sign_in user
       Project.stubs(:find).returns(project)
       project.stubs(:destroy)
     end
 
     it "redirect to projects path" do
-      delete 'destroy'
+      delete 'destroy', id: project.id
       should redirect_to(root_path)
     end
 
     it "delete the project" do
       project.expects(:destroy)
-      delete 'destroy'
+      delete 'destroy', id: project.id
     end
 
     it "set a flash message" do
-      delete 'destroy'
+      delete 'destroy', id: project.id
       should set_the_flash[:notice].to("Votre projet a été supprimé")
     end
   end

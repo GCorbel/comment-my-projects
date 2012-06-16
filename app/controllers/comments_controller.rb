@@ -1,13 +1,13 @@
 #encoding=utf-8
 class CommentsController < ApplicationController
   before_filter :find_project
+  load_resource
 
   def new
-    @comment = Comment.new(ancestry: params[:ancestry])
+    @comment.ancestry = params[:ancestry]
   end
   
   def create
-    @comment = Comment.new(params[:comment])
     @comment.parent = Comment.find(@comment.ancestry) if @comment.ancestry
     @comment.user = current_user
     @comment.project = @project
@@ -21,8 +21,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    comment.destroy
+    @comment.destroy
     redirect_to(@project, notice: 'Votre commentaire a été supprimé')
   end
 

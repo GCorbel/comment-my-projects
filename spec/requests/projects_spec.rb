@@ -101,7 +101,7 @@ describe 'Project' do
 
   describe 'Update' do
     before(:each) do
-      sign_in
+      sign_in user
       visit edit_project_path(project)
     end
 

@@ -2,28 +2,26 @@
 require 'spec_helper'
 
 describe CategoryProjectsController do
-  let(:user) { stub }
-  let(:project) { build_stubbed(:project) }
-  let(:category_project) { stub(:save) }
+  let(:user) { build_stubbed(:user) }
+  let(:project) { build_stubbed(:project, user: user) }
+  let(:category_project) { build_stubbed(:category_project) }
 
   before(:each) do
-    sign_in
+    sign_in user
     Project.stubs(:find).returns(project)
   end
 
   describe "GET 'new'" do
     it "render new template" do
-      sign_in user
-      get 'new'
+      get 'new', id: category_project.id
       should render_template('new')
     end
   end
 
   describe "POST 'create'" do
     before(:each) do
-      sign_in user
+      category_project
       CategoryProject.stubs(:new).returns(category_project)
-      Project.stubs(:find).returns(project)
     end
 
     context "with valid data" do
@@ -57,19 +55,17 @@ describe CategoryProjectsController do
 
   describe "GET 'edit'" do
     before(:each) do
-      sign_in user
-      CategoryProject.stubs(:find)
+      CategoryProject.stubs(:find).returns(category_project)
     end
 
     it "render edit template" do
-      get 'edit'
+      get 'edit', id: category_project.id
       should render_template('edit')
     end
   end
 
   describe "POST 'update'" do
     before(:each) do
-      sign_in user
       CategoryProject.stubs(:find)
                      .returns(category_project)
       category_project.stubs(:category)
@@ -79,17 +75,17 @@ describe CategoryProjectsController do
       before(:each) { category_project.stubs(:update_attributes).returns(true) }
 
       it "redirect to project path" do
-        post 'update'
+        post 'update', id: category_project.id
         should redirect_to(project)
       end
 
       it "update the project" do
         category_project.expects(:update_attributes)
-        post 'update'
+        post 'update', id: category_project.id
       end
 
       it "set a flash message" do
-        post 'update'
+        post 'update', id: category_project.id
         should set_the_flash[:notice].to("La description a été modifiée")
       end
     end
@@ -98,7 +94,7 @@ describe CategoryProjectsController do
       before(:each) { category_project.stubs(:update_attributes).returns(false) }
 
       it "render edit template" do
-        post 'update'
+        post 'update', id: category_project.id
         should render_template('edit')
       end
     end
@@ -112,17 +108,17 @@ describe CategoryProjectsController do
     end
 
     it "redirect to projects path" do
-      delete 'destroy'
+      delete 'destroy', id: category_project.id
       should redirect_to(project)
     end
 
     it "delete the project" do
       category_project.expects(:destroy)
-      delete 'destroy'
+      delete 'destroy', id: category_project.id
     end
 
     it "set a flash message" do
-      delete 'destroy'
+      delete 'destroy', id: category_project.id
       should set_the_flash[:notice].to("La description a été supprimée")
     end
   end

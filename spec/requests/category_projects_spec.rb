@@ -12,7 +12,7 @@ describe 'CategoryProjects' do
   end
 
 
-  before(:each) { sign_in }
+  before(:each) { sign_in user }
 
   context 'Create' do
     before(:each) do

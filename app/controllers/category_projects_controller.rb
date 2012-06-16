@@ -1,14 +1,14 @@
 #encoding=utf-8
 class CategoryProjectsController < ApplicationController
   before_filter :authenticate_user!
+  load_resource
   before_filter :find_project_and_set_categories
 
   def new
-    @category_project = CategoryProject.new(project_id: @project.id)
+    @category_project.id = @project.id
   end
 
   def create
-    @category_project = CategoryProject.new(params[:category_project])
     if @category_project.save
       redirect_to @project, notice: "La description a été ajoutée"
     else
@@ -17,12 +17,10 @@ class CategoryProjectsController < ApplicationController
   end
 
   def edit
-    @category_project = CategoryProject.find(params[:id])
     @categories << @category_project.category if @category_project
   end
 
   def update
-    @category_project = CategoryProject.find(params[:id])
     if @category_project.update_attributes(params[:category_project])
       redirect_to(@project, notice: "La description a été modifiée")
     else
@@ -32,7 +30,6 @@ class CategoryProjectsController < ApplicationController
   end
 
   def destroy
-    @category_project = CategoryProject.find(params[:id])
     @category_project.destroy
     redirect_to(@project, notice: "La description a été supprimée")
   end
@@ -40,6 +37,7 @@ class CategoryProjectsController < ApplicationController
   private
     def find_project_and_set_categories
       @project = Project.find(params[:project_id])
+      @category_project.project = @project
       @categories = Category.all - @project.categories
     end
 end
