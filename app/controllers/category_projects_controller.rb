@@ -3,6 +3,7 @@ class CategoryProjectsController < ApplicationController
   before_filter :authenticate_user!
   load_resource
   before_filter :find_project_and_set_categories
+  authorize_resource
 
   def new
     @category_project.id = @project.id
