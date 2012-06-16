@@ -27,8 +27,8 @@
 
     // The text that appears on the upper part of the dialog box when
     // entering links.
-    var linkDialogText = "<p><b>Insert Hyperlink</b></p><p>http://example.com/ \"optional title\"</p>";
-    var imageDialogText = "<p><b>Insert Image</b></p><p>http://example.com/images/diagram.jpg \"optional title\"<br><br>Need <a href='http://www.google.com/search?q=free+image+hosting' target='_blank'>free image hosting?</a></p>";
+    var linkDialogText = "<p>http://example.com/ \"optional title\"</p>";
+    var imageDialogText = "<p>http://example.com/images/diagram.jpg \"optional title\"</p>";
 
     // The default text that appears in the dialog input box when entering
     // links.
@@ -41,16 +41,35 @@
     //  END OF YOUR CHANGES
     // -------------------------------------------------------------------
 
-    // help, if given, should have a property "handler", the click handler for the help button,
-    // and can have an optional property "title" for the button's tooltip (defaults to "Markdown Editing Help").
-    // If help isn't given, not help button is created.
+	// The buttons parameter allows configuring which buttons appear
+    // See Markdown.Editor.getDefaultButtons() for the format of the buttons parameter. Buttons
+    // can be removed by acquiring the default buttons object and deleting the appropriate button
+    // properties before passing the object here. Moving spacers and pointing to different sprites
+    // can also be accomplished by changing properties in the button object.
     //
-    // The constructed editor object has the methods:
-    // - getConverter() returns the markdown converter object that was passed to the constructor
-    // - run() actually starts the editor; should be called after all necessary plugins are registered. Calling this more than once is a no-op.
-    // - refreshPreview() forces the preview to be updated. This method is only available after run() was called.
-    Markdown.Editor = function (markdownConverter, idPostfix, help) {
+    // A help button is not displayed by default to preserve previous functionality. To include a help
+    // button, add a "help" property to the buttons object using Markdown.Editor.MakeHelpButton(), passing
+    // the onClick handler and optional title. Title defaults to "Markdown Editing Help".
+    
+    // The previous method for specifying a help button continues to be supported, so this class
+    // remains completely backward compatible.
+    // 
+    // The "old" method for specifying a help button:
+    //   help, if given, should have a property "handler", the click handler for the help button,
+    //   and can have an optional property "title" for the button's tooltip (defaults to "Markdown Editing Help").
+    //   If help isn't given, no help button is created.
+     //
+     // The constructed editor object has the methods:
+     // - getConverter() returns the markdown converter object that was passed to the constructor
+     // - run() actually starts the editor; should be called after all necessary plugins are registered. Calling this more than once is a no-op.
+     // - refreshPreview() forces the preview to be updated. This method is only available after run() was called.
+    Markdown.Editor = function (markdownConverter, idPostfix, buttons) {
 
+		if (typeof(idPostfix) === "object") {
+			buttons = idPostfix;
+			idPostfix = null;
+		}
+		
         idPostfix = idPostfix || "";
 
         var hooks = this.hooks = new Markdown.HookCollection();
@@ -88,7 +107,7 @@
                 }
             }
 
-            uiManager = new UIManager(idPostfix, panels, undoManager, previewManager, commandManager, help);
+            uiManager = new UIManager(idPostfix, panels, undoManager, previewManager, commandManager, buttons);
             uiManager.setUndoRedoButtonStates();
 
             var forceRefresh = that.refreshPreview = function () { previewManager.refresh(true); };
@@ -964,45 +983,7 @@
         init();
     };
 
-    // Creates the background behind the hyperlink text entry box.
-    // And download dialog
-    // Most of this has been moved to CSS but the div creation and
-    // browser-specific hacks remain here.
-    ui.createBackground = function () {
-
-        var background = doc.createElement("div"),
-            style = background.style;
-        
-        background.className = "wmd-prompt-background";
-        
-        style.position = "absolute";
-        style.top = "0";
-
-        style.zIndex = "1000";
-
-        if (uaSniffed.isIE) {
-            style.filter = "alpha(opacity=50)";
-        }
-        else {
-            style.opacity = "0.5";
-        }
-
-        var pageSize = position.getPageSize();
-        style.height = pageSize[1] + "px";
-
-        if (uaSniffed.isIE) {
-            style.left = doc.documentElement.scrollLeft;
-            style.width = doc.documentElement.clientWidth;
-        }
-        else {
-            style.left = "0";
-            style.width = "100%";
-        }
-
-        doc.body.appendChild(background);
-        return background;
-    };
-
+    
     // This simulates a modal dialog box and asks for the URL when you
     // click the hyperlink or image buttons.
     //
@@ -1011,7 +992,7 @@
     // callback: The function which is executed when the prompt is dismissed, either via OK or Cancel.
     //      It receives a single argument; either the entered text (if OK was chosen) or null (if Cancel
     //      was chosen).
-    ui.prompt = function (text, defaultInputText, callback) {
+    ui.prompt = function (title, text, defaultInputText, callback) {
 
         // These variables need to be declared at this level since they are used
         // in multiple functions.
@@ -1049,7 +1030,7 @@
                     text = 'http://' + text;
             }
 
-            dialog.parentNode.removeChild(dialog);
+            $(dialog).modal('hide');
 
             callback(text);
             return false;
@@ -1059,20 +1040,46 @@
 
         // Create the text input box form/window.
         var createDialog = function () {
+            // <div class="modal" id="myModal">
+            //   <div class="modal-header">
+            //     <a class="close" data-dismiss="modal">×</a>
+            //     <h3>Modal header</h3>
+            //   </div>
+            //   <div class="modal-body">
+            //     <p>One fine body…</p>
+            //   </div>
+            //   <div class="modal-footer">
+            //     <a href="#" class="btn btn-primary">Save changes</a>
+            //     <a href="#" class="btn">Close</a>
+            //   </div>
+            // </div>
 
             // The main dialog box.
             dialog = doc.createElement("div");
-            dialog.className = "wmd-prompt-dialog";
-            dialog.style.padding = "10px;";
-            dialog.style.position = "fixed";
-            dialog.style.width = "400px";
-            dialog.style.zIndex = "1001";
+            dialog.className = "modal hide fade";
+            dialog.style.display = "none";
+
+            // The header.
+            var header = doc.createElement("div");
+            header.className = "modal-header";
+            header.innerHTML = '<a class="close" data-dismiss="modal">×</a> <h3>'+title+'</h3>';
+            dialog.appendChild(header);
+
+            // The body.
+            var body = doc.createElement("div");
+            body.className = "modal-body";
+            dialog.appendChild(body);
+
+            // The footer.
+            var footer = doc.createElement("div");
+            footer.className = "modal-footer";
+            dialog.appendChild(footer);
 
             // The dialog text.
-            var question = doc.createElement("div");
+            var question = doc.createElement("p");
             question.innerHTML = text;
             question.style.padding = "5px";
-            dialog.appendChild(question);
+            body.appendChild(question);
 
             // The web form container for the text box and buttons.
             var form = doc.createElement("form"),
@@ -1080,11 +1087,7 @@
             form.onsubmit = function () { return close(false); };
             style.padding = "0";
             style.margin = "0";
-            style.cssFloat = "left";
-            style.width = "100%";
-            style.textAlign = "center";
-            style.position = "relative";
-            dialog.appendChild(form);
+            body.appendChild(form);
 
             // The input text box
             input = doc.createElement("input");
@@ -1097,44 +1100,25 @@
             form.appendChild(input);
 
             // The ok button
-            var okButton = doc.createElement("input");
+            var okButton = doc.createElement("button");
+            okButton.className = "btn btn-primary";
             okButton.type = "button";
             okButton.onclick = function () { return close(false); };
-            okButton.value = "OK";
-            style = okButton.style;
-            style.margin = "10px";
-            style.display = "inline";
-            style.width = "7em";
-
+            okButton.innerHTML = "OK";
 
             // The cancel button
-            var cancelButton = doc.createElement("input");
+            var cancelButton = doc.createElement("button");
+            cancelButton.className = "btn btn-primary";
             cancelButton.type = "button";
             cancelButton.onclick = function () { return close(true); };
-            cancelButton.value = "Cancel";
-            style = cancelButton.style;
-            style.margin = "10px";
-            style.display = "inline";
-            style.width = "7em";
+            cancelButton.innerHTML = "Cancel";
 
-            form.appendChild(okButton);
-            form.appendChild(cancelButton);
+            footer.appendChild(okButton);
+            footer.appendChild(cancelButton);
 
             util.addEvent(doc.body, "keydown", checkEscape);
-            dialog.style.top = "50%";
-            dialog.style.left = "50%";
-            dialog.style.display = "block";
-            if (uaSniffed.isIE_5or6) {
-                dialog.style.position = "absolute";
-                dialog.style.top = doc.documentElement.scrollTop + 200 + "px";
-                dialog.style.left = "50%";
-            }
-            doc.body.appendChild(dialog);
 
-            // This has to be done AFTER adding the dialog to the form if you
-            // want it to be centered.
-            dialog.style.marginTop = -(position.getHeight(dialog) / 2) + "px";
-            dialog.style.marginLeft = -(position.getWidth(dialog) / 2) + "px";
+            doc.body.appendChild(dialog);
 
         };
 
@@ -1156,16 +1140,41 @@
                 range.moveEnd("character", defTextLen);
                 range.select();
             }
+            
+            $(dialog).on('shown', function () {
+                input.focus();
+            })
+            
+            $(dialog).on('hidden', function () {
+                dialog.parentNode.removeChild(dialog);
+            })
 
-            input.focus();
+            $(dialog).modal()
+
         }, 0);
     };
 
-    function UIManager(postfix, panels, undoManager, previewManager, commandManager, helpOptions) {
+    function UIManager(postfix, panels, undoManager, previewManager, commandManager, buttonOptions) {
 
         var inputBox = panels.input,
             buttons = {}; // buttons.undo, buttons.link, etc. The actual DOM elements.
-
+		
+		// if no button options passed then set up defaults
+        if (!buttonOptions)
+        {
+          buttonOptions = Markdown.Editor.getDefaultButtons();
+        } 
+        // convert old style "help" parameter format to remain backward compatible - i.e. { handler: x, title:"x" }
+        else if (buttonOptions.handler)
+        {
+            var help = buttonOptions;
+            buttonOptions = Markdown.Editor.getDefaultButtons();
+            buttonOptions.help = Markdown.Editor.getDefaultHelpButton();
+            buttonOptions.help.handler = help.handler;
+            if (help.title)
+              buttonOptions.help.title = help.title;
+        }
+		
         makeSpritedButtonRow();
 
         var keyEvent = "keydown";
@@ -1264,7 +1273,9 @@
 
         // Perform the button's action.
         function doClick(button) {
-
+			
+			if (!button) return;
+			
             inputBox.focus();
 
             if (button.textOp) {
@@ -1325,32 +1336,8 @@
 
         function setupButton(button, isEnabled) {
 
-            var normalYShift = "0px";
-            var disabledYShift = "-20px";
-            var highlightYShift = "-40px";
-            var image = button.getElementsByTagName("span")[0];
             if (isEnabled) {
-                image.style.backgroundPosition = button.XShift + " " + normalYShift;
-                button.onmouseover = function () {
-                    image.style.backgroundPosition = this.XShift + " " + highlightYShift;
-                };
-
-                button.onmouseout = function () {
-                    image.style.backgroundPosition = this.XShift + " " + normalYShift;
-                };
-
-                // IE tries to select the background image "button" text (it's
-                // implemented in a list item) so we have to cache the selection
-                // on mousedown.
-                if (uaSniffed.isIE) {
-                    button.onmousedown = function () {
-                        if (doc.activeElement && doc.activeElement !== panels.input) { // we're not even in the input box, so there's no selection
-                            return;
-                        }
-                        panels.ieCachedRange = document.selection.createRange();
-                        panels.ieCachedScrollTop = panels.input.scrollTop;
-                    };
-                }
+                button.disabled = false;
 
                 if (!button.isHelp) {
                     button.onclick = function () {
@@ -1363,8 +1350,7 @@
                 }
             }
             else {
-                image.style.backgroundPosition = button.XShift + " " + disabledYShift;
-                button.onmouseover = button.onmouseout = button.onclick = function () { };
+                button.disabled = true;
             }
         }
 
@@ -1377,85 +1363,91 @@
         function makeSpritedButtonRow() {
 
             var buttonBar = panels.buttonBar;
-
-            var normalYShift = "0px";
-            var disabledYShift = "-20px";
-            var highlightYShift = "-40px";
-
-            var buttonRow = document.createElement("ul");
+            var buttonRow = document.createElement("div");
             buttonRow.id = "wmd-button-row" + postfix;
-            buttonRow.className = 'wmd-button-row';
+            buttonRow.className = 'btn-toolbar';
             buttonRow = buttonBar.appendChild(buttonRow);
-            var xPosition = 0;
-            var makeButton = function (id, title, XShift, textOp) {
-                var button = document.createElement("li");
-                button.className = "wmd-button";
-                button.style.left = xPosition + "px";
-                xPosition += 25;
-                var buttonImage = document.createElement("span");
-                button.id = id + postfix;
+
+			var makeButton = function (options, textOp, group) {
+				if (!options) return null;
+                var button = document.createElement("button");
+                button.className = "btn";
+                var buttonImage = document.createElement("i");
+                buttonImage.className = options.icon;
+                button.id = options.id + postfix;
                 button.appendChild(buttonImage);
-                button.title = title;
-                button.XShift = XShift;
+                button.title = options.title;
+                $(button).tooltip({placement: 'bottom'})
                 if (textOp)
                     button.textOp = textOp;
                 setupButton(button, true);
-                buttonRow.appendChild(button);
+                if (group) {
+                    group.appendChild(button);
+                } else {
+                    buttonRow.appendChild(button);
+                }
                 return button;
             };
-            var makeSpacer = function (num) {
-                var spacer = document.createElement("li");
-                spacer.className = "wmd-spacer wmd-spacer" + num;
-                spacer.id = "wmd-spacer" + num + postfix;
-                buttonRow.appendChild(spacer);
-                xPosition += 25;
+            var makeGroup = function (num) {
+                var group = document.createElement("div");
+                group.className = "btn-group wmd-button-group" + num;
+                group.id = "wmd-button-group" + num + postfix;
+                buttonRow.appendChild(group);
+                return group
             }
 
-            buttons.bold = makeButton("wmd-bold-button", "Strong <strong> Ctrl+B", "0px", bindCommand("doBold"));
-            buttons.italic = makeButton("wmd-italic-button", "Emphasis <em> Ctrl+I", "-20px", bindCommand("doItalic"));
-            makeSpacer(1);
-            buttons.link = makeButton("wmd-link-button", "Hyperlink <a> Ctrl+L", "-40px", bindCommand(function (chunk, postProcessing) {
+            group1 = makeGroup(1);
+            buttons.bold = makeButton(buttonOptions.bold, bindCommand("doBold"), group1);
+            buttons.italic = makeButton(buttonOptions.italic, bindCommand("doItalic"), group1);
+            
+            group2 = makeGroup(2);
+            buttons.link = makeButton(buttonOptions.link, bindCommand(function (chunk, postProcessing) {
                 return this.doLinkOrImage(chunk, postProcessing, false);
-            }));
-            buttons.quote = makeButton("wmd-quote-button", "Blockquote <blockquote> Ctrl+Q", "-60px", bindCommand("doBlockquote"));
-            buttons.code = makeButton("wmd-code-button", "Code Sample <pre><code> Ctrl+K", "-80px", bindCommand("doCode"));
-            buttons.image = makeButton("wmd-image-button", "Image <img> Ctrl+G", "-100px", bindCommand(function (chunk, postProcessing) {
+            }), group2);
+            buttons.quote = makeButton(buttonOptions.quote, bindCommand("doBlockquote"), group2);
+            buttons.code = makeButton(buttonOptions.code, bindCommand("doCode"), group2);
+            buttons.image = makeButton(buttonOptions.image, bindCommand(function (chunk, postProcessing) {
                 return this.doLinkOrImage(chunk, postProcessing, true);
-            }));
-            makeSpacer(2);
-            buttons.olist = makeButton("wmd-olist-button", "Numbered List <ol> Ctrl+O", "-120px", bindCommand(function (chunk, postProcessing) {
+            }), group2);
+
+            group3 = makeGroup(3);
+            buttons.olist = makeButton(buttonOptions.olist, bindCommand(function (chunk, postProcessing) {
                 this.doList(chunk, postProcessing, true);
-            }));
-            buttons.ulist = makeButton("wmd-ulist-button", "Bulleted List <ul> Ctrl+U", "-140px", bindCommand(function (chunk, postProcessing) {
+            }), group3);
+            buttons.ulist = makeButton(buttonOptions.ulist, bindCommand(function (chunk, postProcessing) {
                 this.doList(chunk, postProcessing, false);
-            }));
-            buttons.heading = makeButton("wmd-heading-button", "Heading <h1>/<h2> Ctrl+H", "-160px", bindCommand("doHeading"));
-            buttons.hr = makeButton("wmd-hr-button", "Horizontal Rule <hr> Ctrl+R", "-180px", bindCommand("doHorizontalRule"));
-            makeSpacer(3);
-            buttons.undo = makeButton("wmd-undo-button", "Undo - Ctrl+Z", "-200px", null);
-            buttons.undo.execute = function (manager) { if (manager) manager.undo(); };
+            }), group3);
+            buttons.heading = makeButton(buttonOptions.heading, bindCommand("doHeading"), group3);
+            buttons.hr = makeButton(buttonOptions.hr, bindCommand("doHorizontalRule"), group3);
+            
+            group4 = makeGroup(4);
+            buttons.undo = makeButton(buttonOptions.undo, null, group4);
+			if (buttons.undo)
+				buttons.undo.execute = function (manager) { if (manager) manager.undo(); };
 
-            var redoTitle = /win/.test(nav.platform.toLowerCase()) ?
-                "Redo - Ctrl+Y" :
-                "Redo - Ctrl+Shift+Z"; // mac and other non-Windows platforms
+            buttons.redo = makeButton(buttonOptions.redo, null, group4);
+			if (buttons.redo)
+				buttons.redo.execute = function (manager) { if (manager) manager.redo(); };
 
-            buttons.redo = makeButton("wmd-redo-button", redoTitle, "-220px", null);
-            buttons.redo.execute = function (manager) { if (manager) manager.redo(); };
-
-            if (helpOptions) {
-                var helpButton = document.createElement("li");
-                var helpButtonImage = document.createElement("span");
+            if (buttonOptions.help) {
+                group5 = makeGroup(5);
+                group5.className = group5.className + " pull-right";
+				
+                var helpButton = document.createElement("button");
+                helpButton.className = "btn";
+				helpButton.id = buttonOptions.help.id + postfix;
+				
+				var helpButtonImage = document.createElement("i");
+                helpButtonImage.className = "icon-question-sign";
                 helpButton.appendChild(helpButtonImage);
-                helpButton.className = "wmd-button wmd-help-button";
-                helpButton.id = "wmd-help-button" + postfix;
-                helpButton.XShift = "-240px";
+                
                 helpButton.isHelp = true;
-                helpButton.style.right = "0px";
-                helpButton.title = helpOptions.title || defaultHelpHoverTitle;
-                helpButton.onclick = helpOptions.handler;
+                helpButton.title = buttonOptions.help.title;
+                $(helpButton).tooltip({placement: 'bottom'})
+                helpButton.onclick = buttonOptions.help.handler;
 
                 setupButton(helpButton, true);
-                buttonRow.appendChild(helpButton);
+                group5.appendChild(helpButton);
                 buttons.help = helpButton;
             }
 
@@ -1680,8 +1672,6 @@
             // Marks up the link and adds the ref.
             var linkEnteredCallback = function (link) {
 
-                background.parentNode.removeChild(background);
-
                 if (link !== null) {
                     // (                          $1
                     //     [^\\]                  anything that's not a backslash
@@ -1721,14 +1711,13 @@
                 postProcessing();
             };
 
-            background = ui.createBackground();
 
             if (isImage) {
                 if (!this.hooks.insertImageDialog(linkEnteredCallback))
-                    ui.prompt(imageDialogText, imageDefaultText, linkEnteredCallback);
+                    ui.prompt('Insert Image', imageDialogText, imageDefaultText, linkEnteredCallback);
             }
             else {
-                ui.prompt(linkDialogText, linkDefaultText, linkEnteredCallback);
+                ui.prompt('Insert Link', linkDialogText, linkDefaultText, linkEnteredCallback);
             }
             return true;
         }
@@ -2155,6 +2144,49 @@
         chunk.selection = "";
         chunk.skipLines(2, 1, true);
     }
+	
+	Markdown.Editor.getDefaultButtons = function() {
+        var result = {
+                bold: { id: "wmd-bold-button", title: "Strong <strong> Ctrl+B", icon: "icon-bold" },
+                italic: { id: "wmd-italic-button", title: "Emphasis <em> Ctrl+I", icon: "icon-italic" },
+                link: { id: "wmd-link-button", title: "Hyperlink <a> Ctrl+L", icon: "icon-link" },
+                quote: { id: "wmd-quote-button", title: "Blockquote <blockquote> Ctrl+Q", icon: "icon-blockquote" },
+                code: { id: "wmd-code-button", title: "Code Sample <pre><code> Ctrl+K", icon: "icon-code" },
+                image: { id: "wmd-image-button", title: "Image <img> Ctrl+G", icon: "icon-picture" },
+                olist: { id: "wmd-olist-button", title: "Numbered List <ol> Ctrl+O", icon: "icon-list" },
+                ulist: { id: "wmd-ulist-button", title: "Bulleted List <ul> Ctrl+U", icon: "icon-bullet-list" },
+                heading: { id: "wmd-heading-button", title: "Heading <h1>/<h2> Ctrl+H", icon: "icon-header" },
+                hr: { id: "wmd-hr-button", title: "Horizontal Rule <hr> Ctrl+R", icon: "icon-hr-line" },
+                undo: { id: "wmd-undo-button", title: "Undo - Ctrl+Z", icon: "icon-undo" },
+                redo: { id: "wmd-redo-button", 
+                        title: /win/.test(nav.platform.toLowerCase()) ? "Redo - Ctrl+Y" : "Redo - Ctrl+Shift+Z" /* mac and other non-Windows platforms*/, icon: "icon-share-alt" }
+            };
+            
+        return result;
+    }
 
+    Markdown.Editor.getDefaultHelpButton = function() {
+    
+        var result =
+          {
+              id: "wmd-help-button",
+              title: defaultHelpHoverTitle,
+              isHelp: true
+          }
+          
+       return result;
+    }
+        
+    Markdown.Editor.MakeHelpButton = function(handler, title) {
+      button = Markdown.Editor.getDefaultHelpButton();
+
+      if (handler)
+          button.handler = handler;
+          
+      if (title)
+          button.title = title;
+      
+      return button;
+    }
 
 })();
