@@ -2,6 +2,6 @@
   <h2>Notes du projet</h2>
   <% project.categories.each do |category| %>
     <% note = project.note_for(category) %>
-    <p><%= category.label %> : <%= note ? "#{note}/10" : '-' %></p>
+    <p><%= category %> : <%= note ? "#{note}/10" : '-' %></p>
   <% end %>
 </div>

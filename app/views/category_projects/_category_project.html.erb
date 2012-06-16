@@ -1,5 +1,5 @@
 <div class="tab-pane <%= category_project_counter == 0 ? 'active' : '' %>"
-     id="<%= category_project.category.label%>">
+     id="<%= category_project.category%>">
   <%=raw category_project.description %>
   <% if signed_in? && current_user == project.user %>
     <%= link_to "Modifier",
