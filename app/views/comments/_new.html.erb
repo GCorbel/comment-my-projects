@@ -3,16 +3,14 @@
   <%= simple_form_for [project, comment] do |f| %>
     <% if comment.ancestry %>
       <%= f.input :ancestry,
-        input_html: { value: comment.parent_id },
-        as: :hidden          
-      %>
+                  input_html: { value: comment.parent_id },
+                  as: :hidden %>
     <% end %>
     <%= f.input :username unless signed_in? %>
     <% if comment.is_root? %>
       <%= f.association :category, collection: project.categories %>
     <% end %>
     <%= f.input :message, as: :markdown %>
-
     <%= f.button :submit, 'Envoyer' %>
   <% end %>
 </div>

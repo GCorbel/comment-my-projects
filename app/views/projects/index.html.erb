@@ -1,5 +1,6 @@
 <% if @projects.empty? %>
-  <%= 'Désolé, aucun projet ne correspond à votre recherche. Veuillez recommencer.' %>
+  <%= 'Désolé, aucun projet ne correspond à votre recherche. ' \
+      'Veuillez recommencer.' %>
 <% else %>
   <table class="table table-striped">
     <thead>
@@ -11,8 +12,8 @@
     <tbody>
       <% @projects.each do |project| %>
         <tr>
-          <td><%= link_to(project, project_path(project)) %></td>
-          <td><%= link_to(project.url, project_path(project)) %></td>
+          <td><%= link_to project, project_path(project) %></td>
+          <td><%= link_to project.url, project_path(project) %></td>
         </tr>
       <% end %>
     </tbody>

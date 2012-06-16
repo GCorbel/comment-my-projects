@@ -1,11 +1,11 @@
-<div class="tab-pane <%= category_project_counter == 0 ? 'active' : '' %>"
+<div class="tab-pane <%= 'active' if category_project_counter == 0 %>"
      id="<%= category_project.category%>">
   <%=raw category_project.description %>
   <% if signed_in? && current_user == project.user %>
     <%= link_to "Modifier",
-        edit_project_category_project_path(project, 
-                                           category_project),
-        class: 'btn' %>
+                edit_project_category_project_path(project, 
+                                                   category_project),
+                class: 'btn' %>
     <% unless category_project_counter == 0 %>
       <%= link_to "Supprimer",
                   project_category_project_path(project,

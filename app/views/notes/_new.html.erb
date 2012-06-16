@@ -1,8 +1,12 @@
 <div class="graybox">
   <h2>Ajouter une note</h2>
   <%= simple_form_for [project, note] do |f| %>
-    <%= f.association :category, collection: project.categories, input_html: { class: 'span2' } %>
-    <%= f.input :value, collection: (1..10), input_html: { class: 'span1' } %>
+    <%= f.association :category, 
+                      collection: project.categories,
+                      input_html: { class: 'span2' } %>
+    <%= f.input :value,
+                collection: (1..10),
+                input_html: { class: 'span1' } %>
     <%= f.button :submit, 'Noter' %>
   <% end %>
 </div>
