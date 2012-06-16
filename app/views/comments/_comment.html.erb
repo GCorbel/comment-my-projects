@@ -10,8 +10,7 @@
                 new_project_comment_path(project,
                                          ancestry: comment),
                 class: 'btn' %>
-    <% if signed_in? && (project.user == current_user || 
-                         comment.user == current_user) %>
+    <% if can? :destroy, comment %>
       <%= link_to 'Supprimer', 
                   project_comment_path(project, comment),
                   method: 'delete', 

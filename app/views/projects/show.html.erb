@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="row-fluid">
-    <% if signed_in? && current_user == @project.user %>
+    <% if can? :manage, @project %>
       <%= render 'projects/form_action', project: @project %>
     <% end %>
   </div>
