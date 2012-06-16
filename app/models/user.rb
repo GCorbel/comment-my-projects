@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
       where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
     end
   end
+
+  def to_s
+    username
+  end
 end

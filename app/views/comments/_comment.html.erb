@@ -1,6 +1,6 @@
 <div id="comment_<%= comment.id %>" class="graybox">
   <h2>
-    <%= comment.user ? comment.user.username : comment.username %>
+    <%= comment.user ? comment.user : comment.username %>
     -
     <%= comment.created_at.strftime('%d/%m/%Y %H:%M') %>
   </h2>
