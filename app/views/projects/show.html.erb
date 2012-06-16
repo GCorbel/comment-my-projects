@@ -4,7 +4,7 @@
     <div class="span12">
       <div class="graybox">
         <h1><%= @project %></h1>
-        <%= render 'nav_tabs' %>
+        <%= render 'projects/nav_tabs' %>
         <div class="tab-content">
           <%= render @project.category_projects, project: @project %>
         </div>
