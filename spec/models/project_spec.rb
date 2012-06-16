@@ -25,7 +25,7 @@ describe Project do
   it "have a category on creation" do
     project.categories.first.label.should == "General"
     project.category_projects.first.description.should == 
-      "Title : <a href=\"http://www.test.com\">http://www.test.com</a>"
+      "Title : [#{project.url}](#{project.url})"
   end
 
   describe :to_s do
