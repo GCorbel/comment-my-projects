@@ -16,18 +16,18 @@ describe NotesController do
       before(:each) { note.stubs(:save).returns(true) }
 
       it "returns http success" do
-        post 'create'
+        post 'create', project_id: project.id
         should redirect_to(project)
       end
 
       it "save the project" do
         lambda do
-          post 'create'
+          post 'create', project_id: project.id
         end.should change(project.notes, :size).by(1)
       end
 
       it "set a flash message" do
-        post 'create'
+        post 'create', project_id: project.id
         should set_the_flash[:notice].to("La note a été ajoutée")
       end
     end
@@ -36,7 +36,7 @@ describe NotesController do
       before(:each) { note.stubs(:save).returns(false) }
 
       it "render new template" do
-        post 'create'
+        post 'create', project_id: project.id
         should render_template('projects/show')
       end
     end

@@ -14,7 +14,7 @@ describe CommentsController do
   describe "GET 'new'" do
     it "render new template" do
       sign_in user
-      get 'new'
+      get 'new', project_id: project.id
       should render_template('new')
     end
   end
@@ -26,17 +26,17 @@ describe CommentsController do
       before(:each) { comment.stubs(:valid?).returns(true) }
 
       it "returns http success" do
-        post 'create'
+        post 'create', project_id: project.id
         should redirect_to(project)
       end
 
       it "add the new comment to the project" do
         project.expects(:add_comment).with(comment)
-        post 'create'
+        post 'create', project_id: project.id
       end
 
       it "set a flash message" do
-        post 'create'
+        post 'create', project_id: project.id
         should set_the_flash[:notice].to("Votre commentaire a été ajouté")
       end
     end
@@ -45,7 +45,7 @@ describe CommentsController do
       before(:each) { comment.stubs(:valid?).returns(false) }
 
       it "render new template" do
-        post 'create'
+        post 'create', project_id: project.id
         should render_template('projects/show')
       end
     end
@@ -57,7 +57,7 @@ describe CommentsController do
       end
 
       it "add the user to comment" do
-        post 'create'
+        post 'create', project_id: project.id
         comment.user.should == user
       end
     end
@@ -70,17 +70,17 @@ describe CommentsController do
     end
 
     it "redirect to project path" do
-      delete 'destroy', id: comment.id
+      delete 'destroy', id: comment.id, project_id: project.id
       should redirect_to(project)
     end
 
     it "delete the comment" do
       comment.expects(:destroy)
-      delete 'destroy', id: comment.id
+      delete 'destroy', id: comment.id, project_id: project.id
     end
 
     it "set a flash message" do
-      delete 'destroy', id: comment.id
+      delete 'destroy', id: comment.id, project_id: project.id
       should set_the_flash[:notice].to("Votre commentaire a été supprimé")
     end
   end

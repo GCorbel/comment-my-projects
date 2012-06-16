@@ -15,7 +15,7 @@
       <%= link_to 'Supprimer', 
                   project_comment_path(project, comment),
                   method: 'delete', 
-                  confirm: 'Êtes vous sûr?', 
+                  data: { confirm: 'Êtes vous sûr?' },
                   class: 'btn btn-danger' %>
     <% end %>
   </div>

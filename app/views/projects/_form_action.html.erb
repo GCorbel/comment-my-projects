@@ -9,7 +9,7 @@
       <%= link_to "Supprimer",
                   project_path(project),
                   method: 'delete',
-                  confirm: 'Êtes vous sûr?',
+                  data: { confirm: 'Êtes vous sûr?' },
                   class: 'btn btn-danger' %>
     </div>
   </div>

@@ -65,7 +65,7 @@
                       <li>
                         <%= link_to "Supprimer",
                                     registration_path(:user),
-                                    confirm: "Êtes vous sûr?",
+                                    data: { confirm: "Êtes vous sûr?" },
                                     method: :delete %>
                       </li>
                   <% else %>
