@@ -1,7 +1,9 @@
 #encoding=utf-8
 class CommentsController < ApplicationController
-  before_filter :find_project
-  load_resource
+  load_resource :project
+  load_resource through: :project
+  before_filter :add_project_to_comment
+  authorize_resource
 
   def new
     @comment.ancestry = params[:ancestry]
@@ -26,7 +28,7 @@ class CommentsController < ApplicationController
   end
 
   private
-    def find_project
-      @project = Project.find(params[:project_id])
+    def add_project_to_comment
+      @comment.project = @project
     end
 end

@@ -2,18 +2,20 @@
 require 'spec_helper'
 
 describe CommentsController do
-  let!(:project) { build_stubbed(:project) }
-  let!(:comment) { build_stubbed(:comment) }
+  let(:project) { build_stubbed(:project, user: user) }
+  let(:comment) { build_stubbed(:comment) }
+  let(:comments) { stub(find: comment, new: comment) }
   let(:user) { build_stubbed(:user) }
 
   before(:each) do
+    sign_in user
     Project.stubs(:find).returns(project)
-    comment.stubs(:save)
+    project.stubs(:add_comment)
+    project.stubs(:comments).returns(comments)
   end
 
   describe "GET 'new'" do
     it "render new template" do
-      sign_in user
       get 'new', project_id: project.id
       should render_template('new')
     end

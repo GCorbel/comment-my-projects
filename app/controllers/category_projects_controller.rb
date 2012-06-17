@@ -1,8 +1,9 @@
 #encoding=utf-8
 class CategoryProjectsController < ApplicationController
   before_filter :authenticate_user!
-  load_resource
-  before_filter :find_project_and_set_categories
+  load_resource :project
+  load_resource through: :project
+  before_filter :add_project_to_category_project, :set_categories
   authorize_resource
 
   def new
@@ -36,9 +37,11 @@ class CategoryProjectsController < ApplicationController
   end
 
   private
-    def find_project_and_set_categories
-      @project = Project.find(params[:project_id])
+    def add_project_to_category_project
       @category_project.project = @project
+    end
+    
+    def set_categories 
       @categories = Category.all - @project.categories
     end
 end

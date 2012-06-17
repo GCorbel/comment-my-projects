@@ -3,12 +3,16 @@ require 'spec_helper'
 
 describe CategoryProjectsController do
   let(:user) { build_stubbed(:user) }
+  let(:category_projects) do
+    stub(find: category_project, new: category_project)
+  end
   let(:project) { build_stubbed(:project, user: user) }
   let(:category_project) { build_stubbed(:category_project) }
 
   before(:each) do
     sign_in user
     Project.stubs(:find).returns(project)
+    project.stubs(:category_projects).returns(category_projects)
   end
 
   describe "GET 'new'" do
@@ -20,7 +24,6 @@ describe CategoryProjectsController do
 
   describe "POST 'create'" do
     before(:each) do
-      category_project
       CategoryProject.stubs(:new).returns(category_project)
     end
 
