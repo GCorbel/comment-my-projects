@@ -102,7 +102,6 @@ describe CategoryProjectsController do
 
   describe "DELETE 'destroy'" do
     before(:each) do
-      sign_in user
       CategoryProject.stubs(:find).returns(category_project)
       category_project.stubs(:destroy)
     end
