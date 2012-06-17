@@ -12,6 +12,16 @@ class Project < ActiveRecord::Base
 
   after_create :add_general_category
 
+  class << self
+    def search(params = nil)
+      if params
+        Project.where('title like ?', "%#{params[:title]}%")
+      else
+        Project.all
+      end
+    end
+  end
+
   def add_general_category
     category = Category.find_by_label 'General'
     CategoryProject.create(category: category,

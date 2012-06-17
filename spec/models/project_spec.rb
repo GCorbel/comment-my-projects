@@ -28,6 +28,23 @@ describe Project do
       "Title : [#{project.url}](#{project.url})"
   end
 
+  describe :search do
+    let!(:project1) { create(:project, title: 'My First Project') }
+    let!(:project2) { create(:project, title: 'My Second Project') }
+
+    context 'when there is a research' do
+      it 'give all the projects with the search in the in title' do
+        Project.search({title: 'first'}).should == [project1]
+      end
+    end
+
+    context 'when there is no search' do
+      it 'give all the project' do
+        Project.search.should == [project1, project2]
+      end
+    end
+  end
+
   describe :to_s do
     subject { project.to_s}
 

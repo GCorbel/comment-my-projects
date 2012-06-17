@@ -15,19 +15,11 @@ describe ProjectsController do
       should render_template('index')
     end
 
-    context 'when there is no search' do
-      it 'give all the projects' do
-        Project.expects(:all).returns([project])
-        get 'index'
-      end
-    end
-
     context 'when there is a search' do
       it 'do the search' do
-        Project.expects(:where)
-               .with('title like ?', '%test%')
-               .returns([project])
-        get 'index', search: { title: 'test' }
+        params = {'title' => 'test'}
+        Project.expects(:search).with(params).returns([project])
+        get 'index', search: params
       end
     end
   end
