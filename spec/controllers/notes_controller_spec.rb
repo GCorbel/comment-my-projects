@@ -15,7 +15,7 @@ describe NotesController do
     context "with valid data" do
       before(:each) { note.stubs(:save).returns(true) }
 
-      it "returns http success" do
+      it "redirect to project's path" do
         post 'create', project_id: project.id
         should redirect_to(project)
       end
@@ -35,7 +35,7 @@ describe NotesController do
     context "with invalid data" do
       before(:each) { note.stubs(:save).returns(false) }
 
-      it "render new template" do
+      it "render project's show template" do
         post 'create', project_id: project.id
         should render_template('projects/show')
       end

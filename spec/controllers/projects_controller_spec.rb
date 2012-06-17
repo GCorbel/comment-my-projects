@@ -55,7 +55,7 @@ describe ProjectsController do
     context "with valid data" do
       before(:each) { project.stubs(:save).returns(true) }
 
-      it "returns http success" do
+      it "redirect to project's path" do
         post 'create'
         should redirect_to(project)
       end
@@ -101,7 +101,7 @@ describe ProjectsController do
     context "when valid" do
       before(:each) { project.stubs(:update_attributes).returns(true) }
 
-      it "redirect to project path" do
+      it "redirect to project's path" do
         post 'update', id: project.id
         should redirect_to(project)
       end
@@ -133,7 +133,7 @@ describe ProjectsController do
       project.stubs(:destroy)
     end
 
-    it "redirect to projects path" do
+    it "redirect to project's path" do
       delete 'destroy', id: project.id
       should redirect_to(root_path)
     end

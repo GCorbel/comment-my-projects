@@ -30,7 +30,7 @@ describe CategoryProjectsController do
     context "with valid data" do
       before(:each) { category_project.stubs(:save).returns(true) }
 
-      it "returns http success" do
+      it "redirect to project's path" do
         post 'create', project_id: project.id
         should redirect_to(project)
       end
@@ -77,7 +77,7 @@ describe CategoryProjectsController do
     context "when valid" do
       before(:each) { category_project.stubs(:update_attributes).returns(true) }
 
-      it "redirect to project path" do
+      it "redirect to project's path" do
         post 'update', id: category_project.id, project_id: project.id
         should redirect_to(project)
       end
@@ -109,7 +109,7 @@ describe CategoryProjectsController do
       category_project.stubs(:destroy)
     end
 
-    it "redirect to projects path" do
+    it "redirect to project's path" do
       delete 'destroy', id: category_project.id, project_id: project.id
       should redirect_to(project)
     end

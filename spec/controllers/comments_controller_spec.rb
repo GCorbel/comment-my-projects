@@ -27,7 +27,7 @@ describe CommentsController do
     context "with valid data" do
       before(:each) { comment.stubs(:valid?).returns(true) }
 
-      it "returns http success" do
+      it "redirect to project's path" do
         post 'create', project_id: project.id
         should redirect_to(project)
       end
@@ -46,7 +46,7 @@ describe CommentsController do
     context "with invalid data" do
       before(:each) { comment.stubs(:valid?).returns(false) }
 
-      it "render new template" do
+      it "render project's show template" do
         post 'create', project_id: project.id
         should render_template('projects/show')
       end
@@ -71,7 +71,7 @@ describe CommentsController do
       comment.stubs(:destroy)
     end
 
-    it "redirect to project path" do
+    it "redirect to project's path" do
       delete 'destroy', id: comment.id, project_id: project.id
       should redirect_to(project)
     end
