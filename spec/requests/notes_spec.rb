@@ -1,7 +1,8 @@
 #encoding=utf-8
 require 'spec_helper'
 
-describe 'Notes' do
+describe 'Notes', js: true do
+  self.use_transactional_fixtures = false
   let(:project) { create(:project) }
   let(:category1) { create(:category, label: 'New Category') }
   let(:category2) { create(:category, label: 'New Category 2') }
