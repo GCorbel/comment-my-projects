@@ -6,9 +6,11 @@
                   input_html: { value: comment.parent_id },
                   as: :hidden %>
     <% end %>
-    <%= f.input :username unless signed_in? %>
+    <%= f.input :username, required: true unless signed_in? %>
     <% if comment.is_root? %>
-      <%= f.association :category, collection: project.categories %>
+      <%= f.association :category,
+                        collection: project.categories,
+                        required: true %>
     <% end %>
     <%= f.input :message, as: :markdown %>
     <%= f.button :submit, 'Envoyer' %>

@@ -2,7 +2,7 @@
                     as: resource_name,
                     url: url,
                     html: { method: :post }) do |f| %>
-  <%= f.input :login %>
+  <%= f.input :login, required: true %>
   <%= f.submit "Envoyer" %>
 <% end %>
 

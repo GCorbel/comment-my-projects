@@ -5,8 +5,8 @@
                     url: session_path(resource_name),
                     wrapper: :small
                    ) do |f| %>
-  <%= f.input :login %>
-  <%= f.input :password %>
+  <%= f.input :login, required: true %>
+  <%= f.input :password, required: true %>
   <div class='inline'>
     <%= f.label :remember_me %>
     <%= f.check_box :remember_me %>
