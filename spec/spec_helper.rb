@@ -7,6 +7,7 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'capybara/rails'
+  require 'database_cleaner'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -14,13 +15,32 @@ Spork.prefork do
     config.mock_with :mocha
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.use_transactional_fixtures = true
-    config.infer_base_class_for_anonymous_controllers = false
+    config.before(:each) do
+      if example.metadata[:js]
+        DatabaseCleaner.strategy = :truncation
+        DatabaseCleaner.start
+      end
+    end
+
+    config.after(:each) do
+      if example.metadata[:js]
+        DatabaseCleaner.clean
+        load "#{Rails.root}/db/seeds.rb"
+      end
+    end
     config.include FactoryGirl::Syntax::Methods
     config.include Warden::Test::Helpers, type: :request
     config.include RequestHelpers, type: :request 
     config.include Devise::TestHelpers, type: :controller
     config.include ControllerHelpers, type: :controller
   end
+
+  Capybara.javascript_driver = :webkit
+  Capybara.run_server = true
+  Capybara.server_port = 7000
+  Capybara.app_host = "http://localhost:#{Capybara.server_port}" 
+  Capybara.automatic_reload = false 
+  Capybara.default_wait_time = 10
 end
 
 Spork.each_run do

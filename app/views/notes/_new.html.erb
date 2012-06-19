@@ -4,9 +4,12 @@
     <%= f.association :category, 
                       collection: project.categories,
                       input_html: { class: 'span2' } %>
-    <%= f.input :value,
-                collection: (1..10),
-                input_html: { class: 'span1' } %>
-    <%= f.button :submit, 'Noter' %>
+    <%= f.input :value, as: :hidden %>
+    <span class="rating">
+      <span class="star" data-value="1"></span>
+      <span class="star" data-value="2"></span>
+      <span class="star" data-value="3"></span>
+      <span class="star" data-value="4"></span>
+    </span>
   <% end %>
 </div>

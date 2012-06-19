@@ -52,6 +52,7 @@ group :test do
   gem 'mocha'
   gem 'shoulda-matchers'
   gem 'launchy'
+  gem 'database_cleaner'
 end
 
 group :development, :test do

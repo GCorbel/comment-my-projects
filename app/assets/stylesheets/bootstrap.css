@@ -30,3 +30,30 @@ body {
 .left {
   margin-left: 0px;
 }
+
+.rating {
+  direction: rtl;
+  font-size: 30px;
+  unicode-bidi: bidi-override;
+}
+
+.rating span.star {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.rating span.star:hover {
+  cursor: pointer;
+}
+
+.rating span.star:before {
+  color: #999999;
+  content: "";
+  padding-right: 5px;
+}
+.rating span.star:hover:before, .rating span.star:hover ~ span.star:before {
+  color: #E3CF7A;
+  content: "";
+}

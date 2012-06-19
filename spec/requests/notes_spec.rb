@@ -32,11 +32,8 @@ describe 'Notes' do
       it 'add a new note' do
         create(:category_project, project: project, category: category1)
         visit project_path(project)
-        within('#new_note') do
-          select('New Category', from: 'Categorie')
-          select('10', form: 'Note')
-          click_button 'Noter'
-        end
+        select('New Category', from: 'Categorie')
+        find('.star').click
         page.should have_content('La note a été ajoutée')
       end
     end
@@ -45,7 +42,7 @@ describe 'Notes' do
       it 'show errors' do
         visit project_path(project)
         within('#new_note') do
-          click_button "Noter"
+          find('.star').click
           page.body.should have_content("champ obligatoire")
         end
       end

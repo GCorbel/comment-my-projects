@@ -5,11 +5,15 @@
 #= require_tree ../../../vendor/assets/javascripts/markdown/
 #= require_tree .
 $(document).ready ->
-  initMarkdown()
+  initialize()
 
 $(document).on("pjax:end", () ->
-  initMarkdown()
+  initialize()
 )
+
+initialize = () ->
+  initMarkdown()
+  $('.star').on('click', rate)
 
 jQuery ->
   $('a:not([data-method=delete]):not([data-remote]):not([data-behavior]):not([data-skip-pjax])').pjax('[data-pjax-container]')
@@ -22,3 +26,7 @@ initMarkdown = () ->
 
 markdownHelp = () ->
   window.open('http://fr.wikipedia.org/wiki/Markdown')
+
+rate = (event) ->
+  $('#note_value').val($(this).attr('data-value'))
+  $('#new_note').submit()
