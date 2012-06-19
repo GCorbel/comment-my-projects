@@ -2,8 +2,6 @@
 require 'spec_helper'
 
 describe ProjectsController do
-  render_views 
-
   let!(:project) { build_stubbed(:project, user: user) }
   let(:user) { build_stubbed(:user) }
 
