@@ -1,0 +1,8 @@
+comment_partial = '<%= escape_javascript(
+  render(@comment, project: @project)
+) %>'
+<% if @comment.parent %>
+  $("#answer_<%= @comment.parent.id %>").html(comment_partial);
+<% else %>
+  $("#new_comment_form_container").before(comment_partial);
+<% end %>

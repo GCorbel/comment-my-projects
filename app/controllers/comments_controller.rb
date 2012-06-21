@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
 
   def new
     @comment.ancestry = params[:ancestry]
+    render format: :js
   end
   
   def create
@@ -15,7 +16,7 @@ class CommentsController < ApplicationController
     @comment.project = @project
     if @comment.valid?
       @project.add_comment(@comment)
-      redirect_to(@project, notice: 'Votre commentaire a été ajouté')
+      render format: :js
     else
       @note = Note.new
       render 'projects/show'

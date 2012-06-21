@@ -17,7 +17,7 @@ describe ProjectsController do
       it 'do the search' do
         params = {'title' => 'test'}
         Project.expects(:search).with(params).returns([project])
-        get 'index', search: params
+        get 'index', search: params, format: :js
       end
     end
   end

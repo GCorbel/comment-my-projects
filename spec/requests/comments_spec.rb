@@ -26,7 +26,9 @@ describe 'Comments' do
     context 'when not signed in' do
       before(:each) { visit project_path(project) }
 
-      context 'with valid data' do
+      context 'with valid data', js: true do
+        self.use_transactional_fixtures = false
+
         it 'Enable to create a new comment' do
           within('#new_comment') do
             fill_in('Nom', with: 'My name')
@@ -34,7 +36,12 @@ describe 'Comments' do
             fill_in('wmd-input', with: 'My Message')
             click_button 'Envoyer'
           end
-          page.should have_content('Votre commentaire a été ajouté')
+
+          wait_until { Comment.count == 1 }
+          new_comment = Comment.last
+          within("#comment_#{new_comment.id}") do
+            page.should have_content('My Message')
+          end
         end
       end
 
@@ -42,8 +49,8 @@ describe 'Comments' do
         it 'show errors' do
           within('#new_comment') do
             click_button "Envoyer"
-            page.body.should have_content("champ obligatoire")
           end
+          page.body.should have_content("champ obligatoire")
         end
       end
     end
@@ -57,16 +64,18 @@ describe 'Comments' do
     end
   end
 
-  describe 'Create a response' do
+  describe 'Create a response', js: true do
+    self.use_transactional_fixtures = false
+
     it 'create a response for a comment' do
       comment
       visit project_path(project)
-      click_link 'Répondre'
-      fill_in('Nom', with: 'My name')
-      fill_in('wmd-input', with: 'My answer')
-      click_button 'Envoyer'
-      page.should have_content('Votre commentaire a été ajouté')
       within("#comment_#{comment.id}") do
+        click_link 'Répondre'
+        fill_in('Nom', with: 'My name')
+        fill_in('wmd-input', with: 'My answer')
+        click_button 'Envoyer'
+        page.should_not have_content('Ajouter un commentaire')
         page.should have_content('My answer')
       end
     end

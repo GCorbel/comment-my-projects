@@ -18,7 +18,7 @@ initialize = () ->
 jQuery ->
   $('a:not([data-method=delete]):not([data-remote]):not([data-behavior]):not([data-skip-pjax])').pjax('[data-pjax-container]')
 
-initMarkdown = () ->
+@initMarkdown = () ->
   if $('#wmd-input').length != 0
     converter1 = Markdown.getSanitizingConverter()
     editor1 = new Markdown.Editor(converter1, '', { title: 'Markdown?', handler: markdownHelp })

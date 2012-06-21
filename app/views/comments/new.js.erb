@@ -1,0 +1,4 @@
+$("#answer_<%= @comment.ancestry %>").html('<%= escape_javascript(
+  render('new', project: @project, comment: @comment)
+) %>');
+initMarkdown();

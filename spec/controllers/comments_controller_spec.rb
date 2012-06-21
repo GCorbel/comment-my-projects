@@ -16,7 +16,7 @@ describe CommentsController do
 
   describe "GET 'new'" do
     it "render new template" do
-      get 'new', project_id: project.id
+      get 'new', project_id: project.id, format: :js
       should render_template('new')
     end
   end
@@ -27,19 +27,14 @@ describe CommentsController do
     context "with valid data" do
       before(:each) { comment.stubs(:valid?).returns(true) }
 
-      it "redirect to project's path" do
-        post 'create', project_id: project.id
-        should redirect_to(project)
+      it "render create template" do
+        post 'create', project_id: project.id, format: :js
+        should render_template('create')
       end
 
       it "add the new comment to the project" do
         project.expects(:add_comment).with(comment)
-        post 'create', project_id: project.id
-      end
-
-      it "set a flash message" do
-        post 'create', project_id: project.id
-        should set_the_flash[:notice].to("Votre commentaire a été ajouté")
+        post 'create', project_id: project.id, format: :js
       end
     end
 
