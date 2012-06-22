@@ -29,4 +29,4 @@ markdownHelp = () ->
 
 rate = (event) ->
   $('#note_value').val($(this).attr('data-value'))
-  $('#new_note').submit()
+  $('#new_note>input').click()
