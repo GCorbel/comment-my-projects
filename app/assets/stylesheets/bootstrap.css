@@ -34,10 +34,13 @@ body {
 .rating {
   direction: rtl;
   font-size: 30px;
+}
+
+.rating, .notes {
   unicode-bidi: bidi-override;
 }
 
-.rating span.star {
+.rating span.star, .notes span.star {
   display: inline-block;
   font-family: FontAwesome;
   font-style: normal;
@@ -48,12 +51,16 @@ body {
   cursor: pointer;
 }
 
-.rating span.star:before {
+.rating span.star:before, .notes span.star.false:before {
   color: #999999;
   content: "";
-  padding-right: 5px;
 }
-.rating span.star:hover:before, .rating span.star:hover ~ span.star:before {
+
+.rating span.star:hover:before, .rating span.star:hover ~ span.star:before, .notes span.star:before {
   color: #E3CF7A;
   content: "";
+}
+
+.notes {
+  display: inline
 }

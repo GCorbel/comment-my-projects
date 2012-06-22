@@ -1,7 +1,6 @@
 <div id="notes" class="graybox">
   <h2>Notes du projet</h2>
   <% project.categories.each do |category| %>
-    <% note = project.note_for(category) %>
-    <p><%= category %> : <%= note ? "#{note}/10" : '-' %></p>
+    <p><%= note_for(project, category) %></p>
   <% end %>
 </div>
