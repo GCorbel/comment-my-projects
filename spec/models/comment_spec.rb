@@ -94,7 +94,7 @@ describe Comment do
       end
     end
 
-    context 'when the parent owner is the project''s owner is the same' do
+    context 'when the parent owner is the project\'s owner is the same' do
       it 'don''t send a mail' do
         comment_1 = create(:comment, project: project, user: user, category: category) 
         lambda do
