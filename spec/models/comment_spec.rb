@@ -93,5 +93,19 @@ describe Comment do
         end.should_not change(ActionMailer::Base.deliveries, :size)
       end
     end
+
+    context 'when the parent owner is the project''s owner is the same' do
+      it 'don''t send a mail' do
+        comment_1 = create(:comment, project: project, user: user, category: category) 
+        lambda do
+          comment_2 = create(:comment,
+                             project: project,
+                             category: category,
+                             user: user3,
+                             parent_id: comment_1
+                            )
+        end.should change(ActionMailer::Base.deliveries, :size).by(1)
+      end
+    end
   end
 end
