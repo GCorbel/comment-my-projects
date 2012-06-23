@@ -1,6 +1,6 @@
 class CategoryProject < ActiveRecord::Base
   default_scope do
-    categories = joins(:category).order([:position, :label])
+    categories = joins(:category).order([:position, :label]).readonly(false)
   end
 
   belongs_to :project
