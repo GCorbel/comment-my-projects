@@ -3,6 +3,8 @@ class Project < ActiveRecord::Base
   has_many :category_projects
   has_many :comments
   has_many :notes
+  has_many(:followers, through: :project_user_followers, source: :user)
+  has_many :project_user_followers
   belongs_to :user
 
   attr_accessible :title, :url
@@ -57,5 +59,9 @@ class Project < ActiveRecord::Base
 
   def number_of_notes_for(category)
     notes_for(category).count
+  end
+
+  def add_follower(user)
+    followers << user
   end
 end

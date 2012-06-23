@@ -8,6 +8,11 @@
         <div class="tab-content">
           <%= render @project.category_projects, project: @project %>
         </div>
+        <% if current_user %>
+          <%= link_to 'Suivre le projet',
+                      project_project_user_followers_path(@project),
+                      method: :post %>
+        <% end %>
       </div>
     </div>
   </div>

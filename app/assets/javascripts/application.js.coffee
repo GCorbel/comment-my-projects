@@ -16,7 +16,7 @@ initialize = () ->
   $('.star').on('click', rate)
 
 jQuery ->
-  $('a:not([data-method=delete]):not([data-remote]):not([data-behavior]):not([data-skip-pjax])').pjax('[data-pjax-container]')
+  $('a:not([data-method=delete]):not([data-method=post]):not([data-remote]):not([data-behavior]):not([data-skip-pjax])').pjax('[data-pjax-container]')
 
 @initMarkdown = () ->
   if $('#wmd-input').length != 0

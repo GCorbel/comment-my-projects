@@ -14,6 +14,8 @@ describe Project do
   it { should have_many(:category_projects) }
   it { should have_many(:comments) }
   it { should have_many(:notes) }
+  it { should have_many(:followers).through(:project_user_followers) }
+  it { should have_many(:project_user_followers) }
   it { should belong_to(:user) }
 
   it { should validate_presence_of :title }
@@ -114,6 +116,14 @@ describe Project do
       project.number_of_notes_for(category).should == 1
       Note.create(project: project, category: category, value: 3)
       project.number_of_notes_for(category).should == 2
+    end
+  end
+
+  describe :add_follower do
+    it 'add a user to the followers' do
+      lambda do
+        project.add_follower(user)
+      end.should change(project.followers, :size).by(1)
     end
   end
 end

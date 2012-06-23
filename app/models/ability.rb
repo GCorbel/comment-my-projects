@@ -22,5 +22,7 @@ class Ability
     can :manage, CategoryProject, project: { user_id: user.id } 
 
     can :create, Note
+
+    can :create, ProjectUserFollower
   end
 end

@@ -3,6 +3,7 @@ CommentMyProjects::Application.routes.draw do
     resources :category_projects
     resources :comments
     resources :notes
+    resources :project_user_followers
   end
 
   devise_for :users
