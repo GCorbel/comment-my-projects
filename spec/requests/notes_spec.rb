@@ -14,16 +14,16 @@ describe 'Notes', js: true do
       create(:category_project, project: project, category: category2)
       create(:category_project, project: project, category: category3)
 
-      Note.create(project: project, category: category1, value: 7)
-      Note.create(project: project, category: category1, value: 3)
-      Note.create(project: project, category: category1, value: 8)
-      Note.create(project: project, category: category2, value: 7)
-      Note.create(project: project, category: category2, value: 4)
+      Note.create(project: project, category: category1, value: 1)
+      Note.create(project: project, category: category1, value: 2)
+      Note.create(project: project, category: category1, value: 4)
+      Note.create(project: project, category: category2, value: 3)
+      Note.create(project: project, category: category2, value: 1)
       visit project_path(project)
       within('#notes') do
-        page.should have_content('New Category : 6.0/10')
-        page.should have_content('New Category 2 : 5.5/10')
-        page.should have_content('New Category 3 : -')
+        page.should have_content('New Category : (2.3/4 - 3 votes)')
+        page.should have_content('New Category 2 : (2.0/4 - 2 votes)')
+        page.should have_content('New Category 3 : Aucun vote')
       end
     end
   end
