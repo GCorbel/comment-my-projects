@@ -4,7 +4,7 @@ module NoteHelper
       raw(
         category.label +
         ' : ' +
-        if project.notes.where(category_id: category.id).count == 0
+        if project.number_of_notes_for(category) == 0
           'Aucun vote'
         else
           project.note_for(category).to_i.times.collect do
@@ -17,7 +17,7 @@ module NoteHelper
           project.note_for(category).to_s +
           '/4 - ' +
           pluralize(
-            project.notes.where(category_id: category.id).count, 'vote'
+            project.number_of_notes_for(category), 'vote'
           ) +
           ')'
         end

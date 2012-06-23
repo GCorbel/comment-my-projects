@@ -92,4 +92,28 @@ describe Project do
       end.should change(project.comments, :size).by(1)
     end
   end
+
+  describe :notes_for do
+    it 'give number of notes' do
+      CategoryProject.create(project: project,
+                             category: category,
+                             description: 'test')
+      project.notes_for(category).should == []
+      note = Note.create(project: project, category: category, value: 1)
+      project.notes_for(category).should == [note]
+    end
+  end
+
+  describe :number_of_notes do
+    it 'give number of notes' do
+      CategoryProject.create(project: project,
+                             category: category,
+                             description: 'test')
+      project.number_of_notes_for(category).should == 0
+      Note.create(project: project, category: category, value: 8)
+      project.number_of_notes_for(category).should == 1
+      Note.create(project: project, category: category, value: 3)
+      project.number_of_notes_for(category).should == 2
+    end
+  end
 end

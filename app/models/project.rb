@@ -50,4 +50,12 @@ class Project < ActiveRecord::Base
   def add_comment(comment)
     comments << comment
   end
+
+  def notes_for(category)
+    notes.where(category_id: category.id)
+  end
+
+  def number_of_notes_for(category)
+    notes_for(category).count
+  end
 end
