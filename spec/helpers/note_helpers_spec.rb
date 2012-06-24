@@ -1,7 +1,7 @@
 describe NoteHelper do
   let(:project) { create(:project) }
   let(:category) { create(:category, label: 'General') }
-  let(:note) { create(:note, category: category, value: 2) }
+  let(:note) { create(:note, category: category, value: 3) }
 
   describe :note_for do
     context 'when there is a vote' do
@@ -11,9 +11,9 @@ describe NoteHelper do
           'General : ' \
           '<span class="star true"></span>' \
           '<span class="star true"></span>' \
+          '<span class="star true"></span>' \
           '<span class="star false"></span>' \
-          '<span class="star false"></span>' \
-          ' (2.0/4 - 1 vote)' \
+          ' (3.0/4 - 1 vote)' \
         '</div>'
       end
     end

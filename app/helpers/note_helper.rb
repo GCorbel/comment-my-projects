@@ -10,7 +10,7 @@ module NoteHelper
           project.note_for(category).to_i.times.collect do
             content_tag(:span, '', class: 'star true')
           end.join +
-          project.note_for(category).to_i.times.collect do
+          (4 - project.note_for(category).to_i).times.collect do
             content_tag(:span, '', class: 'star false')
           end.join +
           ' (' +
