@@ -10,6 +10,7 @@ describe ProjectUserFollowersController do
     Project.stubs(:find).returns(project)
     project.stubs(:followers).returns(followers)
     project.stubs(:add_follower)
+    project.stubs(:remove_follower)
     project.stubs(:to_s).returns(project.title)
     ProjectUserFollower.stubs(:find).returns(project_user_follower)
   end
