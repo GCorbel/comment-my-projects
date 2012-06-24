@@ -35,8 +35,8 @@ describe Project do
     let!(:project2) { create(:project, title: 'My Second Project') }
 
     context 'when there is a research' do
-      it 'give all the projects with the search in the in title' do
-        Project.search({title: 'first'}).should == [project1]
+      it 'give all the projects with a search with datatable' do
+        Project.search('first').should == [project1]
       end
     end
 

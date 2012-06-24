@@ -5,25 +5,6 @@ describe 'Project' do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
 
-  describe 'Search' do
-    context 'When the is some results' do
-      it 'show result' do
-        create(:project, title: 'The first project')
-        create(:project, title: 'The second project')
-        create(:project, title: 'Another one')
-
-        visit root_path
-        within('#new_search') do
-          fill_in('search_title', with: 'PrOject')
-          click_button('submit')
-        end
-        page.should have_content('The first project')
-        page.should have_content('The second project')
-        page.should_not have_content('Another one')
-      end
-    end
-  end
-
   describe 'Create' do
     before(:each) do
       sign_in
@@ -50,19 +31,14 @@ describe 'Project' do
   end
 
   describe 'Index' do
-    context 'When there is a project' do
+    context 'When there is a project', js: true do
+      self.use_transactional_fixtures = false
+
       it 'Show the list of projects' do
         project
         visit projects_path
         page.should have_content(project.title)
         page.should have_content(project.url)
-      end
-    end
-
-    context 'Whene the is no project' do
-      it 'Show a message' do
-        visit projects_path
-        page.should have_content('Désolé, aucun projet ne correspond à votre recherche. Veuillez recommencer.')
       end
     end
   end

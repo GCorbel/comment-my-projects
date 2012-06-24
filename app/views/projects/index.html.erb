@@ -1,21 +1,12 @@
-<% if @projects.empty? %>
-  <%= 'Désolé, aucun projet ne correspond à votre recherche. ' \
-      'Veuillez recommencer.' %>
-<% else %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Titre</th>
-        <th>Url</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @projects.each do |project| %>
-        <tr>
-          <td><%= link_to project, project_path(project) %></td>
-          <td><%= link_to project.url, project_path(project) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+<table id="projects"
+       class="table table-striped table-bordered"
+       data-source="<%= projects_url(format: "json")%>">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Url</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

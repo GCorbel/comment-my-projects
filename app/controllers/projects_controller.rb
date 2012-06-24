@@ -13,7 +13,10 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.search(params[:search])
+    respond_to do |format|
+      format.html
+      format.json { render json: ProjectsDatatable.new(view_context) }
+    end
   end
 
   def new

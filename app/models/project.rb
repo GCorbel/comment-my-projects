@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
   class << self
     def search(params = nil)
       if params
-        Project.where('title like ?', "%#{params[:title]}%")
+        Project.where('title like ?', "%#{params}%")
       else
         Project.all
       end

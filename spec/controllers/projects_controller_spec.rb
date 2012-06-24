@@ -12,14 +12,6 @@ describe ProjectsController do
       get 'index'
       should render_template('index')
     end
-
-    context 'when there is a search' do
-      it 'do the search' do
-        params = {'title' => 'test'}
-        Project.expects(:search).with(params).returns([project])
-        get 'index', search: params, format: :js
-      end
-    end
   end
 
   describe "GET 'show'" do

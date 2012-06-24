@@ -23,6 +23,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails'
+  gem 'jquery-datatables-rails'
 end
 
 gem 'jquery-rails'
@@ -69,3 +70,4 @@ gem 'google-analytics-rails'
 gem 'ancestry'
 gem 'redcarpet'
 gem 'cancan'
+gem 'will_paginate'
