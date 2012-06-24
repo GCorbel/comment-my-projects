@@ -126,4 +126,13 @@ describe Project do
       end.should change(project.followers, :size).by(1)
     end
   end
+
+  describe :remove_follower do
+    it 'add a user to the followers' do
+      project.add_follower(user)
+      lambda do
+        project.remove_follower(user)
+      end.should change(project.followers, :size).by(-1)
+    end
+  end
 end

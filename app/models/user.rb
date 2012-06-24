@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
   def to_s
     username
   end
+
+  def follow?(project)
+    project.followers.include?(self)
+  end
 end

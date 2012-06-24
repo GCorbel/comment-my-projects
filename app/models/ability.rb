@@ -23,6 +23,6 @@ class Ability
 
     can :create, Note
 
-    can :create, ProjectUserFollower
+    can :manage, ProjectUserFollower
   end
 end

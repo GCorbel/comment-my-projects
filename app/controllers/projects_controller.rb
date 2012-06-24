@@ -6,6 +6,8 @@ class ProjectsController < ApplicationController
   def show
     @comment = Comment.new
     @note = Note.new
+    @project_user_follower = @project.project_user_followers
+                                     .where(user_id: current_user.id).first
   end
 
   def index

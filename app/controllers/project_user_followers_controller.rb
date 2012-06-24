@@ -6,4 +6,9 @@ class ProjectUserFollowersController < ApplicationController
     @project.add_follower(current_user)
     redirect_to(@project, notice: "Vous suivez #{@project.title}.")
   end
+
+  def destroy
+    @project.remove_follower(current_user)
+    redirect_to(@project, notice: "Vous ne suivez plus #{@project.title}.")
+  end
 end
