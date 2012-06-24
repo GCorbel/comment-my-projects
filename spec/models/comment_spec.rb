@@ -107,5 +107,17 @@ describe Comment do
         end.should change(ActionMailer::Base.deliveries, :size).by(1)
       end
     end
+
+    context 'when the parent owner is the project\'s owner is the same' do
+      it 'don''t send a mail' do
+        project.add_follower(user2)
+        lambda do
+          create(:comment,
+                 project: project,
+                 category: category,
+                 user: user)
+        end.should change(ActionMailer::Base.deliveries, :size).by(1)
+      end
+    end
   end
 end

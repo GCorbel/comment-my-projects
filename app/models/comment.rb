@@ -18,6 +18,7 @@ class Comment < ActiveRecord::Base
   after_create :init_receivers,
                :send_mail_to_creator_of_parents,
                :send_mail_to_project_owner,
+               :send_mail_to_followers,
                :send_mail
     
   private 
@@ -35,6 +36,10 @@ class Comment < ActiveRecord::Base
       user_ids.each do |id|
         Comment.receivers << User.find(id)
       end
+    end
+
+    def send_mail_to_followers
+      Comment.receivers = Comment.receivers + project.followers
     end
 
     def send_mail
