@@ -32,7 +32,7 @@ class Project < ActiveRecord::Base
   end
 
   def note_for(category)
-    values = notes.where(category_id: category.id).pluck(:value)
+    values = notes_for(category).pluck(:value)
     return nil if values.empty?
     (values.sum / values.count.to_f).round(1)
   end
