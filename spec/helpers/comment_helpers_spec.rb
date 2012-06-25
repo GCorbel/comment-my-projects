@@ -1,4 +1,6 @@
 describe CommentHelper do
+  helper.extend(ApplicationHelper)
+
   let(:user) { build_stubbed(:user) }
   let(:comment) { build_stubbed(:comment, created_at: now) }
   let(:now) { DateTime.now }
@@ -8,15 +10,28 @@ describe CommentHelper do
     subject { comment_title_for(comment) }
 
     context 'when there is a user' do
+      before(:each) { self.stubs(:avatar_url).returns('id') }
+
       it 'show the title' do
         comment.user = user
-        should == "#{user.username} - #{formatted_now}"
+        should == "<div class=\"comment_header\">" \
+            "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
+            "#{user.username}" \
+            "<br/>" \
+            "#{formatted_now}" \
+          "</div>"
       end
     end
 
     context 'when there is a username' do
+      before(:each) { self.stubs(:avatar_url).returns('id') }
       it 'show the title with the username' do
-        should == "#{comment.username} - #{formatted_now}"
+        should == "<div class=\"comment_header\">" \
+            "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
+            "#{comment.username}" \
+            "<br/>" \
+            "#{formatted_now}" \
+          "</div>"
       end
     end
   end

@@ -19,4 +19,12 @@ module ApplicationHelper
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     raw(markdown.render(code))
   end
+
+  def avatar_url(user, size=100)
+    return "/assets/guest.png" if user.nil?
+    avatar_id = Digest::MD5.hexdigest(user.email.downcase)
+    default_url = "http://#{request.host}:#{request.port}/assets/guest.png"
+    "http://gravatar.com/avatar/#{avatar_id}.png" \
+      "?s=#{size}&d=#{CGI.escape(default_url)}"
+  end
 end

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
+  let(:user) { build_stubbed(:user) }
+  let(:avatar_id) { Digest::MD5::hexdigest(user.email).downcase } 
+  let(:default_url) { "http://test.host:80/assets/guest.png"}
+
   describe :alert_box do
     context "when there is a message" do
       subject { helper.alert_box("info", "message") }
@@ -43,6 +47,29 @@ describe ApplicationHelper do
     it "convert a markdown to html" do
       helper.markdown("**test**").should ==
         "<p><strong>test</strong></p>\n"
+    end
+  end
+
+  describe :avatar_url do
+    it "give a path to the avatar" do
+      helper.avatar_url(user).should ==
+        "http://gravatar.com/avatar/#{avatar_id}.png" \
+        "?s=100&d=#{CGI.escape(default_url)}"
+    end
+
+    context "when a size is specified" do
+      it "give a path to the avatar with a size" do
+        helper.avatar_url(user, 50).should ==
+          "http://gravatar.com/avatar/#{avatar_id}.png" \
+          "?s=50&d=#{CGI.escape(default_url)}"
+      end
+    end
+
+    context "the user is nil" do
+      it "give a path to the avatar with a size" do
+        helper.avatar_url(nil).should ==
+          "/assets/guest.png"
+      end
     end
   end
 end
