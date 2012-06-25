@@ -1,5 +1,5 @@
+#encoding=utf-8
 describe ProjectHelper do
-
   let(:user) { build_stubbed(:user) }
   let(:project) { build_stubbed(:project, user: user, created_at: now) }
   let(:now) { DateTime.now }
