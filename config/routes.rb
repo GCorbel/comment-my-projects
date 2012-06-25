@@ -10,6 +10,8 @@ CommentMyProjects::Application.routes.draw do
 
   get "home/index"
 
+  match '*a', to: "home#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
