@@ -44,7 +44,7 @@ class ProjectsDatatable
     end
     projects = projects.page(page).per_page(per_page)
     if params[:sSearch].present?
-      projects = projects.search(params[:sSearc])
+      projects = projects.search(params[:sSearch])
     end
     projects
   end
