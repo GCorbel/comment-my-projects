@@ -4,13 +4,12 @@
   </h2>
   <div>
     <%= markdown comment.message %>
-    <div id="answer_<%= comment.id%>">
-      <%= link_to 'Répondre', 
-                  new_project_comment_path(project,
-                                           ancestry: comment),
-                  class: 'btn',
-                  remote: true %>
-    </div>
+    <div id="answer_<%= comment.id%>"></div>
+    <%= link_to 'Répondre', 
+                new_project_comment_path(project,
+                                         ancestry: comment),
+                class: 'btn',
+                remote: true %>
     <% if can? :destroy, comment %>
       <%= link_to 'Supprimer', 
                   project_comment_path(project, comment),
