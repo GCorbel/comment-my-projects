@@ -9,15 +9,18 @@
           <%= render @project.category_projects, project: @project %>
         </div>
         <% if current_user %>
+          <br/>
           <% if current_user.follow?(@project) %>
             <%= link_to 'Arréter de suivre le projet',
                         project_project_user_follower_path(
                           @project, @project_user_follower),
-                        method: :delete %>
+                        method: :delete,
+                        class: 'btn' %>
           <% else %>
             <%= link_to 'Suivre le projet',
                         project_project_user_followers_path(@project),
-                        method: :post %>
+                        method: :post,
+                        class: 'btn' %>
           <% end %>
         <% end %>
       </div>
