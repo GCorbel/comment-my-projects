@@ -12,7 +12,7 @@
                         collection: project.categories,
                         required: true %>
     <% end %>
-    <%= f.input :message, as: :markdown %>
+    <%= f.input :message, as: :markdown, input_html: { rows: 4 } %>
     <%= f.button :submit, 'Envoyer' %>
   <% end %>
 </div>
