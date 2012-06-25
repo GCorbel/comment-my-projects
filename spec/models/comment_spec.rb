@@ -41,29 +41,27 @@ describe Comment do
       comment.should be_valid
     end
 
-    context 'when the parent have a user' do
+    context 'when there is another discussion on the same project' do
       it 'send a mail' do
         comment_1 = create(:comment, project: project, user: user3, category: category) 
         lambda do
           comment_2 = create(:comment,
                              project: project,
                              category: category,
-                             user: user2,
-                             parent_id: comment_1
+                             user: user2
                             )
         end.should change(ActionMailer::Base.deliveries, :size).by(2)
       end
     end
 
-    context 'when the parent don\'t have user' do
+    context 'when the other discussion don\'t have user' do
       it 'don''t send a mail' do
         comment_1 = create(:comment, project: project, username: 'test', category: category) 
         lambda do
           comment_2 = create(:comment,
                              project: project,
                              category: category,
-                             user: user2,
-                             parent_id: comment_1
+                             user: user2
                             )
         end.should change(ActionMailer::Base.deliveries, :size).by(1)
       end

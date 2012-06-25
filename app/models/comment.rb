@@ -16,7 +16,7 @@ class Comment < ActiveRecord::Base
   validates :username, presence: true, if: 'user.nil?'
 
   after_create :init_receivers,
-               :send_mail_to_creator_of_parents,
+               :send_mail_to_creator_of_other_comments,
                :send_mail_to_project_owner,
                :send_mail_to_followers,
                :send_mail
@@ -30,8 +30,8 @@ class Comment < ActiveRecord::Base
       Comment.receivers << project.user unless project.user == user
     end
 
-    def send_mail_to_creator_of_parents
-      user_ids = ancestors.pluck(:user_id).compact.uniq
+    def send_mail_to_creator_of_other_comments
+      user_ids = project.comments.pluck(:user_id).compact
       user_ids.delete(user.id) if user
       user_ids.each do |id|
         Comment.receivers << User.find(id)
