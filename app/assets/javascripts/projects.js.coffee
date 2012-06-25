@@ -11,6 +11,7 @@ initializeDataTables = () ->
     sPaginationType: "bootstrap"
     bProcessing: true
     bServerSide: true
+    bRetrieve: true
     sAjaxSource: $('#projects').data('source')
     oLanguage:
       sProcessing:   "Traitement en cours..."
