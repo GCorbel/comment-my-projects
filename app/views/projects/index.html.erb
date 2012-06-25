@@ -5,6 +5,9 @@
     <tr>
       <th>Titre</th>
       <th>Url</th>
+      <% Category.all.each do |category| %>
+        <th><%= category %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>

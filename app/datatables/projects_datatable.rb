@@ -17,12 +17,15 @@ class ProjectsDatatable
   private
 
   def data
-    category_general = Category.find_by_label('General')
-    projects.map do |project|
+    data = projects.map do |project|
       [
         link_to(project.title, project),
         link_to(project.url, project),
-      ]
+      ] +
+      Category.all.map do |category|
+        note = project.note_for(category) || "-"
+        link_to(note, project)
+      end
     end
   end
 
@@ -32,6 +35,13 @@ class ProjectsDatatable
 
   def fetch_projects
     projects = Project.order("#{sort_column} #{sort_direction}")
+    projects = projects.select('id, title, url')
+    Category.all.each do |category|
+      sql = Note.select("sum(value)")
+                .where("project_id = projects.id")
+                .where("category_id = #{category.id}").to_sql
+      projects = projects.select("(#{sql}) as note_#{category}")
+    end
     projects = projects.page(page).per_page(per_page)
     if params[:sSearch].present?
       projects = projects.search(params[:sSearc])
@@ -48,7 +58,8 @@ class ProjectsDatatable
   end
 
   def sort_column
-    columns = %w[title url note_general]
+    columns = %w[title url]
+    Category.all.each {|category| columns << "note_#{category}"}
     columns[params[:iSortCol_0].to_i]
   end
 
