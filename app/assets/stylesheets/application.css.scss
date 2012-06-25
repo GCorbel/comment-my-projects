@@ -20,13 +20,21 @@ form textarea {
   width: 100%;
 }
 
-.comment_header .avatar {
+.avatar {
   float:left;
   margin-right: 10px;
-  width: 66px;
-  height: 66px;
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #CCCCCC;
   border-radius: 3px 3px 3px 3px;
   padding: 2px;
+}
+
+.project_header .avatar{
+  width: 80px;
+  height: 80px;
+}
+
+.comment_header .avatar{
+  width: 66px;
+  height: 66px;
 }

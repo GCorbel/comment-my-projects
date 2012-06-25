@@ -3,7 +3,7 @@
   <div class="row-fluid">
     <div class="span12">
       <div class="graybox">
-        <h1><%= @project %></h1>
+        <%= project_title_for(@project) %>
         <%= render 'projects/nav_tabs' %>
         <div class="tab-content">
           <%= render @project.category_projects, project: @project %>
