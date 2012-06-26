@@ -62,7 +62,7 @@ class Project < ActiveRecord::Base
   end
 
   def add_follower(user)
-    followers << user
+    ProjectUserFollower.create(user_id: user.id, project_id: id)
   end
 
   def remove_follower(user)

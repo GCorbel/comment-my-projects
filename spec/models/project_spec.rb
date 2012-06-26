@@ -125,6 +125,10 @@ describe Project do
         project.add_follower(user)
       end.should change(project.followers, :size).by(1)
     end
+
+    it 'render the new relation' do
+      project.add_follower(user).should be_a(ProjectUserFollower)
+    end
   end
 
   describe :remove_follower do
