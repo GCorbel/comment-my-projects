@@ -12,7 +12,7 @@ describe 'Follow', js: true do
       sign_in user
       visit project_path(project)
       click_link "Suivre le projet"
-      wait_until { page.evaluate_script("jQuery.active") == 0 }
+      wait_for_ajax
       page.should have_content("Arréter de suivre le projet")
     end
 
@@ -21,7 +21,7 @@ describe 'Follow', js: true do
       project.add_follower(user)
       visit project_path(project)
       click_link "Arréter de suivre le projet"
-      wait_until { page.evaluate_script("jQuery.active") == 0 }
+      wait_for_ajax
       page.should have_content("Suivre le projet")
     end
   end
