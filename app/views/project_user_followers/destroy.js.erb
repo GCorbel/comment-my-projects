@@ -1,0 +1,4 @@
+link_partial = '<%= escape_javascript(
+ render('link_follow', project: @project)
+) %>'
+$('#project_user_follower_link_container').html(link_partial);

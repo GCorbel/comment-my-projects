@@ -9,19 +9,17 @@
           <%= render @project.category_projects, project: @project %>
         </div>
         <% if current_user %>
-          <br/>
-          <% if current_user.follow?(@project) %>
-            <%= link_to 'Arréter de suivre le projet',
-                        project_project_user_follower_path(
-                          @project, @project_user_follower),
-                        method: :delete,
-                        class: 'btn' %>
-          <% else %>
-            <%= link_to 'Suivre le projet',
-                        project_project_user_followers_path(@project),
-                        method: :post,
-                        class: 'btn' %>
-          <% end %>
+          <div id="project_user_follower_link_container">
+            <% if current_user.follow?(@project) %>
+              <%= render 'project_user_followers/link_unfollow',
+                         project_user_follower: @project_user_follower,
+                         project: @project %>
+            <% else %>
+              <%= render 'project_user_followers/link_follow',
+                         project_user_follower: @project_user_follower,
+                         project: @project %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

@@ -17,37 +17,33 @@ describe ProjectUserFollowersController do
 
   describe "POST 'create'" do
     it 'redirect to project''s path' do
-      post 'create', project_id: project.id
-      should redirect_to(project)
+      post 'create', project_id: project.id, format: :js
+      should render_template('create')
     end
 
     it 'add the user to the following users' do
       sign_in user
       project.expects(:add_follower).with(user)
-      post 'create', project_id: project.id
-    end
-
-    it 'set a flash message' do
-      post 'create', project_id: project.id
-      should set_the_flash[:notice].to("Vous suivez #{project}")
+      post 'create', project_id: project.id, format: :js
     end
   end
 
   describe "DELETE 'destroy'" do
     it 'redirect to project''s path' do
-      delete 'destroy', project_id: project.id, id: project_user_follower.id
-      should redirect_to(project)
+      delete 'destroy',
+             project_id: project.id,
+             id: project_user_follower.id,
+             format: :js
+      should render_template('destroy')
     end
 
     it 'remove the user from the followers' do
       sign_in user
       project.expects(:remove_follower).with(user)
-      delete 'destroy', project_id: project.id, id: project_user_follower.id
-    end
-
-    it 'set a flash message' do
-      delete 'destroy', project_id: project.id, id: project_user_follower.id
-      should set_the_flash[:notice].to("Vous ne suivez plus #{project}")
+      delete 'destroy',
+             project_id: project.id,
+             id: project_user_follower.id,
+             format: :js
     end
   end
 end

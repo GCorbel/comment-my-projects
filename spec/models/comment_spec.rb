@@ -108,6 +108,7 @@ describe Comment do
 
     context 'when the parent owner is the project\'s owner is the same' do
       it 'don''t send a mail' do
+        project.save
         project.add_follower(user2)
         lambda do
           create(:comment,
