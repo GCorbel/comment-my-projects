@@ -43,7 +43,7 @@ class Comment < ActiveRecord::Base
     end
 
     def send_mail
-      receivers = Comment.receivers.uniq
+      receivers = Comment.receivers.compact.uniq
       receivers.each do |receiver|
         CommentMailer.send_mail_to_project_owner(receiver, project).deliver
       end
