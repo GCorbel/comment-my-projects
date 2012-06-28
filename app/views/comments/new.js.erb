@@ -2,6 +2,6 @@ $("#answer_<%= @comment.ancestry %>").html('<%= escape_javascript(
   render('new', project: @project, comment: @comment)
 ) %>');
 $('.cancel_comment').on('click', function() { 
-  $('#answer_<%= @comment.ancestry %>').remove();
+  $('#answer_<%= @comment.ancestry %>').html('');
 })
 initMarkdown();
