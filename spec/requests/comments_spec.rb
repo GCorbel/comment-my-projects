@@ -81,7 +81,9 @@ describe 'Comments' do
     end
   end
 
-  describe 'Delete' do
+  describe 'Delete', js: true do
+    self.use_transactional_fixtures = false
+
     before(:each) { sign_in user }
 
     context 'When the user signed in is the project owner' do
@@ -106,6 +108,6 @@ describe 'Comments' do
     within("#comment_#{comment.id}") do
       click_link 'Supprimer'
     end
-    page.should have_content('Votre commentaire a été supprimé')
+    page.should_not have_content(comment.message)
   end
 end

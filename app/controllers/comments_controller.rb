@@ -25,7 +25,6 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to(@project, notice: 'Votre commentaire a été supprimé')
   end
 
   private

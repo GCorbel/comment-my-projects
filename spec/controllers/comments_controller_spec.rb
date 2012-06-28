@@ -66,19 +66,14 @@ describe CommentsController do
       comment.stubs(:destroy)
     end
 
-    it "redirect to project's path" do
-      delete 'destroy', id: comment.id, project_id: project.id
-      should redirect_to(project)
+    it "render destroy template" do
+      delete 'destroy', id: comment.id, project_id: project.id, format: :js
+      render_template('destroy')
     end
 
     it "delete the comment" do
       comment.expects(:destroy)
-      delete 'destroy', id: comment.id, project_id: project.id
-    end
-
-    it "set a flash message" do
-      delete 'destroy', id: comment.id, project_id: project.id
-      should set_the_flash[:notice].to("Votre commentaire a été supprimé")
+      delete 'destroy', id: comment.id, project_id: project.id, format: :js
     end
   end
 end
