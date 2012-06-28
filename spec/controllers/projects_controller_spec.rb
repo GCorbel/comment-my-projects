@@ -38,9 +38,7 @@ describe ProjectsController do
   end
 
   describe "POST 'create'" do
-    before(:each) do
-      Project.stubs(:new).returns(project)
-    end
+    before(:each) { Project.stubs(:new).returns(project) }
 
     context "with valid data" do
       before(:each) { project.stubs(:save).returns(true) }
@@ -73,9 +71,7 @@ describe ProjectsController do
   end
 
   describe "GET 'edit'" do
-    before(:each) do
-      Project.stubs(:find).returns(project)
-    end
+    before(:each) { Project.stubs(:find).returns(project) }
 
     it "render edit template" do
       get 'edit', id: project.id
@@ -84,9 +80,7 @@ describe ProjectsController do
   end
 
   describe "POST 'update'" do
-    before(:each) do
-      Project.stubs(:find).returns(project)
-    end
+    before(:each) { Project.stubs(:find).returns(project) }
 
     context "when valid" do
       before(:each) { project.stubs(:update_attributes).returns(true) }

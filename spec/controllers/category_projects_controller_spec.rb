@@ -23,9 +23,7 @@ describe CategoryProjectsController do
   end
 
   describe "POST 'create'" do
-    before(:each) do
-      CategoryProject.stubs(:new).returns(category_project)
-    end
+    before(:each) { CategoryProject.stubs(:new).returns(category_project) }
 
     context "with valid data" do
       before(:each) { category_project.stubs(:save).returns(true) }
@@ -57,9 +55,7 @@ describe CategoryProjectsController do
   end
 
   describe "GET 'edit'" do
-    before(:each) do
-      CategoryProject.stubs(:find).returns(category_project)
-    end
+    before(:each) { CategoryProject.stubs(:find).returns(category_project) }
 
     it "render edit template" do
       get 'edit', id: category_project.id, project_id: project.id
@@ -69,8 +65,7 @@ describe CategoryProjectsController do
 
   describe "POST 'update'" do
     before(:each) do
-      CategoryProject.stubs(:find)
-                     .returns(category_project)
+      CategoryProject.stubs(:find).returns(category_project)
       category_project.stubs(:category)
     end
 
