@@ -37,7 +37,7 @@ describe 'Comments' do
             click_button 'Envoyer'
           end
 
-          wait_until { Comment.count == 1 }
+          wait_for_ajax
           new_comment = Comment.last
           within("#comment_#{new_comment.id}") do
             page.should have_content('My Message')
