@@ -4,5 +4,5 @@ comment_partial = '<%= escape_javascript(
 <% if @comment.parent %>
   $("#answer_<%= @comment.parent.id %>").html(comment_partial);
 <% else %>
-  $("#new_comment_form_container").before(comment_partial);
+  $("#new_root_comment").before(comment_partial);
 <% end %>
