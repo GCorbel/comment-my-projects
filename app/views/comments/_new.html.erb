@@ -14,5 +14,10 @@
     <% end %>
     <%= f.input :message, as: :markdown, input_html: { rows: 4 } %>
     <%= f.button :submit, 'Envoyer' %>
+    <% unless comment.is_root? %>
+      <%= link_to 'Annuler',
+                  'javascript:void(0)',
+                  class: 'cancel_comment btn btn-danger' %>
+    <% end %>
   <% end %>
 </div>
