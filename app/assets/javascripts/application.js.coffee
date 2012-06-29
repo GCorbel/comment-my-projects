@@ -26,7 +26,8 @@ jQuery ->
   else
     'textarea.markdown'
 
-  if $(identifier).length != 0
+  if $(identifier).length != 0 &&
+     $(identifier).parent().find('#wmd-bold-button').length == 0
     converter = Markdown.getSanitizingConverter()
     editor = new Markdown.Editor(converter,
                                  suffix,
