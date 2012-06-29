@@ -27,11 +27,11 @@ jQuery ->
     'textarea.markdown'
 
   if $(identifier).length != 0
-    converter1 = Markdown.getSanitizingConverter()
-    editor1 = new Markdown.Editor(converter1,
-                                  suffix,
-                                  { title: 'Markdown?', handler: markdownHelp })
-    editor1.run()
+    converter = Markdown.getSanitizingConverter()
+    editor = new Markdown.Editor(converter,
+                                 suffix,
+                                 { title: 'Markdown?', handler: markdownHelp })
+    editor.run()
 
 markdownHelp = () ->
   window.open('http://fr.wikipedia.org/wiki/Markdown')
