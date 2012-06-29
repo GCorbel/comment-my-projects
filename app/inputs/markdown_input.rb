@@ -9,6 +9,6 @@ class MarkdownInput < SimpleForm::Inputs::Base
     template.content_tag(:div,
                          '',
                          id: "wmd-preview#{suffix}",
-                         class: 'wmd-panel wmd-preview')
+                         class: 'wmd-preview')
   end
 end
