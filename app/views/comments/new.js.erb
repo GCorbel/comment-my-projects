@@ -4,4 +4,4 @@ $("#answer_<%= @comment.ancestry %>").html('<%= escape_javascript(
 $('.cancel_comment').on('click', function() { 
   $('#answer_<%= @comment.ancestry %>').html('');
 })
-initMarkdown();
+initMarkdown('<%= @comment.parent_id %>');

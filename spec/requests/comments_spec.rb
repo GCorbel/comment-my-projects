@@ -72,8 +72,9 @@ describe 'Comments' do
       visit project_path(project)
       within("#comment_#{comment.id}") do
         click_link 'Répondre'
+        wait_for_ajax
         fill_in('Nom', with: 'My name')
-        fill_in('wmd-input', with: 'My answer')
+        fill_in("wmd-input#{comment.id}", with: 'My answer')
         click_button 'Envoyer'
         page.should_not have_content('Ajouter un commentaire')
         page.should have_content('My answer')

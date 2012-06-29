@@ -11,8 +11,10 @@
       <%= f.association :category,
                         collection: project.categories,
                         required: true %>
+      <%= f.input :message, as: :markdown, input_html: { rows: 4 } %>
+    <% else %>
+      <%= f.input :message, as: :markdown, input_html: { rows: 4 }, suffix: comment.parent_id %>
     <% end %>
-    <%= f.input :message, as: :markdown, input_html: { rows: 4 } %>
     <%= f.button :submit, 'Envoyer' %>
     <% unless comment.is_root? %>
       <%= link_to 'Annuler',

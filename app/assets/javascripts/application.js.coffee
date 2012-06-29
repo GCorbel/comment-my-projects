@@ -20,10 +20,17 @@ initialize = () ->
 jQuery ->
   $('a:not(.dataTables_paginate a):not([data-method=delete]):not([data-method=post]):not([data-remote]):not([data-behavior]):not([data-skip-pjax])').pjax('[data-pjax-container]')
 
-@initMarkdown = () ->
-  if $('#wmd-input').length != 0
+@initMarkdown = (suffix = '') ->
+  identifier = if suffix
+    '#wmd-input' + suffix
+  else
+    'textarea.markdown'
+
+  if $(identifier).length != 0
     converter1 = Markdown.getSanitizingConverter()
-    editor1 = new Markdown.Editor(converter1, '', { title: 'Markdown?', handler: markdownHelp })
+    editor1 = new Markdown.Editor(converter1,
+                                  suffix,
+                                  { title: 'Markdown?', handler: markdownHelp })
     editor1.run()
 
 markdownHelp = () ->
