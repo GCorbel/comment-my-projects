@@ -44,9 +44,6 @@ describe 'Project' do
   end
 
   describe 'Show' do
-    before(:each) do
-    end
-
     context 'when there is only one description' do
       it 'don\'t show the link to remove the description' do
         sign_in project.user
