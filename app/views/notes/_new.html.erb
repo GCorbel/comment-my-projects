@@ -1,16 +1,22 @@
 <div class="graybox">
   <h2>Ajouter une note</h2>
-  <%= simple_form_for [project, note] do |f| %>
-    <%= f.association :category, 
-                      collection: project.categories,
-                      input_html: { class: 'span2' } %>
-    <%= f.input :value, as: :hidden %>
-    <span class="rating">
-      <span class="star" data-value="4"></span>
-      <span class="star" data-value="3"></span>
-      <span class="star" data-value="2"></span>
-      <span class="star" data-value="1"></span>
-    </span>
-    <%= f.submit style: 'display:none' %>
+  <% if current_user.present? %>
+    Vous devez être connecté pour ajouter une note.
+  <% elsif current_user == project.user %>
+    Vous ne pouvez pas voter pour votre projet.
+  <% else %>
+    <%= simple_form_for [project, note] do |f| %>
+      <%= f.association :category, 
+                        collection: project.categories,
+                        input_html: { class: 'span2' } %>
+      <%= f.input :value, as: :hidden %>
+      <span class="rating">
+        <span class="star" data-value="4"></span>
+        <span class="star" data-value="3"></span>
+        <span class="star" data-value="2"></span>
+        <span class="star" data-value="1"></span>
+      </span>
+      <%= f.submit style: 'display:none' %>
+    <% end %>
   <% end %>
 </div>

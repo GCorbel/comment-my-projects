@@ -31,6 +31,7 @@ describe 'Notes', js: true do
   describe 'Create' do
     context 'with valid data' do
       it 'add a new note' do
+        sign_in
         create(:category_project, project: project, category: category1)
         visit project_path(project)
         select('New Category', from: 'Categorie')
@@ -41,11 +42,28 @@ describe 'Notes', js: true do
 
     context 'with invalid data' do
       it 'show errors' do
+        sign_in
         visit project_path(project)
         within('#new_note') do
           find('.star').click
           page.body.should have_content("champ obligatoire")
         end
+      end
+    end
+
+    context 'when the user logged is the project owner' do
+      it 'show a message' do
+        sign_in project.user
+        visit project_path(project)
+        page.should have_content("Vous ne pouvez pas voter pour votre projet")
+      end
+    end
+
+    context 'when the user is not signed in' do
+      it 'show a message' do
+        visit project_path(project)
+        page.should 
+          have_content("Vous devez être connecté pour ajouter une note")
       end
     end
   end
