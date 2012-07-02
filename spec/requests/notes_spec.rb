@@ -3,7 +3,8 @@ require 'spec_helper'
 
 describe 'Notes', js: true do
   self.use_transactional_fixtures = false
-  let(:project) { create(:project) }
+  let(:user) { create(:user) }
+  let(:project) { create(:project, user: user) }
   let(:category1) { create(:category, label: 'New Category') }
   let(:category2) { create(:category, label: 'New Category 2') }
   let(:category3) { create(:category, label: 'New Category 3') }
