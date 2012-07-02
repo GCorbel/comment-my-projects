@@ -148,6 +148,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (0.9.2.2)
+    rakismet (1.2.1)
     rb-readline (0.4.2)
     rdoc (3.12)
       json (~> 1.4)
@@ -240,6 +241,7 @@ DEPENDENCIES
   pry-remote (= 0.1.1)
   rack-pjax
   rails (= 3.2.6)
+  rakismet
   rb-readline
   redcarpet
   rspec-rails

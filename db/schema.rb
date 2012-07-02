@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120623182656) do
+ActiveRecord::Schema.define(:version => 20120702144948) do
 
   create_table "categories", :force => true do |t|
     t.string   "label"
@@ -34,9 +34,13 @@ ActiveRecord::Schema.define(:version => 20120623182656) do
     t.integer  "category_id"
     t.text     "message"
     t.string   "username"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "ancestry"
+    t.string   "user_ip"
+    t.string   "user_agent"
+    t.string   "referrer"
+    t.boolean  "approved",    :default => true, :null => false
   end
 
   add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"

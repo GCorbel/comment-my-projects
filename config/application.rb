@@ -59,5 +59,7 @@ module CommentMyProjects
     config.generators.test_framework = :rspec
     config.middleware.use Rack::Pjax
     config.assets.initialize_on_precompile = false
+    config.rakismet.key = '48f75aa5e28b'
+    config.rakismet.url = 'http://comment-my-projects.heroku.com'
   end
 end

@@ -36,6 +36,11 @@ describe CommentsController do
         project.expects(:add_comment).with(comment)
         post 'create', project_id: project.id, format: :js
       end
+
+      it 'give the request to comment' do
+        comment.expects(:request=)
+        post 'create', project_id: project.id, format: :js
+      end
     end
 
     context "with invalid data" do
