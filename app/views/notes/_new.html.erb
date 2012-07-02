@@ -1,7 +1,5 @@
 <div class="graybox">
   <h2>Ajouter une note</h2>
-  <%= current_user %>
-  <%= project.user %>
   <% if current_user.nil? %>
     Vous devez être connecté pour ajouter une note.
   <% elsif current_user == project.user %>
