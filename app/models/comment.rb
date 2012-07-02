@@ -5,6 +5,8 @@ class Comment < ActiveRecord::Base
 
   has_ancestry
 
+  default_scope where(approved: true)
+
   belongs_to :user
   belongs_to :project
   belongs_to :category
