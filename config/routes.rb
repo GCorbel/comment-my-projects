@@ -1,4 +1,6 @@
 CommentMyProjects::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
   resources :projects do
     resources :category_projects
     resources :comments
