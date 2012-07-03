@@ -40,7 +40,7 @@ describe CategoryProjectsController do
 
       it "set a flash message" do
         post 'create', project_id: project.id
-        should set_the_flash[:notice].to("La description a été ajoutée")
+        should set_the_flash[:notice].to("Votre description a été ajouté")
       end
     end
 
@@ -84,7 +84,7 @@ describe CategoryProjectsController do
 
       it "set a flash message" do
         post 'update', id: category_project.id, project_id: project.id
-        should set_the_flash[:notice].to("La description a été modifiée")
+        should set_the_flash[:notice].to("Votre description a été modifié")
       end
     end
 
@@ -116,7 +116,7 @@ describe CategoryProjectsController do
 
     it "set a flash message" do
       delete 'destroy', id: category_project.id, project_id: project.id
-      should set_the_flash[:notice].to("La description a été supprimée")
+      should set_the_flash[:notice].to("Votre description a été supprimé")
     end
   end
 end

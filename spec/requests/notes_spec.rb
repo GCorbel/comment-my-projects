@@ -37,7 +37,7 @@ describe 'Notes', js: true do
         visit project_path(project)
         select('New Category', from: 'Categorie')
         find('.star').click
-        page.should have_content('La note a été ajoutée')
+        page.should have_content('Votre note a été ajouté')
       end
     end
 

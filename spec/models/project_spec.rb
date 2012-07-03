@@ -78,11 +78,7 @@ describe Project do
   describe :root_comments do
     it 'give root comments for the project' do
       project.comments << comment
-      Comment.create(message: 'test2',
-                     parent_id: comment,
-                     username: 'test2',
-                     category_id: category,
-                     parent_id: project)
+      create(:comment, parent: comment, category: category, project: project)
       project.root_comments.size.should == 1
     end
   end

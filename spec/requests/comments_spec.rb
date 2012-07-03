@@ -13,6 +13,10 @@ describe 'Comments' do
            category: category)
   end
 
+  before(:each) do
+    Comment.any_instance.stubs(:spam?).returns(false)
+  end
+
   describe 'Index' do
     it 'Show comments for the project' do
       comment

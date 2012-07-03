@@ -23,7 +23,7 @@ describe 'CategoryProjects' do
     context 'With valid data' do
       it 'Add a new category for a project' do
         fill_form
-        page.should have_content('La description a été ajoutée')
+        page.should have_content('Votre description a été ajouté')
       end
     end
 
@@ -44,7 +44,7 @@ describe 'CategoryProjects' do
     context 'With valid data' do
       it 'Update the category for the project' do
         fill_form
-        page.should have_content('La description a été modifiée')
+        page.should have_content('Votre description a été modifié')
       end
     end
 
@@ -65,7 +65,7 @@ describe 'CategoryProjects' do
       within('.tab-content') do
         click_link "Supprimer"
       end
-      page.should have_content("La description a été supprimée")
+      page.should have_content("Votre description a été supprimé")
     end
   end
 

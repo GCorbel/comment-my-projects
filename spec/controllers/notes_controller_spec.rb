@@ -28,7 +28,7 @@ describe NotesController do
 
       it "set a flash message" do
         post 'create', project_id: project.id
-        should set_the_flash[:notice].to("La note a été ajoutée")
+        should set_the_flash[:notice].to("Votre note a été ajouté")
       end
     end
 
