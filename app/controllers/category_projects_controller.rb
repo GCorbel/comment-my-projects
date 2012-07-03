@@ -12,7 +12,8 @@ class CategoryProjectsController < ApplicationController
 
   def create
     if @category_project.save
-      redirect_to @project, notice: "La description a été ajoutée"
+      redirect_to(project_path(@project),
+                  notice: t('controller.create.success', model: 'description'))
     else
       render :new
     end
@@ -24,7 +25,8 @@ class CategoryProjectsController < ApplicationController
 
   def update
     if @category_project.update_attributes(params[:category_project])
-      redirect_to(@project, notice: "La description a été modifiée")
+      redirect_to(project_path(@project),
+                  notice: t('controller.update.success', model: 'description'))
     else
       @categories << @category_project.category
       render :edit
@@ -33,7 +35,8 @@ class CategoryProjectsController < ApplicationController
 
   def destroy
     @category_project.destroy
-    redirect_to(@project, notice: "La description a été supprimée")
+    redirect_to(@project,
+                notice: t('controller.destroy.success', model: 'description'))
   end
 
   private

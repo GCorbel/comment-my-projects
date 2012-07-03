@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.new(params[:project])
     if @project.save
       redirect_to(project_path(@project),
-                  notice: "Votre projet a été ajouté")
+                  notice: t('controller.create.success', model: 'projet'))
     else
       render :new
     end
@@ -38,7 +38,7 @@ class ProjectsController < ApplicationController
   def update
     if @project.update_attributes(params[:project])
       redirect_to(project_path(@project),
-                  notice: "Votre projet a été modifié")
+                  notice: t('controller.update.success', model: 'projet'))
     else
       render :edit
     end
@@ -46,6 +46,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to(root_path, notice: "Votre projet a été supprimé")
+    redirect_to(root_path,
+                notice: t('controller.destroy.success', model: 'projet'))
   end
 end

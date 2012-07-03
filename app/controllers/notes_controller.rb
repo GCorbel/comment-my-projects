@@ -4,7 +4,8 @@ class NotesController < ApplicationController
     @project = Project.find(params[:project_id])
     @note = @project.notes.new(params[:note], project: @project)
     if @note.save
-      redirect_to(project_path(@project), notice: "La note a été ajoutée")
+      redirect_to(project_path(@project),
+                  notice: t('controller.create.success', model: 'note'))
     else
       @comment = Comment.new
       render 'projects/show'
