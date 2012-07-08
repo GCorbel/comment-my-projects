@@ -18,6 +18,7 @@ describe 'Project' do
         within('#new_project') do
           fill_in("Titre", with: "Mon Projet")
           fill_in("Url", with: "http://www.google.com")
+          select("Ruby", from: "Type")
           click_button "Créer"
         end
         page.should have_content("Votre projet a été ajouté")

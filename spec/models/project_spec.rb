@@ -23,6 +23,7 @@ describe Project do
 
   it { should validate_presence_of :title }
   it { should validate_presence_of :url }
+  it { should validate_presence_of :type }
 
   it { should validate_format_of(:url).with('http://www.google.com') }
   it { should validate_format_of(:url).not_with('test') }
