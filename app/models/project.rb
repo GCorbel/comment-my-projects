@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   has_many :notes
   has_many(:followers, through: :project_user_followers, source: :user)
   has_many :project_user_followers
+  belongs_to :type, class_name: 'ProjectType'
   belongs_to :user
 
   attr_accessible :title, :url
@@ -15,12 +16,11 @@ class Project < ActiveRecord::Base
   after_create :add_general_category
 
   class << self
-    def search(params = nil)
-      if params
-        Project.where('title like ?', "%#{params}%")
-      else
-        Project.all
-      end
+    def search(word = nil, project_type = nil)
+      projects = Project
+      projects = projects.where('title like ?', "%#{word}%") if word
+      projects = projects.where('type_id = ?', project_type) if project_type
+      projects.all
     end
   end
 

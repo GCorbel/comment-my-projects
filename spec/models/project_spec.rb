@@ -4,6 +4,8 @@ describe Project do
   let(:project) { create(:project, title: "Title",
                          url: "http://www.test.com",
                          user: user) }
+  let(:project_type1) { create(:project_type) }
+  let(:project_type2) { create(:project_type) }
   let(:user) { create(:user) } 
   let(:category) { create(:category) } 
   let(:comment) { create(:comment,
@@ -16,6 +18,7 @@ describe Project do
   it { should have_many(:notes) }
   it { should have_many(:followers).through(:project_user_followers) }
   it { should have_many(:project_user_followers) }
+  it { should belong_to(:type).class_name('ProjectType') }
   it { should belong_to(:user) }
 
   it { should validate_presence_of :title }
@@ -31,12 +34,20 @@ describe Project do
   end
 
   describe :search do
-    let!(:project1) { create(:project, title: 'My First Project') }
-    let!(:project2) { create(:project, title: 'My Second Project') }
+    let!(:project1) { create(:project,
+                             title: 'My First Project',
+                             type: project_type1) }
+    let!(:project2) { create(:project,
+                             title: 'My Second Project',
+                             type: project_type2) }
 
     context 'when there is a research' do
-      it 'give all the projects with a search with datatable' do
+      it 'give all the projects with a word with datatable' do
         Project.search('first').should == [project1]
+      end
+
+      it 'give all the project with a type' do
+        Project.search('', project_type2).should == [project2]
       end
     end
 

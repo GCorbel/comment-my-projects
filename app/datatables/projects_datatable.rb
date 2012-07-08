@@ -43,8 +43,8 @@ class ProjectsDatatable
       projects = projects.select("(#{sql}) as note_#{category}")
     end
     projects = projects.page(page).per_page(per_page)
-    if params[:sSearch].present?
-      projects = projects.search(params[:sSearch])
+    if params[:sSearch].present? || params[:project_type]
+      projects = projects.search(params[:sSearch], params[:project_type])
     end
     projects
   end

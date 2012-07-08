@@ -14,6 +14,13 @@ initializeDataTables = () ->
       bServerSide: true
       bRetrieve: true
       sAjaxSource: $('#projects').data('source')
+      fnServerParams: (aoData) ->
+        value = $("#project_type").val()
+        if value
+          aoData.push(
+            name: "project_type"
+            value: value
+          )
       oLanguage:
         sProcessing:   "Traitement en cours..."
         sLengthMenu:   "Afficher _MENU_ éléments"

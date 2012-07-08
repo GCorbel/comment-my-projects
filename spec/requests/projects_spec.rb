@@ -4,6 +4,8 @@ require 'spec_helper'
 describe 'Project' do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
+  let(:rails_type) { create(:project_type, label: 'Ruby On Rails') }
+  let(:ruby_type) { create(:project_type, label: 'Ruby') }
 
   describe 'Create' do
     before(:each) do
@@ -61,6 +63,15 @@ describe 'Project' do
       select('50', from: 'Afficher')
       wait_for_ajax
       page.should have_content("Affichage de l'élement 1 à 11 sur 11 éléments")
+    end
+
+    it 'Enable to filter by langage' do
+      create(:project, title: 'My Rails Project', type: rails_type)
+      create(:project, title: 'My Ruby Project', type: ruby_type)
+      visit projects_path
+      select('Ruby', from: 'Type')
+      page.should have_content('My Ruby Project')
+      page.should_not have_content('My Rails Project')
     end
   end
 

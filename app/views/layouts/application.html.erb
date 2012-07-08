@@ -90,5 +90,8 @@
         <%= yield %>
       </div>
     </div>
+    <%= javascript_tag do %>
+      <%= yield :javascripts %>
+    <% end %>
   </body>
 </html>
