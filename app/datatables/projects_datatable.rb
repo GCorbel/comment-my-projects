@@ -21,6 +21,7 @@ class ProjectsDatatable
       [
         link_to(project.title, project),
         link_to(project.url, project),
+        link_to(project.type.label, project),
       ] +
       Category.all.map do |category|
         note = project.note_for(category) || "-"
@@ -35,7 +36,7 @@ class ProjectsDatatable
 
   def fetch_projects
     projects = Project.order("#{sort_column} #{sort_direction}")
-    projects = projects.select('id, title, url')
+    projects = projects.select('id, title, url, type_id')
     Category.all.each do |category|
       sql = Note.select("sum(value)")
                 .where("project_id = projects.id")
