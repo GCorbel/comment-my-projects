@@ -56,6 +56,14 @@ describe Search do
       projects.size.should == 1
     end
 
+    it "give all the projects when the project type is blank" do
+      create(:project, title: 'Simple Project 1')
+      search = Search.new(options.merge({project_type: ""}))
+
+      projects = search.project_text_search
+      projects.should_not be_empty
+    end
+
     context "when we search only in comments" do
       it "give all the projects with a word in a comment" do
         create(:comment,

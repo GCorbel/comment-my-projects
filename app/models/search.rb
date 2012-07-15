@@ -37,7 +37,7 @@ class Search
       conditions += ' or category_projects.description ilike :word'
     end
 
-    projects = projects.where(type_id: project_type) if project_type
+    projects = projects.where(type_id: project_type) if project_type.present?
     projects.where(conditions, word: word) 
   end
 end
