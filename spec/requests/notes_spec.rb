@@ -30,26 +30,13 @@ describe 'Notes', js: true do
   end
 
   describe 'Create' do
-    context 'with valid data' do
-      it 'add a new note' do
-        sign_in
-        create(:category_project, project: project, category: category1)
-        visit project_path(project)
-        select('New Category', from: 'Categorie')
-        find('.star').click
-        page.should have_content('Votre note a été ajouté')
-      end
-    end
-
-    context 'with invalid data' do
-      it 'show errors' do
-        sign_in
-        visit project_path(project)
-        within('#new_note') do
-          find('.star').click
-          page.body.should have_content("champ obligatoire")
-        end
-      end
+    it 'add a new note' do
+      sign_in
+      create(:category_project, project: project, category: category1)
+      visit project_path(project)
+      select('New Category', from: 'Categorie')
+      find('.star').click
+      page.should have_content('Votre note a été ajouté')
     end
 
     context 'when the user logged is the project owner' do

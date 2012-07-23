@@ -27,34 +27,22 @@ describe 'Comments' do
   end
 
   describe 'Create' do
-    context 'when not signed in' do
-      before(:each) { visit project_path(project) }
+    context 'when not signed in', js: true do
+      self.use_transactional_fixtures = false
 
-      context 'with valid data', js: true do
-        self.use_transactional_fixtures = false
-
-        it 'Enable to create a new comment' do
-          within('#new_comment') do
-            fill_in('Nom', with: 'My name')
-            select('General', from: 'Categorie')
-            fill_in('wmd-input', with: 'My Message')
-            click_button 'Envoyer'
-          end
-
-          wait_for_ajax
-          new_comment = Comment.last
-          within("#comment_#{new_comment.id}") do
-            page.should have_content('My Message')
-          end
+      it 'Enable to create a new comment' do
+        visit project_path(project)
+        within('#new_comment') do
+          fill_in('Nom', with: 'My name')
+          select('General', from: 'Categorie')
+          fill_in('wmd-input', with: 'My Message')
+          click_button 'Envoyer'
         end
-      end
 
-      context 'with invalid data' do
-        it 'show errors' do
-          within('#new_comment') do
-            click_button "Envoyer"
-          end
-          page.body.should have_content("champ obligatoire")
+        wait_for_ajax
+        new_comment = Comment.last
+        within("#comment_#{new_comment.id}") do
+          page.should have_content('My Message')
         end
       end
     end

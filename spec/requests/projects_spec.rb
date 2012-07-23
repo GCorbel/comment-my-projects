@@ -8,28 +8,16 @@ describe 'Project' do
   let(:ruby_type) { create(:project_type, label: 'Ruby') }
 
   describe 'Create' do
-    before(:each) do
+    it 'add a new project' do
       sign_in
       visit new_project_path
-    end
-
-    context 'with valid data' do
-      it 'add a new project' do
-        within('#new_project') do
-          fill_in("Titre", with: "Mon Projet")
-          fill_in("Url", with: "http://www.google.com")
-          select("Ruby", from: "Type")
-          click_button "Créer"
-        end
-        page.should have_content("Votre projet a été ajouté")
-      end
-    end
-
-    context 'with invalid data' do
-      it 'show errors' do
+      within('#new_project') do
+        fill_in("Titre", with: "Mon Projet")
+        fill_in("Url", with: "http://www.google.com")
+        select("Ruby", from: "Type")
         click_button "Créer"
-        page.body.should have_content("champ obligatoire")
       end
+      page.should have_content("Votre projet a été ajouté")
     end
   end
 
@@ -106,27 +94,13 @@ describe 'Project' do
   end
 
   describe 'Update' do
-    before(:each) do
+    it 'update the project' do
       sign_in user
       visit edit_project_path(project)
-    end
-
-    context "with valid data" do
-      it 'update the project' do
-        fill_in("Titre", with: "Mon Projet")
-        fill_in("Url", with: "http://www.google.com")
-        click_button "Modifier"
-        page.should have_content("Votre projet a été modifié")
-      end
-    end
-
-    context "with invalid data" do
-      it "show errors" do
-        fill_in("Titre", with: "")
-        fill_in("Url", with: "")
-        click_button "Modifier"
-        page.should have_content("champ obligatoire")
-      end
+      fill_in("Titre", with: "Mon Projet")
+      fill_in("Url", with: "http://www.google.com")
+      click_button "Modifier"
+      page.should have_content("Votre projet a été modifié")
     end
   end
 

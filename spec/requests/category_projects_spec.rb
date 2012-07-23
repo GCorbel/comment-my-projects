@@ -11,49 +11,23 @@ describe 'CategoryProjects' do
                            description: "test")
   end
 
-
   before(:each) { sign_in user }
 
   context 'Create' do
-    before(:each) do
+    it 'Add a new category for a project' do
       category
       visit new_project_category_project_path(project)
-    end
-
-    context 'With valid data' do
-      it 'Add a new category for a project' do
-        fill_form
-        page.should have_content('Votre description a été ajouté')
-      end
-    end
-
-    context 'With invalid data' do
-      it 'Show error' do
-        click_button 'Valider'
-        page.should have_content("champ obligatoire")
-      end
+      fill_form
+      page.should have_content('Votre description a été ajouté')
     end
   end
 
   context 'Update' do
-    before(:each) do
+    it 'Update the category for the project' do
       category
       visit edit_project_category_project_path(project, category_project)
-    end
-
-    context 'With valid data' do
-      it 'Update the category for the project' do
-        fill_form
-        page.should have_content('Votre description a été modifié')
-      end
-    end
-
-    context 'With invalid data' do
-      it 'Show error' do
-        fill_in('wmd-input', with: '')
-        click_button 'Valider'
-        page.should have_content("champ obligatoire")
-      end
+      fill_form
+      page.should have_content('Votre description a été modifié')
     end
   end
 
