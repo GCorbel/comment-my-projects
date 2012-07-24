@@ -1,15 +1,15 @@
 <div class="span12">
   <div class="graybox">
-    <h1>Administration du projet</h1>
+    <h1><%= t('.project_administration') %></h1>
     <div class="form-actions">
-      <%= link_to 'Ajouter une categorie',
+      <%= link_to t('.add_a_category'),
                   new_project_category_project_path(project),
                   class: 'btn' %>
-      <%= link_to "Modifier", edit_project_path(project), class: 'btn' %>
-      <%= link_to "Supprimer",
+      <%= link_to t('shared.update'), edit_project_path(project), class: 'btn' %>
+      <%= link_to t('shared.delete'),
                   project_path(project),
                   method: 'delete',
-                  data: { confirm: 'Êtes vous sûr?' },
+                  data: { confirm: t('shared.are_you_sure') },
                   class: 'btn btn-danger' %>
     </div>
   </div>

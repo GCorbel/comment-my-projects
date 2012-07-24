@@ -3,7 +3,7 @@
                     url: url,
                     html: { method: :post }) do |f| %>
   <%= f.input :login, required: true %>
-  <%= f.submit "Envoyer" %>
+  <%= f.submit t('shared.submit') %>
 <% end %>
 
 <%= render "links" %>

@@ -1,9 +1,9 @@
 <div class="graybox">
-  <h2>Ajouter une note</h2>
+  <h2><%= t('.add_a_note') %></h2>
   <% if current_user.nil? %>
-    Vous devez être connecté pour ajouter une note.
+    <%= t('.should_be_connected') %>
   <% elsif current_user == project.user %>
-    Vous ne pouvez pas voter pour votre projet.
+    <%= t('.cannot_be_project_owner') %>
   <% else %>
     <%= simple_form_for [project, note] do |f| %>
       <%= f.association :category, 

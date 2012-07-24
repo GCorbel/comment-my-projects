@@ -4,11 +4,11 @@ module ProjectHelper
     content_tag(:div, class: 'project_header') do
       image_tag(avatar_url(project.user, 76), class: 'avatar') +
       raw("<h1>#{project}</h1>") +
-      raw("Site : #{link_to(project.url, project.url)}") +
+      raw("#{t('project.show.site')} : #{link_to(project.url, project.url)}") +
       raw("<br/>") +
-      "Ajouté par : #{project.user}" +
+      "#{t('project.show.added_by')} : #{project.user}" +
       raw("<br/>") +
-      "Le : #{project.created_at.strftime('%d/%m/%Y %H:%M')}"
+      t('project.show.date', date: project.created_at.strftime('%d/%m/%Y %H:%M'))
     end
   end
 end

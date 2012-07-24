@@ -1,4 +1,4 @@
-<h2>Connexion</h2>
+<h2><%= t('.connection') %></h2>
 <br/>
 <%= simple_form_for(resource, 
                     as: resource_name, 
@@ -12,6 +12,6 @@
     <%= f.check_box :remember_me %>
   </div>
 </p>
-  <p><%= f.submit "Connexion" %></p>
+  <p><%= f.submit t('.connection') %></p>
 <% end %>
 <%= render "links" %>

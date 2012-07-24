@@ -163,6 +163,13 @@ fr:
           trillion: "billion"
           quadrillion: "million de milliards"
 
+  shared:
+    submit: "Valider"
+    update: "Modifier"
+    delete: "Supprimer"
+    are_you_sure: "Êtes vous sûr?"
+    cancel: "Annuler"
+
   support:
     array:
       words_connector: ", "
@@ -253,3 +260,70 @@ fr:
       success: "Votre %{model} a été modifié"
     destroy:
       success: "Votre %{model} a été supprimé"
+  comments:
+    comment:
+      answer: "Répondre"
+    new:
+      add_a_comment: "Ajouter un commentaire"
+  mailers:
+    send_mail_to_creator_of_parents: "
+      Bonjour %{user},<br/>
+      <br/>
+      Un commentaire à été ajouté à l''une des discussion auxquels vous avez
+      participé. Pour voir le nouveau message, vous pouvez vous rendre à
+      cette adresse : %{link_to_project}</br>
+      </br>
+      </br>
+      À bientôt sur Comment-My-Projects."
+    send_mail_to_project_owner: "
+      Bonjour %{user},<br/>
+      <br/>
+      Un commentaire à été ajouté à l'un de vos projet.
+      Pour voir le nouveau message, vous pouvez vous rendre à cette adresse :
+      %{link_to_project}
+      </br>
+      </br>
+      À bientôt sur Comment-My-Projects."
+  layouts:
+    application:
+      project_index: "Liste des projets"
+      project_create: "Créer un projet"
+      sign_out: "Déconnexion"
+      sign_up: "Inscription"
+      sign_in: "Connexion"
+      user: "Utilisateur"
+  project_user_followers:
+    link_follow:
+      follow_project: "Suivre le projet"
+    link_unfollow:
+      unfollow_project: "Arréter de suivre le projet"
+  home:
+    index:
+      description: "
+        <h1>Bienvenue sur Comment My Projects</h1>
+        <p>Ce site est un plateforme de discution sur les projects Open-Source où
+          vous pouvez soumettre votre projet et commenter ceux qui sont déjà
+          inscrits.</p>
+        <p>L'intérêt est de pouvoir améliorer nos projets en créant des
+          discutions pertinantes.</p>"
+  project:
+    form_action:
+      project_administration: "Administration du projet"
+      add_a_category: "Ajouter une catégorie"
+    project_type_search:
+      project_type: "Type de projet"
+    index:
+      title: "Titre"
+      url: "Url"
+      type: "Type"
+    show:
+      site: "Site"
+      added_by: "Ajouté par"
+      date: "Le : %{date}"
+  notes:
+    index:
+      project_note: "Notes du projet"
+    new:
+      add_a_note: "Ajouter une note"
+      should_be_connected: "Vous devez être connecté pour ajouter une note."
+      cannot_be_project_owner: "Vous ne pouvez pas voter pour votre projet."

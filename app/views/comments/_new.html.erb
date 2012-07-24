@@ -1,5 +1,5 @@
 <div <%= "id='new_root_comment'" if comment.is_root? %> class="new_comment_form_container graybox">
-  <h1>Ajouter un commentaire</h1>
+  <h1><%= t('.add_a_comment') %></h1>
   <%= simple_form_for [project, comment], remote: true do |f| %>
     <% if comment.ancestry %>
       <%= f.input :ancestry,
@@ -15,9 +15,9 @@
     <% else %>
       <%= f.input :message, as: :markdown, input_html: { rows: 4 }, suffix: comment.parent_id %>
     <% end %>
-    <%= f.button :submit, 'Envoyer' %>
+    <%= f.button :submit, t('shared.submit') %>
     <% unless comment.is_root? %>
-      <%= link_to 'Annuler',
+      <%= link_to t('shared.cancel'),
                   'javascript:void(0)',
                   class: 'cancel_comment btn btn-danger' %>
     <% end %>

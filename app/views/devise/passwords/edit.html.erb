@@ -1,4 +1,4 @@
-<h2>Changer mon mot de passe</h2>
+<h2><%= t('.change_my_password') %></h2>
 
 <%= simple_form_for(resource,
                     as: resource_name,
@@ -7,7 +7,7 @@
   <%= f.input :reset_password_token, as: :hidden %>
   <%= f.input :password, required: true %>
   <%= f.input :password_confirmation, required: true %>
-  <%= f.submit "Changer mon mot de passe" %>
+  <%= f.submit t('.change_my_password') %>
 <% end %>
 
 <%= render "links" %>

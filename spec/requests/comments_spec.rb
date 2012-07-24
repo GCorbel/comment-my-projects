@@ -36,7 +36,7 @@ describe 'Comments' do
           fill_in('Nom', with: 'My name')
           select('General', from: 'Categorie')
           fill_in('wmd-input', with: 'My Message')
-          click_button 'Envoyer'
+          click_button 'Valider'
         end
 
         wait_for_ajax
@@ -67,7 +67,7 @@ describe 'Comments' do
         wait_for_ajax
         fill_in('Nom', with: 'My name')
         fill_in("wmd-input#{comment.id}", with: 'My answer')
-        click_button 'Envoyer'
+        click_button 'Valider'
         page.should_not have_content('Ajouter un commentaire')
         page.should have_content('My answer')
       end

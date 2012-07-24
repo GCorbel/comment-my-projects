@@ -1,4 +1,4 @@
-<h2>Inscription</h2>
+<h2><%= t('.subscription') %></h2>
 <%= simple_form_for(resource, 
                     as: resource_name, 
                     url: registration_path(resource_name)
@@ -7,6 +7,6 @@
   <%= f.input :email, required: true %>
   <%= f.input :password, required: true %>
   <%= f.input :password_confirmation, required: true %>
-  <%= f.submit "Inscription" %>
+  <%= f.submit t('.subscription') %>
 <% end %>
 <%= render "links" %>

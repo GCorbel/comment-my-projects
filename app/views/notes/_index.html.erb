@@ -1,5 +1,5 @@
 <div id="notes" class="graybox">
-  <h2>Notes du projet</h2>
+  <h2><%= t('.project_note') %></h2>
   <% project.categories.each do |category| %>
     <p><%= note_for(project, category) %></p>
   <% end %>

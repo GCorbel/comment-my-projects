@@ -33,10 +33,10 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <%= link_to "Liste des projets", projects_path %>
+                <%= link_to t(".project_index"), projects_path %>
               </li>
               <li>
-                <%= link_to "Ajouter un projet", new_project_path %>
+                <%= link_to t(".project_create"), new_project_path %>
               </li>
             </ul>
             <ul class='nav pull-right'>
@@ -45,33 +45,33 @@
                    class="dropdown-toggle"
                    href="#">
                   <i class="icon-user"></i>
-                  Utilisateur
+                  <%= t('.user') %>
                   <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                   <% if user_signed_in? %>
                     <li>
-                      <%= link_to "Deconnexion",
+                      <%= link_to t(".sign_out"),
                                   destroy_user_session_path,
                                   method: :delete %>
                     </li>
                     <li>
-                      <%= link_to "Modifier",
+                      <%= link_to t("shared.update"),
                                   edit_user_registration_path(current_user) %>
                       </li>
                       <li>
-                        <%= link_to "Supprimer",
+                        <%= link_to t("shared.delete"),
                                     registration_path(:user),
                                     data: { confirm: "Êtes vous sûr?" },
                                     method: :delete %>
                       </li>
                   <% else %>
                     <li>
-                      <%= link_to "Inscription",
+                      <%= link_to t(".sign_up"),
                                   new_user_registration_path %>
                     </li>
                     <li>
-                      <%= link_to "Connexion",
+                      <%= link_to t(".sign_in"),
                                   new_user_session_path %>
                     </li>
                   <% end %>

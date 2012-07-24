@@ -2,5 +2,5 @@
   <%= f.input :project_id, as: :hidden %>
   <%= f.association :category, collection: categories %>
   <%= f.input :description, as: :markdown, input_html: { rows: 4 } %>
-  <%= f.button :submit, 'Valider' %>
+  <%= f.button :submit, t('shared.submit') %>
 <% end %>

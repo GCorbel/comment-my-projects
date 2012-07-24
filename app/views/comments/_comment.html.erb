@@ -5,7 +5,7 @@
   <div>
     <%= markdown comment.message %>
     <div id="answer_<%= comment.id%>"></div>
-    <%= link_to 'Répondre', 
+    <%= link_to t('.answer'), 
                 new_project_comment_path(project,
                                          ancestry: comment),
                 class: 'btn',
@@ -14,7 +14,7 @@
       <%= link_to 'Supprimer', 
                   project_comment_path(project, comment),
                   method: 'delete', 
-                  data: { confirm: 'Êtes vous sûr?' },
+                  data: { confirm: t('shared.are_you_sure') },
                   remote: true,
                   class: 'btn btn-danger' %>
     <% end %>
