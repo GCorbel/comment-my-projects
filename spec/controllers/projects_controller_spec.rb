@@ -14,6 +14,31 @@ describe ProjectsController do
     end
   end
 
+  describe "GET 'advanced_search'" do
+    let(:search) { stub }
+
+    before(:each) { Search.stubs(:new).returns(search) }
+
+    it "render advanced_search template" do
+      get 'advanced_search'
+      should render_template('advanced_search')
+    end
+
+    context 'when the is no search' do
+      it 'don\'t searcj a text' do
+        search.expects(:project_text_search).never
+        get 'advanced_search'
+      end
+    end
+
+    context 'when there is a search' do
+      it "do a full text search" do
+        search.expects(:project_text_search)
+        get 'advanced_search', search: {}
+      end
+    end
+  end
+
   describe "GET 'show'" do
     let!(:comment) { build_stubbed(:comment) }
 

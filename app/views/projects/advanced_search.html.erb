@@ -1,0 +1,22 @@
+<%= simple_form_for @search, 
+                    url: {action: :advanced_search},
+                    method: :get do |f| %>
+  <%= f.input :text, label: t('.advanced_search'), required: false %>
+  <%= f.input :project_type,
+              collection: ProjectType.all, 
+              label: t('.type'),
+              required: false %>
+  <%= f.input :category,
+              collection: Search::PROJECT_CATEGORIES,
+              label: t('.search_for'), required: false %>
+  <%= f.button :submit, 'Go!' %>
+<% end %>
+
+<% if @projects %>
+  <% @projects.each do |project| %>
+    <%= project.title %>
+    <%= excerpt_for(project, @search.text) %>
+  <% end %>
+<% else %>
+  <%= t('.no_result') %>
+<% end %>

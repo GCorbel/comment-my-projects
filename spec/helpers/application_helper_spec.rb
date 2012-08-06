@@ -72,4 +72,40 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe :excerpt_for do
+    let(:description) { "This is\n a description\n with four\n lines" }
+    let(:message) { "This is\n a message\n with four\n lines" }
+    let(:general) { "This is\n a general description\n with four\n lines" }
+    let(:project) { build(:project) }
+
+    context "when there is a description for the project" do
+      it "return the line before and after" do
+        project.stubs(:category_description).returns(description)
+        project.stubs(:comment_message).returns(nil)
+        helper.excerpt_for(project, "description").should ==
+          "This is\n a description\n with four..."
+      end
+    end
+
+    context "when there is a comment for the project" do
+      it "return the line before and after" do
+        project.stubs(:category_description).returns(nil)
+        project.stubs(:comment_message).returns(message)
+        helper.excerpt_for(project, "message").should ==
+          "This is\n a message\n with four..."
+      end
+    end
+
+    context "when is no comment and no description" do
+      it "return the first lines of the general description" do
+        project.save
+        project.category_projects.first.update_attributes(description: general)
+        project.stubs(:category_description).returns(nil)
+        project.stubs(:comment_message).returns(nil)
+        helper.excerpt_for(project, "something").should ==
+          "This is\n a general description..."
+      end
+    end
+  end
 end

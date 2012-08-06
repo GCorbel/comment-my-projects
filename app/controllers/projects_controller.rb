@@ -1,6 +1,6 @@
 #encoding=utf-8
 class ProjectsController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :authenticate_user!, except: [:index, :show, :advanced_search]
   load_and_authorize_resource
 
   def show
@@ -16,6 +16,15 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: ProjectsDatatable.new(view_context) }
+    end
+  end
+
+  def advanced_search
+    if params[:search]
+      @search = Search.new(params[:search])
+      @projects = @search.project_text_search
+    else
+      @search = Search.new
     end
   end
 

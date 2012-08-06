@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
   class << self
     def search(word = nil, project_type = nil)
       projects = Project
-      projects = projects.where('title like ?', "%#{word}%") if word
+      projects = projects.where('title ilike ?', "%#{word}%") if word
       projects = projects.where('type_id = ?', project_type) if project_type
       projects.all
     end
@@ -68,5 +68,9 @@ class Project < ActiveRecord::Base
 
   def remove_follower(user)
     followers.delete(user)
+  end
+
+  def general_description
+    category_projects.first.description
   end
 end

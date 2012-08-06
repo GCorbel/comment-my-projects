@@ -1,4 +1,7 @@
+require "#{Rails.root}/lib/action_view/helpers/text_helper"
 module ApplicationHelper
+  extend ActionView::Helpers::TextHelper
+
   def alert_box(class_name, message)
     if message.present?
       message_tag = content_tag(:div, message)
@@ -26,5 +29,16 @@ module ApplicationHelper
     default_url = "http://#{request.host}:#{request.port}/assets/guest.png"
     "http://gravatar.com/avatar/#{avatar_id}.png" \
       "?s=#{size}&d=#{CGI.escape(default_url)}"
+  end
+
+  def excerpt_for(project, text)
+    options = { separator: "\n", radius: 1 }
+    if project.category_description
+      excerpt(project.category_description, text, options)
+    elsif project.comment_message
+      excerpt(project.comment_message, text, options)
+    else
+      excerpt(project.general_description, "", options)
+    end
   end
 end

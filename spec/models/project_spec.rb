@@ -9,8 +9,9 @@ describe Project do
   let(:user) { create(:user) } 
   let(:category) { create(:category) } 
   let(:comment) { create(:comment,
-                         project_id: project,
-                         category_id: category) }
+                         project: project,
+                         category: category) }
+  let(:project_type) { ProjectType.find_by_label('Ruby') }
 
   it { should have_many(:categories).through(:category_projects) }
   it { should have_many(:category_projects) }
@@ -43,7 +44,7 @@ describe Project do
                              type: project_type2) }
 
     context 'when there is a research' do
-      it 'give all the projects with a word with datatable' do
+      it 'give all the projects with a word with title' do
         Project.search('first').should == [project1]
       end
 
@@ -145,6 +146,12 @@ describe Project do
       lambda do
         project.remove_follower(user)
       end.should change(project.followers, :size).by(-1)
+    end
+  end
+
+  describe :general_description do
+    it "return the general description" do
+      project.general_description.should == project.category_projects.first.description
     end
   end
 end

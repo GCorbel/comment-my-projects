@@ -4,8 +4,9 @@ require 'spec_helper'
 describe 'Project' do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
-  let(:rails_type) { create(:project_type, label: 'Ruby On Rails') }
-  let(:ruby_type) { create(:project_type, label: 'Ruby') }
+  let(:rails_type) { ProjectType.find_by_label('Ruby On Rails') }
+  let(:ruby_type) { ProjectType.find_by_label('Ruby') }
+  let(:category) { create(:category) }
 
   describe 'Create' do
     it 'add a new project' do
@@ -61,6 +62,24 @@ describe 'Project' do
       select('Ruby', from: 'Type')
       page.should have_content('My Ruby Project')
       page.should_not have_content('My Rails Project')
+    end
+  end
+
+  describe 'Advanced Search' do
+    it 'Enable to search in descriptions' do
+      project = create(:project, title: 'Title', type: ruby_type)
+      create(:category_project,
+             project: project,
+             category: category,
+             description: "This is a simple\ndescription\n with three lines")
+
+      visit advanced_search_projects_path
+      fill_in('search_text', with: 'simple')
+      select('Ruby', from: 'Type')
+      select('Descriptions', from: 'search_category')
+
+      click_button('Go!')
+      page.should have_content('This is a simple description...')
     end
   end
 

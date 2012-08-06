@@ -6,6 +6,9 @@ CommentMyProjects::Application.routes.draw do
     resources :comments
     resources :notes
     resources :project_user_followers
+    collection do
+      get 'advanced_search'
+    end
   end
 
   devise_for :users
