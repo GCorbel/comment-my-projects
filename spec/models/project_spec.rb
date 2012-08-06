@@ -90,7 +90,6 @@ describe Project do
 
   describe :root_comments do
     it 'give root comments for the project' do
-      project.comments << comment
       create(:comment, parent: comment, category: category, project: project)
       project.root_comments.size.should == 1
     end
