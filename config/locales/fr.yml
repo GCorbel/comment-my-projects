@@ -224,6 +224,10 @@ fr:
   activemodel:
     errors:
       <<: *errors
+    search:
+      project_all: "Tout"
+      project_comment: "Commentaires"
+      project_description: "Descriptions"
   activerecord:
     errors:
       <<: *errors
@@ -253,6 +257,7 @@ fr:
       note:
         category: "Categorie"
         value: "Note"
+
   controller:
     create:
       success: "Votre %{model} a été ajouté"
@@ -320,6 +325,13 @@ fr:
       site: "Site"
       added_by: "Ajouté par"
       date: "Le : %{date}"
+  projects:
+    advanced_search:
+      search: "Rechercher"
+      advanced_search: "Recherche avancée"
+      type: "Type"
+      search_for: "Recherche dans"
+      no_result: "Il n'y a aucun résultat pour votre recherche. Veuillez recommencer."
   notes:
     index:
       project_note: "Notes du projet"
