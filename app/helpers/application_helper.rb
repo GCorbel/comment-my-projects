@@ -24,9 +24,9 @@ module ApplicationHelper
   end
 
   def avatar_url(user, size=100)
-    return "/assets/guest.png" if user.nil?
-    avatar_id = Digest::MD5.hexdigest(user.email.downcase)
     default_url = "http://#{request.host}:#{request.port}/assets/guest.png"
+    return default_url if user.nil? || Rails.env.test?
+    avatar_id = Digest::MD5.hexdigest(user.email.downcase)
     "http://gravatar.com/avatar/#{avatar_id}.png" \
       "?s=#{size}&d=#{CGI.escape(default_url)}"
   end
