@@ -51,10 +51,14 @@ describe ApplicationHelper do
   end
 
   describe :avatar_url do
+    before(:each) { Rails.env.stubs(:test?).returns(false) }
+    after(:each) { Rails.env.stubs(:test?).returns(true) }
+    
     it "give a path to the avatar" do
       helper.avatar_url(user).should ==
         "http://gravatar.com/avatar/#{avatar_id}.png" \
         "?s=100&d=#{CGI.escape(default_url)}"
+      Rails.env.stubs(:test?).returns(true)
     end
 
     context "when a size is specified" do
@@ -68,7 +72,7 @@ describe ApplicationHelper do
     context "the user is nil" do
       it "give a path to the avatar with a size" do
         helper.avatar_url(nil).should ==
-          "/assets/guest.png"
+          "http://test.host:80/assets/guest.png"
       end
     end
   end
