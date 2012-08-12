@@ -10,7 +10,7 @@ describe CommentMailer do
       mail = CommentMailer.send_mail_to_project_owner(user, project)
       mail.to.should == [user.email]
       mail.subject.should == "Quelqu'un a jouter un commentaire à l'un de vos projet"
-      mail.body.should have_content("http://example.com/projects/#{project.to_param}?locale=fr")
+      mail.body.should have_content("http://example.com/projects/#{project.to_param}")
       mail.body.should have_content("Bonjour #{user.username}")
     end
   end
@@ -20,7 +20,7 @@ describe CommentMailer do
       mail = CommentMailer.send_mail_to_creator_of_parents(user, project)
       mail.to.should == [user.email]
       mail.subject.should == "Quelqu'un a ajouter une reponse à votre commentaire"
-      mail.body.should have_content("http://example.com/projects/#{project.to_param}?locale=fr")
+      mail.body.should have_content("http://example.com/projects/#{project.to_param}")
       mail.body.should have_content("Bonjour #{user.username}")
     end
   end
