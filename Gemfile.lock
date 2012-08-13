@@ -278,7 +278,7 @@ DEPENDENCIES
   cancan
   capybara (= 1.1.2)
   capybara-firebug (= 1.1.0)
-  capybara-webkit
+  capybara-webkit (= 0.12.1)
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise

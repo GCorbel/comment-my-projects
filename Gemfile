@@ -45,7 +45,7 @@ gem 'jquery-rails'
 group :test do
   gem 'capybara', '1.1.2'
   gem 'capybara-firebug', '1.1.0'
-  gem 'capybara-webkit', '0.11.0'
+  gem 'capybara-webkit', '0.12.1'
   gem 'factory_girl_rails'
   gem 'spork-rails'
   gem 'rspec-rails'
