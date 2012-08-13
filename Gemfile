@@ -56,6 +56,11 @@ group :test do
   gem 'database_cleaner'
 end
 
+group :development do
+  gem 'guard'
+  gem 'guard-livereload'
+end
+
 group :development, :test do
   gem 'pry', '0.9.8.4'
   gem 'pry-remote', '0.1.1'
