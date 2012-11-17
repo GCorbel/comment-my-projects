@@ -17,7 +17,7 @@ body {
   background-position: 0 40px;
 }
 
-#project .graybox {
+.graybox {
   padding: 10px;
   border: 1px solid #ccc;
   background: #f5f5f5;
