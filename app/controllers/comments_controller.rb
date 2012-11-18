@@ -1,4 +1,5 @@
 #encoding=utf-8
+require "#{Rails.root}/lib/spam_checker/spam_checker"
 class CommentsController < ApplicationController
   load_resource :project
   load_resource through: :project
@@ -9,11 +10,14 @@ class CommentsController < ApplicationController
     @comment.ancestry = params[:ancestry]
     render format: :js
   end
-  
+
   def create
     @comment.parent = Comment.find(@comment.ancestry) if @comment.ancestry
     @comment.user = current_user
     @comment.project = @project
+
+    @comment.approved = !SpamChecker.spam?(@comment, request)
+
     @comment.request = request
     if @comment.valid?
       @project.add_comment(@comment)

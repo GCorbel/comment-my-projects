@@ -1,5 +1,6 @@
 #encoding=utf-8
 require 'spec_helper'
+require "#{Rails.root}/lib/spam_checker/spam_checker"
 
 describe CommentsController do
   let(:project) { build_stubbed(:project, user: user) }
@@ -12,6 +13,7 @@ describe CommentsController do
     Project.stubs(:find).returns(project)
     project.stubs(:add_comment)
     project.stubs(:comments).returns(comments)
+    SpamChecker.stubs(:spam?).returns(false)
   end
 
   describe "GET 'new'" do
@@ -37,9 +39,25 @@ describe CommentsController do
         post 'create', project_id: project.id, format: :js
       end
 
-      it 'give the request to comment' do
-        comment.expects(:request=)
+      it "check if the comment is a spam" do
+        SpamChecker.expects(:spam?).with(comment, request)
         post 'create', project_id: project.id, format: :js
+      end
+
+      context "when the comment is not a spam" do
+        it "approve the comment" do
+          SpamChecker.stubs(:spam?).returns(false)
+          post 'create', project_id: project.id, format: :js
+          comment.approved.should be_true
+        end
+      end
+
+      context "when the comment is a spam" do
+        it "disapprove the comment" do
+          SpamChecker.stubs(:spam?).returns(true)
+          post 'create', project_id: project.id, format: :js
+          comment.approved.should be_false
+        end
       end
     end
 
@@ -53,7 +71,7 @@ describe CommentsController do
     end
 
     context "when user is signed in" do
-      before(:each) do 
+      before(:each) do
         comment.stubs(:save)
         sign_in user
       end
