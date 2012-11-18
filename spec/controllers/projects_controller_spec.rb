@@ -25,7 +25,7 @@ describe ProjectsController do
     end
 
     context 'when the is no search' do
-      it 'don\'t searcj a text' do
+      it 'don\'t search a text' do
         search.expects(:project_text_search).never
         get 'advanced_search'
       end
