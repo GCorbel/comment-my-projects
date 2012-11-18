@@ -6,7 +6,7 @@ class Search
   PROJECT_COMMENT = I18n.t("activemodel.search.project_comment")
   PROJECT_DESCRIPTION = I18n.t("activemodel.search.project_description")
   PROJECT_CATEGORIES = [PROJECT_ALL, PROJECT_COMMENT, PROJECT_DESCRIPTION]
-  
+
   attr_accessor :text, :project_type, :category
 
   def initialize(attributes = {})
@@ -38,6 +38,6 @@ class Search
     end
 
     projects = projects.where(type_id: project_type) if project_type.present?
-    projects.where(conditions, word: word) 
+    projects.where(conditions, word: word)
   end
 end

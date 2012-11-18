@@ -8,7 +8,7 @@ describe Category do
 
   describe :to_s do
     subject { category.to_s }
-    
+
     it { should == category.label }
   end
 end

@@ -5,15 +5,15 @@
   <div>
     <%= markdown comment.message %>
     <div id="answer_<%= comment.id%>"></div>
-    <%= link_to t('.answer'), 
+    <%= link_to t('.answer'),
                 new_project_comment_path(project,
                                          ancestry: comment),
                 class: 'btn',
                 remote: true %>
     <% if can? :destroy, comment %>
-      <%= link_to 'Supprimer', 
+      <%= link_to 'Supprimer',
                   project_comment_path(project, comment),
-                  method: 'delete', 
+                  method: 'delete',
                   data: { confirm: t('shared.are_you_sure') },
                   remote: true,
                   class: 'btn btn-danger' %>

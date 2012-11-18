@@ -6,8 +6,8 @@ describe Project do
                          user: user) }
   let(:project_type1) { create(:project_type) }
   let(:project_type2) { create(:project_type) }
-  let(:user) { create(:user) } 
-  let(:category) { create(:category) } 
+  let(:user) { create(:user) }
+  let(:category) { create(:category) }
   let(:comment) { create(:comment,
                          project: project,
                          category: category) }
@@ -31,7 +31,7 @@ describe Project do
 
   it "have a category on creation" do
     project.categories.first.label.should == "General"
-    project.category_projects.first.description.should == 
+    project.category_projects.first.description.should ==
       "Title : [#{project.url}](#{project.url})"
   end
 

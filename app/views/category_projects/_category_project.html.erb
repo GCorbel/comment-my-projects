@@ -3,7 +3,7 @@
   <%= markdown category_project.description %>
   <% if can? :manage, category_project %>
     <%= link_to t('shared.update'),
-                edit_project_category_project_path(project, 
+                edit_project_category_project_path(project,
                                                    category_project),
                 class: 'btn' %>
     <% unless category_project_counter == 0 %>

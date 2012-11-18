@@ -37,7 +37,7 @@ describe Search do
              message: "A simple message")
       create(:comment,
              project: project2,
-             category: category, 
+             category: category,
              message: "A complexe message")
       search = Search.new(options)
 
@@ -79,7 +79,7 @@ describe Search do
         projects = search.project_text_search
         projects.size.should == 1
       end
-      
+
       it "give all the projects with a word in a description" do
         create(:comment,
                project: project1,

@@ -42,7 +42,7 @@ describe ProjectsController do
   describe "GET 'show'" do
     let!(:comment) { build_stubbed(:comment) }
 
-    before(:each) { Project.stubs(:find).returns(project) } 
+    before(:each) { Project.stubs(:find).returns(project) }
 
     it "render show template" do
       get 'show', id: project.id

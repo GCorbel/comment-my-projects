@@ -6,8 +6,8 @@ describe 'CategoryProjects' do
   let(:project) { create(:project, user: user) }
   let(:category) { create(:category, label: "New Category") }
   let(:category_project) do
-    CategoryProject.create(project_id: project.id, 
-                           category_id: category.id, 
+    CategoryProject.create(project_id: project.id,
+                           category_id: category.id,
                            description: "test")
   end
 

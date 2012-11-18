@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
   let(:user) { create(:user) }
   let(:project) { create(:project) }
-  
+
   it { should have_many(:projects) }
 
   describe :to_s do

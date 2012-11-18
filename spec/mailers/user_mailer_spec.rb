@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe CommentMailer do
   let(:user) { build_stubbed(:user) }
-  let(:project) { build_stubbed(:project, user: user) } 
+  let(:project) { build_stubbed(:project, user: user) }
 
   describe :send_mail_to_project_owner do
     it "mails the user" do

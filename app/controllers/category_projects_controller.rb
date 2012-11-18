@@ -43,8 +43,8 @@ class CategoryProjectsController < ApplicationController
     def add_project_to_category_project
       @category_project.project = @project
     end
-    
-    def set_categories 
+
+    def set_categories
       @categories = Category.all - @project.categories
     end
 end

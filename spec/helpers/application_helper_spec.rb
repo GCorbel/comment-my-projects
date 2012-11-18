@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ApplicationHelper do
   let(:user) { build_stubbed(:user) }
-  let(:avatar_id) { Digest::MD5::hexdigest(user.email).downcase } 
+  let(:avatar_id) { Digest::MD5::hexdigest(user.email).downcase }
   let(:default_url) { "http://test.host:80/assets/guest.png"}
 
   describe :alert_box do
@@ -31,7 +31,7 @@ describe ApplicationHelper do
   describe :browser_title do
     context "when there is a title" do
       it "show the title" do
-        helper.browser_title("title").should == 
+        helper.browser_title("title").should ==
           "title - Comment My Projects"
       end
     end
@@ -42,7 +42,7 @@ describe ApplicationHelper do
       end
     end
   end
-  
+
   describe :markdown do
     it "convert a markdown to html" do
       helper.markdown("**test**").should ==
@@ -53,7 +53,7 @@ describe ApplicationHelper do
   describe :avatar_url do
     before(:each) { Rails.env.stubs(:test?).returns(false) }
     after(:each) { Rails.env.stubs(:test?).returns(true) }
-    
+
     it "give a path to the avatar" do
       helper.avatar_url(user).should ==
         "http://gravatar.com/avatar/#{avatar_id}.png" \

@@ -50,7 +50,7 @@ describe 'Notes', js: true do
     context 'when the user is not signed in' do
       it 'show a message' do
         visit project_path(project)
-        page.should 
+        page.should
           have_content("Vous devez être connecté pour ajouter une note")
       end
     end
