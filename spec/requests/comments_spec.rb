@@ -5,16 +5,16 @@ describe 'Comments' do
   let!(:project) { create(:project, user: user) }
   let(:user) { create(:user) }
   let(:category) { create(:category) }
-  let(:comment) do 
+  let(:comment) do
     create(:comment,
-           message: 'My Message', 
-           username: 'My name', 
+           message: 'My Message',
+           username: 'My name',
            project: project,
            category: category)
   end
 
   before(:each) do
-    Comment.any_instance.stubs(:spam?).returns(false)
+    SpamChecker.any_instance.stubs(:spam?).returns(false)
   end
 
   describe 'Index' do

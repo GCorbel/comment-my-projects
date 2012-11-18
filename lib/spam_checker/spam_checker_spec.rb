@@ -1,5 +1,4 @@
 require 'spec_helper'
-require "#{Rails.root}/lib/spam_checker/spam_checker"
 
 describe SpamChecker do
   let(:project) { create(:project) }

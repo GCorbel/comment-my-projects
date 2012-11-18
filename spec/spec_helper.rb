@@ -8,6 +8,7 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'capybara/rails'
   require 'database_cleaner'
+  require "#{Rails.root}/lib/spam_checker/spam_checker"
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -30,7 +31,7 @@ Spork.prefork do
     end
     config.include FactoryGirl::Syntax::Methods
     config.include Warden::Test::Helpers, type: :request
-    config.include RequestHelpers, type: :request 
+    config.include RequestHelpers, type: :request
     config.include Devise::TestHelpers, type: :controller
     config.include ControllerHelpers, type: :controller
   end
@@ -38,8 +39,8 @@ Spork.prefork do
   Capybara.javascript_driver = :webkit
   Capybara.run_server = true
   Capybara.server_port = 7000
-  Capybara.app_host = "http://localhost:#{Capybara.server_port}" 
-  Capybara.automatic_reload = false 
+  Capybara.app_host = "http://localhost:#{Capybara.server_port}"
+  Capybara.automatic_reload = false
   Capybara.default_wait_time = 10
 end
 
