@@ -15,10 +15,7 @@ class CommentsController < ApplicationController
     @comment.parent = Comment.find(@comment.ancestry) if @comment.ancestry
     @comment.user = current_user
     @comment.project = @project
-
     @comment.approved = !SpamChecker.spam?(@comment, request)
-
-    @comment.request = request
     if @comment.valid?
       @project.add_comment(@comment)
       render format: :js
