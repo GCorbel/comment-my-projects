@@ -7,6 +7,7 @@ describe CommentsController do
   let(:comment) { build_stubbed(:comment) }
   let(:comments) { stub(find: comment, new: comment) }
   let(:user) { build_stubbed(:user) }
+  let(:args) { { id: comment.id, project_id: project.id, format: :js } }
 
   before(:each) do
     sign_in user
@@ -14,40 +15,37 @@ describe CommentsController do
     project.stubs(:add_comment)
     project.stubs(:comments).returns(comments)
     SpamChecker.stubs(:spam?).returns(false)
+    Comment.stubs(:new).returns(comment)
+    comment.stubs(:save)
+    Comment.stubs(:find).returns(comment)
+    comment.stubs(:destroy)
   end
 
+  after { subject }
+
   describe "GET 'new'" do
-    it "render new template" do
-      get 'new', project_id: project.id, format: :js
-      should render_template('new')
-    end
+    subject { get 'new', args }
+    it { should render_template('new') }
   end
 
   describe "POST 'create'" do
-    before(:each) { Comment.stubs(:new).returns(comment) }
-
+    subject(:do_create) { post 'create', args }
     context "with valid data" do
       before(:each) { comment.stubs(:valid?).returns(true) }
-
-      it "render create template" do
-        post 'create', project_id: project.id, format: :js
-        should render_template('create')
-      end
+      it { should render_template('create') }
 
       it "add the new comment to the project" do
         project.expects(:add_comment).with(comment)
-        post 'create', project_id: project.id, format: :js
       end
 
       it "check if the comment is a spam" do
         SpamChecker.expects(:spam?).with(comment, request)
-        post 'create', project_id: project.id, format: :js
       end
 
       context "when the comment is not a spam" do
         it "approve the comment" do
           SpamChecker.stubs(:spam?).returns(false)
-          post 'create', project_id: project.id, format: :js
+          do_create
           comment.approved.should be_true
         end
       end
@@ -55,7 +53,7 @@ describe CommentsController do
       context "when the comment is a spam" do
         it "disapprove the comment" do
           SpamChecker.stubs(:spam?).returns(true)
-          post 'create', project_id: project.id, format: :js
+          do_create
           comment.approved.should be_false
         end
       end
@@ -63,40 +61,22 @@ describe CommentsController do
 
     context "with invalid data" do
       before(:each) { comment.stubs(:valid?).returns(false) }
-
-      it "render project's show template" do
-        post 'create', project_id: project.id
-        should render_template('projects/show')
-      end
+      it { should render_template('projects/show') }
     end
 
     context "when user is signed in" do
-      before(:each) do
-        comment.stubs(:save)
-        sign_in user
-      end
-
       it "add the user to comment" do
-        post 'create', project_id: project.id
+        do_create
         comment.user.should == user
       end
     end
   end
 
   describe "DELETE 'destroy'" do
-    before(:each) do
-      Comment.stubs(:find).returns(comment)
-      comment.stubs(:destroy)
-    end
-
-    it "render destroy template" do
-      delete 'destroy', id: comment.id, project_id: project.id, format: :js
-      render_template('destroy')
-    end
-
+    subject { delete 'destroy', args }
+    it { render_template('destroy') }
     it "delete the comment" do
       comment.expects(:destroy)
-      delete 'destroy', id: comment.id, project_id: project.id, format: :js
     end
   end
 end

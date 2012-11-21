@@ -4,99 +4,75 @@ require 'spec_helper'
 describe ProjectsController do
   let!(:project) { build_stubbed(:project, user: user) }
   let(:user) { build_stubbed(:user) }
+  let(:search) { stub }
+  let(:args) { { id: project.id, search: {} } }
+  let!(:comment) { build_stubbed(:comment) }
+  before(:each) do
+    sign_in user
+    Search.stubs(:new).returns(search)
+    Project.stubs(:find).returns(project)
+    Project.stubs(:new).returns(project)
+    project.stubs(:destroy)
+  end
 
-  before(:each) { sign_in user }
+  after { subject }
 
   describe "GET 'index'" do
-    it "render index template" do
-      get 'index'
-      should render_template('index')
-    end
+    subject { get 'index' }
+    it { should render_template('index') }
   end
 
   describe "GET 'advanced_search'" do
-    let(:search) { stub }
-
-    before(:each) { Search.stubs(:new).returns(search) }
-
-    it "render advanced_search template" do
-      get 'advanced_search'
-      should render_template('advanced_search')
-    end
-
-    context 'when the is no search' do
+    subject { get 'advanced_search' }
+    it { should render_template('advanced_search') }
+    context 'when there is no search' do
       it 'don\'t search a text' do
         search.expects(:project_text_search).never
-        get 'advanced_search'
       end
     end
 
     context 'when there is a search' do
+      subject { get 'advanced_search', args }
       it "do a full text search" do
         search.expects(:project_text_search)
-        get 'advanced_search', search: {}
       end
     end
   end
 
   describe "GET 'show'" do
+    subject { get 'show', args }
     let!(:comment) { build_stubbed(:comment) }
-
-    before(:each) { Project.stubs(:find).returns(project) }
-
-    it "render show template" do
-      get 'show', id: project.id
-      should render_template('show')
-    end
-
+    it { should render_template('show') }
     it "create a new comment" do
       Comment.expects(:new).returns(comment)
-      get 'show', id: project.id
     end
   end
 
   describe "GET 'new'" do
-    it "render new template" do
-      get 'new'
-      should render_template('new')
-    end
+    subject { get 'new' }
+    it { should render_template('new') }
   end
 
   describe "POST 'create'" do
-    before(:each) { Project.stubs(:new).returns(project) }
+    subject { post 'create' }
 
     context "with valid data" do
       before(:each) { project.stubs(:save).returns(true) }
-
-      it "redirect to project's path" do
-        post 'create'
-        should redirect_to(project)
-      end
-
-      it "save the project" do
-        lambda do
-          post 'create'
-        end.should change(user.projects, :size).by(1)
-      end
-
+      it { should redirect_to(project) }
+      it("Save the project") { project.expects(:save) }
       it "set a flash message" do
-        post 'create'
-        should set_the_flash[:notice].to("Votre projet a été ajouté")
+        controller.should
+          set_the_flash[:notice].to("Votre projet a été ajouté")
       end
     end
 
     context "with invalid data" do
       before(:each) { project.stubs(:save).returns(false) }
-
-      it "render new template" do
-        post 'create'
-        should render_template('new')
-      end
+      it { should render_template('new') }
     end
   end
 
   describe "GET 'edit'" do
-    before(:each) { Project.stubs(:find).returns(project) }
 
     it "render edit template" do
       get 'edit', id: project.id
@@ -105,56 +81,39 @@ describe ProjectsController do
   end
 
   describe "POST 'update'" do
-    before(:each) { Project.stubs(:find).returns(project) }
+    subject { post 'update', args }
 
     context "when valid" do
       before(:each) { project.stubs(:update_attributes).returns(true) }
-
-      it "redirect to project's path" do
-        post 'update', id: project.id
-        should redirect_to(project)
-      end
+      it { should redirect_to(project) }
 
       it "update the project" do
         project.expects(:update_attributes)
-        post 'update', id: project.id
       end
 
       it "set a flash message" do
-        post 'update', id: project.id
-        should set_the_flash[:notice].to("Votre projet a été modifié")
+        controller.should
+          set_the_flash[:notice].to("Votre projet a été modifié")
       end
     end
 
     context "when invalid" do
       before(:each) { project.stubs(:update_attributes).returns(false) }
-
-      it "render edit template" do
-        post 'update', id: project.id
-        should render_template('edit')
-      end
+      it { should render_template('edit') }
     end
   end
 
   describe "DELETE 'destroy'" do
-    before(:each) do
-      Project.stubs(:find).returns(project)
-      project.stubs(:destroy)
-    end
-
-    it "redirect to project's path" do
-      delete 'destroy', id: project.id
-      should redirect_to(root_path)
-    end
+    subject { delete 'destroy', args }
+    it { should redirect_to(root_path) }
 
     it "delete the project" do
       project.expects(:destroy)
-      delete 'destroy', id: project.id
     end
 
     it "set a flash message" do
-      delete 'destroy', id: project.id
-      should set_the_flash[:notice].to("Votre projet a été supprimé")
+      controller.should
+        set_the_flash[:notice].to("Votre projet a été supprimé")
     end
   end
 end
