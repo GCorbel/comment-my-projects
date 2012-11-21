@@ -9,7 +9,7 @@ describe CommentsController do
   let(:user) { build_stubbed(:user) }
   let(:args) { { id: comment.id, project_id: project.id, format: :js } }
 
-  before(:each) do
+  before do
     sign_in user
     Project.stubs(:find).returns(project)
     project.stubs(:add_comment)
@@ -31,7 +31,7 @@ describe CommentsController do
   describe "POST 'create'" do
     subject(:do_create) { post 'create', args }
     context "with valid data" do
-      before(:each) { comment.stubs(:valid?).returns(true) }
+      before { comment.stubs(:valid?).returns(true) }
       it { should render_template('create') }
 
       it "add the new comment to the project" do
@@ -60,7 +60,7 @@ describe CommentsController do
     end
 
     context "with invalid data" do
-      before(:each) { comment.stubs(:valid?).returns(false) }
+      before { comment.stubs(:valid?).returns(false) }
       it { should render_template('projects/show') }
     end
 

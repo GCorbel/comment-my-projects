@@ -51,8 +51,8 @@ describe ApplicationHelper do
   end
 
   describe :avatar_url do
-    before(:each) { Rails.env.stubs(:test?).returns(false) }
-    after(:each) { Rails.env.stubs(:test?).returns(true) }
+    before { Rails.env.stubs(:test?).returns(false) }
+    after { Rails.env.stubs(:test?).returns(true) }
 
     it "give a path to the avatar" do
       helper.avatar_url(user).should ==

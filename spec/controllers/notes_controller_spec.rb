@@ -6,7 +6,7 @@ describe NotesController do
   let(:project) { build_stubbed(:project) }
   let(:args) { { project_id: project.id } }
 
-  before(:each) do
+  before do
     Project.stubs(:find).returns(project)
     Note.stubs(:new).returns(note)
     note.stubs(:save)
@@ -18,7 +18,7 @@ describe NotesController do
     subject { post 'create', args }
 
     context "with valid data" do
-      before(:each) { note.stubs(:save).returns(true) }
+      before { note.stubs(:save).returns(true) }
       it { should redirect_to(project) }
       it("Save the note") { note.expects(:save) }
       it "set a flash message" do
@@ -28,7 +28,7 @@ describe NotesController do
     end
 
     context "with invalid data" do
-      before(:each) { note.stubs(:save).returns(false) }
+      before { note.stubs(:save).returns(false) }
       it { should render_template('projects/show') }
     end
   end

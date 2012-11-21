@@ -7,7 +7,7 @@ describe ProjectsController do
   let(:search) { stub }
   let(:args) { { id: project.id, search: {} } }
   let!(:comment) { build_stubbed(:comment) }
-  before(:each) do
+  before do
     sign_in user
     Search.stubs(:new).returns(search)
     Project.stubs(:find).returns(project)
@@ -57,7 +57,7 @@ describe ProjectsController do
     subject { post 'create' }
 
     context "with valid data" do
-      before(:each) { project.stubs(:save).returns(true) }
+      before { project.stubs(:save).returns(true) }
       it { should redirect_to(project) }
       it("Save the project") { project.expects(:save) }
       it "set a flash message" do
@@ -67,7 +67,7 @@ describe ProjectsController do
     end
 
     context "with invalid data" do
-      before(:each) { project.stubs(:save).returns(false) }
+      before { project.stubs(:save).returns(false) }
       it { should render_template('new') }
     end
   end
@@ -84,7 +84,7 @@ describe ProjectsController do
     subject { post 'update', args }
 
     context "when valid" do
-      before(:each) { project.stubs(:update_attributes).returns(true) }
+      before { project.stubs(:update_attributes).returns(true) }
       it { should redirect_to(project) }
 
       it "update the project" do
@@ -98,7 +98,7 @@ describe ProjectsController do
     end
 
     context "when invalid" do
-      before(:each) { project.stubs(:update_attributes).returns(false) }
+      before { project.stubs(:update_attributes).returns(false) }
       it { should render_template('edit') }
     end
   end

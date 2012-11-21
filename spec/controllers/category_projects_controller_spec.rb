@@ -10,7 +10,7 @@ describe CategoryProjectsController do
   let(:category_project) { build_stubbed(:category_project) }
   let(:args) { { id: category_project.id, project_id: project.id } }
 
-  before(:each) do
+  before do
     sign_in user
     Project.stubs(:find).returns(project)
     project.stubs(:category_projects).returns(category_projects)
@@ -31,7 +31,7 @@ describe CategoryProjectsController do
     subject { post 'create', args }
 
     context "with valid data" do
-      before(:each) { category_project.stubs(:save).returns(true) }
+      before { category_project.stubs(:save).returns(true) }
       it { should redirect_to(project) }
       it("Save the relation") { category_project.expects(:save) }
       it "set a flash message" do
@@ -41,7 +41,7 @@ describe CategoryProjectsController do
     end
 
     context "with invalid data" do
-      before(:each) { category_project.stubs(:save).returns(false) }
+      before { category_project.stubs(:save).returns(false) }
       it { should render_template('new') }
     end
   end
@@ -55,7 +55,7 @@ describe CategoryProjectsController do
     subject { post 'update', args }
 
     context "when valid" do
-      before(:each) { category_project.stubs(:update_attributes).returns(true) }
+      before { category_project.stubs(:update_attributes).returns(true) }
       it { should redirect_to(project) }
       it("update the project") { category_project.expects(:update_attributes) }
       it "set a flash message" do
@@ -65,7 +65,7 @@ describe CategoryProjectsController do
     end
 
     context "when invalid" do
-      before(:each) { category_project.stubs(:update_attributes).returns(false) }
+      before { category_project.stubs(:update_attributes).returns(false) }
       it { should render_template('edit') }
     end
   end

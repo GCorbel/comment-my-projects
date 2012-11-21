@@ -11,7 +11,7 @@ describe 'CategoryProjects' do
                            description: "test")
   end
 
-  before(:each) { sign_in user }
+  before { sign_in user }
 
   context 'Create' do
     it 'Add a new category for a project' do

@@ -9,7 +9,7 @@ describe ProjectHelper do
     subject { project_title_for(project) }
 
     context 'when there is a user' do
-      before(:each) { self.stubs(:avatar_url).returns('id') }
+      before { self.stubs(:avatar_url).returns('id') }
 
       it 'show the title' do
         should == "<div class=\"project_header\">" \

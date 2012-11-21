@@ -9,7 +9,7 @@ describe ProjectUserFollowersController do
     { project_id: project.id, format: :js, id: project_user_follower.id }
   end
 
-  before(:each) do
+  before do
     sign_in user
     Project.stubs(:find).returns(project)
     project.stubs(:followers).returns(followers)

@@ -13,7 +13,7 @@ describe 'Comments' do
            category: category)
   end
 
-  before(:each) do
+  before do
     SpamChecker.any_instance.stubs(:spam?).returns(false)
   end
 
@@ -77,7 +77,7 @@ describe 'Comments' do
   describe 'Delete', js: true do
     self.use_transactional_fixtures = false
 
-    before(:each) { sign_in user }
+    before { sign_in user }
 
     context 'When the user signed in is the project owner' do
       it 'allow to delete comment' do
