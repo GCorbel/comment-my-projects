@@ -18,9 +18,8 @@ describe NotesController do
     subject { post 'create', args }
 
     context "with valid data" do
-      before { note.stubs(:save).returns(true) }
+      before { note.expects(:save).returns(true) }
       it { should redirect_to(project) }
-      it("Save the note") { note.expects(:save) }
       it "set a flash message" do
         controller.should
           set_the_flash[:notice].to("Votre note a été ajouté")
@@ -28,7 +27,7 @@ describe NotesController do
     end
 
     context "with invalid data" do
-      before { note.stubs(:save).returns(false) }
+      before { note.expects(:save).returns(false) }
       it { should render_template('projects/show') }
     end
   end

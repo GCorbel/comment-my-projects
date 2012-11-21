@@ -57,9 +57,8 @@ describe ProjectsController do
     subject { post 'create' }
 
     context "with valid data" do
-      before { project.stubs(:save).returns(true) }
+      before { project.expects(:save).returns(true) }
       it { should redirect_to(project) }
-      it("Save the project") { project.expects(:save) }
       it "set a flash message" do
         controller.should
           set_the_flash[:notice].to("Votre projet a été ajouté")
@@ -67,7 +66,7 @@ describe ProjectsController do
     end
 
     context "with invalid data" do
-      before { project.stubs(:save).returns(false) }
+      before { project.expects(:save).returns(false) }
       it { should render_template('new') }
     end
   end
@@ -84,13 +83,8 @@ describe ProjectsController do
     subject { post 'update', args }
 
     context "when valid" do
-      before { project.stubs(:update_attributes).returns(true) }
+      before { project.expects(:update_attributes).returns(true) }
       it { should redirect_to(project) }
-
-      it "update the project" do
-        project.expects(:update_attributes)
-      end
-
       it "set a flash message" do
         controller.should
           set_the_flash[:notice].to("Votre projet a été modifié")
@@ -98,7 +92,7 @@ describe ProjectsController do
     end
 
     context "when invalid" do
-      before { project.stubs(:update_attributes).returns(false) }
+      before { project.expects(:update_attributes).returns(false) }
       it { should render_template('edit') }
     end
   end

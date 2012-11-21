@@ -31,9 +31,8 @@ describe CategoryProjectsController do
     subject { post 'create', args }
 
     context "with valid data" do
-      before { category_project.stubs(:save).returns(true) }
+      before { category_project.expects(:save).returns(true) }
       it { should redirect_to(project) }
-      it("Save the relation") { category_project.expects(:save) }
       it "set a flash message" do
         controller.should
           set_the_flash[:notice].to("Votre description a été ajouté")
@@ -41,7 +40,7 @@ describe CategoryProjectsController do
     end
 
     context "with invalid data" do
-      before { category_project.stubs(:save).returns(false) }
+      before { category_project.expects(:save).returns(false) }
       it { should render_template('new') }
     end
   end
@@ -55,9 +54,8 @@ describe CategoryProjectsController do
     subject { post 'update', args }
 
     context "when valid" do
-      before { category_project.stubs(:update_attributes).returns(true) }
+      before { category_project.expects(:update_attributes).returns(true) }
       it { should redirect_to(project) }
-      it("update the project") { category_project.expects(:update_attributes) }
       it "set a flash message" do
         controller.should
           set_the_flash[:notice].to("Votre description a été modifié")
@@ -65,7 +63,7 @@ describe CategoryProjectsController do
     end
 
     context "when invalid" do
-      before { category_project.stubs(:update_attributes).returns(false) }
+      before { category_project.expects(:update_attributes).returns(false) }
       it { should render_template('edit') }
     end
   end
