@@ -18,8 +18,17 @@ describe ProjectsController do
   after { subject }
 
   describe "GET 'index'" do
-    subject { get 'index' }
-    it { should render_template('index') }
+    context 'when it is an html format' do
+      subject { get 'index' }
+      it { should render_template('index') }
+    end
+
+    context 'when it is a json format' do
+      subject { get 'index', format: :json }
+      it "should instanciate a new presenter" do
+        ProjectsDatatable.expects(:new)
+      end
+    end
   end
 
   describe "GET 'advanced_search'" do
@@ -48,66 +57,8 @@ describe ProjectsController do
     end
   end
 
-  describe "GET 'new'" do
-    subject { get 'new' }
-    it { should render_template('new') }
-  end
-
-  describe "POST 'create'" do
-    subject { post 'create' }
-
-    context "with valid data" do
-      before { project.expects(:save).returns(true) }
-      it { should redirect_to(project) }
-      it "set a flash message" do
-        controller.should
-          set_the_flash[:notice].to("Votre projet a été ajouté")
-      end
-    end
-
-    context "with invalid data" do
-      before { project.expects(:save).returns(false) }
-      it { should render_template('new') }
-    end
-  end
-
-  describe "GET 'edit'" do
-
-    it "render edit template" do
-      get 'edit', id: project.id
-      should render_template('edit')
-    end
-  end
-
-  describe "POST 'update'" do
-    subject { post 'update', args }
-
-    context "when valid" do
-      before { project.expects(:update_attributes).returns(true) }
-      it { should redirect_to(project) }
-      it "set a flash message" do
-        controller.should
-          set_the_flash[:notice].to("Votre projet a été modifié")
-      end
-    end
-
-    context "when invalid" do
-      before { project.expects(:update_attributes).returns(false) }
-      it { should render_template('edit') }
-    end
-  end
-
   describe "DELETE 'destroy'" do
     subject { delete 'destroy', args }
     it { should redirect_to(root_path) }
-
-    it "delete the project" do
-      project.expects(:destroy)
-    end
-
-    it "set a flash message" do
-      controller.should
-        set_the_flash[:notice].to("Votre projet a été supprimé")
-    end
   end
 end

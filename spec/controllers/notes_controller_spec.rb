@@ -12,23 +12,8 @@ describe NotesController do
     note.stubs(:save)
   end
 
-  after { subject }
-
   describe "POST 'create'" do
     subject { post 'create', args }
-
-    context "with valid data" do
-      before { note.expects(:save).returns(true) }
-      it { should redirect_to(project) }
-      it "set a flash message" do
-        controller.should
-          set_the_flash[:notice].to("Votre note a été ajouté")
-      end
-    end
-
-    context "with invalid data" do
-      before { note.expects(:save).returns(false) }
-      it { should render_template('projects/show') }
-    end
+    it { should redirect_to(project) }
   end
 end

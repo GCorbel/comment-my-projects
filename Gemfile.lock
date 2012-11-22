@@ -289,6 +289,7 @@ DEPENDENCIES
   google-analytics-rails
   guard
   guard-livereload
+  inherited_resources
   jquery-datatables-rails
   jquery-rails
   launchy

@@ -1,9 +1,12 @@
 #encoding=utf-8
 class CategoryProjectsController < ApplicationController
+  inherit_resources
+  belongs_to :project
   before_filter :authenticate_user!
   load_resource :project
   load_resource through: :project
   before_filter :add_project_to_category_project, :set_categories
+  before_filter :add_category_to_list, only: :edit
   authorize_resource
 
   def new
@@ -11,26 +14,12 @@ class CategoryProjectsController < ApplicationController
   end
 
   def create
-    if @category_project.save
-      redirect_to(project_path(@project),
-                  notice: t('controller.create.success', model: 'description'))
-    else
-      render :new
-    end
-  end
-
-  def edit
-    @categories << @category_project.category if @category_project
+    create! { project_path(@project) }
   end
 
   def update
-    if @category_project.update_attributes(params[:category_project])
-      redirect_to(project_path(@project),
-                  notice: t('controller.update.success', model: 'description'))
-    else
-      @categories << @category_project.category
-      render :edit
-    end
+    @categories << @category_project.category
+    update! { project_path(@project) }
   end
 
   def destroy
@@ -40,6 +29,10 @@ class CategoryProjectsController < ApplicationController
   end
 
   private
+    def add_category_to_list
+      @categories << @category_project.category if @category_project
+    end
+
     def add_project_to_category_project
       @category_project.project = @project
     end

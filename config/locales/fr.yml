@@ -220,7 +220,7 @@ fr:
         one: "Impossible d'enregistrer cet utilisateur : 1 erreur"
         other: "Impossible d'enregistrer cet utilisateur : %{count} erreurs"
       body: "Veuillez vérifier les champs suivants : "
-      
+
   activemodel:
     errors:
       <<: *errors
@@ -258,6 +258,33 @@ fr:
         category: "Categorie"
         value: "Note"
 
+  flash:
+    actions:
+      create:
+        notice: "Votre %{resource_name} a été ajouté"
+      update:
+        notice: "Votre %{resource_name} a été modifié"
+      destroy:
+        notice: "Votre %{resource_name} a été supprimé"
+    category_projects:
+      create:
+        notice: "Votre description a été ajouté"
+      update:
+        notice: "Votre description a été modifié"
+    projects:
+      create:
+        notice: "Votre projet a été ajouté"
+      update:
+        notice: "Votre projet a été modifié"
+      destroy:
+        notice: "Votre projet a été supprimé"
+    notes:
+      create:
+        notice: "Votre note a été ajouté"
+      update:
+        notice: "Votre note a été modifié"
+      delete:
+        notice: "Votre note a été supprimé"
   controller:
     create:
       success: "Votre %{model} a été ajouté"

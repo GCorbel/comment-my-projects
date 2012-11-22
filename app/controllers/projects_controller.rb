@@ -1,5 +1,6 @@
 #encoding=utf-8
 class ProjectsController < ApplicationController
+  inherit_resources
   before_filter :authenticate_user!, except: [:index, :show, :advanced_search]
   load_and_authorize_resource
 
@@ -28,34 +29,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def new
-  end
-
-  def create
-    @project = current_user.projects.new(params[:project])
-    if @project.save
-      redirect_to(project_path(@project),
-                  notice: t('controller.create.success', model: 'projet'))
-    else
-      render :new
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    if @project.update_attributes(params[:project])
-      redirect_to(project_path(@project),
-                  notice: t('controller.update.success', model: 'projet'))
-    else
-      render :edit
-    end
-  end
-
   def destroy
-    @project.destroy
-    redirect_to(root_path,
-                notice: t('controller.destroy.success', model: 'projet'))
+    destroy! { root_url }
   end
 end
