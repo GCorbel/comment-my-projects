@@ -47,4 +47,9 @@ describe CategoryProjectsController do
       it { should redirect_to(project) }
     end
   end
+
+  describe "DELETE 'destroy'" do
+    subject { delete 'destroy', args }
+    it { should redirect_to(project) }
+  end
 end

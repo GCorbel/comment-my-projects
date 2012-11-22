@@ -23,9 +23,7 @@ class CategoryProjectsController < ApplicationController
   end
 
   def destroy
-    @category_project.destroy
-    redirect_to(@project,
-                notice: t('controller.destroy.success', model: 'description'))
+    destroy! { project_path(@project) }
   end
 
   private
@@ -34,7 +32,7 @@ class CategoryProjectsController < ApplicationController
     end
 
     def add_project_to_category_project
-      @category_project.project = @project
+      @category_project.project = @project if @category_project
     end
 
     def set_categories
