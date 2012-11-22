@@ -12,8 +12,8 @@ describe CommentsController do
   before do
     sign_in user
     Project.stubs(:find).returns(project)
-    project.stubs(:add_comment)
     project.stubs(:comments).returns(comments)
+    comments.stubs(:build).returns(comment)
     SpamChecker.stubs(:spam?).returns(false)
     Comment.stubs(:new).returns(comment)
     comment.stubs(:save)
@@ -32,11 +32,6 @@ describe CommentsController do
     subject(:do_create) { post 'create', args }
     context "with valid data" do
       before { comment.stubs(:valid?).returns(true) }
-      it { should render_template('create') }
-
-      it "add the new comment to the project" do
-        project.expects(:add_comment).with(comment)
-      end
 
       it "check if the comment is a spam" do
         SpamChecker.expects(:spam?).with(comment, request)
@@ -59,11 +54,6 @@ describe CommentsController do
       end
     end
 
-    context "with invalid data" do
-      before { comment.stubs(:valid?).returns(false) }
-      it { should render_template('projects/show') }
-    end
-
     context "when user is signed in" do
       it "add the user to comment" do
         do_create
@@ -74,9 +64,9 @@ describe CommentsController do
 
   describe "DELETE 'destroy'" do
     subject { delete 'destroy', args }
-    it { render_template('destroy') }
-    it "delete the comment" do
-      comment.expects(:destroy)
+    it "assign project to comment" do
+      comment.project = project
+      comment.expects(:project=).with(project)
     end
   end
 end
