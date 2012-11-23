@@ -54,6 +54,9 @@ describe ProjectsController do
     it "create a new comment" do
       Comment.expects(:new)
     end
+    it "create a new note" do
+      Note.expects(:new)
+    end
   end
 
   describe "DELETE 'destroy'" do
