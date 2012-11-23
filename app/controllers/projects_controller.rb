@@ -7,10 +7,6 @@ class ProjectsController < ApplicationController
   def show
     @comment = Comment.new
     @note = Note.new
-    if current_user
-      @project_user_follower = @project.project_user_followers
-                                       .where(user_id: current_user.id).first
-    end
   end
 
   def index

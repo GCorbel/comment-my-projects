@@ -5,11 +5,13 @@ CommentMyProjects::Application.routes.draw do
     resources :category_projects
     resources :comments
     resources :notes
-    resources :project_user_followers
+    #resources :project_user_followers
     collection do
       get 'advanced_search'
     end
   end
+  match "projects/:project_id/users/:user_id/follow" => "project_user_followers#create", as: :follow
+  match "projects/:project_id/users/:user_id/unfollow" => "project_user_followers#destroy", as: :unfollow
 
   devise_for :users
 

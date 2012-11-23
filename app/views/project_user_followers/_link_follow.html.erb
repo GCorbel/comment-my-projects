@@ -1,5 +1,5 @@
 <%= link_to t('.follow_project'),
-            project_project_user_followers_path(project),
+            follow_path(project, current_user),
             method: :post,
             remote: true,
             class: 'btn' %>

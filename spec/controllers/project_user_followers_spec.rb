@@ -6,7 +6,7 @@ describe ProjectUserFollowersController do
   let(:project_user_follower) { build_stubbed(:project_user_follower) }
   let(:followers) { stub(find: user, new: user) }
   let(:args) do
-    { project_id: project.id, format: :js, id: project_user_follower.id }
+    { project_id: project.id, format: :js, user_id: user.id }
   end
 
   before do
@@ -16,6 +16,7 @@ describe ProjectUserFollowersController do
     project.stubs(:add_follower)
     project.stubs(:remove_follower)
     project.stubs(:to_s).returns(project.title)
+    User.stubs(:find).returns(user)
     ProjectUserFollower.stubs(:find).returns(project_user_follower)
   end
 

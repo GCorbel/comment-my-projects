@@ -1,5 +1,5 @@
 <%= link_to t('.unfollow_project'),
-            project_project_user_follower_path(project, project_user_follower),
+            unfollow_path(project, current_user),
             method: :delete,
             remote: true,
             class: 'btn' %>
