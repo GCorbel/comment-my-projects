@@ -60,6 +60,13 @@ describe CommentsController do
         comment.user.should == user
       end
     end
+
+    context "when there is an ancestry" do
+      it "assign a parent to the new comment" do
+        comment.stubs(:ancestry).returns(comment)
+        comment.expects(:parent=).with(comment)
+      end
+    end
   end
 
   describe "DELETE 'destroy'" do
