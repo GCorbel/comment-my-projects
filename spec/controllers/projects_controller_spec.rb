@@ -50,10 +50,9 @@ describe ProjectsController do
 
   describe "GET 'show'" do
     subject { get 'show', args }
-    let!(:comment) { build_stubbed(:comment) }
     it { should render_template('show') }
     it "create a new comment" do
-      Comment.expects(:new).returns(comment)
+      Comment.expects(:new)
     end
   end
 
