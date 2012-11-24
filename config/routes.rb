@@ -5,7 +5,6 @@ CommentMyProjects::Application.routes.draw do
     resources :category_projects
     resources :comments
     resources :notes
-    #resources :project_user_followers
     collection do
       get 'advanced_search'
     end
