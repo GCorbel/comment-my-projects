@@ -1,1 +1,19 @@
-<%= raw(t('.description')) %>
+<div class="row-fluid">
+  <div class="span9">
+    <div class="graybox">
+      <%= raw(t('.description')) %>
+    </div>
+  </div>
+  <div class="span3">
+    <div class="graybox">
+      <h2><%= t('.top') %></h2>
+      <% ProjectPresenter.top(5).each do |project| %>
+        <p>
+          <%= link_to project, project_path(project) %>
+          (<%= (project.sum_notes.to_f / project.nb_notes.to_f).round(1) %>/4
+          - <%= project.nb_notes %>)
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

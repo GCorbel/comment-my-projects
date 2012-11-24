@@ -333,6 +333,7 @@ fr:
       unfollow_project: "Arréter de suivre le projet"
   home:
     index:
+      top: "Meilleurs projets"
       description: "
         <h1>Bienvenue sur Comment My Projects</h1>
         <p>Ce site est un plateforme de discution sur les projects Open-Source où
