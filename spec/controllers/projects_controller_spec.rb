@@ -51,7 +51,7 @@ describe ProjectsController do
   describe "GET 'show'" do
     subject { get 'show', args }
     it { should render_template('show') }
-    it "create a new comment" do
+    it "assign a new comment" do
       Comment.expects(:new)
     end
     it "create a new note" do

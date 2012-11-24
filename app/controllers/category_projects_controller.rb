@@ -6,7 +6,6 @@ class CategoryProjectsController < ApplicationController
   load_resource :project
   load_resource through: :project
   before_filter :add_project_to_category_project, :set_categories
-  before_filter :add_category_to_list, only: :edit
   authorize_resource
 
   def new
@@ -15,6 +14,11 @@ class CategoryProjectsController < ApplicationController
 
   def create
     create! { project_path(@project) }
+  end
+
+  def edit
+    @categories << @category_project.category if @category_project
+    edit!
   end
 
   def update
@@ -27,10 +31,6 @@ class CategoryProjectsController < ApplicationController
   end
 
   private
-    def add_category_to_list
-      @categories << @category_project.category if @category_project
-    end
-
     def add_project_to_category_project
       @category_project.project = @project if @category_project
     end
