@@ -39,6 +39,6 @@ class Search
     end
 
     projects = projects.where(type_id: project_type) if project_type.present?
-    projects.where(conditions, word: word)
+    projects.where(conditions, word: word).order("projects.updated_at DESC")
   end
 end

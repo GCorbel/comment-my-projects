@@ -6,6 +6,16 @@ describe Search do
     let(:category) { create(:category) }
     let(:options) { {text: 'Simple', category: Search::PROJECT_ALL} }
 
+    it "order by update time" do
+      create(:project, id: 1, title: 'Project 1', updated_at: 10.minutes.ago)
+      create(:project, id: 2, title: 'Project 2', updated_at: 5.minutes.ago)
+
+      search = Search.new({})
+
+      projects = search.project_text_search
+      projects.map(&:title).should == ['Project 2', 'Project 1']
+    end
+
     it "give the project's title and the project's id" do
       create(:project, id: 1, title: 'Project 1')
       create(:project, id: 2, title: 'Project 2')
