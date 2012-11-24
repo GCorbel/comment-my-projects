@@ -1,12 +1,12 @@
 <div class="row-fluid">
   <div class="span12">
     <div class="graybox">
-      <%= simple_form_for @search, 
+      <%= simple_form_for @search,
                           url: {action: :advanced_search},
                           method: :get do |f| %>
         <%= f.input :text, label: t('.advanced_search'), required: false %>
         <%= f.input :project_type,
-                    collection: ProjectType.all, 
+                    collection: ProjectType.all,
                     label: t('.type'),
                     required: false,
                     include_blank: "Tout les langage" %>
