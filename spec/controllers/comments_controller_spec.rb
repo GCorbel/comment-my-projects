@@ -15,9 +15,10 @@ describe CommentsController do
     project.stubs(:comments).returns(comments)
     comments.stubs(:build).returns(comment)
     SpamChecker.stubs(:spam?).returns(false)
-    comment.stubs(:save)
+    Comment.stubs(:new).returns(comment)
     Comment.stubs(:find).returns(comment)
     comment.stubs(:destroy)
+    comment.stubs(:save)
   end
 
   after { subject }
