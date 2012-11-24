@@ -24,15 +24,16 @@ class Search
     word = "%#{text}%"
     conditions = 'projects.title ilike :word'
     projects = Project.select('projects.id, projects.title')
+    projects = projects.group("projects.id")
 
     if category == PROJECT_COMMENT || category == PROJECT_ALL
-      projects = projects.select('comments.message as comment_message')
+      projects = projects.select('MIN(comments.message) as comment_message')
                          .joins("LEFT OUTER JOIN comments ON comments.project_id = projects.id")
       conditions += " or comments.message ilike :word"
     end
 
     if category == PROJECT_DESCRIPTION || category == PROJECT_ALL
-      projects = projects.select('category_projects.description as category_description')
+      projects = projects.select('MIN(category_projects.description) as category_description')
                          .joins("LEFT OUTER JOIN category_projects ON category_projects.project_id = projects.id")
       conditions += ' or category_projects.description ilike :word'
     end

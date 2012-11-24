@@ -13,8 +13,8 @@ describe Search do
       search = Search.new({})
 
       projects = search.project_text_search
-      projects.map(&:title).should == ['Project 1', 'Project 2']
-      projects.map(&:id).should == [1, 2]
+      projects.map(&:title).should == ['Project 2', 'Project 1']
+      projects.map(&:id).should == [2, 1]
     end
 
     it "give all the projects with a word in the title" do
@@ -64,7 +64,7 @@ describe Search do
       search = Search.new(options.merge({project_type: type1}))
 
       projects = search.project_text_search
-      projects.size.should == 1
+      projects.length.should == 1
     end
 
     it "give all the projects when the project type is blank" do
@@ -88,7 +88,7 @@ describe Search do
         search = Search.new({text: 'simple', category: Search::PROJECT_COMMENT})
 
         projects = search.project_text_search
-        projects.size.should == 1
+        projects.length.should == 1
       end
 
       it "give all the projects with a word in a description" do
@@ -97,13 +97,45 @@ describe Search do
                category: category,
                message: "A simple message")
         create(:category_project,
-               project: project2,
+               project: project1,
                category: category,
                description: "A simple description")
         search = Search.new({text: 'simple', category: Search::PROJECT_DESCRIPTION})
 
         projects = search.project_text_search
-        projects.size.should == 1
+        projects.length.should == 1
+      end
+    end
+
+    context "when the project has many comments" do
+      context "when we search a word in many comments" do
+        it "give only one result" do
+          project1 = create(:project, title: "A simple Project")
+          create(:comment, project: project1, category: category, message: "A simple message")
+          create(:comment, project: project1, category: category, message: "A simple text")
+          search = Search.new(options)
+          projects = search.project_text_search
+          projects.length.should == 1
+        end
+      end
+    end
+
+    context "when the project has many categories" do
+      context "when we search a word in many categories" do
+        it "give only one result" do
+          project1 = create(:project, title: "A simple Project")
+      create(:category_project,
+             project: project1,
+             category: category,
+             description: "A simple description")
+      create(:category_project,
+             project: project1,
+             category: category,
+             description: "A simple text")
+          search = Search.new(options)
+          projects = search.project_text_search
+          projects.length.should == 1
+        end
       end
     end
   end
