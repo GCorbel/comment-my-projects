@@ -14,9 +14,6 @@ describe CategoryProjectsController do
     sign_in user
     Project.stubs(:find).returns(project)
     project.stubs(:category_projects).returns(category_projects)
-    CategoryProject.stubs(:find).returns(category_project)
-    category_project.stubs(:category)
-    CategoryProject.stubs(:new).returns(category_project)
     category_project.stubs(:destroy)
   end
 
