@@ -6,6 +6,17 @@ describe Search do
     let(:category) { create(:category) }
     let(:options) { {text: 'Simple', category: Search::PROJECT_ALL} }
 
+    it "give the project's title and the project's id" do
+      create(:project, id: 1, title: 'Project 1')
+      create(:project, id: 2, title: 'Project 2')
+
+      search = Search.new({})
+
+      projects = search.project_text_search
+      projects.map(&:title).should == ['Project 1', 'Project 2']
+      projects.map(&:id).should == [1, 2]
+    end
+
     it "give all the projects with a word in the title" do
       create(:project, title: 'Simple Project 1')
       create(:project, title: 'Complexe Project 2')

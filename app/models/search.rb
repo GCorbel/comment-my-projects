@@ -23,7 +23,7 @@ class Search
   def project_text_search
     word = "%#{text}%"
     conditions = 'projects.title ilike :word'
-    projects = Project.select('projects.title')
+    projects = Project.select('projects.id, projects.title')
 
     if category == PROJECT_COMMENT || category == PROJECT_ALL
       projects = projects.select('comments.message as comment_message')
