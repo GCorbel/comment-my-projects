@@ -15,7 +15,6 @@ describe CommentsController do
     project.stubs(:comments).returns(comments)
     comments.stubs(:build).returns(comment)
     SpamChecker.stubs(:spam?).returns(false)
-    Comment.stubs(:new).returns(comment)
     comment.stubs(:save)
     Comment.stubs(:find).returns(comment)
     comment.stubs(:destroy)
