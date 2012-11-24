@@ -2,10 +2,10 @@
 require 'spec_helper'
 
 describe ProjectsController do
-  let(:project) { build_stubbed(:project, user: user) }
+  let(:project) { build_stubbed(:project) }
   let(:user) { build_stubbed(:user) }
   let(:search) { stub }
-  let(:args) { { id: project.id, search: {} } }
+  let(:args) { { id: project.id } }
   before do
     sign_in user
     Search.stubs(:new).returns(search)
@@ -41,7 +41,7 @@ describe ProjectsController do
     end
 
     context 'when there is a search' do
-      subject { get 'advanced_search', args }
+      subject { get 'advanced_search', search: {} }
       it "do a full text search" do
         search.expects(:project_text_search)
       end
@@ -61,7 +61,6 @@ describe ProjectsController do
 
   describe "POST 'create'" do
     it "assign the signed user to the project" do
-      project.user = nil
       post 'create', args
       project.user.should == user
     end
