@@ -2,16 +2,14 @@
 require 'spec_helper'
 
 describe ProjectsController do
-  let!(:project) { build_stubbed(:project, user: user) }
+  let(:project) { build_stubbed(:project, user: user) }
   let(:user) { build_stubbed(:user) }
   let(:search) { stub }
   let(:args) { { id: project.id, search: {} } }
-  let!(:comment) { build_stubbed(:comment) }
   before do
     sign_in user
     Search.stubs(:new).returns(search)
     Project.stubs(:find).returns(project)
-    Project.stubs(:new).returns(project)
     project.stubs(:destroy)
   end
 
