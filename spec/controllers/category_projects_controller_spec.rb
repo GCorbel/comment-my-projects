@@ -35,17 +35,6 @@ describe CategoryProjectsController do
     end
   end
 
-  describe "GET 'edit'" do
-    before { get 'edit', args }
-    it { should render_template('edit') }
-    context "when there is a project's category" do
-      before { category_projects.stubs(:find).returns(category_project) }
-      it "add the category to the list of categories" do
-        assigns(:categories).should_not include(category_project)
-      end
-    end
-  end
-
   describe "POST 'update'" do
     context "when valid" do
       subject { post 'update', args }
