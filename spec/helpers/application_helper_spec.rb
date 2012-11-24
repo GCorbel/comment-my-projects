@@ -88,7 +88,7 @@ describe ApplicationHelper do
         project.stubs(:category_description).returns(description)
         project.stubs(:comment_message).returns(nil)
         helper.excerpt_for(project, "description").should ==
-          "This is\n a description\n with four..."
+          "This is\n a <strong class=\"highlight\">description</strong>\n with four..."
       end
     end
 
@@ -97,7 +97,7 @@ describe ApplicationHelper do
         project.stubs(:category_description).returns(nil)
         project.stubs(:comment_message).returns(message)
         helper.excerpt_for(project, "message").should ==
-          "This is\n a message\n with four..."
+          "This is\n a <strong class=\"highlight\">message</strong>\n with four..."
       end
     end
 
@@ -110,6 +110,15 @@ describe ApplicationHelper do
         helper.excerpt_for(project, "something").should ==
           "This is\n a general description..."
       end
+    end
+
+    it "hillight the result" do
+      project.save
+      project.category_projects.first.update_attributes(description: general)
+      project.stubs(:category_description).returns(nil)
+      project.stubs(:comment_message).returns(nil)
+      helper.excerpt_for(project, "description").should ==
+        "This is\n a general <strong class=\"highlight\">description</strong>..."
     end
   end
 end
