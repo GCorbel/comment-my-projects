@@ -10,7 +10,9 @@ describe ProjectsController do
     sign_in user
     Search.stubs(:new).returns(search)
     Project.stubs(:find).returns(project)
+    Project.stubs(:new).returns(project)
     project.stubs(:destroy)
+    project.stubs(:save)
   end
 
   after { subject }
@@ -54,6 +56,14 @@ describe ProjectsController do
     end
     it "create a new note" do
       Note.expects(:new)
+    end
+  end
+
+  describe "POST 'create'" do
+    it "assign the signed user to the project" do
+      project.user = nil
+      post 'create', args
+      project.user.should == user
     end
   end
 

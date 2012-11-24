@@ -25,6 +25,11 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def create
+    @project.user = current_user
+    create!
+  end
+
   def destroy
     destroy! { root_url }
   end
