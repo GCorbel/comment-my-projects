@@ -83,7 +83,7 @@ describe ApplicationHelper do
     let(:general) { "This is\n a general description\n with four\n lines" }
     let(:project) { build(:project) }
 
-    context "when there is a description for the project" do
+    context "when the text is in the description for the project" do
       it "return the line before and after" do
         project.stubs(:category_description).returns(description)
         project.stubs(:comment_message).returns(nil)
@@ -92,7 +92,7 @@ describe ApplicationHelper do
       end
     end
 
-    context "when there is a comment for the project" do
+    context "when the text is in the comment for the project" do
       it "return the line before and after" do
         project.stubs(:category_description).returns(nil)
         project.stubs(:comment_message).returns(message)
