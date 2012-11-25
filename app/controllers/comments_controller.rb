@@ -2,9 +2,10 @@
 require "#{Rails.root}/lib/spam_checker/spam_checker"
 class CommentsController < ApplicationController
   inherit_resources
-  belongs_to :project
+  belongs_to :project, :actuality, polymorphic: true
   load_resource :project
-  load_resource through: :project
+  load_resource :actuality
+  load_resource through: [:project, :actuality]
   authorize_resource
   respond_to :js
 
