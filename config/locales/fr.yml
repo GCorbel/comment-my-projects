@@ -385,3 +385,5 @@ fr:
   actualities:
     show:
       back_to_project: "Retour au projet"
+    form_action:
+      actuality_administration: "Administration de l'actualité"
