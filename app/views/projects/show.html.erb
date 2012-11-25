@@ -33,10 +33,12 @@
         <div class="graybox">
           <h2><%= t('.list_actuality') %></h2>
           <% @project.actualities.each do |actuality| %>
-            <%= link_to actuality.title,
-                        project_actuality_path(@project, actuality) %>
-            -
-            <%= actuality.created_at.strftime('%d/%m/%Y %H:%M') %>
+            <p>
+              <%= link_to actuality.title,
+                          project_actuality_path(@project, actuality) %>
+              -
+              <%= actuality.created_at.strftime('%d/%m/%Y %H:%M') %>
+            </p>
           <% end %>
         </div>
       <% end %>
