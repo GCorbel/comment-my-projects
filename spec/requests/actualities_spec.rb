@@ -6,7 +6,7 @@ describe 'Actualities' do
   let(:project) { create(:project, user: user) }
 
   describe 'Create' do
-    it "add a new new" do
+    it "add a new actuality" do
       sign_in user
       visit new_project_actuality_path(project)
       within('#new_actuality') do
