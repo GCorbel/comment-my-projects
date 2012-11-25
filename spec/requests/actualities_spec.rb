@@ -6,6 +6,15 @@ describe 'Actualities' do
   let(:project) { create(:project, user: user) }
   let(:actuality) { create(:actuality, project: project) }
 
+  describe 'Show' do
+    it "show an actuality" do
+      visit project_actuality_path(project, actuality)
+
+      page.should have_content(actuality.title)
+      page.should have_content(actuality.body)
+    end
+  end
+
   describe 'Create' do
     it "add a new actuality" do
       sign_in user
@@ -29,6 +38,18 @@ describe 'Actualities' do
         click_button 'Modifier'
       end
       page.should have_content("Votre actualité a été modifiée")
+    end
+  end
+
+  describe 'Destroy' do
+    it "destroy an actuality" do
+      sign_in user
+      visit project_actuality_path(project, actuality)
+      save_and_open_page
+      within('.form-actions') do
+        click_link "Supprimer"
+      end
+      page.should have_content("Votre projet a été supprimé")
     end
   end
 end
