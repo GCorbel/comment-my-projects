@@ -4,4 +4,5 @@ class Actuality < ActiveRecord::Base
 
   validates :body, presence: true
   validates :title, presence: true
+  validates :project, presence: true
 end
