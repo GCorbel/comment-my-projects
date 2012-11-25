@@ -382,3 +382,6 @@ fr:
       add_a_note: "Ajouter une note"
       should_be_connected: "Vous devez être connecté pour ajouter une note."
       cannot_be_project_owner: "Vous ne pouvez pas voter pour votre projet."
+  actualities:
+    show:
+      back_to_project: "Retour au projet"
