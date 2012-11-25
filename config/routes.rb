@@ -8,7 +8,9 @@ CommentMyProjects::Application.routes.draw do
     collection do
       get 'advanced_search'
     end
-    resources :actualities
+    resources :actualities do
+      resources :comments
+    end
   end
   match "projects/:project_id/users/:user_id/follow" => "project_user_followers#create", as: :follow
   match "projects/:project_id/users/:user_id/unfollow" => "project_user_followers#destroy", as: :unfollow
