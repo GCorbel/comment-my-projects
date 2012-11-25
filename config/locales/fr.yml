@@ -373,6 +373,8 @@ fr:
       type: "Type"
       search_for: "Recherche dans"
       no_result: "Il n'y a aucun résultat pour votre recherche. Veuillez recommencer."
+    form_action:
+      add_a_actuality: "Ajouter une actualitée"
   notes:
     index:
       project_note: "Notes du projet"
