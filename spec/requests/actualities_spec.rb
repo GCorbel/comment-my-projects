@@ -54,7 +54,6 @@ describe 'Actualities' do
     it "destroy an actuality" do
       sign_in user
       visit project_actuality_path(project, actuality)
-      save_and_open_page
       within('.form-actions') do
         click_link "Supprimer"
       end
