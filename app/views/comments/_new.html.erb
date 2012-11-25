@@ -8,9 +8,6 @@
     <% end %>
     <%= f.input :username, required: true unless signed_in? %>
     <% if comment.is_root? %>
-      <%= f.association :category,
-                        collection: project.categories,
-                        required: true %>
       <%= f.input :message, as: :markdown, input_html: { rows: 4 } %>
     <% else %>
       <%= f.input :message, as: :markdown, input_html: { rows: 4 }, suffix: comment.parent_id %>

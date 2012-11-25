@@ -4,13 +4,11 @@ require 'spec_helper'
 describe 'Comments' do
   let!(:project) { create(:project, user: user) }
   let(:user) { create(:user) }
-  let(:category) { create(:category) }
   let(:comment) do
     create(:comment,
            message: 'My Message',
            username: 'My name',
-           project: project,
-           category: category)
+           project: project)
   end
 
   before do
@@ -34,7 +32,6 @@ describe 'Comments' do
         visit project_path(project)
         within('#new_comment') do
           fill_in('Nom', with: 'My name')
-          select('General', from: 'Categorie')
           fill_in('wmd-input', with: 'My Message')
           click_button 'Valider'
         end

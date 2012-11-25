@@ -54,11 +54,9 @@ describe Search do
     it "give all the projects with a word in a comment" do
       create(:comment,
              project: project1,
-             category: category,
              message: "A simple message")
       create(:comment,
              project: project2,
-             category: category,
              message: "A complexe message")
       search = Search.new(options)
 
@@ -89,11 +87,9 @@ describe Search do
       it "give all the projects with a word in a comment" do
         create(:comment,
                project: project1,
-               category: category,
                message: "A simple message")
         create(:category_project,
                project: project2,
-               category: category,
                description: "A simple description")
         search = Search.new({text: 'simple', category: Search::PROJECT_COMMENT})
 
@@ -104,11 +100,9 @@ describe Search do
       it "give all the projects with a word in a description" do
         create(:comment,
                project: project1,
-               category: category,
                message: "A simple message")
         create(:category_project,
                project: project1,
-               category: category,
                description: "A simple description")
         search = Search.new({text: 'simple', category: Search::PROJECT_DESCRIPTION})
 
@@ -121,8 +115,8 @@ describe Search do
       context "when we search a word in many comments" do
         it "give only one result" do
           project1 = create(:project, title: "A simple Project")
-          create(:comment, project: project1, category: category, message: "A simple message")
-          create(:comment, project: project1, category: category, message: "A simple text")
+          create(:comment, project: project1, message: "A simple message")
+          create(:comment, project: project1, message: "A simple text")
           search = Search.new(options)
           projects = search.project_text_search
           projects.length.should == 1
@@ -136,12 +130,8 @@ describe Search do
           project1 = create(:project, title: "A simple Project")
       create(:category_project,
              project: project1,
-             category: category,
              description: "A simple description")
-      create(:category_project,
-             project: project1,
-             category: category,
-             description: "A simple text")
+      create(:category_project, project: project1, description: "A simple text")
           search = Search.new(options)
           projects = search.project_text_search
           projects.length.should == 1

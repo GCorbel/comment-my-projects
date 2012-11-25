@@ -7,12 +7,9 @@ describe CommentMailerObserver do
   let(:project) { build(:project) }
   let(:comment1) { build(:comment,
                          project: project,
-                         category: category,
                          user: user,
                          username: nil) }
-  let(:comment2) { build(:comment,
-                         category: category,
-                         username: nil) }
+  let(:comment2) { build(:comment, username: nil) }
   let(:mailer) { stub(:deliver) }
 
   describe :after_create do
