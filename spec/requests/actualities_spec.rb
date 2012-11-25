@@ -6,6 +6,15 @@ describe 'Actualities' do
   let(:project) { create(:project, user: user) }
   let(:actuality) { create(:actuality, project: project) }
 
+  describe 'Index' do
+    it 'Show list of actualities' do
+      sign_in project.user
+      project.actualities << actuality
+      visit project_path(project)
+      page.should have_content(actuality.title)
+    end
+  end
+
   describe 'Show' do
     it "show an actuality" do
       visit project_actuality_path(project, actuality)
