@@ -24,5 +24,9 @@ class Ability
     can :create, Note
 
     can :manage, ProjectUserFollower
+
+    can :manage, Actuality do |actuality|
+      actuality.project.user == user
+    end
   end
 end

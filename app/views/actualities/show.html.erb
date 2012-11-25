@@ -7,8 +7,10 @@
     </div>
   </div>
 </div>
-<div class="row-fluid">
-  <%= render 'actualities/form_action',
-             project: @project,
-             actuality: @actuality %>
-</div>
+<% if can? :manager, @actuality %>
+  <div class="row-fluid">
+    <%= render 'actualities/form_action',
+               project: @project,
+               actuality: @actuality %>
+  </div>
+<% end %>
