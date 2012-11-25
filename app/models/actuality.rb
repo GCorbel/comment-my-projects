@@ -5,4 +5,8 @@ class Actuality < ActiveRecord::Base
   validates :body, presence: true
   validates :title, presence: true
   validates :project, presence: true
+
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
 end
