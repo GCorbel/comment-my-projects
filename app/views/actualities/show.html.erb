@@ -3,7 +3,7 @@
     <div class="graybox">
       <p><%= link_to t('.back_to_project'), project_path(@project) %></p>
       <h1><%= @actuality.title %></h1>
-      <%= @actuality.body %>
+      <%= markdown @actuality.body %>
     </div>
   </div>
 </div>
