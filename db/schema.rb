@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125135557) do
+ActiveRecord::Schema.define(:version => 20121125211843) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20121125135557) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "project_id"
     t.integer  "category_id"
     t.text     "message"
     t.string   "username"
@@ -66,11 +65,12 @@ ActiveRecord::Schema.define(:version => 20121125135557) do
     t.string   "user_agent"
     t.string   "referrer"
     t.boolean  "approved",    :default => true, :null => false
+    t.integer  "item_id"
+    t.string   "item_type"
   end
 
   add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
   add_index "comments", ["category_id"], :name => "index_comments_on_category_id"
-  add_index "comments", ["project_id"], :name => "index_comments_on_project_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "notes", :force => true do |t|

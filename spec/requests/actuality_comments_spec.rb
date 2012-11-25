@@ -9,7 +9,7 @@ describe 'Comments' do
     create(:comment,
            message: 'My Message',
            username: 'My name',
-           project: project)
+           item: project)
   end
 
   before do

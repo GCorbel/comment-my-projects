@@ -53,10 +53,10 @@ describe Search do
 
     it "give all the projects with a word in a comment" do
       create(:comment,
-             project: project1,
+             item: project1,
              message: "A simple message")
       create(:comment,
-             project: project2,
+             item: project2,
              message: "A complexe message")
       search = Search.new(options)
 
@@ -86,7 +86,7 @@ describe Search do
     context "when we search only in comments" do
       it "give all the projects with a word in a comment" do
         create(:comment,
-               project: project1,
+               item: project1,
                message: "A simple message")
         create(:category_project,
                project: project2,
@@ -99,7 +99,7 @@ describe Search do
 
       it "give all the projects with a word in a description" do
         create(:comment,
-               project: project1,
+               item: project1,
                message: "A simple message")
         create(:category_project,
                project: project1,
@@ -115,8 +115,8 @@ describe Search do
       context "when we search a word in many comments" do
         it "give only one result" do
           project1 = create(:project, title: "A simple Project")
-          create(:comment, project: project1, message: "A simple message")
-          create(:comment, project: project1, message: "A simple text")
+          create(:comment, item: project1, message: "A simple message")
+          create(:comment, item: project1, message: "A simple text")
           search = Search.new(options)
           projects = search.project_text_search
           projects.length.should == 1

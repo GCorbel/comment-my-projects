@@ -8,7 +8,7 @@ describe Project do
   let(:project_type2) { create(:project_type) }
   let(:user) { create(:user) }
   let(:category) { create(:category) }
-  let(:comment) { create(:comment, project: project) }
+  let(:comment) { create(:comment, item: project) }
   let(:project_type) { ProjectType.find_by_label('Ruby') }
 
   it { should have_many(:categories).through(:category_projects) }
@@ -89,7 +89,7 @@ describe Project do
 
   describe :root_comments do
     it 'give root comments for the project' do
-      create(:comment, parent: comment, project: project)
+      create(:comment, parent: comment, item: project)
       project.root_comments.size.should == 1
     end
   end

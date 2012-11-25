@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   has_many(:categories, through: :category_projects)
   has_many :category_projects
-  has_many :comments
+  has_many :comments, as: :item
   has_many :notes
   has_many(:followers, through: :project_user_followers, source: :user)
   has_many :project_user_followers

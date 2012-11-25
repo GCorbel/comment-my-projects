@@ -6,7 +6,7 @@ describe CommentMailerObserver do
   let(:user3) { build(:user) }
   let(:project) { build(:project) }
   let(:comment1) { build(:comment,
-                         project: project,
+                         item: project,
                          user: user,
                          username: nil) }
   let(:comment2) { build(:comment, username: nil) }
@@ -24,7 +24,7 @@ describe CommentMailerObserver do
 
   context 'when there is other comments on the project' do
     it 'send an mail to other comments owners' do
-      comment2.update_attributes(project: project, user: user2)
+      comment2.update_attributes(item: project, user: user2)
       project.user = user
       CommentMailer.expects(:send_mail_to_project_owner)
                    .with(user2, project)

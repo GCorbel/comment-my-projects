@@ -7,7 +7,7 @@ class Ability
     can :read, :all
     can :create, Comment
     can :destroy, Comment do |comment|
-      comment.user == user || comment.project.user == user
+      comment.user == user || comment.item.user == user
     end
 
     can :read, Project

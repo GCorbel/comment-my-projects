@@ -8,7 +8,7 @@ describe 'Comments' do
     create(:comment,
            message: 'My Message',
            username: 'My name',
-           project: project)
+           item: project)
   end
 
   before do
@@ -78,8 +78,8 @@ describe 'Comments' do
 
     context 'When the user signed in is the project owner' do
       it 'allow to delete comment' do
-        comment.project.user = user
-        comment.project.save
+        comment.item.user = user
+        comment.item.save
         delete_comment
       end
     end

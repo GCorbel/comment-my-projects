@@ -72,8 +72,8 @@ describe CommentsController do
   describe "DELETE 'destroy'" do
     subject { delete 'destroy', args }
     it "assign project to comment" do
-      comment.project = project
-      comment.expects(:project=).with(project)
+      comment.item = project
+      comment.expects(:item=).with(project)
     end
   end
 end

@@ -3,7 +3,7 @@ class CommentMailerObserver < ActiveRecord::Observer
 
   def after_create(comment)
     @comment = comment
-    @project = comment.project
+    @project = comment.item
     @notified = []
 
     add_project_owner_to_notified

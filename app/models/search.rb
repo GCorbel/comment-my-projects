@@ -28,7 +28,7 @@ class Search
 
     if category == PROJECT_COMMENT || category == PROJECT_ALL
       projects = projects.select('MIN(comments.message) as comment_message')
-                         .joins("LEFT OUTER JOIN comments ON comments.project_id = projects.id")
+                         .joins("LEFT OUTER JOIN comments ON comments.item_id = projects.id")
       conditions += " or comments.message ilike :word"
     end
 
