@@ -22,17 +22,6 @@
       </div>
     </div>
   </div>
-  <% if @project.actualities.any? %>
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="graybox">
-          <% @project.actualities.each do |actuality| %>
-            <%= link_to actuality.title, project_actuality_path(@project, actuality) %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
   <div class="row-fluid">
     <% if can? :manage, @project %>
       <%= render 'projects/form_action', project: @project %>
@@ -40,6 +29,17 @@
   </div>
   <div class="row-fluid">
     <div class="span3">
+      <% if @project.actualities.any? %>
+        <div class="graybox">
+          <h2><%= t('.list_actuality') %></h2>
+          <% @project.actualities.each do |actuality| %>
+            <%= link_to actuality.title,
+                        project_actuality_path(@project, actuality) %>
+            -
+            <%= actuality.created_at.strftime('%d/%m/%Y %H:%M') %>
+          <% end %>
+        </div>
+      <% end %>
       <%= render 'notes/index', project: @project %>
       <%= render 'notes/new',
                  project: @project,

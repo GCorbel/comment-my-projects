@@ -375,6 +375,8 @@ fr:
       no_result: "Il n'y a aucun résultat pour votre recherche. Veuillez recommencer."
     form_action:
       add_a_actuality: "Ajouter une actualitée"
+    show:
+      list_actuality: "Actualités"
   notes:
     index:
       project_note: "Notes du projet"
