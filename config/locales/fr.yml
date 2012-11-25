@@ -296,7 +296,7 @@ fr:
         notice: "Votre actualité a été ajoutée"
       update:
         notice: "Votre actualité a été modifiée"
-      delete:
+      destroy:
         notice: "Votre actualité a été supprimée"
   controller:
     create:

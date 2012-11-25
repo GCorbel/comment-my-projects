@@ -57,7 +57,7 @@ describe 'Actualities' do
       within('.form-actions') do
         click_link "Supprimer"
       end
-      page.should have_content("Votre projet a été supprimé")
+      page.should have_content("Votre actualité a été supprimé")
     end
   end
 end

@@ -6,7 +6,7 @@
                   edit_project_actuality_path(project, actuality),
                   class: 'btn' %>
       <%= link_to t('shared.delete'),
-                  project_path(project, actuality),
+                  project_actuality_path(project, actuality),
                   method: 'delete',
                   data: { confirm: t('shared.are_you_sure') },
                   class: 'btn btn-danger' %>

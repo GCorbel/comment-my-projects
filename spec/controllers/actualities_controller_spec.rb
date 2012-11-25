@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe ActualitiesController do
-  let(:project) { build_stubbed(:project) }
+  let(:project) { build_stubbed(:project, user: user) }
   let(:user) { build_stubbed(:user) }
-  let(:actuality) { build_stubbed(:actuality) }
+  let(:actuality) { build_stubbed(:actuality, project: project) }
   let(:actualities) { stub(find: actuality) }
   let(:args) { { id: actuality.id, project_id: project.id } }
 
