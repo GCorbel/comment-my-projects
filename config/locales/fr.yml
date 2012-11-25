@@ -236,6 +236,7 @@ fr:
         project: "Project"
         user: "Utilisateur"
         category: "Categorie"
+        actuality: "Actualité"
       user:
         login: "Nom d'utilisateur ou email"
         username: "Nom d'utilisateur"
@@ -257,6 +258,9 @@ fr:
       note:
         category: "Categorie"
         value: "Note"
+      actuality:
+        title: "Titre"
+        body: "Corps"
 
   flash:
     actions:
@@ -287,6 +291,13 @@ fr:
         notice: "Votre note a été modifié"
       delete:
         notice: "Votre note a été supprimé"
+    actualities:
+      create:
+        notice: "Votre actualité a été ajoutée"
+      update:
+        notice: "Votre actualité a été modifiée"
+      delete:
+        notice: "Votre actualité a été supprimée"
   controller:
     create:
       success: "Votre %{model} a été ajouté"

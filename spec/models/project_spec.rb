@@ -19,6 +19,7 @@ describe Project do
   it { should have_many(:notes) }
   it { should have_many(:followers).through(:project_user_followers) }
   it { should have_many(:project_user_followers) }
+  it { should have_many(:actualities) }
   it { should belong_to(:type).class_name('ProjectType') }
   it { should belong_to(:user) }
 
