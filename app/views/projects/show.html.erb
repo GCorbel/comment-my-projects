@@ -48,7 +48,13 @@
                  note: @note %>
     </div>
     <div class="span9">
-      <%= render @project.root_comments, project: @project %>
+      <% @project.root_comments.each do |comment| %>
+        <%= render comment,
+          project: @project,
+          new_path: new_project_comment_path(@project, ancestry: comment),
+          destroy_path: project_comment_path(@project, comment)
+        %>
+      <% end %>
       <%= render 'comments/new', comment: @comment, project: @project %>
     </div>
   </div>

@@ -9,7 +9,7 @@ describe 'Comments' do
     create(:comment,
            message: 'My Message',
            username: 'My name',
-           item: project)
+           item: actuality)
   end
 
   before do
@@ -79,8 +79,9 @@ describe 'Comments' do
 
     context 'When the user signed in is the actuality owner' do
       it 'allow to delete comment' do
-        comment.project.user = user
-        comment.project.save
+        project = comment.item.project
+        project.user = user
+        project.save
         delete_comment
       end
     end
@@ -95,7 +96,7 @@ describe 'Comments' do
   end
 
   def delete_comment
-    visit project_actuality_path(project)
+    visit project_actuality_path(project, actuality)
     within("#comment_#{comment.id}") do
       click_link 'Supprimer'
     end

@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.item = @project
+    @comment.item = @project || @actuality
     destroy!
   end
 end

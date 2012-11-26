@@ -51,7 +51,7 @@ group :test do
   gem 'rspec-rails'
   gem 'fuubar'
   gem 'mocha'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
   gem 'launchy'
   gem 'database_cleaner'
 end
@@ -65,7 +65,6 @@ group :development, :test do
   gem 'pry', '0.9.8.4'
   gem 'pry-remote', '0.1.1'
   gem 'pry-nav', '0.2.0'
-  gem 'quiet_assets'
 end
 
 gem 'devise'

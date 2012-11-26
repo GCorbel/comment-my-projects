@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/thoughtbot/shoulda-matchers.git
+  revision: 8a563c18a5c7f4d283382977a11058bc4cbe8276
+  specs:
+    shoulda-matchers (1.4.1)
+      activesupport (>= 3.0.0)
+      bourne (~> 1.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -46,6 +54,8 @@ GEM
     bcrypt-ruby (3.0.1)
     bourbon (2.1.1)
       sass (>= 3.1)
+    bourne (1.1.2)
+      mocha (= 0.10.5)
     builder (3.0.4)
     cancan (1.6.7)
     capybara (1.1.2)
@@ -150,7 +160,7 @@ GEM
     metaclass (0.0.1)
     method_source (0.7.1)
     mime-types (1.18)
-    mocha (0.11.4)
+    mocha (0.10.5)
       metaclass (~> 0.0.1)
     multi_json (1.3.7)
     nokogiri (1.5.4)
@@ -168,8 +178,6 @@ GEM
     pry-remote (0.1.1)
       pry (~> 0.9.8)
       slop (~> 2.1)
-    quiet_assets (1.0.1)
-      railties (~> 3.1)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -237,8 +245,6 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
-    shoulda-matchers (1.1.0)
-      activesupport (>= 3.0.0)
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -300,7 +306,6 @@ DEPENDENCIES
   pry (= 0.9.8.4)
   pry-nav (= 0.2.0)
   pry-remote (= 0.1.1)
-  quiet_assets
   rack-pjax
   rails (= 3.2.6)
   rakismet
@@ -308,7 +313,7 @@ DEPENDENCIES
   redcarpet
   rspec-rails
   sass-rails (~> 3.2.3)
-  shoulda-matchers
+  shoulda-matchers!
   simple_form
   spork-rails
   sqlite3
