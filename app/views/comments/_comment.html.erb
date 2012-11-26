@@ -20,6 +20,9 @@
   </div>
   <br/>
   <% comment.children.order(:created_at).each do |sub_comment| %>
-    <%= render sub_comment, project: project %>
+    <%= render sub_comment,
+               project: project,
+               new_path: new_path,
+               destroy_path: destroy_path %>
   <% end %>
 </div>
