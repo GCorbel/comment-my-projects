@@ -233,7 +233,7 @@ fr:
       <<: *errors
     attributes:
       models:
-        project: "Project"
+        project: "Projet"
         user: "Utilisateur"
         category: "Categorie"
         actuality: "Actualité"
