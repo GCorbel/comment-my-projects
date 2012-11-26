@@ -13,21 +13,15 @@ describe ProjectUserFollowersController do
     project.stubs(:remove_follower)
   end
 
-  after { subject }
-
   describe "POST 'create'" do
     subject { post 'create', args }
+    before { project.expects(:add_follower).with(user) }
     it { should render_template('create') }
-    it 'add the user to the following users' do
-      project.expects(:add_follower).with(user)
-    end
   end
 
   describe "DELETE 'destroy'" do
     subject { delete 'destroy', args }
+    before { project.expects(:remove_follower).with(user) }
     it { should render_template('destroy') }
-    it 'remove the user from the followers' do
-      project.expects(:remove_follower).with(user)
-    end
   end
 end

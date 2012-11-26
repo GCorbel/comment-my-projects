@@ -6,6 +6,7 @@ describe ProjectsController do
   let(:user) { build_stubbed(:user) }
   let(:search) { stub }
   let(:args) { { id: project.id } }
+
   before do
     sign_in user
     Search.stubs(:new).returns(search)
@@ -15,8 +16,6 @@ describe ProjectsController do
     project.stubs(:save)
   end
 
-  after { subject }
-
   describe "GET 'index'" do
     context 'when it is an html format' do
       subject { get 'index' }
@@ -24,9 +23,9 @@ describe ProjectsController do
     end
 
     context 'when it is a json format' do
-      subject { get 'index', format: :json }
       it "should instanciate a new presenter" do
         ProjectsDatatable.expects(:new)
+        get 'index', format: :json
       end
     end
   end
@@ -34,29 +33,29 @@ describe ProjectsController do
   describe "GET 'advanced_search'" do
     subject { get 'advanced_search' }
     it { should render_template('advanced_search') }
-    context 'when there is no search' do
-      it 'don\'t search a text' do
+
+    context 'when there is a search' do
+      it "do a full text search" do
         search.expects(:project_text_search).never
+        get 'advanced_search'
       end
     end
 
     context 'when there is a search' do
-      subject { get 'advanced_search', search: {} }
       it "do a full text search" do
         search.expects(:project_text_search)
+        get 'advanced_search', search: {}
       end
     end
   end
 
   describe "GET 'show'" do
     subject { get 'show', args }
-    it { should render_template('show') }
-    it "assign a new comment" do
+    before do
       Comment.expects(:new)
-    end
-    it "create a new note" do
       Note.expects(:new)
     end
+    it { should render_template('show') }
   end
 
   describe "POST 'create'" do

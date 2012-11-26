@@ -21,8 +21,6 @@ describe CommentsController do
     comment.stubs(:save)
   end
 
-  after { subject }
-
   describe "GET 'new'" do
     subject { get 'new', args }
     it { should render_template('new') }
@@ -31,15 +29,15 @@ describe CommentsController do
   describe "POST 'create'" do
     subject(:do_create) { post 'create', args }
     context "with valid data" do
-      before { comment.stubs(:valid?).returns(true) }
-
-      it "check if the comment is a spam" do
-        SpamChecker.expects(:spam?).with(comment, request)
+      before do
+        comment.stubs(:valid?).returns(true)
+        comment.stubs(:ancestry).returns(comment)
+        comment.expects(:parent=).with(comment)
       end
 
       context "when the comment is not a spam" do
         it "approve the comment" do
-          SpamChecker.stubs(:spam?).returns(false)
+          SpamChecker.expects(:spam?).returns(false)
           do_create
           comment.approved.should be_true
         end
@@ -47,7 +45,7 @@ describe CommentsController do
 
       context "when the comment is a spam" do
         it "disapprove the comment" do
-          SpamChecker.stubs(:spam?).returns(true)
+          SpamChecker.expects(:spam?).returns(true)
           do_create
           comment.approved.should be_false
         end
@@ -60,20 +58,14 @@ describe CommentsController do
         comment.user.should == user
       end
     end
-
-    context "when there is an ancestry" do
-      it "assign a parent to the new comment" do
-        comment.stubs(:ancestry).returns(comment)
-        comment.expects(:parent=).with(comment)
-      end
-    end
   end
 
   describe "DELETE 'destroy'" do
-    subject { delete 'destroy', args }
+    subject(:do_destroy) { delete 'destroy', args }
     it "assign project to comment" do
       comment.item = project
       comment.expects(:item=).with(project)
+      do_destroy
     end
   end
 end
