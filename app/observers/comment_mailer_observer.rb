@@ -7,7 +7,6 @@ class CommentMailerObserver < ActiveRecord::Observer
     @notified = []
 
     add_project_owner_to_notified
-    add_comments_owner_to_notified
     add_followers_to_notified
     delete_comment_owner_to_notified
     send_notification
@@ -16,10 +15,6 @@ class CommentMailerObserver < ActiveRecord::Observer
   private
     def add_project_owner_to_notified
       @notified << @item.user_id
-    end
-
-    def add_comments_owner_to_notified
-      @notified += @item.comments.pluck(:user_id)
     end
 
     def add_followers_to_notified

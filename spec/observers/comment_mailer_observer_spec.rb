@@ -22,17 +22,6 @@ describe CommentMailerObserver do
     end
   end
 
-  context 'when there is other comments on the project' do
-    it 'send an mail to other comments owners' do
-      comment2.update_attributes(item: project, user: user2)
-      project.user = user
-      CommentMailer.expects(:comment_notify)
-                   .with(user2, project)
-                   .returns(mailer)
-      comment1.save
-    end
-  end
-
   context 'when there is followers' do
     it 'send an email to all the followers' do
       project.save
