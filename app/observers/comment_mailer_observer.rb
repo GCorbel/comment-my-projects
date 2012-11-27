@@ -3,7 +3,7 @@ class CommentMailerObserver < ActiveRecord::Observer
 
   def after_create(comment)
     @comment = comment
-    @project = comment.item
+    @item = comment.item
     @notified = []
 
     add_project_owner_to_notified
@@ -15,15 +15,15 @@ class CommentMailerObserver < ActiveRecord::Observer
 
   private
     def add_project_owner_to_notified
-      @notified << @project.user_id
+      @notified << @item.user_id
     end
 
     def add_comments_owner_to_notified
-      @notified += @project.comments.pluck(:user_id)
+      @notified += @item.comments.pluck(:user_id)
     end
 
     def add_followers_to_notified
-      @notified += @project.followers.pluck(:user_id)
+      @notified += @item.followers.pluck(:user_id)
     end
 
     def delete_comment_owner_to_notified
@@ -33,7 +33,7 @@ class CommentMailerObserver < ActiveRecord::Observer
     def send_notification
       @notified.compact.uniq.each do |id|
         user = User.find id
-        CommentMailer.send_mail_to_project_owner(user, @project).deliver
+        CommentMailer.comment_notify(user, @item).deliver
       end
     end
 end

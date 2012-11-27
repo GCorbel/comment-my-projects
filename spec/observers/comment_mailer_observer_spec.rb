@@ -15,7 +15,7 @@ describe CommentMailerObserver do
   describe :after_create do
     it "send an email to the project owner" do
       project.user = user2
-      CommentMailer.expects(:send_mail_to_project_owner)
+      CommentMailer.expects(:comment_notify)
                    .with(user2, project)
                    .returns(mailer)
       comment1.save
@@ -26,7 +26,7 @@ describe CommentMailerObserver do
     it 'send an mail to other comments owners' do
       comment2.update_attributes(item: project, user: user2)
       project.user = user
-      CommentMailer.expects(:send_mail_to_project_owner)
+      CommentMailer.expects(:comment_notify)
                    .with(user2, project)
                    .returns(mailer)
       comment1.save
@@ -37,7 +37,7 @@ describe CommentMailerObserver do
     it 'send an email to all the followers' do
       project.save
       project.add_follower(user2)
-      CommentMailer.expects(:send_mail_to_project_owner)
+      CommentMailer.expects(:comment_notify)
                    .with(user2, project)
                    .returns(mailer)
       comment1.save
