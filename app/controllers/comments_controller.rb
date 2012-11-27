@@ -17,6 +17,7 @@ class CommentsController < ApplicationController
     @comment.parent = Comment.find(@comment.ancestry) if @comment.ancestry
     @comment.user = current_user
     @comment.approved = !SpamChecker.spam?(@comment, request)
+    @new_comment = Comment.new
     create!
   end
 

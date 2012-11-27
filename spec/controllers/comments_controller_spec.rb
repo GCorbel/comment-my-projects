@@ -33,6 +33,7 @@ describe CommentsController do
         comment.stubs(:valid?).returns(true)
         comment.stubs(:ancestry).returns(comment)
         comment.expects(:parent=).with(comment)
+        Comment.expects(:new)
       end
 
       context "when the comment is not a spam" do

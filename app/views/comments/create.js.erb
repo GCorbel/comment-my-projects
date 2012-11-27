@@ -1,5 +1,5 @@
 comment_partial = '<%= escape_javascript(
-  render(@comment, item: @comment.item)
+  render(@comment, item: @comment.item, new_comment: @comment)
 ) %>'
 <% if @comment.parent %>
   $("#answer_<%= @comment.parent.id %>").html(comment_partial);

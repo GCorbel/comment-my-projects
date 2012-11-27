@@ -17,7 +17,7 @@
   <div class="row-fluid">
     <div class="span12">
       <% @actuality.root_comments.each do |comment| %>
-        <%= render comment, item: @actuality %>
+        <%= render comment, item: @actuality, new_comment: @comment %>
       <% end %>
       <%= render 'comments/new', comment: @comment, item: @actuality %>
     </div>

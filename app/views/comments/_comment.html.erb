@@ -6,7 +6,7 @@
     <%= markdown comment.message %>
     <div id="answer_<%= comment.id%>"></div>
     <%= link_to t('.answer'),
-                new_polymorphic_path([item, Comment.new], ancestry: comment),
+                new_polymorphic_path([item, new_comment], ancestry: comment),
                 class: 'btn',
                 remote: true %>
     <% if can? :destroy, comment %>
@@ -20,6 +20,6 @@
   </div>
   <br/>
   <% comment.children.order(:created_at).each do |sub_comment| %>
-    <%= render sub_comment, item: item %>
+    <%= render sub_comment, item: item, new_comment: new_comment %>
   <% end %>
 </div>
