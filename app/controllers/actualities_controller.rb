@@ -6,7 +6,6 @@ class ActualitiesController < ApplicationController
 
   def show
     @comment = Comment.new
-    @project = @actuality.project
   end
 
   def destroy
