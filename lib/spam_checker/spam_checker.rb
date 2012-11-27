@@ -14,6 +14,6 @@ class SpamChecker
   end
 
   def self.spam?(comment, request)
-    SpamChecker.new(comment, request).spam?
+    SpamChecker.new(comment, request).spam? unless Rails.env.development?
   end
 end
