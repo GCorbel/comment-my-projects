@@ -6,9 +6,10 @@ class ActualitiesController < ApplicationController
 
   def show
     @comment = Comment.new
+    @project = @actuality.project
   end
 
   def destroy
-    destroy! { project_path(@project) }
+    destroy! { project_path(@actuality.project) }
   end
 end

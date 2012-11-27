@@ -1,6 +1,6 @@
 <div <%= "id='new_root_comment'" if comment.is_root? %> class="new_comment_form_container graybox">
   <h1><%= t('.add_a_comment') %></h1>
-  <%= simple_form_for [project, comment], remote: true do |f| %>
+  <%= simple_form_for [item, comment], remote: true do |f| %>
     <% if comment.ancestry %>
       <%= f.input :ancestry,
                   input_html: { value: comment.parent_id },

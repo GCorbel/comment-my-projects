@@ -10,23 +10,15 @@
 <% if can? :manager, @actuality %>
   <div class="row-fluid">
     <%= render 'actualities/form_action',
-               project: @project,
+               project: @actuality.project,
                actuality: @actuality %>
   </div>
 <% end %>
   <div class="row-fluid">
     <div class="span12">
       <% @actuality.root_comments.each do |comment| %>
-        <%= render comment,
-                   project: @project,
-                   actuality: @actuality,
-                   new_path: new_project_actuality_comment_path(@project, @actuality, ancestry: comment),
-                   destroy_path: project_actuality_comment_path(@project, @actuality, comment)
-            %>
+        <%= render comment, item: @actuality %>
       <% end %>
-      <%= render 'comments/new',
-                 comment: @comment,
-                 project: @project,
-                 actuality: @actuality %>
+      <%= render 'comments/new', comment: @comment, item: @actuality %>
     </div>
   </div>

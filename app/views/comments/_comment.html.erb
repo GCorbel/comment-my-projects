@@ -6,12 +6,12 @@
     <%= markdown comment.message %>
     <div id="answer_<%= comment.id%>"></div>
     <%= link_to t('.answer'),
-                new_path,
+                new_polymorphic_path([item, Comment.new], ancestry: comment),
                 class: 'btn',
                 remote: true %>
     <% if can? :destroy, comment %>
       <%= link_to 'Supprimer',
-                  destroy_path,
+                  polymorphic_path([item, comment]),
                   method: 'delete',
                   data: { confirm: t('shared.are_you_sure') },
                   remote: true,
@@ -20,9 +20,6 @@
   </div>
   <br/>
   <% comment.children.order(:created_at).each do |sub_comment| %>
-    <%= render sub_comment,
-               project: project,
-               new_path: new_path,
-               destroy_path: destroy_path %>
+    <%= render sub_comment, item: item %>
   <% end %>
 </div>

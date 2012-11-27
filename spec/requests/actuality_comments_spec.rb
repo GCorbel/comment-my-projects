@@ -42,6 +42,10 @@ describe 'Comments' do
         within("#comment_#{new_comment.id}") do
           page.should have_content('My Message')
         end
+        visit project_actuality_path(project, actuality)
+        within("#comment_#{new_comment.id}") do
+          page.should have_content('My Message')
+        end
       end
     end
 
@@ -66,6 +70,11 @@ describe 'Comments' do
         fill_in('Nom', with: 'My name')
         fill_in("wmd-input#{comment.id}", with: 'My answer')
         click_button 'Valider'
+        page.should_not have_content('Ajouter un commentaire')
+        page.should have_content('My answer')
+      end
+      visit project_actuality_path(project, actuality)
+      within("#comment_#{comment.id}") do
         page.should_not have_content('Ajouter un commentaire')
         page.should have_content('My answer')
       end
@@ -100,6 +109,8 @@ describe 'Comments' do
     within("#comment_#{comment.id}") do
       click_link 'Supprimer'
     end
+    page.should_not have_content(comment.message)
+    visit project_actuality_path(project, actuality)
     page.should_not have_content(comment.message)
   end
 end
