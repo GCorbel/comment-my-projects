@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_admin_user!
-    redirect_to new_user_session_path unless current_user
+    if current_user.nil?
+      redirect_to new_user_session_path
+    else !current_user.admin
+      redirect_to root_path, notice: t('application_controller.not_admin')
+    end
   end
 end

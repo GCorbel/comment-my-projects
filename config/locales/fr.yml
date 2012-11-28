@@ -433,3 +433,5 @@ fr:
       back_to_project: "Retour au projet"
     form_action:
       actuality_administration: "Administration de l'actualité"
+  application_controller:
+    not_admin: "Vous devez être administrateur pour accéder à cet page"
