@@ -14,6 +14,15 @@ describe CommentMailer do
       mail.body.should have_content("http://example.com/projects/#{project.to_param}")
       mail.body.should have_content("Bonjour #{user.username}")
     end
+    context 'when the item is a actuality' do
+      it 'send the mail for actuality' do
+        mail = CommentMailer.comment_notify_item_owner(user, actuality)
+        mail.to.should == [user.email]
+        mail.subject.should == "Un commentaire a été ajouté à l'une de vos actualité"
+        mail.body.should have_content("http://example.com/actualities/#{actuality.to_param}")
+        mail.body.should have_content("Bonjour #{user.username}")
+      end
+    end
   end
 
   describe :comment_notify do
