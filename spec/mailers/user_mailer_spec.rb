@@ -6,43 +6,39 @@ describe CommentMailer do
   let(:project) { build_stubbed(:project, user: user) }
   let(:actuality) { build_stubbed(:actuality, project: project) }
 
+  before do
+    @prefix = "Un commentaire a été ajouté à"
+  end
+
   describe :comment_notify_item_owner do
-    it "mails the user" do
-      mail = CommentMailer.comment_notify_item_owner(user, project)
-      mail.to.should == [user.email]
-      mail.subject.should == "Un commentaire a été ajouté à l'un de vos projet"
-      mail.body.should have_content("http://example.com/projects/#{project.to_param}")
-      mail.body.should have_content("Bonjour #{user.username}")
+    context 'when the item is a project' do
+      subject { CommentMailer.comment_notify_item_owner(user, project) }
+      its(:to) { should == [user.email] }
+      its(:subject) { should == "#{@prefix} l'un de vos projet" }
+      its(:body) { should have_content(url_for(project)) }
     end
+
     context 'when the item is a actuality' do
-      it 'send the mail for actuality' do
-        mail = CommentMailer.comment_notify_item_owner(user, actuality)
-        mail.to.should == [user.email]
-        mail.subject.should == "Un commentaire a été ajouté à l'une de vos actualité"
-        mail.body.should have_content("http://example.com/actualities/#{actuality.to_param}")
-        mail.body.should have_content("Bonjour #{user.username}")
-      end
+      subject { CommentMailer.comment_notify_item_owner(user, actuality) }
+      its(:to) { should == [user.email] }
+      its(:subject) { should == "#{@prefix} l'une de vos actualité" }
+      its(:body) { should have_content(url_for(actuality)) }
     end
   end
 
   describe :comment_notify_followers do
     context 'when the item is a project' do
-      it 'send the mail for project' do
-        mail = CommentMailer.comment_notify_followers(user, project)
-        mail.to.should == [user.email]
-        mail.subject.should == "Un commentaire a été ajouté à l'un des projets que vous suivez"
-        mail.body.should have_content("http://example.com/projects/#{project.to_param}")
-        mail.body.should have_content("Bonjour #{user.username}")
-      end
+      subject { CommentMailer.comment_notify_followers(user, project) }
+      its(:to) { should == [user.email] }
+      its(:subject) { should == "#{@prefix} l'un des projets que vous suivez" }
+      its(:body) { should have_content(url_for(project)) }
     end
+
     context 'when the item is a actuality' do
-      it 'send the mail for actuality' do
-        mail = CommentMailer.comment_notify_followers(user, actuality)
-        mail.to.should == [user.email]
-        mail.subject.should == "Un commentaire a été ajouté à l'une des actualités que vous suivez"
-        mail.body.should have_content("http://example.com/actualities/#{actuality.to_param}")
-        mail.body.should have_content("Bonjour #{user.username}")
-      end
+      subject { CommentMailer.comment_notify_followers(user, actuality) }
+      its(:to) { should == [user.email] }
+      its(:subject) { should == "#{@prefix} l'une des actualités que vous suivez" }
+      its(:body) { should have_content(url_for(actuality)) }
     end
   end
 end
