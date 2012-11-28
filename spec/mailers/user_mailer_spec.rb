@@ -6,11 +6,11 @@ describe CommentMailer do
   let(:project) { build_stubbed(:project, user: user) }
   let(:actuality) { build_stubbed(:actuality, project: project) }
 
-  describe :send_mail_to_project_owner do
+  describe :comment_notify_item_owner do
     it "mails the user" do
-      mail = CommentMailer.send_mail_to_project_owner(user, project)
+      mail = CommentMailer.comment_notify_item_owner(user, project)
       mail.to.should == [user.email]
-      mail.subject.should == "Quelqu'un a jouter un commentaire à l'un de vos projet"
+      mail.subject.should == "Un commentaire a été ajouté à l'un de vos projet"
       mail.body.should have_content("http://example.com/projects/#{project.to_param}")
       mail.body.should have_content("Bonjour #{user.username}")
     end

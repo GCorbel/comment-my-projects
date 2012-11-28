@@ -311,6 +311,28 @@ fr:
     new:
       add_a_comment: "Ajouter un commentaire"
   mailers:
+    project_comment_notify_item_owner_title:
+      "Un commentaire a été ajouté à l'un de vos projet"
+    project_comment_notify_item_owner: "
+      Bonjour %{user},<br/>
+      <br/>
+      Un commentaire à été ajouté à l'un de vos projet.
+      Pour voir le nouveau message, vous pouvez vous rendre à cette adresse :
+      %{link_to}
+      </br>
+      </br>
+      À bientôt sur Comment-My-Projects."
+    actuality_comment_notify_item_owner_title:
+      "Un commentaire a été ajouté à l'une de vos actualité"
+    actuality_comment_notify_item_owner: "
+      Bonjour %{user},<br/>
+      <br/>
+      Un commentaire à été ajouté à l'une de vos actualité.
+      Pour voir le nouveau message, vous pouvez vous rendre à cette adresse :
+      %{link_to}
+      </br>
+      </br>
+      À bientôt sur Comment-My-Projects."
     project_comment_notify_title:
       "Un commentaire a été ajouté à l'un des projets que vous suivez"
     project_comment_notify: "

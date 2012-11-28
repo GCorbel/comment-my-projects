@@ -2,11 +2,12 @@
 class CommentMailer < ActionMailer::Base
   default from: "guirec.corbel@gmail.com"
 
-  def send_mail_to_project_owner(user, project)
+  def comment_notify_item_owner(user, item)
     @user = user
-    @project = project
-    mail(to: user.email,
-         subject: "Quelqu'un a jouter un commentaire à l'un de vos projet")
+    @item = item
+    @prefix = "mailers.#{item.class.to_s.downcase}_comment_notify_item_owner"
+    @url = url_for(item)
+    mail(to: user.email, subject: subject)
   end
 
   def comment_notify(user, item)
@@ -14,7 +15,12 @@ class CommentMailer < ActionMailer::Base
     @item = item
     @prefix = "mailers.#{item.class.to_s.downcase}_comment_notify"
     @url = url_for(item)
-    subject = t("#{@prefix}_title")
     mail(to: user.email, subject: subject)
+  end
+
+  private
+
+  def subject
+    t("#{@prefix}_title")
   end
 end

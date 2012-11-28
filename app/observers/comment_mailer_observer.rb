@@ -4,31 +4,34 @@ class CommentMailerObserver < ActiveRecord::Observer
   def after_create(comment)
     @comment = comment
     @item = comment.item
-    @notified = []
+    @notified_followers = []
+    @item_owner
 
-    add_project_owner_to_notified
+    send_notification_to_item_owner
     add_followers_to_notified
     delete_comment_owner_to_notified
     send_notification
   end
 
   private
-    def add_project_owner_to_notified
-      @notified << @item.user_id
+    def send_notification_to_item_owner
+      unless @comment.user == @item.user
+        CommentMailer.comment_notify_item_owner(@item.user, @item).deliver
+      end
     end
 
     def add_followers_to_notified
-      @notified += @item.followers.pluck(:user_id)
+      @notified_followers += @item.followers.pluck(:user_id)
     end
 
     def delete_comment_owner_to_notified
-      @notified.delete(@comment.user_id)
+      @notified_followers.delete(@comment.user_id)
     end
 
     def send_notification
-      @notified.compact.uniq.each do |id|
+      @notified_followers.compact.uniq.each do |id|
         user = User.find id
-        CommentMailer.comment_notify(user, @item).deliver
+        CommentMailer.comment_notify_followers(user, @item).deliver
       end
     end
 end
