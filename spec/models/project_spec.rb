@@ -152,4 +152,11 @@ describe Project do
       project.general_description.should == project.category_projects.first.description
     end
   end
+
+  describe :followers_ids do
+    it "return the ids of followers" do
+      project.add_follower(user)
+      project.followers_ids.should == [user.id.to_s]
+    end
+  end
 end

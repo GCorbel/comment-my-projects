@@ -21,7 +21,7 @@ class CommentMailerObserver < ActiveRecord::Observer
     end
 
     def add_followers_to_notified
-      @notified_followers += @item.followers.pluck(:user_id)
+      @notified_followers += @item.followers_ids
     end
 
     def delete_comment_owner_to_notified

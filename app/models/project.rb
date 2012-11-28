@@ -71,6 +71,10 @@ class Project < ActiveRecord::Base
     followers.delete(user)
   end
 
+  def followers_ids
+    followers.pluck(:user_id)
+  end
+
   def general_description
     category_projects.first.description
   end

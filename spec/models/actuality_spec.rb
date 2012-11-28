@@ -14,6 +14,7 @@ describe Actuality do
   it { should delegate_method(:user).to(:project) }
   it { should delegate_method(:user_id).to(:project) }
   it { should delegate_method(:followers).to(:project) }
+  it { should delegate_method(:followers_ids).to(:project) }
 
   describe :to_param do
     subject { actuality.to_param }

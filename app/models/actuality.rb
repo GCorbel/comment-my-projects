@@ -9,7 +9,7 @@ class Actuality < ActiveRecord::Base
   validates :title, presence: true
   validates :project, presence: true
 
-  delegate :user, :user_id, :followers, to: :project
+  delegate :user, :user_id, :followers, :followers_ids, to: :project
 
   def to_param
     "#{id}-#{title.parameterize}"
