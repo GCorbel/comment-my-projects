@@ -25,9 +25,10 @@ describe CommentMailerObserver do
 
   context 'when there is followers' do
     it 'send an email to all the followers' do
+      project.user = user2
       project.save
       project.add_follower(user2)
-      CommentMailer.expects(:comment_notify)
+      CommentMailer.expects(:comment_notify_followers)
                    .with(user2, project)
                    .returns(mailer)
       comment1.save

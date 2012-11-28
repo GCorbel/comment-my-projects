@@ -25,10 +25,10 @@ describe CommentMailer do
     end
   end
 
-  describe :comment_notify do
+  describe :comment_notify_followers do
     context 'when the item is a project' do
       it 'send the mail for project' do
-        mail = CommentMailer.comment_notify(user, project)
+        mail = CommentMailer.comment_notify_followers(user, project)
         mail.to.should == [user.email]
         mail.subject.should == "Un commentaire a été ajouté à l'un des projets que vous suivez"
         mail.body.should have_content("http://example.com/projects/#{project.to_param}")
@@ -37,7 +37,7 @@ describe CommentMailer do
     end
     context 'when the item is a actuality' do
       it 'send the mail for actuality' do
-        mail = CommentMailer.comment_notify(user, actuality)
+        mail = CommentMailer.comment_notify_followers(user, actuality)
         mail.to.should == [user.email]
         mail.subject.should == "Un commentaire a été ajouté à l'une des actualités que vous suivez"
         mail.body.should have_content("http://example.com/actualities/#{actuality.to_param}")

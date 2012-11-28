@@ -10,7 +10,7 @@ class CommentMailer < ActionMailer::Base
     mail(to: user.email, subject: subject)
   end
 
-  def comment_notify(user, item)
+  def comment_notify_followers(user, item)
     @user = user
     @item = item
     @prefix = "mailers.#{item.class.to_s.downcase}_comment_notify"
