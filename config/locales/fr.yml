@@ -419,6 +419,7 @@ fr:
       no_result: "Il n'y a aucun résultat pour votre recherche. Veuillez recommencer."
     form_action:
       add_a_actuality: "Ajouter une actualitée"
+      add_a_category: "Ajouter une catégorie"
     show:
       list_actuality: "Actualités"
   notes:
