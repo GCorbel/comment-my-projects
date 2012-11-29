@@ -2,35 +2,37 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user
+    can :read, :all
+    can :create, Comment
+    can :create, Project
+    can :create, Note
+    can :advanced_search, Project
 
-    if user.admin
+    if user.try(:admin)
       can :manage, :all
-    else
-      can :read, :all
-      can :create, Comment
-      can :destroy, Comment do |comment|
-        comment.user == user || comment.item.user == user
-      end
+    elsif user
+      initialize_management_for(user)
+    end
+  end
 
-      can :read, Project
-      can :create, Project
-      can :manage, Project do |project|
-        project.user == user
-      end
+  private
+  def initialize_management_for(user)
+    can :destroy, Comment do |comment|
+      comment.user == user || comment.item.user == user
+    end
 
-      can :create, CategoryProject do |category_project|
-        category_project.project.user == user
-      end
-      can :manage, CategoryProject, project: { user_id: user.id }
+    can :manage, Project do |project|
+      project.user == user
+    end
 
-      can :create, Note
+    can :manage, CategoryProject do |category_project|
+      category_project.project.user == user
+    end
 
-      can :manage, ProjectUserFollower
+    can :manage, ProjectUserFollower
 
-      can :manage, Actuality do |actuality|
-        actuality.project.user == user
-      end
+    can :manage, Actuality do |actuality|
+      actuality.project.user == user
     end
   end
 end
