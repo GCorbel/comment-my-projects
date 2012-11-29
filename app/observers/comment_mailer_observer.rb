@@ -7,10 +7,12 @@ class CommentMailerObserver < ActiveRecord::Observer
     @notified_followers = []
     @item_owner
 
-    send_notification_to_item_owner
-    add_followers_to_notified
-    delete_comment_owner_to_notified
-    send_notification
+    if comment.approved
+      send_notification_to_item_owner
+      add_followers_to_notified
+      delete_comment_owner_to_notified
+      send_notification
+    end
   end
 
   private

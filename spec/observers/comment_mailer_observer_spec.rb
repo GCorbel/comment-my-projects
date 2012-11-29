@@ -14,17 +14,19 @@ describe CommentMailerObserver do
   after { comment.save! }
 
   describe :after_create do
-    it "send an email to the project owner" do
-      CommentMailer.expects(:comment_notify_item_owner)
-                   .with(user2, project)
-                   .returns(mailer)
-    end
+    context "when the comment is approved " do
+      it "send an email to the project owner" do
+        CommentMailer.expects(:comment_notify_item_owner)
+        .with(user2, project)
+        .returns(mailer)
+      end
 
-    context 'when there is followers' do
-      it 'send an email to all the followers' do
-        CommentMailer.expects(:comment_notify_followers)
-                     .with(user2, project)
-                     .returns(mailer)
+      context 'when there is followers' do
+        it 'send an email to all the followers' do
+          CommentMailer.expects(:comment_notify_followers)
+          .with(user2, project)
+          .returns(mailer)
+        end
       end
     end
   end
