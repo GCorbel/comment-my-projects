@@ -1,14 +1,40 @@
 #encoding=utf-8
 module ProjectHelper
   def project_title_for(project)
+    @project = project
     content_tag(:div, class: 'project_header') do
-      image_tag(avatar_url(project.user, 76), class: 'avatar') +
-      raw("<h1>#{project}</h1>") +
-      raw("#{t('project.show.site')} : #{link_to(project.url, project.url)}") +
-      raw("<br/>") +
-      "#{t('project.show.added_by')} : #{project.user}" +
-      raw("<br/>") +
-      t('project.show.date', date: project.created_at.strftime('%d/%m/%Y %H:%M'))
+      image + title + link + added_by + date
+    end
+  end
+
+  private
+  def image
+    image_tag(avatar_url(@project.user, 76), class: 'avatar')
+  end
+
+  def title
+    content_tag(:h1) do
+      @project.to_s
+    end
+  end
+
+  def link
+    link_to_project = link_to(@project.url, @project.url)
+    content_tag(:p) do
+      raw(t('project.show.site', link: link_to_project))
+    end
+  end
+
+  def added_by
+    content_tag(:p) do
+      raw(t('project.show.added_by', user: @project.user))
+    end
+  end
+
+  def date
+    content_tag(:p) do
+      t('project.show.date',
+        date: @project.created_at.strftime('%d/%m/%Y %H:%M'))
     end
   end
 end

@@ -407,8 +407,8 @@ fr:
       url: "Url"
       type: "Type"
     show:
-      site: "Site"
-      added_by: "Ajouté par"
+      site: "Site : %{link}"
+      added_by: "Ajouté par : %{user}"
       date: "Le : %{date}"
   projects:
     advanced_search:

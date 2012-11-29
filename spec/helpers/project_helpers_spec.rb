@@ -15,11 +15,9 @@ describe ProjectHelper do
         should == "<div class=\"project_header\">" \
             "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
             "<h1>#{project}</h1>" \
-            "Site : #{link_to(project.url, project.url)}" \
-            "<br/>" \
-            "Ajouté par : #{user.username}" \
-            "<br/>" \
-            "Le : #{formatted_now}" \
+            "<p>Site : #{link_to(project.url, project.url)}</p>" \
+            "<p>Ajouté par : #{user.username}</p>" \
+            "<p>Le : #{formatted_now}</p>" \
           "</div>"
       end
     end
