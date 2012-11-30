@@ -15,5 +15,17 @@
         </p>
       <% end %>
     </div>
+    <div class="graybox">
+      <h3><%= t('.top_user_projects') %></h3>
+      <ol>
+        <% UserPresenter.top_project(5).each do |user| %>
+          <li>
+            <%= user.username %>
+            -
+            <%= pluralize(user.nb_projects, t("activerecord.attributes.models.project").downcase) %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
   </div>
 </div>

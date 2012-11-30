@@ -389,6 +389,7 @@ fr:
   home:
     index:
       top: "Meilleurs projets"
+      top_user_projects: "Utilisateurs ayant le plus de projets"
       description: "
         <h1>Bienvenue sur Comment My Projects</h1>
         <p>Ce site est un plateforme de discution sur les projects Open-Source où
