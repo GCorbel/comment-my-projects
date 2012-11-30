@@ -18,6 +18,7 @@ CommentMyProjects::Application.routes.draw do
   match "projects/:project_id/users/:user_id/unfollow" => "project_user_followers#destroy", as: :unfollow
 
   resources :actualities do
+    get 'feed', on: :collection, defaults: { format: 'atom' }
     resources :comments
   end
 
