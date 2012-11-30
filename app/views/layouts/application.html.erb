@@ -19,6 +19,12 @@
         })();
       </script>
     <% end %>
+    <%= auto_discovery_link_tag :atom,
+      feed_projects_path,
+      title: I18n.t('activerecord.attributes.models.project').pluralize %>
+    <%= auto_discovery_link_tag :atom,
+      feed_actualities_path,
+      title: I18n.t('activerecord.attributes.models.actuality').pluralize %>
   </head>
   <body>
     <div class="navbar navbar-fixed-top">
