@@ -20,14 +20,7 @@ describe ActualitiesController do
   end
 
   describe "GET 'feed'" do
-    context "when the request is a rss" do
-      subject { get 'feed', format: :rss }
-      it { should be_redirect }
-    end
-
-    context "when the request is a atom" do
-      subject { get 'feed', format: :atom }
-      it { should be_success }
-    end
+    subject { get 'feed', format: :atom }
+    it { should be_success }
   end
 end

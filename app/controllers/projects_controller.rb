@@ -40,7 +40,6 @@ class ProjectsController < ApplicationController
       @updated = @projects.first.try(:updated_at)
 
       format.atom { render layout: false }
-      format.rss { redirect_to feed_projects_path(format: :atom), status: 301 }
     end
   end
 end
