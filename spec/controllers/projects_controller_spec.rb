@@ -69,4 +69,16 @@ describe ProjectsController do
     subject { delete 'destroy', args }
     it { should redirect_to(root_path) }
   end
+
+  describe "GET 'feed'" do
+    context "when the request is a rss" do
+      subject { get 'feed', format: :rss }
+      it { should be_redirect }
+    end
+
+    context "when the request is a atom" do
+      subject { get 'feed', format: :atom }
+      it { should be_success }
+    end
+  end
 end

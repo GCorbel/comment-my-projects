@@ -2,6 +2,8 @@ CommentMyProjects::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :projects do
+    get 'feed', on: :collection, defaults: { format: 'atom' }
+
     resources :category_projects
     resources :comments
     resources :notes
