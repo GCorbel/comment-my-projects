@@ -4,9 +4,10 @@ atom_feed language: 'fr-FR' do |feed|
 
   @projects.each do |project|
     feed.entry(project) do |entry|
+      content = markdown(project.category_projects.first.description)
       entry.url project_path(project)
       entry.title project.title
-      entry.content project.category_projects.first.description, type: 'html'
+      entry.content content, type: 'html'
       entry.updated(project.updated_at.strftime("%Y-%m-%dT%H:%M:%SZ"))
 
       entry.author do |author|
