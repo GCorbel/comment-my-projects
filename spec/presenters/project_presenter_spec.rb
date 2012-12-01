@@ -2,17 +2,17 @@ require 'spec_helper'
 
 describe ProjectPresenter do
 
-  let(:note1) { create(:note, value: 1) }
-  let(:note2) { create(:note, value: 5) }
-
   let(:project1) { create(:project) }
   let(:project2) { create(:project) }
 
-
   describe :top do
     it "give the five best projects" do
-      project1.notes << note1
-      project2.notes << note2
+      project1.notes << build(:note, value: 4)
+      project1.notes << build(:note, value: 4)
+      project1.notes << build(:note, value: 4)
+
+      project2.notes << build(:note, value: 4)
+      project2.notes << build(:note, value: 5)
 
       projects = ProjectPresenter.top(1)
 
