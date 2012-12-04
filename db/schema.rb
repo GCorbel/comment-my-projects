@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204011651) do
+ActiveRecord::Schema.define(:version => 20121204021735) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -37,13 +37,6 @@ ActiveRecord::Schema.define(:version => 20121204011651) do
   end
 
   add_index "actualities", ["project_id"], :name => "index_actualities_on_project_id"
-
-  create_table "categories", :force => true do |t|
-    t.string   "label"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "position",   :default => 999
-  end
 
   create_table "category_projects", :force => true do |t|
     t.integer  "category_id"
@@ -75,14 +68,14 @@ ActiveRecord::Schema.define(:version => 20121204011651) do
 
   create_table "notes", :force => true do |t|
     t.integer  "project_id"
-    t.integer  "category_id"
     t.integer  "value"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "tag_id"
   end
 
-  add_index "notes", ["category_id"], :name => "index_notes_on_category_id"
   add_index "notes", ["project_id"], :name => "index_notes_on_project_id"
+  add_index "notes", ["tag_id"], :name => "index_notes_on_tag_id"
 
   create_table "project_types", :force => true do |t|
     t.string   "label"

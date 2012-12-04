@@ -6,6 +6,7 @@ describe Project do
                          user: user) }
   let(:user) { create(:user) }
   let(:comment) { create(:comment, item: project) }
+  let(:tag) { create(:tag) }
 
   it { should have_many(:comments) }
   it { should have_many(:notes) }
@@ -52,25 +53,19 @@ describe Project do
 
   describe :note_for do
     it 'give notes for the project' do
-      pending
-      CategoryProject.create(project: project,
-                             category: category,
-                             description: 'test')
-      Note.create(project: project, category: category, value: 8)
-      Note.create(project: project, category: category, value: 3)
-      Note.create(project: project, category: category, value: 3)
-      project.note_for(category).should == 4.7
+      Note.create(project: project, tag: tag, value: 8)
+      Note.create(project: project, tag: tag, value: 3)
+      Note.create(project: project, tag: tag, value: 3)
+      project.note_for(tag).should == 4.7
     end
   end
 
   it 'give nil when the is no notes' do
-    pending
-    project.note_for(category).should be_nil
+    project.note_for(tag).should be_nil
   end
 
   describe :root_comments do
     it 'give root comments for the project' do
-      pending
       create(:comment, parent: comment, item: project)
       project.root_comments.size.should == 1
     end
@@ -86,27 +81,19 @@ describe Project do
 
   describe :notes_for do
     it 'give number of notes' do
-      pending
-      CategoryProject.create(project: project,
-                             category: category,
-                             description: 'test')
-      project.notes_for(category).should == []
-      note = Note.create(project: project, category: category, value: 1)
-      project.notes_for(category).should == [note]
+      project.notes_for(tag).should == []
+      note = Note.create(project: project, tag: tag, value: 1)
+      project.notes_for(tag).should == [note]
     end
   end
 
   describe :number_of_notes do
     it 'give number of notes' do
-      pending
-      CategoryProject.create(project: project,
-                             category: category,
-                             description: 'test')
-      project.number_of_notes_for(category).should == 0
-      Note.create(project: project, category: category, value: 8)
-      project.number_of_notes_for(category).should == 1
-      Note.create(project: project, category: category, value: 3)
-      project.number_of_notes_for(category).should == 2
+      project.number_of_notes_for(tag).should == 0
+      Note.create(project: project, tag: tag, value: 8)
+      project.number_of_notes_for(tag).should == 1
+      Note.create(project: project, tag: tag, value: 3)
+      project.number_of_notes_for(tag).should == 2
     end
   end
 

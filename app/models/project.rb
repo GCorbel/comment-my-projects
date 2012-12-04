@@ -49,4 +49,18 @@ class Project < ActiveRecord::Base
   def followers_ids
     followers.pluck(:user_id)
   end
+
+  def note_for(tag)
+    values = notes_for(tag).pluck(:value)
+    return nil if values.empty?
+    (values.sum / values.count.to_f).round(1)
+  end
+
+  def notes_for(tag)
+    notes.where(tag_id: tag)
+  end
+
+  def number_of_notes_for(tag)
+    notes_for(tag).count
+  end
 end
