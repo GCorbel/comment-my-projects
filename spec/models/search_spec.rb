@@ -64,25 +64,6 @@ describe Search do
       projects.map(&:comment_message).should == ['A simple message']
     end
 
-    it "give all the projects with a type" do
-      type1 = create(:project_type, label: "Java")
-      type2 = create(:project_type, label: "Ruby")
-      create(:project, title: "Simple project 1", type: type1)
-      create(:project, title: "Simple project 1", type: type2)
-      search = Search.new(options.merge({project_type: type1}))
-
-      projects = search.project_text_search
-      projects.length.should == 1
-    end
-
-    it "give all the projects when the project type is blank" do
-      create(:project, title: 'Simple Project 1')
-      search = Search.new(options.merge({project_type: ""}))
-
-      projects = search.project_text_search
-      projects.should_not be_empty
-    end
-
     context "when we search only in comments" do
       it "give all the projects with a word in a comment" do
         pending

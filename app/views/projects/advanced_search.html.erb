@@ -5,11 +5,6 @@
                           url: {action: :advanced_search},
                           method: :get do |f| %>
         <%= f.input :text, label: t('.advanced_search'), required: false %>
-        <%= f.input :project_type,
-                    collection: ProjectType.all,
-                    label: t('.type'),
-                    required: false,
-                    include_blank: "Tout les langage" %>
         <%= f.input :category,
                     collection: Search::PROJECT_CATEGORIES,
                     label: t('.search_for'),

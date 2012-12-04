@@ -1,9 +1,0 @@
-<%= label_tag 'project_type' do %>
-  <%= t('.project_type') %> : 
-  <%= collection_select('project',
-                        'type',
-                        ProjectType.all,
-                        'id',
-                        'label',
-                        {:include_blank => true, :selected => nil}) %>
-<% end %>

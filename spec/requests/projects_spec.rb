@@ -4,8 +4,6 @@ require 'spec_helper'
 describe 'Project' do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
-  let(:rails_type) { ProjectType.find_by_label('Ruby On Rails') }
-  let(:ruby_type) { ProjectType.find_by_label('Ruby') }
 
   describe 'Create' do
     it 'add a new project' do
@@ -14,7 +12,6 @@ describe 'Project' do
       within('#new_project') do
         fill_in("Titre", with: "Mon Projet")
         fill_in("Url", with: "http://www.google.com")
-        select("Ruby", from: "Type")
         fill_in('wmd-input', with: 'My Project')
         click_button "Créer"
       end
@@ -54,25 +51,15 @@ describe 'Project' do
       wait_for_ajax
       page.should have_content("Affichage de l'élement 1 à 11 sur 11 éléments")
     end
-
-    it 'Enable to filter by langage' do
-      create(:project, title: 'My Rails Project', type: rails_type)
-      create(:project, title: 'My Ruby Project', type: ruby_type)
-      visit projects_path
-      select('Ruby', from: 'Type')
-      page.should have_content('My Ruby Project')
-      page.should_not have_content('My Rails Project')
-    end
   end
 
   describe 'Advanced Search' do
     it 'Enable to search in descriptions' do
       description = 'This is a simple description\nwith two lines'
-      project = create(:project, title: 'Title', description: description, type: ruby_type)
+      project = create(:project, title: 'Title', description: description)
 
       visit advanced_search_projects_path
       fill_in('search_text', with: 'simple')
-      select('Ruby', from: 'Type')
       select('Descriptions', from: 'search_category')
 
       click_button('Go!')

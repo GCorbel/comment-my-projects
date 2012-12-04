@@ -21,7 +21,6 @@ class ProjectsDatatable
       [
         link_to(project.title, project),
         link_to(project.url, project),
-        link_to(project.type.label, project),
       ]
     end
   end
@@ -32,10 +31,10 @@ class ProjectsDatatable
 
   def fetch_projects
     projects = Project.order("#{sort_column} #{sort_direction}")
-    projects = projects.select('id, title, url, type_id')
+    projects = projects.select('id, title, url')
     projects = projects.page(page).per_page(per_page)
-    if params[:sSearch].present? || params[:project_type]
-      projects = projects.search(params[:sSearch], params[:project_type])
+    if params[:sSearch].present?
+      projects = projects.search(params[:sSearch])
     end
     projects
   end
