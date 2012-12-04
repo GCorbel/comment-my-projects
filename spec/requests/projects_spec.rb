@@ -13,6 +13,7 @@ describe 'Project' do
         fill_in("Titre", with: "Mon Projet")
         fill_in("Url", with: "http://www.google.com")
         fill_in('wmd-input', with: 'My Project')
+        fill_in('Tag list', with: 'Ruby, Rails')
         click_button "Créer"
       end
       page.should have_content("Votre projet a été ajouté")

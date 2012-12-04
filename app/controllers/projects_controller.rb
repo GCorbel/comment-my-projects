@@ -25,6 +25,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def new
+    @tags = ActsAsTaggableOn::Tag.all.map(&:name).join(',')
+  end
+
   def create
     @project.user = current_user
     create!

@@ -3,6 +3,7 @@
 #= require twitter/bootstrap
 #= require jquery.pjax
 #= require dataTables/jquery.dataTables
+#= require select2
 #= require_tree ../../../vendor/assets/javascripts/markdown/
 #= require_tree ../../../vendor/assets/javascripts/datatables/
 #= require_tree .

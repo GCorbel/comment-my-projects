@@ -1,6 +1,7 @@
 <%= simple_form_for project do |f| %>
   <%= f.input :title %>
   <%= f.input :url %>
+  <%= f.input :tag_list, placeholder: 'type something to find tags', input_html: { data: {tags: @tags}} %>
   <%= f.input :description, as: :markdown %>
   <%= f.button :submit %>
 <% end %>

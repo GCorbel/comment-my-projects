@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  acts_as_taggable
+
   has_many :comments, as: :item
   has_many :notes
   has_many(:followers, through: :project_user_followers, source: :user)
@@ -6,7 +8,7 @@ class Project < ActiveRecord::Base
   has_many :actualities
   belongs_to :user
 
-  attr_accessible :title, :url, :type_id, :description
+  attr_accessible :title, :url, :type_id, :description, :tag_ids, :tag_list
 
   validates :title, presence: true
   validates :url, presence: true, format: { with: /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix }

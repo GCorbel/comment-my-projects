@@ -1,8 +1,10 @@
 $(document).ready ->
   initializeDataTables()
+  initializeTagList()
 
 $(document).on("pjax:end", () ->
   initializeDataTables()
+  initializeTagList()
 )
 
 initializeDataTables = () ->
@@ -39,4 +41,9 @@ initializeDataTables = () ->
 
 $.extend( $.fn.dataTableExt.oStdClasses, {
   "sWrapper": "dataTables_wrapper form-inline"
-} );
+} )
+
+initializeTagList = ->
+  field = $('#project_tag_list')
+  unless field.length == 0
+    field.select2(tags: field.attr('data-tags').split(','))
