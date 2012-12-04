@@ -1,15 +1,14 @@
 describe NoteHelper do
   let(:project) { create(:project) }
-  let(:category) { create(:category, label: 'General') }
-  let(:note) { create(:note, category: category, value: 3) }
+  let(:tag) { create(:tag) }
+  let(:note) { create(:note, tag: tag, value: 3) }
 
   describe :note_for do
     context 'when there is a vote' do
       it 'show notes with stars' do
-        pending
         project.notes << note
-        note_for(project, category).should == '<div class="notes">' \
-          'General : ' \
+        note_for(project, tag).should == '<div class="notes">' \
+          "#{tag.name} : " \
           '<span class="star true"></span>' \
           '<span class="star true"></span>' \
           '<span class="star true"></span>' \
@@ -21,9 +20,8 @@ describe NoteHelper do
 
     context 'when there is no vote' do
       it 'give a message' do
-        pending
-        note_for(project, category).should == '<div class="notes">' \
-        'General : ' \
+        note_for(project, tag).should == '<div class="notes">' \
+        "#{tag.name} : " \
         'Aucun vote' \
         '</div>'
       end

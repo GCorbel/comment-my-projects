@@ -1,11 +1,11 @@
 module NoteHelper
-  def note_for(project, category)
+  def note_for(project, tag)
     content_tag(:div, class: 'notes') do
-      note = project.note_for(category)
-      number_of_notes = project.number_of_notes_for(category)
+      note = project.note_for(tag)
+      number_of_notes = project.number_of_notes_for(tag)
       number_of_notes_plural = pluralize(number_of_notes, 'vote')
       raw(
-        "#{category.label} : " +
+        "#{tag.name} : " +
         if number_of_notes == 0
           'Aucun vote'
         else
