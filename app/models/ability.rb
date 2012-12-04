@@ -25,10 +25,6 @@ class Ability
       project.user == user
     end
 
-    can :manage, CategoryProject do |category_project|
-      category_project.project.user == user
-    end
-
     can :manage, ProjectUserFollower
 
     can :manage, Actuality do |actuality|

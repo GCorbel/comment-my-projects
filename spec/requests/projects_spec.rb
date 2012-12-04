@@ -6,7 +6,6 @@ describe 'Project' do
   let(:project) { create(:project, user: user) }
   let(:rails_type) { ProjectType.find_by_label('Ruby On Rails') }
   let(:ruby_type) { ProjectType.find_by_label('Ruby') }
-  let(:category) { create(:category) }
 
   describe 'Create' do
     it 'add a new project' do
@@ -16,6 +15,7 @@ describe 'Project' do
         fill_in("Titre", with: "Mon Projet")
         fill_in("Url", with: "http://www.google.com")
         select("Ruby", from: "Type")
+        fill_in('wmd-input', with: 'My Project')
         click_button "Créer"
       end
       page.should have_content("Votre projet a été ajouté")
@@ -67,11 +67,8 @@ describe 'Project' do
 
   describe 'Advanced Search' do
     it 'Enable to search in descriptions' do
-      project = create(:project, title: 'Title', type: ruby_type)
-      create(:category_project,
-             project: project,
-             category: category,
-             description: "This is a simple\ndescription\n with three lines")
+      description = 'This is a simple description\nwith two lines'
+      project = create(:project, title: 'Title', description: description, type: ruby_type)
 
       visit advanced_search_projects_path
       fill_in('search_text', with: 'simple')
@@ -79,36 +76,16 @@ describe 'Project' do
       select('Descriptions', from: 'search_category')
 
       click_button('Go!')
-      page.should have_content('This is a simple description...')
+      page.should have_content(description.split('\n').first)
     end
   end
 
   describe 'Show' do
-    context 'when there is only one description' do
-      it 'don\'t show the link to remove the description' do
-        sign_in project.user
-        visit project_path(project)
-        within('.tab-content') do
-          page.should_not have_css('a', text: 'Supprimer')
-        end
-      end
-    end
-
-    context 'when there is two description' do
-      it 'show a link to remove the description' do
-        sign_in project.user
-        create(:category_project, project: project)
-        visit project_path(project)
-        within('.tab-content') do
-          page.should have_css('a', text: 'Supprimer')
-        end
-      end
-    end
-
     it 'Show informations about the project' do
       sign_in project.user
       visit project_path(project)
-      page.should have_content("#{project.title} : #{project.url}")
+      page.should have_content(project.title)
+      page.should have_content(project.description)
     end
   end
 
@@ -118,6 +95,7 @@ describe 'Project' do
       visit edit_project_path(project)
       fill_in("Titre", with: "Mon Projet")
       fill_in("Url", with: "http://www.google.com")
+      fill_in('wmd-input', with: 'My Project')
       click_button "Modifier"
       page.should have_content("Votre projet a été modifié")
     end

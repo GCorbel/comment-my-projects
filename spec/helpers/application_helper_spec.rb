@@ -80,12 +80,11 @@ describe ApplicationHelper do
   describe :excerpt_for do
     let(:description) { "This is\n a description\n with four\n lines" }
     let(:message) { "This is\n a message\n with four\n lines" }
-    let(:general) { "This is\n a general description\n with four\n lines" }
     let(:project) { build(:project) }
 
     context "when the text is in the description for the project" do
       it "return the line before and after" do
-        project.stubs(:category_description).returns(description)
+        project.stubs(:description).returns(description)
         project.stubs(:comment_message).returns(nil)
         helper.excerpt_for(project, "description").should ==
           "This is\n a <strong class=\"highlight\">description</strong>\n with four..."
@@ -94,7 +93,7 @@ describe ApplicationHelper do
 
     context "when the text is in the comment for the project" do
       it "return the line before and after" do
-        project.stubs(:category_description).returns(nil)
+        project.stubs(:description).returns(nil)
         project.stubs(:comment_message).returns(message)
         helper.excerpt_for(project, "message").should ==
           "This is\n a <strong class=\"highlight\">message</strong>\n with four..."
@@ -102,23 +101,19 @@ describe ApplicationHelper do
     end
 
     context "when is no comment and no description" do
-      it "return the first lines of the general description" do
-        project.save
-        project.category_projects.first.update_attributes(description: general)
-        project.stubs(:category_description).returns(nil)
+      it "return the first lines of the project's description" do
+        project.stubs(:description).returns(description)
         project.stubs(:comment_message).returns(nil)
         helper.excerpt_for(project, "something").should ==
-          "This is\n a general description..."
+          "This is\n a description..."
       end
     end
 
     it "hillight the result" do
-      project.save
-      project.category_projects.first.update_attributes(description: general)
-      project.stubs(:category_description).returns(nil)
+      project.stubs(:description).returns(description)
       project.stubs(:comment_message).returns(nil)
       helper.excerpt_for(project, "description").should ==
-        "This is\n a general <strong class=\"highlight\">description</strong>..."
+        "This is\n a <strong class=\"highlight\">description</strong>\n with four..."
     end
   end
 end

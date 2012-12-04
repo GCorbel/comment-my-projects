@@ -7,12 +7,9 @@ describe Project do
   let(:project_type1) { create(:project_type) }
   let(:project_type2) { create(:project_type) }
   let(:user) { create(:user) }
-  let(:category) { create(:category) }
   let(:comment) { create(:comment, item: project) }
   let(:project_type) { ProjectType.find_by_label('Ruby') }
 
-  it { should have_many(:categories).through(:category_projects) }
-  it { should have_many(:category_projects) }
   it { should have_many(:comments) }
   it { should have_many(:notes) }
   it { should have_many(:followers).through(:project_user_followers) }
@@ -23,16 +20,10 @@ describe Project do
 
   it { should validate_presence_of :title }
   it { should validate_presence_of :url }
-  it { should validate_presence_of :type }
+  it { should validate_presence_of :description }
 
   it { should validate_format_of(:url).with('http://www.google.com') }
   it { should validate_format_of(:url).not_with('test') }
-
-  it "have a category on creation" do
-    project.categories.first.label.should == "General"
-    project.category_projects.first.description.should ==
-      "Title : [#{project.url}](#{project.url})"
-  end
 
   describe :search do
     let!(:project1) { create(:project,
@@ -73,6 +64,7 @@ describe Project do
 
   describe :note_for do
     it 'give notes for the project' do
+      pending
       CategoryProject.create(project: project,
                              category: category,
                              description: 'test')
@@ -84,11 +76,13 @@ describe Project do
   end
 
   it 'give nil when the is no notes' do
+    pending
     project.note_for(category).should be_nil
   end
 
   describe :root_comments do
     it 'give root comments for the project' do
+      pending
       create(:comment, parent: comment, item: project)
       project.root_comments.size.should == 1
     end
@@ -104,6 +98,7 @@ describe Project do
 
   describe :notes_for do
     it 'give number of notes' do
+      pending
       CategoryProject.create(project: project,
                              category: category,
                              description: 'test')
@@ -115,6 +110,7 @@ describe Project do
 
   describe :number_of_notes do
     it 'give number of notes' do
+      pending
       CategoryProject.create(project: project,
                              category: category,
                              description: 'test')
@@ -144,12 +140,6 @@ describe Project do
       lambda do
         project.remove_follower(user)
       end.should change(project.followers, :size).by(-1)
-    end
-  end
-
-  describe :general_description do
-    it "return the general description" do
-      project.general_description.should == project.category_projects.first.description
     end
   end
 

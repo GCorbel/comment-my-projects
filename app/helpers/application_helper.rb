@@ -34,13 +34,13 @@ module ApplicationHelper
   def excerpt_for(project, text)
     regex = Regexp.new text
     options = { separator: "\n", radius: 1 }
-    excerpt = if project.category_description =~ regex
-      excerpt(project.category_description, text, options)
+    finded_text = if project.description =~ regex
+      excerpt(project.description, text, options)
     elsif project.comment_message =~ regex
       excerpt(project.comment_message, text, options)
     else
-      excerpt(project.general_description, "", options)
+      excerpt(project.description, "", options)
     end
-    highlight(excerpt, text)
+    highlight(finded_text, text)
   end
 end

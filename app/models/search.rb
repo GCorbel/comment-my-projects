@@ -5,7 +5,7 @@ class Search
   PROJECT_ALL = I18n.t("activemodel.search.project_all")
   PROJECT_COMMENT = I18n.t("activemodel.search.project_comment")
   PROJECT_DESCRIPTION = I18n.t("activemodel.search.project_description")
-  PROJECT_CATEGORIES = [PROJECT_ALL, PROJECT_COMMENT, PROJECT_DESCRIPTION]
+  PROJECT_CATEGORIES = [PROJECT_DESCRIPTION, PROJECT_COMMENT]
 
   attr_accessor :text, :project_type, :category
 
@@ -21,11 +21,9 @@ class Search
   end
 
   def project_text_search
-    projects = Project.select('projects.id, projects.title')
+    projects = Project.select('projects.id, projects.title, projects.description')
       .select('MIN(comments.message) as comment_message')
-      .select('MIN(category_projects.description) as category_description')
       .joins("LEFT OUTER JOIN comments ON comments.item_id = projects.id")
-      .joins("LEFT OUTER JOIN category_projects ON category_projects.project_id = projects.id")
       .group("projects.id")
       .order("projects.updated_at DESC")
 
@@ -37,13 +35,10 @@ class Search
   def add_conditions_for(projects, category)
     word = "%#{text}%"
     conditions = 'projects.title ilike :word'
+    conditions += ' or projects.description ilike :word'
 
-    if category == PROJECT_COMMENT || category == PROJECT_ALL
+    if category == PROJECT_COMMENT
       conditions += " or comments.message ilike :word"
-    end
-
-    if category == PROJECT_DESCRIPTION || category == PROJECT_ALL
-      conditions += ' or category_projects.description ilike :word'
     end
 
     projects.where(conditions, word: word)

@@ -11,6 +11,7 @@ describe 'Notes', js: true do
 
   describe 'Show' do
     it 'show notes on project path' do
+      pending
       create(:category_project, project: project, category: category1)
       create(:category_project, project: project, category: category2)
       create(:category_project, project: project, category: category3)
@@ -31,6 +32,7 @@ describe 'Notes', js: true do
 
   describe 'Create' do
     it 'add a new note' do
+      pending
       sign_in
       create(:category_project, project: project, category: category1)
       visit project_path(project)

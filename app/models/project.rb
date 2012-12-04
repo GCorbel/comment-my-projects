@@ -9,13 +9,12 @@ class Project < ActiveRecord::Base
   belongs_to :type, class_name: 'ProjectType'
   belongs_to :user
 
-  attr_accessible :title, :url, :type_id
+  attr_accessible :title, :url, :type_id, :description
 
   validates :title, presence: true
   validates :url, presence: true, format: { with: /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix }
   validates :type, presence: true
-
-  after_create :add_general_category
+  validates :description, presence: true
 
   class << self
     def search(word = nil, project_type = nil)
@@ -24,13 +23,6 @@ class Project < ActiveRecord::Base
       projects = projects.where('type_id = ?', project_type) if project_type
       projects.all
     end
-  end
-
-  def add_general_category
-    category = Category.find_by_label 'General'
-    CategoryProject.create(category: category,
-                           project: self,
-                           description: "#{title} : [#{url}](#{url})")
   end
 
   def note_for(category)
@@ -73,9 +65,5 @@ class Project < ActiveRecord::Base
 
   def followers_ids
     followers.pluck(:user_id)
-  end
-
-  def general_description
-    category_projects.first.description
   end
 end

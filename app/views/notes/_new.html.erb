@@ -6,9 +6,6 @@
     <%= t('.cannot_be_project_owner') %>
   <% else %>
     <%= simple_form_for [project, note] do |f| %>
-      <%= f.association :category,
-                        collection: project.categories,
-                        input_html: { class: 'span2' } %>
       <%= f.input :value, as: :hidden %>
       <span class="rating">
         <span class="star" data-value="4"></span>

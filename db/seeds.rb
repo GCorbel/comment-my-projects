@@ -5,11 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Category.create label: "General", position: 1
-Category.create label: "Tests"
-Category.create label: "Design"
-Category.create label: "Conception"
-Category.create label: "Performence"
+#Category.create label: "General", position: 1
+#Category.create label: "Tests"
+#Category.create label: "Design"
+#Category.create label: "Conception"
+#Category.create label: "Performence"
 
 ["Ruby", "Ruby On Rails", "Flash", "Flex", "ASP", "C", "C#", "C++", "Java", "Visual Basic", "Delphi", "Javascript", "Zend", "Synfony", "Cake", "PHP", "Python", "QT"].each do |label|
   ProjectType.create label: label

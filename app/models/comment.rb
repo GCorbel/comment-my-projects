@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :item, polymorphic: true
 
-  attr_accessible :message, :username, :category_id, :user_id, :ancestry,
+  attr_accessible :message, :username, :user_id, :ancestry,
                   :parent_id, :approved, :user, :item
 
   validates :message, presence: true
