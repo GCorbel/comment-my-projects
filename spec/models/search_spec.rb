@@ -70,13 +70,10 @@ describe Search do
       end
 
       it "give all the projects with a word in a description" do
-        pending
         create(:comment,
                item: project1,
                message: "A simple message")
-        create(:category_project,
-               project: project1,
-               description: "A simple description")
+        project1.update_attributes(description: 'A simple description')
         search = Search.new({text: 'simple', category: Search::PROJECT_DESCRIPTION})
 
         projects = search.project_text_search
