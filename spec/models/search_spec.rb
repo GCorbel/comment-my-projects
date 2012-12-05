@@ -93,21 +93,5 @@ describe Search do
         end
       end
     end
-
-    context "when the project has many categories" do
-      context "when we search a word in many categories" do
-        it "give only one result" do
-          pending
-          project1 = create(:project, title: "A simple Project")
-      create(:category_project,
-             project: project1,
-             description: "A simple description")
-      create(:category_project, project: project1, description: "A simple text")
-          search = Search.new(options)
-          projects = search.project_text_search
-          projects.length.should == 1
-        end
-      end
-    end
   end
 end
