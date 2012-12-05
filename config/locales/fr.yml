@@ -248,6 +248,7 @@ fr:
       project:
         title: "Titre"
         url: "Url"
+        tag_list: "Liste de tags"
       category:
         label: "Label"
       category_project:
@@ -418,11 +419,14 @@ fr:
       type: "Type"
       search_for: "Recherche dans"
       no_result: "Il n'y a aucun résultat pour votre recherche. Veuillez recommencer."
+      tag_list: 'Liste de tags'
     form_action:
       add_a_actuality: "Ajouter une actualitée"
       add_a_category: "Ajouter une catégorie"
     show:
       list_actuality: "Actualités"
+    form:
+      tag_list_placeholder: "Tags pour lesquels vous voulez être noté"
   notes:
     index:
       project_note: "Notes du projet"
