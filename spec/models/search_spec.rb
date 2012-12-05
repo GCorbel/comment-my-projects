@@ -59,13 +59,10 @@ describe Search do
 
     context "when we search only in comments" do
       it "give all the projects with a word in a comment" do
-        pending
         create(:comment,
                item: project1,
                message: "A simple message")
-        create(:category_project,
-               project: project2,
-               description: "A simple description")
+        project1.update_attributes(description: 'A simple description')
         search = Search.new({text: 'simple', category: Search::PROJECT_COMMENT})
 
         projects = search.project_text_search
