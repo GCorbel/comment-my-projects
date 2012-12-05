@@ -36,19 +36,12 @@ describe Search do
     end
 
     it "give all the projects with a word in a description" do
-      pending
-      create(:category_project,
-             project: project1,
-             category: category,
-             description: "A simple description")
-      create(:category_project,
-             project: project2,
-             category: category,
-             description: "A complexe description")
+      create(:project, description: 'A simple description')
+      create(:project, description: 'A complexe description')
       search = Search.new(options)
 
       projects = search.project_text_search
-      projects.map(&:category_description).should == ['A simple description']
+      projects.map(&:description).should == ['A simple description']
     end
 
     it "give all the projects with a word in a comment" do
