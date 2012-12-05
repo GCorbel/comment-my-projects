@@ -2,6 +2,7 @@
 class ProjectsController < ApplicationController
   inherit_resources
   before_filter :authenticate_user!, except: [:index, :show, :feed]
+  before_filter :search_tags, only: [:new, :edit, :index]
   load_and_authorize_resource
 
   def show
@@ -16,10 +17,6 @@ class ProjectsController < ApplicationController
     else
       @search = Search.new
     end
-  end
-
-  def new
-    @tags = ActsAsTaggableOn::Tag.all.map(&:name).join(',')
   end
 
   def create
@@ -38,5 +35,11 @@ class ProjectsController < ApplicationController
 
       format.atom { render layout: false }
     end
+  end
+
+  private
+
+  def search_tags
+    @tags = ActsAsTaggableOn::Tag.all.map(&:name).join(',')
   end
 end

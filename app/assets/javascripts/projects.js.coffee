@@ -45,5 +45,6 @@ $.extend( $.fn.dataTableExt.oStdClasses, {
 
 initializeTagList = ->
   field = $('#project_tag_list')
+  field = $('#search_tag_list') if field.length == 0
   unless field.length == 0
-    field.select2(tags: field.attr('data-tags').split(','))
+    field.select2(width: '400px', tags: field.attr('data-tags').split(','))

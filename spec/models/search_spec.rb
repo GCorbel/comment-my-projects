@@ -3,6 +3,8 @@ describe Search do
   describe :project_text_search do
     let(:project1) { create(:project) }
     let(:project2) { create(:project) }
+    let(:tag1) { create(:tag) }
+    let(:tag2) { create(:tag) }
     let(:options) { {text: 'Simple', category: Search::PROJECT_DESCRIPTION} }
 
     it "order by update time" do
@@ -51,6 +53,22 @@ describe Search do
 
       projects = search.project_text_search
       projects.map(&:comment_message).should == ['A simple message']
+    end
+
+    it "give all the project with a tag in the tag list" do
+      project1 = create(:project, title: 'Simple Title')
+      project2 = create(:project, title: 'Complex Title')
+
+      project1.tag_list = tag1
+      project2.tag_list = tag2
+
+      project1.save
+      project2.save
+
+      search = Search.new({text: '', tag_list: tag1.to_s})
+
+      projects = search.project_text_search
+      projects.map(&:title).should == [project1.title]
     end
 
     context "when we search only in comments" do

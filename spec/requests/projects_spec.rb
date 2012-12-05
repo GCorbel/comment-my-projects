@@ -4,6 +4,7 @@ require 'spec_helper'
 describe 'Project' do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
+  let(:tag) { create(:tag) }
 
   describe 'Create' do
     it 'add a new project' do
@@ -23,11 +24,12 @@ describe 'Project' do
   describe 'Index' do
     it 'Enable to search in descriptions' do
       description = 'This is a simple description\nwith two lines'
-      project = create(:project, title: 'Title', description: description)
+      project = create(:project, title: 'Title', description: description, tag_list: tag)
 
       visit projects_path
       fill_in('search_text', with: 'simple')
       select('Descriptions', from: 'search_category')
+      fill_in('Tag list', with: tag.name)
 
       click_button('Go!')
       page.should have_content(description.split('\n').first)

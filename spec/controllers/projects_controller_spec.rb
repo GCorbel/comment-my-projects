@@ -12,12 +12,15 @@ describe ProjectsController do
     Search.stubs(:new).returns(search)
     Project.stubs(:find).returns(project)
     Project.stubs(:new).returns(project)
+    ActsAsTaggableOn::Tag.stubs(:all).returns([])
     project.stubs(:destroy)
     project.stubs(:save)
   end
 
   describe "GET 'index'" do
     subject { get 'index' }
+    before { ActsAsTaggableOn::Tag.expects(:all).returns([]) }
+
     it { should render_template('index') }
 
     context 'when there is a search' do

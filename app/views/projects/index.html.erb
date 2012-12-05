@@ -8,6 +8,9 @@
                     label: t('.search_for'),
                     required: false,
                     include_blank: false %>
+        <%= f.input :tag_list,
+          input_html: { data: {tags: @tags}},
+          required: false %>
         <%= f.button :submit, 'Go!' %>
       <% end %>
     </div>

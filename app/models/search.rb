@@ -7,7 +7,7 @@ class Search
   PROJECT_DESCRIPTION = I18n.t("activemodel.search.project_description")
   PROJECT_CATEGORIES = [PROJECT_DESCRIPTION, PROJECT_COMMENT]
 
-  attr_accessor :text, :project_type, :category
+  attr_accessor :text, :project_type, :category, :tag_list
 
   def initialize(attributes = {})
     attributes.each do |key, value|
@@ -21,7 +21,13 @@ class Search
   end
 
   def project_text_search
-    projects = Project.select('projects.id, projects.title, projects.description')
+    projects = if tag_list && !tag_list.empty?
+      Project.tagged_with(tag_list.split(','))
+    else
+      Project
+    end
+
+    projects = projects.select('projects.id, projects.title, projects.description')
       .select('MIN(comments.message) as comment_message')
       .joins("LEFT OUTER JOIN comments ON comments.item_id = projects.id")
       .group("projects.id")
