@@ -14,6 +14,6 @@ describe NotesController do
 
   describe "POST 'create'" do
     subject { post 'create', args }
-    it "should rendirect to project"
+    it { should redirect_to(project) }
   end
 end
