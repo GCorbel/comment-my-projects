@@ -19,7 +19,7 @@
 </div>
 
 <% if @search.text %>
-  <% if @projects %>
+  <% if @projects.try(:any?) %>
     <% @projects.each do |project| %>
       <div class="row-fluid">
         <div class="span12">
