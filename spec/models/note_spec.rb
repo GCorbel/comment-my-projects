@@ -6,5 +6,4 @@ describe Note do
 
   it { should validate_presence_of :value }
   it { should validate_presence_of :project }
-  it { should validate_presence_of :tag }
 end

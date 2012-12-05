@@ -63,4 +63,8 @@ class Project < ActiveRecord::Base
   def number_of_notes_for(tag)
     notes_for(tag).count
   end
+
+  def tags_with_general
+    [ActsAsTaggableOn::Tag.new(name: 'General')] + tags
+  end
 end

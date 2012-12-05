@@ -97,6 +97,18 @@ describe Project do
     end
   end
 
+  describe :tags_with_general do
+    it 'give all the tag with general' do
+      project.tag_list = tag.name
+      project.save
+      project.reload
+      tag_list = project.tags_with_general
+      tag_list.size.should == 2
+      tag_list.first.name.should == "General"
+      tag_list.second.name.should == tag.name
+    end
+  end
+
   describe :add_follower do
     it 'add a user to the followers' do
       lambda do

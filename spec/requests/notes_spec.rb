@@ -5,27 +5,28 @@ describe 'Notes', js: true do
   self.use_transactional_fixtures = false
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
-  let(:category1) { create(:category, label: 'New Category') }
-  let(:category2) { create(:category, label: 'New Category 2') }
-  let(:category3) { create(:category, label: 'New Category 3') }
+  let(:tag1) { create(:tag, name: 'New tag') }
+  let(:tag2) { create(:tag, name: 'New tag 2') }
+  let(:tag3) { create(:tag, name: 'New tag 3') }
 
   describe 'Show' do
     it 'show notes on project path' do
-      pending
-      create(:category_project, project: project, category: category1)
-      create(:category_project, project: project, category: category2)
-      create(:category_project, project: project, category: category3)
+      project.tag_list = [tag1, tag2, tag3].join(",")
+      project.save
+      project.reload
 
-      Note.create(project: project, category: category1, value: 1)
-      Note.create(project: project, category: category1, value: 2)
-      Note.create(project: project, category: category1, value: 4)
-      Note.create(project: project, category: category2, value: 3)
-      Note.create(project: project, category: category2, value: 1)
+      Note.create(project: project, tag: nil, value: 1)
+      Note.create(project: project, tag: tag1, value: 1)
+      Note.create(project: project, tag: tag1, value: 2)
+      Note.create(project: project, tag: tag1, value: 4)
+      Note.create(project: project, tag: tag2, value: 3)
+      Note.create(project: project, tag: tag2, value: 1)
       visit project_path(project)
       within('#notes') do
-        page.should have_content('New Category : (2.3/4 - 3 votes)')
-        page.should have_content('New Category 2 : (2.0/4 - 2 votes)')
-        page.should have_content('New Category 3 : Aucun vote')
+        page.should have_content('General : (1.0/4 - 1 vote)')
+        page.should have_content('New tag : (2.3/4 - 3 votes)')
+        page.should have_content('New tag 2 : (2.0/4 - 2 votes)')
+        page.should have_content('New tag 3 : Aucun vote')
       end
     end
   end
@@ -34,9 +35,9 @@ describe 'Notes', js: true do
     it 'add a new note' do
       pending
       sign_in
-      create(:category_project, project: project, category: category1)
+      create(:tag_project, project: project, tag: tag1)
       visit project_path(project)
-      select('New Category', from: 'Categorie')
+      select('New tag', from: 'Categorie')
       find('.star').click
       page.should have_content('Votre note a été ajouté')
     end

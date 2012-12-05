@@ -4,7 +4,6 @@ class Note < ActiveRecord::Base
 
   validates :value, presence: true
   validates :project, presence: true
-  validates :tag, presence: true
 
   attr_accessible :value, :project_id, :project, :tag
 end
