@@ -7,9 +7,6 @@ CommentMyProjects::Application.routes.draw do
     resources :category_projects
     resources :comments
     resources :notes
-    collection do
-      get 'advanced_search'
-    end
     resources :actualities do
       resources :comments
     end

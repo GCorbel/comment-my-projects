@@ -1,7 +1,7 @@
 #encoding=utf-8
 class ProjectsController < ApplicationController
   inherit_resources
-  before_filter :authenticate_user!, except: [:index, :show, :advanced_search, :feed]
+  before_filter :authenticate_user!, except: [:index, :show, :feed]
   load_and_authorize_resource
 
   def show
@@ -10,13 +10,6 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    respond_to do |format|
-      format.html
-      format.json { render json: ProjectsDatatable.new(view_context) }
-    end
-  end
-
-  def advanced_search
     if params[:search]
       @search = Search.new(params[:search])
       @projects = @search.project_text_search

@@ -6,7 +6,6 @@ class Ability
     can :create, Comment
     can :create, Project
     can :create, Note
-    can :advanced_search, Project
 
     if user.try(:admin)
       can :manage, :all

@@ -20,46 +20,12 @@ describe 'Project' do
     end
   end
 
-  describe 'Index', js: true do
-    self.use_transactional_fixtures = false
-
-    context 'When there is a project', js: true do
-      it 'Show the list of projects' do
-        project
-        visit projects_path
-        page.should have_content(project.title)
-        page.should have_content(project.url)
-      end
-    end
-
-    it 'Enable to search project' do
-      create(:project, title: 'The First Project')
-      create(:project, title: 'The Second Project')
-      visit projects_path
-      fill_in('Rechercher', with: 'First')
-      wait_for_ajax
-      page.should have_content('The First Project')
-      page.should_not have_content('The Second Project')
-    end
-
-    it 'Enable pagination' do
-      11.times do
-        create(:project)
-      end
-      visit projects_path
-      page.should have_content("Affichage de l'élement 1 à 10 sur 11 éléments")
-      select('50', from: 'Afficher')
-      wait_for_ajax
-      page.should have_content("Affichage de l'élement 1 à 11 sur 11 éléments")
-    end
-  end
-
-  describe 'Advanced Search' do
+  describe 'Index' do
     it 'Enable to search in descriptions' do
       description = 'This is a simple description\nwith two lines'
       project = create(:project, title: 'Title', description: description)
 
-      visit advanced_search_projects_path
+      visit projects_path
       fill_in('search_text', with: 'simple')
       select('Descriptions', from: 'search_category')
 

@@ -17,34 +17,20 @@ describe ProjectsController do
   end
 
   describe "GET 'index'" do
-    context 'when it is an html format' do
-      subject { get 'index' }
-      it { should render_template('index') }
-    end
-
-    context 'when it is a json format' do
-      it "should instanciate a new presenter" do
-        ProjectsDatatable.expects(:new)
-        get 'index', format: :json
-      end
-    end
-  end
-
-  describe "GET 'advanced_search'" do
-    subject { get 'advanced_search' }
-    it { should render_template('advanced_search') }
+    subject { get 'index' }
+    it { should render_template('index') }
 
     context 'when there is a search' do
       it "do a full text search" do
         search.expects(:project_text_search).never
-        get 'advanced_search'
+        get 'index'
       end
     end
 
     context 'when there is a search' do
       it "do a full text search" do
         search.expects(:project_text_search)
-        get 'advanced_search', search: {}
+        get 'index', search: {}
       end
     end
   end

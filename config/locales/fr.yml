@@ -412,7 +412,7 @@ fr:
       added_by: "Ajouté par : %{user}"
       date: "Le : %{date}"
   projects:
-    advanced_search:
+    index:
       search: "Rechercher"
       advanced_search: "Recherche avancée"
       type: "Type"
