@@ -33,11 +33,13 @@ describe 'Notes', js: true do
 
   describe 'Create' do
     it 'add a new note' do
-      pending
+      project.tag_list = tag1.name
+      project.save
+      project.reload
+
       sign_in
-      create(:tag_project, project: project, tag: tag1)
       visit project_path(project)
-      select('New tag', from: 'Categorie')
+      select('New tag', from: 'Tag')
       find('.star').click
       page.should have_content('Votre note a été ajouté')
     end
