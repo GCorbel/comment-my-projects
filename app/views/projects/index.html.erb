@@ -25,7 +25,8 @@
         <div class="span12">
           <div class="graybox">
             <h1><%= link_to project, project %></h1>
-            <%= excerpt_for(project, @search.text) %>
+            <p><%= excerpt_for(project, @search.text) %></p>
+            <p><%= t('.tags') %> : <%= project.tag_list %></p>
           </div>
         </div>
       </div>

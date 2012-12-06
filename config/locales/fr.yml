@@ -420,6 +420,7 @@ fr:
       search_for: "Recherche dans"
       no_result: "Il n'y a aucun résultat pour votre recherche. Veuillez recommencer."
       tag_list: 'Liste de tags'
+      tags: 'Tags'
     form_action:
       add_a_actuality: "Ajouter une actualitée"
       add_a_category: "Ajouter une catégorie"
