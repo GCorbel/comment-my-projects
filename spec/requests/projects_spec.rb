@@ -14,7 +14,7 @@ describe 'Project' do
         fill_in("Titre", with: "Mon Projet")
         fill_in("Url", with: "http://www.google.com")
         fill_in('wmd-input', with: 'My Project')
-        fill_in('Tag list', with: 'Ruby, Rails')
+        fill_in('Liste de tags', with: 'Ruby, Rails')
         click_button "Créer"
       end
       page.should have_content("Votre projet a été ajouté")
@@ -29,7 +29,7 @@ describe 'Project' do
       visit projects_path
       fill_in('search_text', with: 'simple')
       select('Descriptions', from: 'search_category')
-      fill_in('Tag list', with: tag.name)
+      fill_in('Liste de tags', with: tag.name)
 
       click_button('Go!')
       page.should have_content(description.split('\n').first)
