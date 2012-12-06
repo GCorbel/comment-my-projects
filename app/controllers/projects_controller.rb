@@ -15,7 +15,8 @@ class ProjectsController < ApplicationController
       @search = Search.new(params[:search])
       @projects = @search.project_text_search
     else
-      @search = Search.new
+      @search = Search.new(text: '')
+      @projects = Project.all
     end
   end
 

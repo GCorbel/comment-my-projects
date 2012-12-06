@@ -4,7 +4,7 @@ atom_feed language: 'fr-FR' do |feed|
 
   @projects.each do |project|
     feed.entry(project) do |entry|
-      content = markdown(project.category_projects.first.description)
+      content = markdown(project.description)
       entry.url project_path(project)
       entry.title project.title
       entry.content content, type: 'html'

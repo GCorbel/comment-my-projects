@@ -235,7 +235,6 @@ fr:
       models:
         project: "Projet"
         user: "Utilisateur"
-        category: "Categorie"
         actuality: "Actualité"
       user:
         login: "Nom d'utilisateur ou email"
@@ -249,15 +248,9 @@ fr:
         title: "Titre"
         url: "Url"
         tag_list: "Liste de tags"
-      category:
-        label: "Label"
-      category_project:
-        category: "Categorie"
       comment:
         username: "Nom"
-        category: "Categorie"
       note:
-        category: "Categorie"
         value: "Note"
       actuality:
         title: "Titre"
@@ -271,13 +264,6 @@ fr:
         notice: "Votre %{resource_name} a été modifié"
       destroy:
         notice: "Votre %{resource_name} a été supprimé"
-    category_projects:
-      create:
-        notice: "Votre description a été ajouté"
-      update:
-        notice: "Votre description a été modifié"
-      destroy:
-        notice: "Votre description a été supprimé"
     projects:
       create:
         notice: "Votre projet a été ajouté"
@@ -401,7 +387,6 @@ fr:
   project:
     form_action:
       project_administration: "Administration du projet"
-      add_a_category: "Ajouter une catégorie"
     project_type_search:
       project_type: "Type de projet"
     index:
@@ -423,7 +408,6 @@ fr:
       tags: 'Tags'
     form_action:
       add_a_actuality: "Ajouter une actualitée"
-      add_a_category: "Ajouter une catégorie"
     show:
       list_actuality: "Actualités"
     form:
