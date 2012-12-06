@@ -4,7 +4,7 @@
     <div class="span12">
       <div class="graybox">
         <%= project_title_for(@project) %>
-        <%= @project.description %>
+        <%= markdown(@project.description) %>
         <% if current_user %>
           <div id="project_user_follower_link_container">
             <% if current_user.follow?(@project) %>
