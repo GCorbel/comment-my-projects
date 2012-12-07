@@ -25,7 +25,9 @@
         <div class="graybox">
           <h1><%= link_to project, project %></h1>
           <p><%= markdown(excerpt_for(project, @search.text)) %></p>
-          <p><%= t('.tags') %> : <%= project.tag_list %></p>
+          <% if project.tag_list.any? %>
+            <p><%= t('.tags') %> : <%= project.tag_list %></p>
+          <% end %>
         </div>
       </div>
     </div>
