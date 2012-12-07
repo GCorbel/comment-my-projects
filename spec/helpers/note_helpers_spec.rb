@@ -27,4 +27,27 @@ describe NoteHelper do
       end
     end
   end
+
+  describe :star_for do
+    context 'when there is a vote' do
+      it 'show notes with stars' do
+        project.notes << note
+        stars_for(project, tag).should == '<div class="notes">' \
+          "#{tag.name} : " \
+          '<span class="star true"></span>' \
+          '<span class="star true"></span>' \
+          '<span class="star true"></span>' \
+          '<span class="star false"></span>' \
+        '</div>'
+      end
+    end
+
+    context 'when there is no vote' do
+      it 'show only the tag name' do
+        stars_for(project, tag).should == '<div class="notes">' \
+          "#{tag.name}" \
+        '</div>'
+      end
+    end
+  end
 end
