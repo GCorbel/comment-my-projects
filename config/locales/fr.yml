@@ -169,6 +169,7 @@ fr:
     delete: "Supprimer"
     are_you_sure: "Êtes vous sûr?"
     cancel: "Annuler"
+    tags: "Tags"
 
   support:
     array:
@@ -405,7 +406,6 @@ fr:
       search_for: "Recherche dans"
       no_result: "Il n'y a aucun résultat pour votre recherche. Veuillez recommencer."
       tag_list: 'Liste de tags'
-      tags: 'Tags'
     form_action:
       add_a_actuality: "Ajouter une actualitée"
     show:

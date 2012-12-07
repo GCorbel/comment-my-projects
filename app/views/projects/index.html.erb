@@ -25,11 +25,7 @@
         <div class="graybox">
           <h1><%= link_to project, project %></h1>
           <p><%= markdown(excerpt_for(project, @search.text)) %></p>
-          <%= t('.tags') %>
-          :
-          <%= raw(project.tags_with_general.map do |tag|
-            stars_for(project, tag)
-          end.join(", ")) %>
+          <%= raw(tags_for(project)) %>
         </div>
       </div>
     </div>

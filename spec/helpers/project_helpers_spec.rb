@@ -4,7 +4,6 @@ describe ProjectHelper do
   let(:project) { build_stubbed(:project, user: user, created_at: now) }
   let(:now) { DateTime.now }
   let(:formatted_now) { now.strftime('%d/%m/%Y %H:%M') }
-
   describe :comment_title do
     subject { project_title_for(project) }
 
@@ -19,6 +18,16 @@ describe ProjectHelper do
             "<p>Ajouté par : #{user.username}</p>" \
             "<p>Le : #{formatted_now}</p>" \
           "</div>"
+      end
+    end
+  end
+
+  describe :tags_for do
+    context "when the project don't have notes" do
+      it "show tags" do
+        tag = build_stubbed(:tag)
+        project.stubs(:tags_with_general).returns([tag])
+        tags_for(project).should == "Tags : <div class=\"notes\">tag1</div>"
       end
     end
   end

@@ -1,10 +1,19 @@
 #encoding=utf-8
 module ProjectHelper
+  include NoteHelper
+
   def project_title_for(project)
     @project = project
     content_tag(:div, class: 'project_header') do
       image + title + link + added_by + date
     end
+  end
+
+  def tags_for(project)
+    "#{I18n.t('shared.tags')} : " +
+    project.tags_with_general.map do |tag|
+      stars_for(project, tag)
+    end.join(", ")
   end
 
   private
