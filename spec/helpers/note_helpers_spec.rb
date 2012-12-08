@@ -1,19 +1,23 @@
 describe NoteHelper do
   let(:project) { create(:project) }
   let(:tag) { create(:tag) }
-  let(:note) { create(:note, tag: tag, value: 3) }
+  let(:note1) { create(:note, tag: tag, value: 3) }
+  let(:note2) { create(:note, tag: tag, value: 4) }
+  let(:note3) { create(:note, tag: tag, value: 3) }
 
   describe :note_for do
     context 'when there is a vote' do
       it 'show notes with stars' do
-        project.notes << note
+        project.notes << note1
+        project.notes << note2
+        project.notes << note3
         note_for(project, tag).should == '<div class="notes">' \
           "#{tag.name} : " \
           '<span class="star true"></span>' \
           '<span class="star true"></span>' \
           '<span class="star true"></span>' \
           '<span class="star false"></span>' \
-          ' (3.0/4 - 1 vote)' \
+          ' (3.3/4 - 3 votes)' \
         '</div>'
       end
     end
@@ -31,7 +35,9 @@ describe NoteHelper do
   describe :star_for do
     context 'when there is a vote' do
       it 'show notes with stars' do
-        project.notes << note
+        project.notes << note1
+        project.notes << note2
+        project.notes << note3
         stars_for(project, tag).should == '<div class="notes">' \
           "#{tag.name} : " \
           '<span class="star true"></span>' \

@@ -36,7 +36,7 @@ module NoteHelper
   end
 
   def stars(note, css)
-    note.to_i.times.collect do
+    note.round.times.collect do
       content_tag(:span, '', class: "star #{css}")
     end.join
   end
