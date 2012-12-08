@@ -1,20 +1,20 @@
 development:
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
   database: comment_my_projects_development
-  username: comment_my_projects
-  password: comment_my_projects
+  username: root
+  password: root
 
 test:
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
   database: comment_my_projects_test
-  username: comment_my_projects
-  password: comment_my_projects
+  username: root
+  password: root
 
 production:
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
   database: comment_my_projects_production
-  username: comment_my_projects
-  password: comment_my_projects
+  username: root
+  password: root

@@ -6,7 +6,7 @@ class ProjectPresenter
            .select("count(value) as nb_notes")
            .select("sum(value) as sum_notes")
            .group("projects.id")
-           .order("(cast(sum(value) as float) /count(value)) DESC")
+           .order("(sum(value) /count(value)) DESC")
            .limit(number)
   end
 end

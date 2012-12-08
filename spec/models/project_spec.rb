@@ -133,7 +133,7 @@ describe Project do
   describe :followers_ids do
     it "return the ids of followers" do
       project.add_follower(user)
-      project.followers_ids.should == [user.id.to_s]
+      project.followers_ids.should == [user.id]
     end
   end
 end

@@ -24,8 +24,8 @@ describe Search do
       search = Search.new({})
 
       projects = search.project_text_search
-      projects.map(&:title).should == ['Project 2', 'Project 1']
-      projects.map(&:id).should == [2, 1]
+      projects.map(&:title).should == ['Project 1', 'Project 2']
+      projects.map(&:id).should == [1, 2]
     end
 
     it "give all the projects with a word in the title" do

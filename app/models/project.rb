@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
   class << self
     def search(word = nil)
       projects = Project
-      projects = projects.where('title ilike ?', "%#{word}%") if word
+      projects = projects.where('title like ?', "%#{word}%") if word
       projects.all
     end
   end

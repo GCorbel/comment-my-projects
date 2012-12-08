@@ -40,11 +40,11 @@ class Search
   private
   def add_conditions_for(projects, category)
     word = "%#{text}%"
-    conditions = 'projects.title ilike :word'
-    conditions += ' or projects.description ilike :word'
+    conditions = 'projects.title like :word'
+    conditions += ' or projects.description like :word'
 
     if category == PROJECT_COMMENT
-      conditions += " or comments.message ilike :word"
+      conditions += " or comments.message like :word"
     end
 
     projects.where(conditions, word: word)
