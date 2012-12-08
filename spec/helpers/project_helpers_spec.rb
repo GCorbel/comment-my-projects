@@ -27,7 +27,7 @@ describe ProjectHelper do
       it "show tags" do
         tag = build_stubbed(:tag)
         project.stubs(:tags_with_general).returns([tag])
-        tags_for(project).should == "Tags : <div class=\"notes\">tag1</div>"
+        tags_for(project).should == "Tags : <div class=\"notes\">#{tag.name}</div>"
       end
     end
   end

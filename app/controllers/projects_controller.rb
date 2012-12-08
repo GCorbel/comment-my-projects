@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
       @projects = @search.project_text_search
     else
       @search = Search.new(text: '')
-      @projects = Project.order("created_at DESC")
+      @projects = Project.order("updated_at DESC")
     end
   end
 
