@@ -1,17 +1,21 @@
-<h2><%= t('.connection') %></h2>
-<br/>
-<%= simple_form_for(resource,
-                    as: resource_name,
-                    url: session_path(resource_name),
-                    wrapper: :small
-                   ) do |f| %>
-  <%= f.input :login, required: true %>
-  <%= f.input :password, required: true %>
-  <div class='inline'>
-    <%= f.label :remember_me %>
-    <%= f.check_box :remember_me %>
+<div class="row-fluid ">
+  <div class="graybox">
+    <h2><%= t('.connection') %></h2>
+    <br/>
+    <%= simple_form_for(resource,
+                        as: resource_name,
+                        url: session_path(resource_name),
+                        wrapper: :small
+                       ) do |f| %>
+      <%= f.input :login, required: true %>
+      <%= f.input :password, required: true %>
+      <div class='inline'>
+        <%= f.label :remember_me %>
+        <%= f.check_box :remember_me %>
+      </div>
+    </p>
+      <p><%= f.submit t('.connection') %></p>
+    <% end %>
+    <%= render "links" %>
   </div>
-</p>
-  <p><%= f.submit t('.connection') %></p>
-<% end %>
-<%= render "links" %>
+</div>

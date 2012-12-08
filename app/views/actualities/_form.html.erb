@@ -1,5 +1,9 @@
-<%= simple_form_for [@project, @actuality] do |f| %>
-  <%= f.input :title %>
-  <%= f.input :body, as: :markdown, input_html: { rows: 4 } %>
-  <%= f.button :submit %>
-<% end %>
+<div class="row-fluid ">
+  <div class="graybox">
+    <%= simple_form_for [@project, @actuality] do |f| %>
+      <%= f.input :title %>
+      <%= f.input :body, as: :markdown, input_html: { rows: 4 } %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>

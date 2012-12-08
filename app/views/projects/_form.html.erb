@@ -1,7 +1,11 @@
-<%= simple_form_for project do |f| %>
-  <%= f.input :title %>
-  <%= f.input :url %>
-  <%= f.input :tag_list, placeholder: t('.tag_list_placeholder'), input_html: { data: {tags: @tags}} %>
-  <%= f.input :description, as: :markdown %>
-  <%= f.button :submit %>
-<% end %>
+<div class="row-fluid ">
+  <div class="graybox">
+    <%= simple_form_for project do |f| %>
+      <%= f.input :title %>
+      <%= f.input :url %>
+      <%= f.input :tag_list, placeholder: t('.tag_list_placeholder'), input_html: { data: {tags: @tags}} %>
+      <%= f.input :description, as: :markdown %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>
