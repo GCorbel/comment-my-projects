@@ -46,7 +46,7 @@ group :test do
   gem 'rspec-rails'
   gem 'fuubar'
   gem 'mocha'
-  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
+  gem 'shoulda-matchers'
   gem 'launchy'
   gem 'database_cleaner'
 end
