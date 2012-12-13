@@ -4,6 +4,9 @@
     <title>
       <%= browser_title(yield(:title)) %>
     </title>
+    <meta name="description" content="<%= browser_description(yield(:description)) %>"/>
+    <meta name="author" content="Guirec Corbel"/>
+    <meta name="news_keywords" content="social, development, coding, best practice, bests practices, github"/>
     <%= javascript_include_tag "application" %>
     <% unless Rails.env.test? %>
       <%= stylesheet_link_tag    "application", :media => "all" %>
