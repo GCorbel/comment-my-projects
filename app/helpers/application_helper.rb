@@ -1,4 +1,3 @@
-#encoding=utf-8
 require "#{Rails.root}/lib/action_view/helpers/text_helper"
 module ApplicationHelper
   extend ActionView::Helpers::TextHelper
@@ -17,18 +16,6 @@ module ApplicationHelper
 
   def browser_title(title = nil)
     [(title if title.present?), "Code Review"].compact.join(" - ")
-  end
-
-  def page_description(description)
-    content_for(:description, description)
-  end
-
-  def browser_description(description = nil)
-    if description.present?
-      description[0..160]
-    else
-      "Ce site est un plateforme de discution sur les projects Open-Source où vous pouvez soumettre votre projet et commenter ceux qui sont déjà inscrits"
-    end
   end
 
   def markdown(code)

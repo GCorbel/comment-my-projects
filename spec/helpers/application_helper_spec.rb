@@ -1,4 +1,3 @@
-#encoding=utf-8
 require 'spec_helper'
 
 describe ApplicationHelper do
@@ -40,27 +39,6 @@ describe ApplicationHelper do
     context "when there is no title" do
       it "show the site name" do
         helper.browser_title().should == "Code Review"
-      end
-    end
-  end
-
-  describe :page_description do
-    it "set a new description" do
-      helper.expects(:content_for).with(:description, "My Description")
-      helper.page_description("My Description")
-    end
-  end
-
-  describe :browser_description do
-    context "when there is a description" do
-      it "show the description" do
-        helper.browser_description("description").should == "description"
-      end
-    end
-
-    context "where there is no description" do
-      it "show a standard description" do
-        helper.browser_description().should == "Ce site est un plateforme de discution sur les projects Open-Source où vous pouvez soumettre votre projet et commenter ceux qui sont déjà inscrits"
       end
     end
   end
