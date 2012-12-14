@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def browser_title(title = nil)
-    [(title if title.present?), "Comment My Projects"].compact.join(" - ")
+    [(title if title.present?), "Code Review"].compact.join(" - ")
   end
 
   def page_description(description)

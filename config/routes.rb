@@ -1,4 +1,4 @@
-CommentMyProjects::Application.routes.draw do
+CodeReview::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :projects do
