@@ -1,4 +1,4 @@
-CodeReview::Application.routes.draw do
+SocialReviewing::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :projects do

@@ -33,13 +33,13 @@ describe ApplicationHelper do
     context "when there is a title" do
       it "show the title" do
         helper.browser_title("title").should ==
-          "title - Code Review"
+          "title - Social Reviewing"
       end
     end
 
     context "when there is no title" do
       it "show the site name" do
-        helper.browser_title().should == "Code Review"
+        helper.browser_title().should == "Social Reviewing"
       end
     end
   end

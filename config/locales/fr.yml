@@ -379,7 +379,7 @@ fr:
       top_projects: "Meilleurs projets"
       top_user_projects: "Utilisateurs ayant le plus de projets"
       description: "
-        <h1>Bienvenue sur Code Review</h1>
+        <h1>Bienvenue sur Social Reviewing</h1>
         <p>Ce site est un plateforme de discution sur les projects Open-Source où
           vous pouvez soumettre votre projet et commenter ceux qui sont déjà
           inscrits.</p>

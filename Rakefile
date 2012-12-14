@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-CodeReview::Application.load_tasks
+SocialReviewing::Application.load_tasks

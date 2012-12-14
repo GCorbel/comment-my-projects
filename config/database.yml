@@ -1,14 +1,14 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: code_review_development
+  database: social_reviewing_development
   username: root
   password: root
 
 test:
   adapter: mysql2
   encoding: utf8
-  database: code_review_test
+  database: social_reviewing_test
   username: root
   password: root
 
