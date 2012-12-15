@@ -1,0 +1,12 @@
+<div class="row-fluid ">
+  <div class="graybox">
+    <b>Nous sommes disponnible pour des contrats en freelance. Envoyer nous un message pour plus d'informations.</b>
+    <br/>
+    <%= simple_form_for @message do |f| %>
+      <%= f.input :username %>
+      <%= f.input :email %>
+      <%= f.input :body, as: :text %>
+      <%= f.button :submit, t('.send') %>
+    <% end %>
+  </div>
+</div>

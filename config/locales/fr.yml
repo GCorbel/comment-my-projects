@@ -237,6 +237,7 @@ fr:
         project: "Projet"
         user: "Utilisateur"
         actuality: "Actualité"
+        message: "Message"
       user:
         login: "Nom d'utilisateur ou email"
         username: "Nom d'utilisateur"
@@ -256,6 +257,10 @@ fr:
       actuality:
         title: "Titre"
         body: "Corps"
+      message:
+        username: "Nom d'utilisateur"
+        email: "Email"
+        body: "Message"
 
   flash:
     actions:
@@ -286,6 +291,9 @@ fr:
         notice: "Votre actualité a été modifiée"
       destroy:
         notice: "Votre actualité a été supprimée"
+    messages:
+      create:
+        notice: "Votre message a été envoyé"
   controller:
     create:
       success: "Votre %{model} a été ajouté"
@@ -365,6 +373,7 @@ fr:
     application:
       project_index: "Liste des projets"
       project_create: "Créer un projet"
+      contact_us: "Contactez/Embauchez nous"
       sign_out: "Déconnexion"
       sign_up: "Inscription"
       sign_in: "Connexion"
@@ -419,3 +428,6 @@ fr:
       actuality_administration: "Administration de l'actualité"
   application_controller:
     not_admin: "Vous devez être administrateur pour accéder à cet page"
+  messages:
+    new:
+      send: "Envoyer"

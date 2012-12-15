@@ -19,6 +19,8 @@ SocialReviewing::Application.routes.draw do
     resources :comments
   end
 
+  resources :messages, only: [:new, :create]
+
   devise_for :users
 
   get "home/index"

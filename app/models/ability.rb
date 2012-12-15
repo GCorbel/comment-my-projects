@@ -6,6 +6,7 @@ class Ability
     can :create, Comment
     can :create, Project
     can :create, Note
+    can :create, Message
 
     if user.try(:admin)
       can :manage, :all
