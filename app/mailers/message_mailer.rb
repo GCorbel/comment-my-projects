@@ -2,7 +2,8 @@
 class MessageMailer < ActionMailer::Base
   def contact(email, body)
     mail subject: "Vous avez reçu un message de Social-Reviewing.com",
-         to: email,
-         body: body
+         from: email,
+         body: body,
+         to: "contact@social-reviewing.com"
   end
 end
