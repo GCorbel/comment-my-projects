@@ -28,6 +28,11 @@
     <%= auto_discovery_link_tag :atom,
       feed_actualities_path,
       title: I18n.t('activerecord.attributes.models.actuality').pluralize %>
+
+      <% if can? :manage, Page %>
+        <%= stylesheet_link_tag 'minimalist_cms/minimalist_cms' %>
+        <%= javascript_include_tag 'minimalist_cms/minimalist_cms' %>
+      <% end %>
   </head>
   <body>
     <div class="navbar navbar-fixed-top">
