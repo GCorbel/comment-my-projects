@@ -13,14 +13,9 @@
       <%= csrf_meta_tags %>
       <%= analytics_init if Rails.env.production? %>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <script type="text/javascript">
-        var uvOptions = {};
-        (function() {
-          var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-          uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/sb5Pwl66jG2RGorpjdSKxg.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-        })();
-      </script>
+    <% end %>
+    <% if Rails.env.production? %>
+      <%= javascript_include_tag "http://widget.uservoice.com/sb5Pwl66jG2RGorpjdSKxg.js", async: true %>
     <% end %>
     <%= auto_discovery_link_tag :atom,
       feed_projects_path,
