@@ -7,6 +7,10 @@
     <meta name="description" content="<%= browser_description(yield(:description)) %>"/>
     <meta name="author" content="Guirec Corbel"/>
     <meta name="news_keywords" content="social, development, coding, best practice, bests practices, github"/>
+    <% if can? :manage, Page %>
+      <%= stylesheet_link_tag 'minimalist_cms/minimalist_cms' %>
+      <%= javascript_include_tag 'minimalist_cms/minimalist_cms' %>
+    <% end %>
     <%= javascript_include_tag "application" %>
     <% unless Rails.env.test? %>
       <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -23,12 +27,7 @@
     <%= auto_discovery_link_tag :atom,
       feed_actualities_path,
       title: I18n.t('activerecord.attributes.models.actuality').pluralize %>
-
-      <% if can? :manage, Page %>
-        <%= stylesheet_link_tag 'minimalist_cms/minimalist_cms' %>
-        <%= javascript_include_tag 'minimalist_cms/minimalist_cms' %>
-      <% end %>
-  </head>
+    </head>
   <body>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
