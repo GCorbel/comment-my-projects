@@ -1,39 +1,6 @@
 <div class="row-fluid">
   <div class="span9">
-    <div class="graybox">
-      <p>Social-Reviewing est une plateforme collaborative qui à pour but d'aider les programmeurs à s'améliorer en favorisant la discussion autour des techniques utilisées sur des projets Open-Source.</p>
-      <p>Trois types d'utilisateurs sont suceptibles d'être intéréssés :</p>
-      <ul>
-        <li><b>Le créateur d'un projet</b> : Celui-ci bénéficie des avis d'autres programmeurs;</li>
-        <li><b>Le développeur commentant un projet</b> : Il améliore ses compétences en consultant le code des créateurs des projets et en discutant avec eux;</li>
-        <li><b>Le développeur néophite</b> : Il peut regarder les projets existant, lire les étapes que le développeur a suivi pour créer son projet et apprendre en lisant les commentaires soumis. Il peut prendre un projet comme modèle et suivre les discussions techniques autour de celui-ci;</li>
-      </ul>
-    </div>
-    <div class="graybox">
-      <h2>"Social Coding" vs "Social Reviewing"</h2>
-      <p>Les plateformes collaboratives comme Github, Google Code ou CodePlex sont créés pour héberger et gérer le code de projets. Le point de vue social de ces sites se limite au niveau des pull requests ou des issues. Social-Reviewing propose une approche différente, ayant pour but d'être utilisée conjoitement avec un site de social coding. Ici, les discussions sont centrés sur les pratiques et les techniques plutôt que de se limiter uniquement à une gestion de tickets.</p>
-    </div>
-    <div class="graybox">
-      <h2>Pourquoi ajouter un nouveau projet?</h2>
-      <p>L'intérêt est exactement le même que pour la revue de code traditionnel. Laisser un bug, utiliser une mauvaise pratique, garder une mauvaise architecture et toute autres raisons qui cause l'instabilité d'un développement peut couter très cher. Un développeur solitaire peut rapidement commettre des erreurs sans s'en rendre compte. Avoir les avis d'autres développeurs peut permettre de les éviter. De plus, l'ajout d'un projet sur Social-Reviewing est <b>simple, rapide et gratuit</b> alors pourquoi ne pas essayer?</p>
-    </div>
-    <div class="graybox">
-      <h2>Écrire une description intéressante pour un projet</h2>
-      <p>Tout d'abord, un description générale du projet est nécessaire. Ensuite, vos pouvez mettre en avant certains points de votre projet. Vous pouvez également ajouter des tags correspondants à votre projet. Cela va permettre aux autres développeurs de trouver votre projet par centre d'intérêt. Il est conseillé de décrire les méthodes que vous avez utilisé pour créer le projet ainsi que de détaillé les outils que vous avez utilisé et indiquer pourquoi vous avez fait ces choix.</p>
-      <p>Vous pouvez voir un exemple de projet <%= link_to 'ici', '/projects/1' %>.</p>
-    </div>
-    <div class="graybox">
-      <h2>Noter un projet</h2>
-      <p>L'intérêt de noter un projet est de permettre au créateur du projet de savoir s'il est sur la bonne voie. Les notes permettent également aux autres utilisateurs de connaître la quote du projet dans un domaine précis. Ainsi, celui-ci saura si ce projet est un modèle à suivre ou non.</p>
-    </div>
-    <div class="graybox">
-      <h2>Commenter un projet</h2>
-      <p>Si vous n'êtes pas d'accord avec l'auteur d'un code, d'un article ou d'un commentaire, ne vous contentez plus de ronchonner devant votre ordinateur, <b>partagez votre opinion</b>. Les projets ajoutés ici ne sont pas tous parfait et l'auteur de l'un d'entre eux devrait s'attendre à recevoir quelques commentaires. L'important est de rester dans une optique de discussion constructive. Ainsi, nous pourrons tous nous améliorer.</p>
-    </div>
-    <div class="graybox">
-      <h2>Ajouter une actualité pour un article</h2>
-      <p>Vous avez la possibilité d'ajouter un article pour un projet. Cette fonction est utile pour informer quelles sont les nouvelles techniques que vous avez décidé d'utiliser ou pour obtenir des commentaires sur de nouveaux développements.</p>
-    </div>
+    <%= editable @page do @page.body end %>
   </div>
   <div class="span3">
     <div class="graybox">
