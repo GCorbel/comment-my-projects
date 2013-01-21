@@ -3,7 +3,8 @@
 #= require twitter/bootstrap
 #= require jquery.pjax
 #= require_tree ../../../vendor/assets/javascripts/markdown/
-#= require_tree .
+#= require projects
+
 $(document).ready ->
   initialize()
 
