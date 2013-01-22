@@ -77,4 +77,4 @@ gem 'inherited_resources'
 gem 'acts-as-taggable-on'
 gem 'select2-rails'
 gem 'minimalist_cms'
-gem "activeadmin-globalize3", git: 'git@github.com:stefanoverna/activeadmin-globalize3.git'
+gem "activeadmin-globalize3"
