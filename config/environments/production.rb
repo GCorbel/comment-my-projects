@@ -66,5 +66,5 @@ SocialReviewing::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   GA.tracker = "UA-32598287-1"
   config.action_mailer.default_url_options = { :host => 'comment-my-projects.heroku.com' }
-  config.assets.precompile += %w[active_admin.css active_admin.js]
+  config.assets.precompile += %w[minimalist_cms/minimalist_cms.js minimalist_cms/minimalist_cms.css minimalist_cms.css minimalist_cms.js active_admin.css active_admin.js]
 end
