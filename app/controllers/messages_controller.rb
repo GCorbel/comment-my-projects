@@ -4,6 +4,6 @@ class MessagesController < ApplicationController
 
   def create
     MessageMailer.contact(@message.email, @message.body)
-    create!
+    create! { root_url }
   end
 end

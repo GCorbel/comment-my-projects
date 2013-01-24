@@ -4,6 +4,7 @@ require 'spec_helper'
 describe 'Mesage' do
   describe 'Create' do
     it "allow to create a new message" do
+      Page.create!(title: 'home', home: true)
       visit new_message_path
       fill_in 'Nom', with: 'username'
       fill_in 'Email', with: 'user@host.com'
