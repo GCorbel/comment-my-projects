@@ -59,6 +59,7 @@ describe 'Project' do
 
   describe 'Destroy' do
     it 'Destroy the project' do
+      Page.create!(title: 'home', home: true)
       sign_in project.user
       visit project_path(project)
       within('.form-actions') do
