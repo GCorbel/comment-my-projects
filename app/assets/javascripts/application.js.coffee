@@ -1,23 +1,14 @@
 #= require jquery
 #= require jquery_ujs
 #= require twitter/bootstrap
-#= require jquery.pjax
+#= require jquery.turbolinks
+#= require turbolinks
 #= require_tree ../../../vendor/assets/javascripts/markdown/
 #= require projects
 
 $(document).ready ->
-  initialize()
-
-$(document).on("pjax:end", () ->
-  initialize()
-)
-
-initialize = () ->
   initMarkdown()
   $('.star').on('click', rate)
-
-jQuery ->
-  $('a:not([data-method=delete]):not([data-method=post]):not([data-remote]):not([data-behavior]):not([data-skip-pjax])').pjax('[data-pjax-container]')
 
 @initMarkdown = (suffix = '') ->
   identifier = if suffix

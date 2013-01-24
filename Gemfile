@@ -64,7 +64,8 @@ end
 
 gem 'devise'
 gem 'rb-readline'
-gem 'rack-pjax'
+gem 'jquery-turbolinks'
+gem 'turbolinks'
 gem 'simple_form'
 gem 'google-analytics-rails'
 gem 'ancestry'

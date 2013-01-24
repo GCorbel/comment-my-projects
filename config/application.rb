@@ -57,7 +57,6 @@ module SocialReviewing
     config.assets.version = '1.0'
 
     config.generators.test_framework = :rspec
-    config.middleware.use Rack::Pjax
     config.rakismet.key = '48f75aa5e28b'
     config.rakismet.url = 'http://comment-my-projects.heroku.com'
   end

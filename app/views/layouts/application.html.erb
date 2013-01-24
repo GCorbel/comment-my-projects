@@ -96,12 +96,10 @@
       </div>
     </div>
     <div class="container-fluid">
-      <div class="row-fluid" data-pjax-container>
-        <%= alert_box("success", flash[:notice]) %>
-        <%= alert_box("error", flash[:error]) %>
-        <%= alert_box("alert", flash[:alert]) %>
-        <%= yield %>
-      </div>
+      <%= alert_box("success", flash[:notice]) %>
+      <%= alert_box("error", flash[:error]) %>
+      <%= alert_box("alert", flash[:alert]) %>
+      <%= yield %>
     </div>
     <%= javascript_tag do %>
       <%= yield :javascripts %>
