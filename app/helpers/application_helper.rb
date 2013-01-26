@@ -32,7 +32,10 @@ module ApplicationHelper
   end
 
   def markdown(code)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+                                       autolink: true,
+                                       no_intra_emphasis: true,
+                                       fenced_code_blocks: true)
     raw(markdown.render(code))
   end
 
