@@ -38,9 +38,9 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :test do
-  gem 'capybara', '1.1.2'
-  gem 'capybara-firebug', '1.1.0'
-  gem 'capybara-webkit', '0.12.1'
+  gem 'capybara'
+  gem 'capybara-firebug'
+  gem 'capybara-webkit'
   gem 'factory_girl_rails'
   gem 'spork-rails'
   gem 'rspec-rails'
