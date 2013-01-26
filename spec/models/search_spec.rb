@@ -14,7 +14,7 @@ describe Search do
       search = Search.new({})
 
       projects = search.project_text_search
-      projects.map(&:title).should == ['Project 2', 'Project 1']
+      expect(projects.map(&:title)).to eq ['Project 2', 'Project 1']
     end
 
     it "give the project's title and the project's id" do
@@ -24,8 +24,8 @@ describe Search do
       search = Search.new({})
 
       projects = search.project_text_search
-      projects.map(&:title).should == ['Project 1', 'Project 2']
-      projects.map(&:id).should == [1, 2]
+      expect(projects.map(&:title)).to eq ['Project 1', 'Project 2']
+      expect(projects.map(&:id)).to eq [1, 2]
     end
 
     it "give all the projects with a word in the title" do
@@ -34,7 +34,7 @@ describe Search do
       search = Search.new(options)
 
       projects = search.project_text_search
-      projects.map(&:title).should == ['Simple Project 1']
+      expect(projects.map(&:title)).to eq ['Simple Project 1']
     end
 
     it "give all the projects with a word in a description" do
@@ -43,7 +43,7 @@ describe Search do
       search = Search.new(options)
 
       projects = search.project_text_search
-      projects.map(&:description).should == ['A simple description']
+      expect(projects.map(&:description)).to eq ['A simple description']
     end
 
     it "give all the projects with a word in a comment" do
@@ -52,7 +52,7 @@ describe Search do
       search = Search.new({text: 'Simple', category: Search::PROJECT_COMMENT})
 
       projects = search.project_text_search
-      projects.map(&:comment_message).should == ['A simple message']
+      expect(projects.map(&:comment_message)).to eq ['A simple message']
     end
 
     it "give all the project with a tag in the tag list" do
@@ -68,7 +68,7 @@ describe Search do
       search = Search.new({text: '', tag_list: tag1.to_s})
 
       projects = search.project_text_search
-      projects.map(&:title).should == [project1.title]
+      expect(projects.map(&:title)).to eq [project1.title]
     end
 
     context "when we search only in comments" do
@@ -78,7 +78,7 @@ describe Search do
         search = Search.new({text: 'simple', category: Search::PROJECT_COMMENT})
 
         projects = search.project_text_search
-        projects.length.should == 1
+        expect(projects.length).to eq 1
       end
 
       it "give all the projects with a word in a description" do
@@ -87,7 +87,7 @@ describe Search do
         search = Search.new({text: 'simple', category: Search::PROJECT_DESCRIPTION})
 
         projects = search.project_text_search
-        projects.length.should == 1
+        expect(projects.length).to eq 1
       end
     end
 
@@ -99,7 +99,7 @@ describe Search do
           create(:comment, item: project1, message: "A simple text")
           search = Search.new(options)
           projects = search.project_text_search
-          projects.length.should == 1
+          expect(projects.length).to eq 1
         end
       end
     end

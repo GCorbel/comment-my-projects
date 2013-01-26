@@ -17,7 +17,7 @@ feature "Projects" do
       fill_in('Liste de tags', with: 'Ruby, Rails')
       click_button "Créer"
     end
-    page.should have_content("Votre projet a été ajouté")
+    expect(page).to have_content("Votre projet a été ajouté")
   end
 
   scenario 'Search a project' do
@@ -30,13 +30,13 @@ feature "Projects" do
     fill_in('Liste de tags', with: tag.name)
 
     click_button('Go!')
-    page.should have_content(description.split('\n').first)
+    expect(page).to have_content(description.split('\n').first)
   end
 
   scenario 'Show informations about the project' do
     visit project_path(project)
-    page.should have_content(project.title)
-    page.should have_content(project.description)
+    expect(page).to have_content(project.title)
+    expect(page).to have_content(project.description)
   end
 
   scenario 'Update a project' do
@@ -46,7 +46,7 @@ feature "Projects" do
     fill_in("Url", with: "http://www.google.com")
     fill_in('wmd-input', with: 'My Project')
     click_button "Modifier"
-    page.should have_content("Votre projet a été modifié")
+    expect(page).to have_content("Votre projet a été modifié")
   end
 
   scenario 'Destroy a project' do
@@ -56,6 +56,6 @@ feature "Projects" do
     within('.form-actions') do
       click_link "Supprimer"
     end
-    page.should have_content("Votre projet a été supprimé")
+    expect(page).to have_content("Votre projet a été supprimé")
   end
 end

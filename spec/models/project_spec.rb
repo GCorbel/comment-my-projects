@@ -28,13 +28,13 @@ describe Project do
 
     context 'when there is a research' do
       it 'give all the projects with a word with title' do
-        Project.search('first').should == [project1]
+        expect(Project.search('first')).to eq [project1]
       end
     end
 
     context 'when there is no search' do
       it 'give all the project' do
-        Project.search.should == [project1, project2]
+        expect(Project.search).to eq [project1, project2]
       end
     end
   end
@@ -42,13 +42,13 @@ describe Project do
   describe :to_s do
     subject { project.to_s}
 
-    it { should == project.title }
+    it { should eq project.title }
   end
 
   describe :to_param do
     subject { project.to_param }
 
-    it { should == "#{project.id}-#{project.title.parameterize}" }
+    it { should eq "#{project.id}-#{project.title.parameterize}" }
   end
 
   describe :note_for do
@@ -56,44 +56,44 @@ describe Project do
       Note.create(project: project, tag: tag, value: 8)
       Note.create(project: project, tag: tag, value: 3)
       Note.create(project: project, tag: tag, value: 3)
-      project.note_for(tag).should == 4.7
+      expect(project.note_for(tag)).to eq 4.7
     end
   end
 
   it 'give nil when the is no notes' do
-    project.note_for(tag).should be_nil
+    expect(project.note_for(tag)).to be_nil
   end
 
   describe :root_comments do
     it 'give root comments for the project' do
       create(:comment, parent: comment, item: project)
-      project.root_comments.size.should == 1
+      expect(project.root_comments.size).to eq 1
     end
   end
 
   describe :add_comment do
     it 'add a new comment' do
-      lambda do
+      expect(lambda do
         project.add_comment(comment)
-      end.should change(project.comments, :size).by(1)
+      end).to change(project.comments, :size).by(1)
     end
   end
 
   describe :notes_for do
     it 'give number of notes' do
-      project.notes_for(tag).should == []
+      expect(project.notes_for(tag)).to eq []
       note = Note.create(project: project, tag: tag, value: 1)
-      project.notes_for(tag).should == [note]
+      expect(project.notes_for(tag)).to eq [note]
     end
   end
 
   describe :number_of_notes do
     it 'give number of notes' do
-      project.number_of_notes_for(tag).should == 0
+      expect(project.number_of_notes_for(tag)).to eq 0
       Note.create(project: project, tag: tag, value: 8)
-      project.number_of_notes_for(tag).should == 1
+      expect(project.number_of_notes_for(tag)).to eq 1
       Note.create(project: project, tag: tag, value: 3)
-      project.number_of_notes_for(tag).should == 2
+      expect(project.number_of_notes_for(tag)).to eq 2
     end
   end
 
@@ -103,37 +103,37 @@ describe Project do
       project.save
       project.reload
       tag_list = project.tags_with_general
-      tag_list.size.should == 2
-      tag_list.first.name.should == "General"
-      tag_list.second.name.should == tag.name
+      expect(tag_list.size).to eq 2
+      expect(tag_list.first.name).to eq "General"
+      expect(tag_list.second.name).to eq tag.name
     end
   end
 
   describe :add_follower do
     it 'add a user to the followers' do
-      lambda do
+      expect(lambda do
         project.add_follower(user)
-      end.should change(project.followers, :size).by(1)
+      end).to change(project.followers, :size).by(1)
     end
 
     it 'render the new relation' do
-      project.add_follower(user).should be_a(ProjectUserFollower)
+      expect(project.add_follower(user)).to be_a(ProjectUserFollower)
     end
   end
 
   describe :remove_follower do
     it 'add a user to the followers' do
       project.add_follower(user)
-      lambda do
+      expect(lambda do
         project.remove_follower(user)
-      end.should change(project.followers, :size).by(-1)
+      end).to change(project.followers, :size).by(-1)
     end
   end
 
   describe :followers_ids do
     it "return the ids of followers" do
       project.add_follower(user)
-      project.followers_ids.should == [user.id]
+      expect(project.followers_ids).to eq [user.id]
     end
   end
 end

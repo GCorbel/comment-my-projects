@@ -11,7 +11,7 @@ describe NoteHelper do
         project.notes << note1
         project.notes << note2
         project.notes << note3
-        note_for(project, tag).should == '<div class="notes">' \
+        expect(note_for(project, tag)).to eq '<div class="notes">' \
           "#{tag.name} : " \
           '<span class="star true"></span>' \
           '<span class="star true"></span>' \
@@ -24,7 +24,7 @@ describe NoteHelper do
 
     context 'when there is no vote' do
       it 'give a message' do
-        note_for(project, tag).should == '<div class="notes">' \
+        expect(note_for(project, tag)).to eq '<div class="notes">' \
         "#{tag.name} : " \
         'Aucun vote' \
         '</div>'
@@ -38,7 +38,7 @@ describe NoteHelper do
         project.notes << note1
         project.notes << note2
         project.notes << note3
-        stars_for(project, tag).should == '<div class="notes">' \
+        expect(stars_for(project, tag)).to eq '<div class="notes">' \
           "#{tag.name} : " \
           '<span class="star true"></span>' \
           '<span class="star true"></span>' \
@@ -50,7 +50,7 @@ describe NoteHelper do
 
     context 'when there is no vote' do
       it 'show only the tag name' do
-        stars_for(project, tag).should == '<div class="notes">' \
+        expect(stars_for(project, tag)).to eq '<div class="notes">' \
           "#{tag.name}" \
         '</div>'
       end

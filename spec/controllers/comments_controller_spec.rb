@@ -40,7 +40,7 @@ describe CommentsController do
         it "approve the comment" do
           SpamChecker.expects(:spam?).returns(false)
           do_create
-          comment.approved.should be_true
+          expect(comment.approved).to be_true
         end
       end
 
@@ -48,7 +48,7 @@ describe CommentsController do
         it "disapprove the comment" do
           SpamChecker.expects(:spam?).returns(true)
           do_create
-          comment.approved.should be_false
+          expect(comment.approved).to be_false
         end
       end
     end
@@ -56,7 +56,7 @@ describe CommentsController do
     context "when user is signed in" do
       it "add the user to comment" do
         do_create
-        comment.user.should == user
+        expect(comment.user).to eq user
       end
     end
   end

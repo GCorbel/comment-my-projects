@@ -11,7 +11,7 @@ describe ProjectHelper do
       before { self.stubs(:avatar_url).returns('id') }
 
       it 'show the title' do
-        should == "<div class=\"project_header\">" \
+        should eq "<div class=\"project_header\">" \
             "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
             "<h1>#{project}</h1>" \
             "<p>Site : #{link_to(project.url, project.url)}</p>" \
@@ -27,7 +27,7 @@ describe ProjectHelper do
       it "show tags" do
         tag = build_stubbed(:tag)
         project.stubs(:tags_with_general).returns([tag])
-        tags_for(project).should == "Tags : <div class=\"notes\">#{tag.name}</div>"
+        expect(tags_for(project)).to eq "Tags : <div class=\"notes\">#{tag.name}</div>"
       end
     end
   end

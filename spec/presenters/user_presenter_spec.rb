@@ -14,8 +14,8 @@ describe UserPresenter do
 
       users = UserPresenter.top_project(1)
 
-      users.length.should == 1
-      users.first.should == user1
+      expect(users.length).to eq 1
+      expect(users.first).to eq user1
     end
   end
 end

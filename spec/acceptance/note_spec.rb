@@ -21,10 +21,10 @@ feature 'Notes', js: true do
     Note.create(project: project, tag: tag2, value: 1)
     visit project_path(project)
     within('#notes') do
-      page.should have_content('General : (1.0/4 - 1 vote)')
-      page.should have_content('New tag : (2.3/4 - 3 votes)')
-      page.should have_content('New tag 2 : (2.0/4 - 2 votes)')
-      page.should have_content('New tag 3 : Aucun vote')
+      expect(page).to have_content('General : (1.0/4 - 1 vote)')
+      expect(page).to have_content('New tag : (2.3/4 - 3 votes)')
+      expect(page).to have_content('New tag 2 : (2.0/4 - 2 votes)')
+      expect(page).to have_content('New tag 3 : Aucun vote')
     end
   end
 
@@ -37,18 +37,17 @@ feature 'Notes', js: true do
     visit project_path(project)
     select('New tag', from: 'Tag')
     first('.star').click
-    page.should have_content('Votre note a été ajouté')
+    expect(page).to have_content('Votre note a été ajouté')
   end
 
   scenario 'Visit the projet when the user is the project owner' do
     sign_in project.user
     visit project_path(project)
-    page.should have_content("Vous ne pouvez pas voter pour votre projet")
+    expect(page).to have_content("Vous ne pouvez pas voter pour votre projet")
   end
 
   scenario 'Visit the project when the user is not signed in' do
     visit project_path(project)
-    page.should
-    have_content("Vous devez être connecté pour ajouter une note")
+    expect(page).to have_content("Vous devez être connecté pour ajouter une note")
   end
 end

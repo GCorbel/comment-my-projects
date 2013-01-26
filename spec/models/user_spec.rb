@@ -9,20 +9,20 @@ describe User do
   describe :to_s do
     subject { user.to_s }
 
-    it { should == user.username }
+    it { should eq user.username }
   end
 
   describe :follow? do
     context 'when the user follow the project' do
       it 'give true' do
         project.add_follower(user)
-        user.follow?(project).should be_true
+        expect(user.follow?(project)).to be_true
       end
     end
 
     context 'when the user doesn\'t follow the project' do
       it 'give false' do
-        user.follow?(project).should be_false
+        expect(user.follow?(project)).to be_false
       end
     end
   end

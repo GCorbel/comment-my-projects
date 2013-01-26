@@ -32,14 +32,13 @@ describe ApplicationHelper do
   describe :browser_title do
     context "when there is a title" do
       it "show the title" do
-        helper.browser_title("title").should ==
-          "title - Social Reviewing"
+        expect(helper.browser_title("title")).to eq "title - Social Reviewing"
       end
     end
 
     context "when there is no title" do
       it "show the site name" do
-        helper.browser_title().should == "Social Reviewing"
+        expect(helper.browser_title).to eq "Social Reviewing"
       end
     end
   end
@@ -54,21 +53,20 @@ describe ApplicationHelper do
   describe :browser_description do
     context "when there is a description" do
       it "show the description" do
-        helper.browser_description("description").should == "description"
+        expect(helper.browser_description("description")).to eq "description"
       end
     end
 
     context "where there is no description" do
       it "show a standard description" do
-        helper.browser_description().should == "Ce site est un plateforme de discution sur les projects Open-Source où vous pouvez soumettre votre projet et commenter ceux qui sont déjà inscrits"
+        expect(helper.browser_description).to eq "Ce site est un plateforme de discution sur les projects Open-Source où vous pouvez soumettre votre projet et commenter ceux qui sont déjà inscrits"
       end
     end
   end
 
   describe :markdown do
     it "convert a markdown to html" do
-      helper.markdown("**test**").should ==
-        "<p><strong>test</strong></p>\n"
+      expect(helper.markdown("**test**")).to eq "<p><strong>test</strong></p>\n"
     end
   end
 
@@ -77,24 +75,19 @@ describe ApplicationHelper do
     after { Rails.env.stubs(:test?).returns(true) }
 
     it "give a path to the avatar" do
-      helper.avatar_url(user).should ==
-        "http://gravatar.com/avatar/#{avatar_id}.png" \
-        "?s=100&d=#{CGI.escape(default_url)}"
+      expect(helper.avatar_url(user)).to eq "http://gravatar.com/avatar/#{avatar_id}.png?s=100&d=#{CGI.escape(default_url)}"
       Rails.env.stubs(:test?).returns(true)
     end
 
     context "when a size is specified" do
       it "give a path to the avatar with a size" do
-        helper.avatar_url(user, 50).should ==
-          "http://gravatar.com/avatar/#{avatar_id}.png" \
-          "?s=50&d=#{CGI.escape(default_url)}"
+        expect(helper.avatar_url(user, 50)).to eq "http://gravatar.com/avatar/#{avatar_id}.png?s=50&d=#{CGI.escape(default_url)}"
       end
     end
 
     context "the user is nil" do
       it "give a path to the avatar with a size" do
-        helper.avatar_url(nil).should ==
-          "http://test.host:80/assets/guest.png"
+        expect(helper.avatar_url(nil)).to eq "http://test.host:80/assets/guest.png"
       end
     end
   end
@@ -108,8 +101,7 @@ describe ApplicationHelper do
       it "return the line before and after" do
         project.stubs(:description).returns(description)
         project.stubs(:comment_message).returns(nil)
-        helper.excerpt_for(project, "description").should ==
-          "This is\n a <strong class=\"highlight\">description</strong>\n with four..."
+        expect(helper.excerpt_for(project, "description")).to eq "This is\n a <strong class=\"highlight\">description</strong>\n with four..."
       end
     end
 
@@ -117,8 +109,7 @@ describe ApplicationHelper do
       it "return the line before and after" do
         project.stubs(:description).returns(nil)
         project.stubs(:comment_message).returns(message)
-        helper.excerpt_for(project, "message").should ==
-          "This is\n a <strong class=\"highlight\">message</strong>\n with four..."
+        expect(helper.excerpt_for(project, "message")).to eq "This is\n a <strong class=\"highlight\">message</strong>\n with four..."
       end
     end
 
@@ -126,16 +117,14 @@ describe ApplicationHelper do
       it "return the first lines of the project's description" do
         project.stubs(:description).returns(description)
         project.stubs(:comment_message).returns(nil)
-        helper.excerpt_for(project, "something").should ==
-          "This is\n a description..."
+        expect(helper.excerpt_for(project, "something")).to eq "This is\n a description..."
       end
     end
 
     it "hillight the result" do
       project.stubs(:description).returns(description)
       project.stubs(:comment_message).returns(nil)
-      helper.excerpt_for(project, "description").should ==
-        "This is\n a <strong class=\"highlight\">description</strong>\n with four..."
+      expect(helper.excerpt_for(project, "description")).to eq "This is\n a <strong class=\"highlight\">description</strong>\n with four..."
     end
   end
 end

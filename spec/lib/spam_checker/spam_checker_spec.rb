@@ -14,7 +14,7 @@ describe SpamChecker do
   context "when the comment is a spam" do
     it "say than the comment is a spam" do
       SpamChecker.any_instance.stubs(:spam?).returns(true)
-      SpamChecker.spam?(invalid_comment, request).should be_true
+      expect(SpamChecker.spam?(invalid_comment, request)).to be_true
     end
   end
 end

@@ -19,13 +19,13 @@ describe Actuality do
   describe :to_param do
     subject { actuality.to_param }
 
-    it { should == "#{actuality.id}-#{actuality.title.parameterize}" }
+    it { should eq "#{actuality.id}-#{actuality.title.parameterize}" }
   end
 
   describe :root_comments do
     it 'give root comments for the actuality' do
       create(:comment, parent: comment, item: actuality)
-      actuality.root_comments.size.should == 1
+      expect(actuality.root_comments.size).to eq 1
     end
   end
 end

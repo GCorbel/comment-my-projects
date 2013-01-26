@@ -50,7 +50,7 @@ describe ProjectsController do
   describe "POST 'create'" do
     it "assign the signed user to the project" do
       post 'create', args
-      project.user.should == user
+      expect(project.user).to eq user
     end
   end
 

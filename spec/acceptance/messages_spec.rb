@@ -9,6 +9,6 @@ feature 'Mesage' do
     fill_in 'Email', with: 'user@host.com'
     fill_in 'Message', with: 'message'
     click_button 'Envoyer'
-    page.should have_content('Votre message a été envoyé')
+    expect(page).to have_content('Votre message a été envoyé')
   end
 end

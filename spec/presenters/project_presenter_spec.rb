@@ -16,8 +16,8 @@ describe ProjectPresenter do
 
       projects = ProjectPresenter.top(1)
 
-      projects.length.should == 1
-      projects.first.id.should == project2.id
+      expect(projects.length).to eq 1
+      expect(projects.first.id).to eq project2.id
     end
   end
 end
