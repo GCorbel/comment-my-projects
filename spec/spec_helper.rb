@@ -14,24 +14,27 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.mock_with :mocha
-    config.fixture_path = "#{::Rails.root}/spec/fixtures"
-    config.use_transactional_fixtures = true
     config.before(:each) do
       if example.metadata[:js]
         DatabaseCleaner.strategy = :truncation
-        DatabaseCleaner.start
+      else
+        DatabaseCleaner.strategy = :transaction
       end
+      DatabaseCleaner.start
     end
 
     config.after(:each) do
-      if example.metadata[:js]
-        DatabaseCleaner.clean
-        load "#{Rails.root}/db/seeds.rb"
-      end
+      DatabaseCleaner.clean
+      load "#{Rails.root}/db/seeds.rb" if example.metadata[:js]
     end
+
+    config.before(:suite) do
+      DatabaseCleaner.clean_with :truncation
+    end
+
     config.include FactoryGirl::Syntax::Methods
-    config.include Warden::Test::Helpers, type: :request
-    config.include RequestHelpers, type: :request
+    config.include Warden::Test::Helpers, type: :feature
+    config.include RequestHelpers, type: :feature
     config.include Devise::TestHelpers, type: :controller
     config.include ControllerHelpers, type: :controller
   end
