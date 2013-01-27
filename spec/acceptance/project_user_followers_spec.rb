@@ -7,8 +7,8 @@ feature 'Follow', js: true do
   scenario 'Follow a project' do
     sign_in user
     visit project_path(project)
-    save_and_open_page
     click_link "Follow the project"
+    expect(page).to have_content("Stop to follow the project")
   end
 
   scenario 'Stop to follow a project' do
