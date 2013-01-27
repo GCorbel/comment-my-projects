@@ -79,3 +79,8 @@ gem 'acts-as-taggable-on'
 gem 'select2-rails'
 gem 'minimalist_cms'
 gem "activeadmin-globalize3"
+gem "rubber"
+gem "open4"
+gem "gelf"
+gem 'graylog2_exceptions', :git => 'git://github.com/wr0ngway/graylog2_exceptions.git'
+gem 'graylog2-resque'
