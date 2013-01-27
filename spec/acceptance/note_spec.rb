@@ -1,4 +1,3 @@
-#encoding=utf-8
 require 'spec_helper'
 
 feature 'Notes', js: true do
@@ -37,17 +36,17 @@ feature 'Notes', js: true do
     visit project_path(project)
     select('New tag', from: 'Tag')
     first('.star').click
-    expect(page).to have_content('Votre note a été ajouté')
+    expect(page).to have_content('Your rating has been added')
   end
 
   scenario 'Visit the projet when the user is the project owner' do
     sign_in project.user
     visit project_path(project)
-    expect(page).to have_content("Vous ne pouvez pas voter pour votre projet")
+    expect(page).to have_content("You can not rate for your project")
   end
 
   scenario 'Visit the project when the user is not signed in' do
     visit project_path(project)
-    expect(page).to have_content("Vous devez être connecté pour ajouter une note")
+    expect(page).to have_content("You must be logged to add a rate")
   end
 end

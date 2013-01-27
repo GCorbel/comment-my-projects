@@ -10,7 +10,7 @@
                 class: 'btn',
                 remote: true %>
     <% if can? :destroy, comment %>
-      <%= link_to 'Supprimer',
+      <%= link_to t('shared.delete'),
                   polymorphic_path([item, comment]),
                   method: 'delete',
                   data: { confirm: t('shared.are_you_sure') },

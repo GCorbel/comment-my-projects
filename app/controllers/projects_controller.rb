@@ -1,4 +1,3 @@
-#encoding=utf-8
 class ProjectsController < ApplicationController
   inherit_resources
   before_filter :authenticate_user!, except: [:index, :show, :feed]

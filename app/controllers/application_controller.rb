@@ -1,8 +1,7 @@
-#encoding=utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
   rescue_from CanCan::AccessDenied do |excetion|
-    flash[:error] = "Accès interdit"
+    flash[:error] = I18n.t(".access_forbidden")
     redirect_to root_url
   end
 

@@ -1,4 +1,3 @@
-#encoding=utf-8
 require 'spec_helper'
 
 feature "Comments" do
@@ -26,9 +25,9 @@ feature "Comments" do
   scenario 'Enable to create a new comment', js: true do
     visit project_actuality_path(project, actuality)
     within('#new_comment') do
-      fill_in('Nom', with: 'My name')
+      fill_in('Username', with: 'My name')
       fill_in('wmd-input', with: 'My Message')
-      click_button 'Valider'
+      click_button 'Submit'
     end
     comment_should_be_visible
   end
@@ -38,7 +37,7 @@ feature "Comments" do
     visit project_actuality_path(project, actuality)
     within('#new_comment') do
       fill_in('wmd-input', with: 'My Message')
-      click_button 'Valider'
+      click_button 'Submit'
     end
     comment_should_be_visible
   end
@@ -60,16 +59,16 @@ feature "Comments" do
     comment
     visit project_actuality_path(project, actuality)
     within("#comment_#{comment.id}") do
-      click_link 'Répondre'
-      fill_in('Nom', with: 'My name')
+      click_link 'Answer'
+      fill_in('Username', with: 'My name')
       fill_in("wmd-input#{comment.id}", with: 'My answer')
-      click_button 'Valider'
-      expect(page).to_not have_content('Ajouter un commentaire')
+      click_button 'Submit'
+      expect(page).to_not have_content('Add a comment')
       expect(page).to have_content('My answer')
     end
     visit project_actuality_path(project, actuality)
     within("#comment_#{comment.id}") do
-      expect(page).to_not have_content('Ajouter un commentaire')
+      expect(page).to_not have_content('Add a comment')
       expect(page).to have_content('My answer')
     end
   end
@@ -92,7 +91,7 @@ feature "Comments" do
   def delete_comment
     visit project_actuality_path(project, actuality)
     within("#comment_#{comment.id}") do
-      click_link 'Supprimer'
+      click_link 'Delete'
     end
     expect(page).to_not have_content(comment.message)
     visit project_actuality_path(project, actuality)

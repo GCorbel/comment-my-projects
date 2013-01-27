@@ -184,6 +184,8 @@ fr:
       create: "Créer"
       update: "Modifier"
       submit: "Valider"
+    site_description:
+      "Ce site est une plateforme de discussion sur les projets Open-Source où vous pouvez soumettre votre projet et commenter ceux qui sont déjà inscrits"
 
   errors: &errors
     format: "%{attribute} : %{message}"
@@ -428,6 +430,7 @@ fr:
       actuality_administration: "Administration de l'actualité"
   application_controller:
     not_admin: "Vous devez être administrateur pour accéder à cet page"
+    access_forbidden: "Accès interdit"
   messages:
     new:
       send: "Envoyer"

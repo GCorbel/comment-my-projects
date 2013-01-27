@@ -1,4 +1,3 @@
-#encoding=utf-8
 require "#{Rails.root}/lib/action_view/helpers/text_helper"
 module ApplicationHelper
   extend ActionView::Helpers::TextHelper
@@ -27,7 +26,7 @@ module ApplicationHelper
     if description.present?
       description[0..160]
     else
-      "Ce site est un plateforme de discution sur les projects Open-Source où vous pouvez soumettre votre projet et commenter ceux qui sont déjà inscrits"
+      t('helpers.site_description')
     end
   end
 

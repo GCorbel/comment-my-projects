@@ -2,4 +2,258 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  shared:
+    submit: "Submit"
+    update: "Update"
+    delete: "Delete"
+    are_you_sure: "Are you sure?"
+    cancel: "Cancel"
+    tags: "Tags"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " and "
+      last_word_connector: " and "
+
+  helpers:
+    select:
+      prompt: "Please select"
+    submit:
+      create: "Create"
+      update: "Update"
+      submit: "Submit"
+    site_description:
+      "This site is a discussion plateforme for open-source proects where you can to submit your project and comment one those already subscribed"
+
+  errors: &errors
+    format: "%{attribute} : %{message}"
+    messages: &errors_messages
+      inclusion: "is not included in the list"
+      exclusion: "is not available"
+      invalid: "is not valid"
+      confirmation: "does not match confirmation"
+      accepted: "must be accepted"
+      empty: "required field"
+      blank: "required field"
+      too_long:
+        one: "is too long (no more than one character)"
+        other: "is too long (no more than %{count} characters)"
+      too_short:
+        one: "is too short (at least one character)"
+        other: "it too short (less than %{count} characters)"
+      wrong_length:
+        one: "is not the correct length (must be a single character)"
+        other: "is not the correct length (must include %{count} characters)"
+      not_a_number: "is not a number"
+      not_an_integer: "must be an integer"
+      greater_than: "must be greater than %{count}"
+      greater_than_or_equal_to: "must be greater than or equal to %{count}"
+      equal_to: "must be equal to %{count}"
+      less_than: "must be less than %{count}"
+      less_than_or_equal_to: "must be less than or equal to %{count}"
+      odd: "must be odd"
+      even: "must be even"
+      taken: "is not available"
+      record_invalid: "Validation failed: %{errors}"
+
+    template: &errors_template
+      header:
+        one: "Failed to save the user: error 1"
+        other: "Failed to register the user: %{count} errors"
+      body: "Please check the following fields:"
+
+  activemodel:
+    errors:
+      <<: *errors
+    search:
+      project_all: "All"
+      project_comment: "Comments"
+      project_description: "Descriptions"
+  activerecord:
+    errors:
+      <<: *errors
+    attributes:
+      models:
+        project: "Project"
+        user: "User"
+        actuality: "Actuality"
+        message: "Message"
+      user:
+        username: "Username or email"
+        username: "Username"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Confirm password"
+        remember_me: "Remember Me"
+        current_password: "Current Password"
+      project:
+        title: "Title"
+        url: "Url"
+        tag_list: "Tag list"
+      comment:
+        username: "Username"
+      note:
+        value: "Rate"
+      actuality:
+        title: "Title"
+        body: "Body"
+      message:
+        username: "Username"
+        email: "Email"
+        body: "Message"
+
+  flash:
+    actions:
+      create:
+        notice: "Your %{resource_name} has been added"
+      update:
+        notice: "Your %{resource_name} has been updated"
+      destroy:
+        notice: "Your %{resource_name} has been deleted"
+    projects:
+      create:
+        notice: "Your project has been added"
+      update:
+        notice: "Your project has been updated"
+      destroy:
+        notice: "Your project has been deleted"
+    notes:
+      create:
+        notice: "Your rating has been added"
+      update:
+        notice: "Your rating has been update"
+      delete:
+        notice: "Your rating has been delete"
+    actualities:
+      create:
+        notice: "Your actuality has been added"
+      update:
+        notice: "Your actuality has been updated"
+      destroy:
+        notice: "Your actuality has been deleted"
+    messages:
+      create:
+        notice: "Your message has been sended"
+  controller:
+    create:
+      success: "Your %{model} has beend added"
+    update:
+      success: "Your %{model} has been updated"
+    destroy:
+      success: "Your %{model} has been deleted"
+  comments:
+    comment:
+      answer: "Answer"
+    new:
+      add_a_comment: "Add a comment"
+  mailers:
+    project_comment_notify_item_owner_title:
+      "A comment has been added to one of your projects"
+    project_comment_notify_item_owner: "
+      Hello %{user},<br/>
+      <br/>
+      A comment has beed added to one of your projects
+      To view the message, you can go to this address :
+      %{link_to}
+      </br>
+      </br>
+      See you later on Social-Reviewing"
+    actuality_comment_notify_item_owner_title:
+      "A comment has been added to one of your news"
+    actuality_comment_notify_item_owner: "
+      Hello %{user},<br/>
+      <br/>
+      A comment has beed added to one of your news
+      To show the message you can go to this address :
+      %{link_to}
+      </br>
+      </br>
+      See you later on Social-Reviewing"
+    project_comment_notify_title:
+      "A comment has been added to one of the projects that you follow"
+    project_comment_notify: "
+      Hello %{user},<br/>
+      <br/>
+      A comment has been added to one of the projects that you follow
+      To view the new message, you can go to this address:
+      %{link_to}
+      </br>
+      </br>
+      See you later on Social-Reviewing"
+    actuality_comment_notify_title:
+      "A comment has been added to one of the news that you follow"
+    actuality_comment_notify: "
+      Hello %{user},<br/>
+      <br/>
+      A comment has been added to one of the news that you follow
+      To view the new message, you can go to this address:
+      %{link_to}
+      </br>
+      </br>
+      See you later on Social-Reviewing"
+    you_received_an_email:
+      "You received an email from Social-Reviewing.com"
+  layouts:
+    application:
+      project_index: "Project list"
+      project_create: "Add project"
+      contact_us: "Contact/Hire us"
+      sign_out: "Sign out"
+      sign_up: "Sign up"
+      sign_in: "Sign in"
+      user: "User"
+  project_user_followers:
+    link_follow:
+      follow_project: "Follow the project"
+    link_unfollow:
+      unfollow_project: "Stop to follow the project"
+  home:
+    index:
+      top_projects: "Best projects"
+      top_user_projects: "Users with the most projects"
+  project:
+    form_action:
+      project_administration: "Project administration"
+    project_type_search:
+      project_type: "Project type"
+    index:
+      title: "Title"
+      url: "Url"
+      type: "Type"
+    show:
+      site: "Site : %{link}"
+      added_by: "Added by : %{user}"
+      date: "Date : %{date}"
+  projects:
+    index:
+      search: "Search"
+      advanced_search: "Advanced search"
+      type: "Type"
+      search_for: "Search in"
+      no_result: "The is no result in your search. Please try again"
+      tag_list: 'Tag list'
+    form_action:
+      add_a_actuality: "Add an actuality"
+    show:
+      list_actuality: "News"
+    form:
+      tag_list_placeholder: "Tags where you want to be rate"
+  notes:
+    index:
+      project_note: "Project rates"
+    new:
+      add_a_note: "Add a rate"
+      should_be_connected: "You must be logged to add a rate"
+      cannot_be_project_owner: "You can not rate for your project"
+  actualities:
+    show:
+      back_to_project: "Back to the project"
+    form_action:
+      actuality_administration: "Administration of the news"
+  application_controller:
+    not_admin: "You must to be an administrator to access to this page"
+    access_forbidden: "Unauthorized access"
+  messages:
+    new:
+      send: "Send"

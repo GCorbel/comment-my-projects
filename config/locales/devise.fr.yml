@@ -29,6 +29,9 @@ fr:
       updated: 'Votre mot de passe a été édité avec succès, vous êtes maintenant connecté'
       updated_not_active: 'Votre mot de passe a été changé avec succès.'
       send_paranoid_instructions: "Si votre e-mail existe dans notre base de données, vous allez recevoir un lien de réinitialisation par e-mail"
+      no_token: "Vous ne pouvez accéder à cette page sans venir d'un email de changement de mot de passe. Si vous venez d'un email de changement de mot de passe, s'il vous plait, vérifier d'avoir bien utilisé l'URL fourni."
+      new:
+        password_forgotten: "Mot de passe oublié"
       edit:
         change_my_password: "Changer mon mot de passe"
     confirmations:
@@ -55,7 +58,7 @@ fr:
       unlocked: 'Votre compte a été déverrouillé avec succès, vous êtes maintenant connecté.'
       send_paranoid_instructions: 'Si votre compte existe, vous allez bientôt recevoir un email contenant les instructions pour le déverrouiller.'
       new:
-        unlocks: "Renvoyer les instructions de débloquage"
+        unlocks: "Envoyer les instructions de déblocage"
     links:
       subscription: "Inscription"
       forgot_password: "Mot de passe oublié?"

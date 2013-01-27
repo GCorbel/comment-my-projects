@@ -1,4 +1,3 @@
-#encoding=utf-8
 require "#{Rails.root}/lib/spam_checker/spam_checker"
 class CommentsController < ApplicationController
   inherit_resources

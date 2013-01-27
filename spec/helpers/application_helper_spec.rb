@@ -1,4 +1,3 @@
-#encoding=utf-8
 require 'spec_helper'
 
 describe ApplicationHelper do
@@ -59,7 +58,7 @@ describe ApplicationHelper do
 
     context "where there is no description" do
       it "show a standard description" do
-        expect(helper.browser_description).to eq "Ce site est un plateforme de discution sur les projects Open-Source où vous pouvez soumettre votre projet et commenter ceux qui sont déjà inscrits"
+        expect(helper.browser_description).to eq "This site is a discussion plateforme for open-source proects where you can to submit your project and comment one those already subscribed"
       end
     end
   end

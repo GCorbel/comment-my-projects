@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe CommentMailer do
@@ -7,21 +6,21 @@ describe CommentMailer do
   let(:actuality) { build_stubbed(:actuality, project: project) }
 
   before do
-    @prefix = "Un commentaire a été ajouté à"
+    @prefix = "A comment has been added to"
   end
 
   describe :comment_notify_item_owner do
     context 'when the item is a project' do
       subject { CommentMailer.comment_notify_item_owner(user, project) }
       its(:to) { should == [user.email] }
-      its(:subject) { should == "#{@prefix} l'un de vos projet" }
+      its(:subject) { should == "#{@prefix} one of your projects" }
       its(:body) { should have_content(url_for(project)) }
     end
 
     context 'when the item is a actuality' do
       subject { CommentMailer.comment_notify_item_owner(user, actuality) }
       its(:to) { should == [user.email] }
-      its(:subject) { should == "#{@prefix} l'une de vos actualité" }
+      its(:subject) { should == "#{@prefix} one of your news" }
       its(:body) { should have_content(url_for(actuality)) }
     end
   end
@@ -30,14 +29,14 @@ describe CommentMailer do
     context 'when the item is a project' do
       subject { CommentMailer.comment_notify_followers(user, project) }
       its(:to) { should == [user.email] }
-      its(:subject) { should == "#{@prefix} l'un des projets que vous suivez" }
+      its(:subject) { should == "#{@prefix} one of the projects that you follow" }
       its(:body) { should have_content(url_for(project)) }
     end
 
     context 'when the item is a actuality' do
       subject { CommentMailer.comment_notify_followers(user, actuality) }
       its(:to) { should == [user.email] }
-      its(:subject) { should == "#{@prefix} l'une des actualités que vous suivez" }
+      its(:subject) { should == "#{@prefix} one of the news that you follow" }
       its(:body) { should have_content(url_for(actuality)) }
     end
   end

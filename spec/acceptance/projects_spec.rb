@@ -1,4 +1,3 @@
-#encoding=utf-8
 require 'spec_helper'
 
 feature "Projects" do
@@ -11,13 +10,13 @@ feature "Projects" do
     sign_in
     visit new_project_path
     within('#new_project') do
-      fill_in("Titre", with: "Mon Projet")
+      fill_in("Title", with: "Mon Projet")
       fill_in("Url", with: "http://www.google.com")
       fill_in('wmd-input', with: 'My Project')
-      fill_in('Liste de tags', with: 'Ruby, Rails')
-      click_button "Créer"
+      fill_in('Tag list', with: 'Ruby, Rails')
+      click_button "Create"
     end
-    expect(page).to have_content("Votre projet a été ajouté")
+    expect(page).to have_content("Your project has been added")
   end
 
   scenario 'Search a project' do
@@ -27,7 +26,7 @@ feature "Projects" do
     visit projects_path
     fill_in('search_text', with: 'simple')
     select('Descriptions', from: 'search_category')
-    fill_in('Liste de tags', with: tag.name)
+    fill_in('Tag list', with: tag.name)
 
     click_button('Go!')
     expect(page).to have_content(description.split('\n').first)
@@ -42,11 +41,11 @@ feature "Projects" do
   scenario 'Update a project' do
     sign_in user
     visit edit_project_path(project)
-    fill_in("Titre", with: "Mon Projet")
+    fill_in("Title", with: "Mon Projet")
     fill_in("Url", with: "http://www.google.com")
     fill_in('wmd-input', with: 'My Project')
-    click_button "Modifier"
-    expect(page).to have_content("Votre projet a été modifié")
+    click_button "Update"
+    expect(page).to have_content("Your project has been updated")
   end
 
   scenario 'Destroy a project' do
@@ -54,8 +53,8 @@ feature "Projects" do
     sign_in project.user
     visit project_path(project)
     within('.form-actions') do
-      click_link "Supprimer"
+      click_link "Delete"
     end
-    expect(page).to have_content("Votre projet a été supprimé")
+    expect(page).to have_content("Your project has been deleted")
   end
 end

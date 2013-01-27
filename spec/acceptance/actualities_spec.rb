@@ -1,4 +1,3 @@
-#encoding=utf-8
 require 'spec_helper'
 
 feature "Actualities" do
@@ -24,30 +23,30 @@ feature "Actualities" do
     sign_in user
     visit new_project_actuality_path(project)
     within('#new_actuality') do
-      fill_in("Titre", with: "Mon Titre")
-      fill_in('wmd-input', with: 'Mon Corps')
-      click_button 'Créer'
+      fill_in("Title", with: "My Body")
+      fill_in('wmd-input', with: 'My Body')
+      click_button 'Create'
     end
-    expect(page).to have_content("Votre actualité a été ajoutée")
+    expect(page).to have_content("Your actuality has been added")
   end
 
   scenario "update an actuality" do
     sign_in user
     visit edit_project_actuality_path(project, actuality)
     within("#edit_actuality_#{actuality.id}") do
-      fill_in("Titre", with: "Mon Titre")
-      fill_in('wmd-input', with: 'Mon Corps')
-      click_button 'Modifier'
+      fill_in("Title", with: "My Title")
+      fill_in('wmd-input', with: 'My Body')
+      click_button 'Update'
     end
-    expect(page).to have_content("Votre actualité a été modifiée")
+    expect(page).to have_content("Your actuality has been updated")
   end
 
   scenario "destroy an actuality" do
     sign_in user
     visit project_actuality_path(project, actuality)
     within('.form-actions') do
-      click_link "Supprimer"
+      click_link "Delete"
     end
-    expect(page).to have_content("Votre actualité a été supprimé")
+    expect(page).to have_content("Your actuality has been deleted")
   end
 end

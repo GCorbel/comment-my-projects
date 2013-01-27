@@ -1,14 +1,13 @@
-#encoding=utf-8
 require 'spec_helper'
 
 feature 'Mesage' do
   scenario "Send a new message" do
     Page.create!(title: 'home', home: true)
     visit new_message_path
-    fill_in 'Nom', with: 'username'
+    fill_in 'Username', with: 'username'
     fill_in 'Email', with: 'user@host.com'
     fill_in 'Message', with: 'message'
-    click_button 'Envoyer'
-    expect(page).to have_content('Votre message a été envoyé')
+    click_button 'Send'
+    expect(page).to have_content('Your message has been sended')
   end
 end

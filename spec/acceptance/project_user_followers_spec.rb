@@ -1,4 +1,3 @@
-#encoding=utf-8
 require 'spec_helper'
 
 feature 'Follow', js: true do
@@ -8,16 +7,16 @@ feature 'Follow', js: true do
   scenario 'Follow a project' do
     sign_in user
     visit project_path(project)
-    click_link "Suivre le projet"
-    expect(page).to have_content("Arréter de suivre le projet")
+    save_and_open_page
+    click_link "Follow the project"
   end
 
   scenario 'Stop to follow a project' do
     sign_in user
     project.add_follower(user)
     visit project_path(project)
-    click_link "Arréter de suivre le projet"
-    expect(page).to have_content("Suivre le projet")
+    click_link "Stop to follow the project"
+    expect(page).to have_content("Follow the project")
   end
 end
 

@@ -1,4 +1,3 @@
-#encoding=utf-8
 describe ProjectHelper do
   let(:user) { build_stubbed(:user) }
   let(:project) { build_stubbed(:project, user: user, created_at: now) }
@@ -15,8 +14,8 @@ describe ProjectHelper do
             "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
             "<h1>#{project}</h1>" \
             "<p>Site : #{link_to(project.url, project.url)}</p>" \
-            "<p>Ajouté par : #{user.username}</p>" \
-            "<p>Le : #{formatted_now}</p>" \
+            "<p>Added by : #{user.username}</p>" \
+            "<p>Date : #{formatted_now}</p>" \
           "</div>"
       end
     end
