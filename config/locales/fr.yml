@@ -435,3 +435,9 @@ fr:
     new:
       send: "Envoyer"
       header: "Nous sommes disponnible pour des contrats en freelance. Envoyer nous un message pour plus d'informations."
+  users:
+    show:
+      date: "Membre depuis le : %{date}"
+      email: "Email"
+      username: "Nom d'utilisateur"
+      user_projects: "Projets de l'utilisateur"

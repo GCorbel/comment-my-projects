@@ -14,7 +14,7 @@ describe ProjectHelper do
             "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
             "<h1>#{project}</h1>" \
             "<p>Site : #{link_to(project.url, project.url)}</p>" \
-            "<p>Added by : #{user.username}</p>" \
+            "<p>Added by : #{link_to(user.username, user)}</p>" \
             "<p>Date : #{formatted_now}</p>" \
           "</div>"
       end

@@ -126,4 +126,10 @@ describe ApplicationHelper do
       expect(helper.excerpt_for(project, "description")).to eq "This is\n a <strong class=\"highlight\">description</strong>\n with four..."
     end
   end
+
+  describe :image_for do
+    it "give the gravatar for the user" do
+      expect(helper.image_for(user)).to eq '<img alt="Guest" class="avatar" src="http://test.host:80/assets/guest.png" />'
+    end
+  end
 end

@@ -46,6 +46,10 @@ module ApplicationHelper
       "?s=#{size}&d=#{CGI.escape(default_url)}"
   end
 
+  def image_for(user)
+    image_tag(avatar_url(user, 76), class: 'avatar')
+  end
+
   def excerpt_for(project, text)
     regex = Regexp.new text
     options = { separator: "\n", radius: 1 }

@@ -1,0 +1,20 @@
+<div id="project">
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="graybox">
+        <%= image_for(@user) %>
+        <p><%= t('.username') %> : <%= @user.username %></p>
+        <p><%= t('.email') %> : <%= @user.email %></p>
+        <p><%= date_for_user(@user) %></p>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="graybox">
+        <h3><%= t('.user_projects') %></h3>
+        <% @user.projects.each do |project| %>
+          <p><%= link_to project, project_path(project) %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

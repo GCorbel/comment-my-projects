@@ -16,7 +16,7 @@ describe CommentHelper do
         comment.user = user
         should eq "<div class=\"comment_header\">" \
             "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
-            "#{user.username}" \
+            "#{link_to(user.username, user)}" \
             "<br/>" \
             "#{formatted_now}" \
           "</div>"

@@ -1,5 +1,6 @@
 module ProjectHelper
   include NoteHelper
+  include ApplicationHelper
 
   def project_title_for(project)
     @project = project
@@ -17,7 +18,7 @@ module ProjectHelper
 
   private
   def image
-    image_tag(avatar_url(@project.user, 76), class: 'avatar')
+    image_for(@project.user)
   end
 
   def title
@@ -34,8 +35,10 @@ module ProjectHelper
   end
 
   def added_by
+    user = @project.user
+    link = link_to(user.username, user)
     content_tag(:p) do
-      raw(t('project.show.added_by', user: @project.user))
+      raw(t('project.show.added_by', user: link))
     end
   end
 

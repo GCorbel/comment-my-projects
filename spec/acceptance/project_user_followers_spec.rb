@@ -2,7 +2,8 @@ require 'spec_helper'
 
 feature 'Follow', js: true do
   given(:user) { create(:user) }
-  given(:project) { create(:project) }
+  given(:owner) { create(:user) }
+  given(:project) { create(:project, user: owner) }
 
   scenario 'Follow a project' do
     sign_in user
