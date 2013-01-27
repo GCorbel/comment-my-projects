@@ -10,7 +10,7 @@ describe ApplicationHelper do
       subject { helper.alert_box("info", "message") }
 
       it "create a valid message" do
-        should == %Q{<div class=\"alert alert-info\"><button class=\"close\" data-dismiss=\"alert\">x</button><div>message</div></div>}
+        should eq %Q{<div class=\"alert alert-info\"><button class=\"close\" data-dismiss=\"alert\">x</button><div>message</div></div>}
       end
     end
 

@@ -14,7 +14,7 @@ describe CommentHelper do
 
       it 'show the title' do
         comment.user = user
-        should == "<div class=\"comment_header\">" \
+        should eq "<div class=\"comment_header\">" \
             "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
             "#{user.username}" \
             "<br/>" \
@@ -26,7 +26,7 @@ describe CommentHelper do
     context 'when there is a username' do
       before { self.stubs(:avatar_url).returns('id') }
       it 'show the title with the username' do
-        should == "<div class=\"comment_header\">" \
+        should eq "<div class=\"comment_header\">" \
             "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
             "#{comment.username}" \
             "<br/>" \
