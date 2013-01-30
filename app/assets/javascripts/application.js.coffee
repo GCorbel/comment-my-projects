@@ -31,9 +31,11 @@ rate = (event) ->
   value = $(this).data('value')
   tag = $(this).data('tag')
   url = $(this).data('url')
+  user = $(this).data('user')
   $.post(
     url
     note:
       value: value
       tag_id: tag
+      user_id: user
   ).done( => $(this).parent().parent().html('Your rate has been added<br/><br/>') )

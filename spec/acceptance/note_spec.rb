@@ -12,12 +12,12 @@ feature 'Notes', js: true do
     project.save
     project.reload
 
-    Note.create(project: project, tag: nil, value: 1)
-    Note.create(project: project, tag: tag1, value: 1)
-    Note.create(project: project, tag: tag1, value: 2)
-    Note.create(project: project, tag: tag1, value: 4)
-    Note.create(project: project, tag: tag2, value: 3)
-    Note.create(project: project, tag: tag2, value: 1)
+    Note.create(project: project, tag: nil, value: 1, user: user)
+    Note.create(project: project, tag: tag1, value: 1, user: user)
+    Note.create(project: project, tag: tag1, value: 2, user: user)
+    Note.create(project: project, tag: tag1, value: 4, user: user)
+    Note.create(project: project, tag: tag2, value: 3, user: user)
+    Note.create(project: project, tag: tag2, value: 1, user: user)
     visit project_path(project)
     within('#notes') do
       expect(page).to have_content('General : (1.0/4 - 1 vote)')

@@ -53,9 +53,9 @@ describe Project do
 
   describe :note_for do
     it 'give notes for the project' do
-      Note.create(project: project, tag: tag, value: 8)
-      Note.create(project: project, tag: tag, value: 3)
-      Note.create(project: project, tag: tag, value: 3)
+      Note.create(project: project, tag: tag, value: 8, user: user)
+      Note.create(project: project, tag: tag, value: 3, user: user)
+      Note.create(project: project, tag: tag, value: 3, user: user)
       expect(project.note_for(tag)).to eq 4.7
     end
   end
@@ -82,7 +82,7 @@ describe Project do
   describe :notes_for do
     it 'give number of notes' do
       expect(project.notes_for(tag)).to eq []
-      note = Note.create(project: project, tag: tag, value: 1)
+      note = Note.create(project: project, tag: tag, value: 1, user: user)
       expect(project.notes_for(tag)).to eq [note]
     end
   end
@@ -90,9 +90,9 @@ describe Project do
   describe :number_of_notes do
     it 'give number of notes' do
       expect(project.number_of_notes_for(tag)).to eq 0
-      Note.create(project: project, tag: tag, value: 8)
+      Note.create(project: project, tag: tag, value: 8, user: user)
       expect(project.number_of_notes_for(tag)).to eq 1
-      Note.create(project: project, tag: tag, value: 3)
+      Note.create(project: project, tag: tag, value: 3, user: user)
       expect(project.number_of_notes_for(tag)).to eq 2
     end
   end

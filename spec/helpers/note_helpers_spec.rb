@@ -1,9 +1,10 @@
 describe NoteHelper do
   let(:project) { create(:project) }
   let(:tag) { create(:tag) }
-  let(:note1) { create(:note, tag: tag, value: 3) }
-  let(:note2) { create(:note, tag: tag, value: 4) }
-  let(:note3) { create(:note, tag: tag, value: 3) }
+  let(:user) { create(:user) }
+  let(:note1) { create(:note, tag: tag, value: 3, user: user) }
+  let(:note2) { create(:note, tag: tag, value: 4, user: user) }
+  let(:note3) { create(:note, tag: tag, value: 3, user: user) }
 
   describe :note_for do
     context 'when there is a vote' do

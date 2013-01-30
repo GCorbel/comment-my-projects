@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117013135) do
+ActiveRecord::Schema.define(:version => 20130130010915) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -80,10 +80,12 @@ ActiveRecord::Schema.define(:version => 20130117013135) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "tag_id"
+    t.integer  "user_id"
   end
 
   add_index "notes", ["project_id"], :name => "index_notes_on_project_id"
   add_index "notes", ["tag_id"], :name => "index_notes_on_tag_id"
+  add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
 
   create_table "page_translations", :force => true do |t|
     t.integer  "page_id"
