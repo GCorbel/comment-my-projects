@@ -3,8 +3,10 @@ require 'spec_helper'
 describe Project do
   let(:project) { create(:project, title: "Title",
                          url: "http://www.test.com",
-                         user: user) }
-  let(:user) { create(:user) }
+                         user: user1) }
+  let(:user1) { create(:user) }
+  let(:user2) { create(:user) }
+  let(:user3) { create(:user) }
   let(:comment) { create(:comment, item: project) }
   let(:tag) { create(:tag) }
 
@@ -53,9 +55,9 @@ describe Project do
 
   describe :note_for do
     it 'give notes for the project' do
-      Note.create(project: project, tag: tag, value: 8, user: user)
-      Note.create(project: project, tag: tag, value: 3, user: user)
-      Note.create(project: project, tag: tag, value: 3, user: user)
+      Note.create(project: project, tag: tag, value: 8, user: user1)
+      Note.create(project: project, tag: tag, value: 3, user: user2)
+      Note.create(project: project, tag: tag, value: 3, user: user3)
       expect(project.note_for(tag)).to eq 4.7
     end
   end
@@ -82,7 +84,7 @@ describe Project do
   describe :notes_for do
     it 'give number of notes' do
       expect(project.notes_for(tag)).to eq []
-      note = Note.create(project: project, tag: tag, value: 1, user: user)
+      note = Note.create(project: project, tag: tag, value: 1, user: user1)
       expect(project.notes_for(tag)).to eq [note]
     end
   end
@@ -90,9 +92,9 @@ describe Project do
   describe :number_of_notes do
     it 'give number of notes' do
       expect(project.number_of_notes_for(tag)).to eq 0
-      Note.create(project: project, tag: tag, value: 8, user: user)
+      Note.create(project: project, tag: tag, value: 8, user: user1)
       expect(project.number_of_notes_for(tag)).to eq 1
-      Note.create(project: project, tag: tag, value: 3, user: user)
+      Note.create(project: project, tag: tag, value: 3, user: user2)
       expect(project.number_of_notes_for(tag)).to eq 2
     end
   end
@@ -112,28 +114,28 @@ describe Project do
   describe :add_follower do
     it 'add a user to the followers' do
       expect(lambda do
-        project.add_follower(user)
+        project.add_follower(user1)
       end).to change(project.followers, :size).by(1)
     end
 
     it 'render the new relation' do
-      expect(project.add_follower(user)).to be_a(ProjectUserFollower)
+      expect(project.add_follower(user1)).to be_a(ProjectUserFollower)
     end
   end
 
   describe :remove_follower do
     it 'add a user to the followers' do
-      project.add_follower(user)
+      project.add_follower(user1)
       expect(lambda do
-        project.remove_follower(user)
+        project.remove_follower(user1)
       end).to change(project.followers, :size).by(-1)
     end
   end
 
   describe :followers_ids do
     it "return the ids of followers" do
-      project.add_follower(user)
-      expect(project.followers_ids).to eq [user.id]
+      project.add_follower(user1)
+      expect(project.followers_ids).to eq [user1.id]
     end
   end
 end

@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 feature 'Notes', js: true do
-  given(:user) { create(:user) }
-  given(:project) { create(:project, user: user) }
+  given(:user1) { create(:user) }
+  given(:user2) { create(:user) }
+  given(:user3) { create(:user) }
+  given(:project) { create(:project, user: user1) }
   given(:tag1) { create(:tag, name: 'New tag') }
   given(:tag2) { create(:tag, name: 'New tag 2') }
   given(:tag3) { create(:tag, name: 'New tag 3') }
@@ -12,12 +14,12 @@ feature 'Notes', js: true do
     project.save
     project.reload
 
-    Note.create(project: project, tag: nil, value: 1, user: user)
-    Note.create(project: project, tag: tag1, value: 1, user: user)
-    Note.create(project: project, tag: tag1, value: 2, user: user)
-    Note.create(project: project, tag: tag1, value: 4, user: user)
-    Note.create(project: project, tag: tag2, value: 3, user: user)
-    Note.create(project: project, tag: tag2, value: 1, user: user)
+    Note.create(project: project, tag: nil, value: 1, user: user1)
+    Note.create(project: project, tag: tag1, value: 1, user: user1)
+    Note.create(project: project, tag: tag1, value: 2, user: user2)
+    Note.create(project: project, tag: tag1, value: 4, user: user3)
+    Note.create(project: project, tag: tag2, value: 3, user: user1)
+    Note.create(project: project, tag: tag2, value: 1, user: user2)
     visit project_path(project)
     within('#notes') do
       expect(page).to have_content('General : (1.0/4 - 1 vote)')
