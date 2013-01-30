@@ -39,10 +39,7 @@ describe ProjectsController do
 
   describe "GET 'show'" do
     subject { get 'show', args }
-    before do
-      Comment.expects(:new)
-      Note.expects(:new)
-    end
+    before { Comment.expects(:new) }
     it { should render_template('show') }
   end
 
