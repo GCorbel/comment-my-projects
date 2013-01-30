@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @note = Note.new
   end
 
   def index

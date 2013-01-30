@@ -1,0 +1,2 @@
+$('#notes_index_container').html("<%= j(render('index', project: @project)) %>")
+$('#tag_list').html("<%= j(raw(tags_for(@project))) %>")

@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  respond_to :js
   inherit_resources
   belongs_to :project
 

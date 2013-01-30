@@ -8,12 +8,12 @@
     <meta name="author" content="Guirec Corbel"/>
     <meta name="news_keywords" content="social, development, coding, best practice, bests practices, github"/>
     <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
     <% if can? :manage, Page %>
       <%= stylesheet_link_tag 'minimalist_cms/minimalist_cms' %>
       <%= javascript_include_tag 'minimalistcms' %>
     <% end %>
     <% unless Rails.env.test? %>
-      <%= stylesheet_link_tag    "application", :media => "all" %>
       <%= csrf_meta_tags %>
       <%= analytics_init if Rails.env.production? %>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,9 +74,8 @@
                       </li>
                       <li>
                         <%= link_to t("shared.delete"),
-                                    registration_path(:user),
-                                    data: { confirm: "Êtes vous sûr?" },
-                                    method: :delete %>
+                                    cancel_user_registration_path,
+                                    data: { confirm: "Êtes vous sûr?" } %>
                       </li>
                   <% else %>
                     <li>

@@ -5,7 +5,9 @@
     <div class="span12">
       <div class="graybox">
         <%= project_title_for(@project) %>
-        <%= raw(tags_for(@project)) %>
+        <div id="tag_list">
+          <%= raw(tags_for(@project)) %>
+        </div>
         <hr/>
         <%= markdown(@project.description) %>
         <% if current_user %>
@@ -43,10 +45,10 @@
           <% end %>
         </div>
       <% end %>
-      <%= render 'notes/index', project: @project %>
-      <%= render 'notes/new',
-                 project: @project,
-                 note: @note %>
+      <div id="notes_index_container">
+        <%= render 'notes/index', project: @project %>
+      </div>
+      <%= render 'notes/new', project: @project %>
     </div>
     <div class="span9">
       <% @project.root_comments.each do |comment| %>

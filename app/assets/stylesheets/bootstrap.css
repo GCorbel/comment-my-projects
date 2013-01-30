@@ -31,9 +31,15 @@ body {
   margin-left: 0px;
 }
 
+#rating_container {
+  width: 180px;
+}
+
 .rating {
   direction: rtl;
   font-size: 30px;
+  padding-right: 30px;
+  align: right;
 }
 
 .rating, .notes {

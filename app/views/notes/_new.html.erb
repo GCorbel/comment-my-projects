@@ -5,16 +5,22 @@
   <% elsif current_user == project.user %>
     <%= t('.cannot_be_project_owner') %>
   <% else %>
-    <%= simple_form_for [project, note] do |f| %>
-      <%= f.association :tag, collection: project.tags %>
-      <%= f.input :value, as: :hidden %>
-      <span class="rating">
-        <span class="star" data-value="4"></span>
-        <span class="star" data-value="3"></span>
-        <span class="star" data-value="2"></span>
-        <span class="star" data-value="1"></span>
-      </span>
-      <%= f.submit style: 'display:none' %>
-    <% end %>
+    <div id="rating_container">
+      <% project.tags_with_general.each do |tag| %>
+        <h4><%= tag %></h4>
+        <div id="new_tag_<%= tag.id %>">
+          <div class="rating">
+            <% 4.downto(1) do |index| %>
+              <span class="star"
+                data-value="<%= index %>"
+                data-tag="<%= tag.id %>"
+                data-url="<%= project_notes_path(project) %>"></span>
+            <% end %>
+            <br/>
+            <br/>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>

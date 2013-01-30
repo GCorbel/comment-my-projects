@@ -27,16 +27,28 @@ feature 'Notes', js: true do
     end
   end
 
-  scenario 'Add a new note' do
+  scenario 'Add a new note', js: true do
     project.tag_list = tag1.name
     project.save
     project.reload
 
     sign_in
     visit project_path(project)
-    select('New tag', from: 'Tag')
-    first('.star').click
-    expect(page).to have_content('Your rating has been added')
+    within('#new_tag_') do
+      first('.star').click
+      expect(page).to have_content('Your rate has been added')
+    end
+    within('#tag_') do
+      expect(page).to have_content('General : (4.0/4 - 1 vote)')
+    end
+
+    within("#new_tag_#{tag1.id}") do
+      first('.star').click
+      expect(page).to have_content('Your rate has been added')
+    end
+    within("#tag_#{tag1.id}") do
+      expect(page).to have_content('New tag : (4.0/4 - 1 vote)')
+    end
   end
 
   scenario 'Visit the projet when the user is the project owner' do

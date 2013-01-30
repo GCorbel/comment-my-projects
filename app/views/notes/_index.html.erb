@@ -1,6 +1,6 @@
 <div id="notes" class="graybox">
   <h2><%= t('.project_note') %></h2>
   <% project.tags_with_general.each do |tag| %>
-    <p><%= note_for(project, tag) %></p>
+    <div id="tag_<%= tag.id %>"><%= note_for(project, tag) %></div>
   <% end %>
 </div>

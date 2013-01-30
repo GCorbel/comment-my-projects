@@ -28,5 +28,12 @@ markdownHelp = () ->
   window.open('http://fr.wikipedia.org/wiki/Markdown')
 
 rate = (event) ->
-  $('#note_value').val($(this).attr('data-value'))
-  $('#new_note>input').click()
+  value = $(this).data('value')
+  tag = $(this).data('tag')
+  url = $(this).data('url')
+  $.post(
+    url
+    note:
+      value: value
+      tag_id: tag
+  ).done( => $(this).parent().parent().html('Your rate has been added<br/><br/>') )

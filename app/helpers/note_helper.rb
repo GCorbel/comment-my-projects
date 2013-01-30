@@ -3,7 +3,9 @@ module NoteHelper
     content_tag(:div, class: 'notes') do
       note = project.note_for(tag)
       number_of_notes = project.number_of_notes_for(tag)
-      number_of_notes_plural = pluralize(number_of_notes, 'vote')
+      number_of_notes_plural =
+        number_of_notes.to_s + ' vote'.pluralize(number_of_notes)
+
       raw(
         "#{tag.name} : " +
         if number_of_notes == 0
