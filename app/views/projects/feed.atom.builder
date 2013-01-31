@@ -1,5 +1,5 @@
 atom_feed language: 'fr-FR' do |feed|
-  feed.title 'Projets de Comment-My-Projects'
+  feed.title 'Projets de Social-Reviewing'
   feed.updated @updated
 
   @projects.each do |project|

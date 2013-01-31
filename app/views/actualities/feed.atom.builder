@@ -1,5 +1,5 @@
 atom_feed language: 'fr-FR' do |feed|
-  feed.title 'Acutalités de Comment-My-Projects'
+  feed.title 'Acutalités de Social-Reviewing'
   feed.updated @updated
 
   @actualities.each do |actuality|

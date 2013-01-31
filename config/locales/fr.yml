@@ -319,7 +319,7 @@ fr:
       %{link_to}
       </br>
       </br>
-      À bientôt sur Comment-My-Projects."
+      À bientôt sur Social-Reviewing."
     actuality_comment_notify_item_owner_title:
       "Un commentaire a été ajouté à l'une de vos actualité"
     actuality_comment_notify_item_owner: "
@@ -330,7 +330,7 @@ fr:
       %{link_to}
       </br>
       </br>
-      À bientôt sur Comment-My-Projects."
+      À bientôt sur Social-Reviewing."
     project_comment_notify_title:
       "Un commentaire a été ajouté à l'un des projets que vous suivez"
     project_comment_notify: "
@@ -341,7 +341,7 @@ fr:
       %{link_to}
       </br>
       </br>
-      À bientôt sur Comment-My-Projects."
+      À bientôt sur Social-Reviewing."
     actuality_comment_notify_title:
       "Un commentaire a été ajouté à l'une des actualités que vous suivez"
     actuality_comment_notify: "
@@ -352,7 +352,7 @@ fr:
       %{link_to}
       </br>
       </br>
-      À bientôt sur Comment-My-Projects."
+      À bientôt sur Social-Reviewing."
     send_mail_to_creator_of_parents: "
       Bonjour %{user},<br/>
       <br/>
@@ -361,7 +361,7 @@ fr:
       cette adresse : %{link_to_project}</br>
       </br>
       </br>
-      À bientôt sur Comment-My-Projects."
+      À bientôt sur Social-Reviewing."
     send_mail_to_project_owner: "
       Bonjour %{user},<br/>
       <br/>
@@ -370,7 +370,7 @@ fr:
       %{link_to_project}
       </br>
       </br>
-      À bientôt sur Comment-My-Projects."
+      À bientôt sur Social-Reviewing."
   layouts:
     application:
       project_index: "Liste des projets"

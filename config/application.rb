@@ -58,6 +58,6 @@ module SocialReviewing
 
     config.generators.test_framework = :rspec
     config.rakismet.key = '48f75aa5e28b'
-    config.rakismet.url = 'http://comment-my-projects.heroku.com'
+    config.rakismet.url = 'http://www.social-reviewing.com'
   end
 end
