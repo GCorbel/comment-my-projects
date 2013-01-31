@@ -51,6 +51,15 @@ feature 'Notes', js: true do
     within("#tag_#{tag1.id}") do
       expect(page).to have_content('New tag : (4.0/4 - 1 vote)')
     end
+
+    visit project_path(project)
+
+    within("#new_tag_#{tag1.id}") do
+      expect(page).to have_content('Rate already registered')
+    end
+    within("#tag_#{tag1.id}") do
+      expect(page).to have_content('New tag : (4.0/4 - 1 vote)')
+    end
   end
 
   scenario 'Visit the projet when the user is the project owner' do

@@ -246,6 +246,7 @@ en:
       add_a_note: "Add a rate"
       should_be_connected: "You must be logged to add a rate"
       cannot_be_project_owner: "You can not rate for your project"
+      already_rated_project: "Rate already registered"
   actualities:
     show:
       back_to_project: "Back to the project"

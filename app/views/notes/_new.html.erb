@@ -9,17 +9,21 @@
       <% project.tags_with_general.each do |tag| %>
         <h4><%= tag %></h4>
         <div id="new_tag_<%= tag.id %>">
-          <div class="rating">
-            <% 4.downto(1) do |index| %>
-              <span class="star"
-                data-value="<%= index %>"
-                data-tag="<%= tag.id %>"
-                data-user="<%= current_user.id %>"
-                data-url="<%= project_notes_path(project) %>"></span>
-            <% end %>
-            <br/>
-            <br/>
-          </div>
+          <% if project.notes.where(user_id: current_user.id).any? %>
+            <%= t('.already_rated_project') %>
+          <% else %>
+            <div class="rating">
+              <% 4.downto(1) do |index| %>
+                <span class="star"
+                  data-value="<%= index %>"
+                  data-tag="<%= tag.id %>"
+                  data-user="<%= current_user.id %>"
+                  data-url="<%= project_notes_path(project) %>"></span>
+              <% end %>
+              <br/>
+              <br/>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
