@@ -41,6 +41,25 @@ describe Project do
     end
   end
 
+  describe :top do
+    let!(:project1) { create(:project, title: 'My First Project') }
+    let!(:project2) { create(:project, title: 'My Second Project') }
+
+    it 'give the top of the projects' do
+      project1.notes << build(:note, value: 4, user: user1)
+      project1.notes << build(:note, value: 4, user: user2)
+      project1.notes << build(:note, value: 4, user: user3)
+
+      project2.notes << build(:note, value: 4, user: user1)
+      project2.notes << build(:note, value: 5, user: user2)
+
+      projects = Project.top(1)
+
+      expect(projects.length).to eq 1
+      expect(projects.first.id).to eq project2.id
+    end
+  end
+
   describe :to_s do
     subject { project.to_s}
 

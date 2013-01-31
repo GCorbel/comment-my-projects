@@ -1,19 +1,12 @@
 describe NoteHelper do
-  let(:project) { create(:project) }
-  let(:tag) { create(:tag) }
-  let(:user1) { create(:user) }
-  let(:user2) { create(:user) }
-  let(:user3) { create(:user) }
-  let(:note1) { create(:note, tag: tag, value: 3, user: user1) }
-  let(:note2) { create(:note, tag: tag, value: 4, user: user2) }
-  let(:note3) { create(:note, tag: tag, value: 3, user: user3) }
+  let(:project) { build_stubbed(:project) }
+  let(:tag) { build_stubbed(:tag) }
 
   describe :note_for do
     context 'when there is a vote' do
       it 'show notes with stars' do
-        project.notes << note1
-        project.notes << note2
-        project.notes << note3
+        project.expects(:note_for).with(tag).returns(3.3)
+        project.expects(:number_of_notes_for).with(tag).returns(3)
         expect(note_for(project, tag)).to eq '<div class="notes">' \
           "#{tag.name} : " \
           '<span class="star true"></span>' \
@@ -38,9 +31,8 @@ describe NoteHelper do
   describe :star_for do
     context 'when there is a vote' do
       it 'show notes with stars' do
-        project.notes << note1
-        project.notes << note2
-        project.notes << note3
+        project.expects(:note_for).with(tag).returns(3.3)
+        project.expects(:number_of_notes_for).returns(3)
         expect(stars_for(project, tag)).to eq '<div class="notes">' \
           "#{tag.name} : " \
           '<span class="star true"></span>' \

@@ -10,13 +10,25 @@ class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :login
   attr_accessor :login
 
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if reset_password_token = conditions[:reset_password_token]
-      where(conditions).where(["reset_password_token = ?", reset_password_token]).first
-    else
-      login = conditions.delete(:login).downcase
-      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+  class << self
+    def find_first_by_auth_conditions(warden_conditions)
+      conditions = warden_conditions.dup
+      if reset_password_token = conditions[:reset_password_token]
+        where(conditions).where(["reset_password_token = ?", reset_password_token]).first
+      else
+        login = conditions.delete(:login).downcase
+        where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      end
+    end
+
+    def top_project(number)
+      User.joins(:projects)
+          .select("users.username")
+          .select("users.id")
+          .select("count(projects.id) as nb_projects")
+          .group("users.id")
+          .order("count(projects.id) DESC")
+          .limit(number)
     end
   end
 

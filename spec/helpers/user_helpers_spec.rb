@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe UserHelper do
-  let(:user) { create(:user) }
+  let(:user) { build_stubbed(:user) }
   let(:formatted_now) { DateTime.now.strftime('%d/%m/%Y %H:%M') }
 
   describe :date_for_user do
