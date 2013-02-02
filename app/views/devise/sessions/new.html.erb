@@ -13,9 +13,16 @@
         <%= f.label :remember_me %>
         <%= f.check_box :remember_me %>
       </div>
-    </p>
-      <p><%= f.submit t('.connection') %></p>
+      <p>
+        <%= f.submit t('.connection') %>
+        <%= link_to user_omniauth_authorize_path(:google_oauth2),
+          data: { "no-turbolink" => true },
+          class: 'btn small' do %>
+            <i class="icon-google-plus icon-large"></i>
+            <%= t('devise.sessions.new.sign_in_google') %>
+          <% end %>
+      </p>
     <% end %>
-    <%= render "links" %>
+    <%= link_to t('devise.links.forgot_password'), new_user_password_path %>
   </div>
 </div>

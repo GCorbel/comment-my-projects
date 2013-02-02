@@ -79,12 +79,15 @@
                       </li>
                   <% else %>
                     <li>
-                      <%= link_to t(".sign_up"),
-                                  new_user_registration_path %>
+                      <%= link_to t(".sign_up"), new_user_registration_path %>
                     </li>
                     <li>
-                      <%= link_to t(".sign_in"),
-                                  new_user_session_path %>
+                      <%= link_to t(".sign_in"), new_user_session_path %>
+                    </li>
+                    <li>
+                      <%= link_to t('devise.sessionis.new.sign_in_google'),
+                        user_omniauth_authorize_path(:google_oauth2),
+                        data: { "no-turbolink" => true } %>
                     </li>
                   <% end %>
                 </ul>

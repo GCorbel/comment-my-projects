@@ -11,6 +11,6 @@
       <%= f.input :password_confirmation, required: true %>
       <%= f.submit t('.subscription') %>
     <% end %>
-    <%= render "links" %>
+    <%= link_to t('devise.links.forgot_password'), new_user_password_path %>
   </div>
 </div>

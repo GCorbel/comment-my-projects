@@ -28,6 +28,7 @@ en:
       signed_out: 'Signed out successfully.'
       new:
         connection: "Connexion"
+        sign_in_google: 'Sign in with google'
     passwords:
       send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
       updated: 'Your password was changed successfully. You are now signed in.'
