@@ -214,6 +214,10 @@ Devise.setup do |config|
     ENV['FACEBOOK_CONSUMER_SECRET'],
     strategy_class: OmniAuth::Strategies::Facebook
 
+  config.omniauth :twitter,
+    ENV["TWITTER_CONSUMER_KEY"],
+    ENV["TWITTER_CONSUMER_SECRET"]
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

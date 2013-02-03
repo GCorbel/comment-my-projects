@@ -7,6 +7,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     authenticate('Facebook')
   end
 
+  def twitter
+    authenticate('Twitter')
+  end
+
   private
 
   def authenticate(kind)

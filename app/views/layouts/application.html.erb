@@ -94,6 +94,11 @@
                         user_omniauth_authorize_path(:facebook),
                         data: { "no-turbolink" => true } %>
                     </li>
+                    <li>
+                      <%= link_to t('devise.sessions.new.sign_in_twitter'),
+                        user_omniauth_authorize_path(:twitter),
+                        data: { "no-turbolink" => true } %>
+                    </li>
                   <% end %>
                 </ul>
               </li>
