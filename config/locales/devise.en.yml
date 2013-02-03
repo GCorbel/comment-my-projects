@@ -29,6 +29,7 @@ en:
       new:
         connection: "Connexion"
         sign_in_google: 'Sign in with google'
+        remember_me: "Remember me"
     passwords:
       send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
       updated: 'Your password was changed successfully. You are now signed in.'

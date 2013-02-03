@@ -246,7 +246,6 @@ fr:
         email: "Email"
         password: "Mot de passe"
         password_confirmation: "Confirmation du mot de passe"
-        remember_me: "Se souvenir de moi"
         current_password: "Mot de passe actuel"
       project:
         title: "Titre"

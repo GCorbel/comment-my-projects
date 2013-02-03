@@ -5,15 +5,13 @@
     <%= simple_form_for(resource,
                         as: resource_name,
                         url: session_path(resource_name),
-                        wrapper: :small
                        ) do |f| %>
       <%= f.input :login, required: true %>
       <%= f.input :password, required: true %>
-      <%= f.input :remember_me, required: true, type: :checkbox %>
-      <div class='inline'>
-        <%= f.label :remember_me %>
-        <%= f.check_box :remember_me %>
-      </div>
+      <%= f.input :remember_me,
+        as: :boolean,
+        label: false,
+        inline_label: t('.remember_me') %>
       <p>
         <%= f.submit t('.connection') %>
         <%= link_to user_omniauth_authorize_path(:google_oauth2),

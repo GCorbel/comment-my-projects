@@ -85,7 +85,6 @@ en:
         email: "Email"
         password: "Password"
         password_confirmation: "Confirm password"
-        remember_me: "Remember Me"
         current_password: "Current Password"
       project:
         title: "Title"
