@@ -7,9 +7,11 @@
                        ) do |f| %>
       <%= f.input :username, required: true %>
       <%= f.input :email, required: true %>
-      <%= f.input :password %>
-      <%= f.input :password_confirmation %>
-      <%= f.input :current_password, required: true %>
+      <% if @user.encrypted_password.present? %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+        <%= f.input :current_password, required: true %>
+      <% end %>
       <%= f.button :submit %>
     <% end %>
   </div>
