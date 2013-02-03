@@ -1,16 +1,18 @@
 class Authentication
-  attr_reader :name, :email
+  attr_reader :name, :email, :provider, :uid
 
   def initialize(omniauth)
     info = omniauth.info
     @name = info.name
     @email = info.email
+    @provider = omniauth.provider
+    @uid = omniauth.uid
   end
 
   def user
-    model = User.find_by_username(name)
+    model = User.find_by_provider_and_uid(provider, uid)
     unless model
-      model = User.create_by_username_and_email(name, email)
+      model = User.create(username: name, email: email, provider: provider, uid: uid)
     end
     model
   end

@@ -41,12 +41,4 @@ describe User do
       end
     end
   end
-
-  describe :find_by_username do
-    it 'give the user with the given username' do
-      user = User.create_by_username_and_email("test", "test@test.com")
-      expect(user.username).to eq "test"
-      expect(user.email).to eq "test@test.com"
-    end
-  end
 end

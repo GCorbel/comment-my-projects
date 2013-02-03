@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :login
+  attr_accessible :username, :email, :password, :password_confirmation,
+    :remember_me, :login, :provider, :uid
   attr_accessor :login
 
   class << self
@@ -29,11 +30,6 @@ class User < ActiveRecord::Base
           .group("users.id")
           .order("count(projects.id) DESC")
           .limit(number)
-    end
-
-    def create_by_username_and_email(username, email)
-      password = Devise.friendly_token[0,20]
-      User.create(username: username, email: email, password: password )
     end
   end
 
