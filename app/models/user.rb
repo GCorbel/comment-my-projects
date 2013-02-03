@@ -39,12 +39,7 @@ class User < ActiveRecord::Base
       provider = omniauth.provider
       uid = omniauth.uid
 
-      password = Devise.friendly_token[0,20]
-      User.create(username: name,
-                  email: email,
-                  provider: provider,
-                  uid: uid,
-                  password: password )
+      User.create(username: name, email: email, provider: provider, uid: uid)
     end
   end
 
@@ -54,5 +49,9 @@ class User < ActiveRecord::Base
 
   def follow?(project)
     project.followers.include?(self)
+  end
+
+  def password_required?
+    super && provider.blank?
   end
 end

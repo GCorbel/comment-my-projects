@@ -51,4 +51,18 @@ describe User do
       }.to change(User, :count).by(1)
     end
   end
+
+  describe :password_required? do
+    subject { user1.password_required? }
+
+    context "when the provider is nil" do
+      before { user1.provider = nil }
+      it { should be_true }
+    end
+
+    context "when the provider is present" do
+      before { user1.provider = "google" }
+      it { should be_false }
+    end
+  end
 end
