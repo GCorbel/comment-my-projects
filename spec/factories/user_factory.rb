@@ -5,5 +5,7 @@ FactoryGirl.define do
     f.password "test1234"
     f.password_confirmation "test1234"
     f.sequence(:email){ |n| "guirec.corbel#{n}@gmail.com"}
+    f.uid 1234
+    f.provider "google"
   end
 end

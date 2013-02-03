@@ -31,6 +31,21 @@ class User < ActiveRecord::Base
           .order("count(projects.id) DESC")
           .limit(number)
     end
+
+    def create_with_omniauth_credentials(omniauth)
+      info = omniauth.info
+      name = info.name
+      email = info.email
+      provider = omniauth.provider
+      uid = omniauth.uid
+
+      password = Devise.friendly_token[0,20]
+      User.create(username: name,
+                  email: email,
+                  provider: provider,
+                  uid: uid,
+                  password: password )
+    end
   end
 
   def to_s

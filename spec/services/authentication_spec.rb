@@ -14,7 +14,7 @@ describe Authentication do
 
     it 'create a new user if the name doesn''t exist' do
       User.expects(:find_by_provider_and_uid).returns(nil)
-      User.expects(:create)
+      User.expects(:create_with_omniauth_credentials).with(omniauth)
       subject.user
     end
   end

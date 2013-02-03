@@ -6,6 +6,8 @@ describe User do
   let(:project1) { create(:project) }
   let(:project2) { create(:project) }
   let(:project3) { create(:project) }
+  let(:info) { stub name: 'name', email: 'test@test.com'}
+  let(:omniauth) { stub info: info, provider: 'google', uid: 1234  }
 
   it { should have_many(:projects) }
 
@@ -39,6 +41,14 @@ describe User do
       it 'give false' do
         expect(user1.follow?(project1)).to be_false
       end
+    end
+  end
+
+  describe :create_with_omniauth_credentials do
+    it "create a new user" do
+      expect {
+        User.create_with_omniauth_credentials(omniauth)
+      }.to change(User, :count).by(1)
     end
   end
 end
