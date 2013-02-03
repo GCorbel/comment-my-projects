@@ -24,12 +24,12 @@ class User < ActiveRecord::Base
 
     def top_project(number)
       User.joins(:projects)
-          .select("users.username")
-          .select("users.id")
-          .select("count(projects.id) as nb_projects")
-          .group("users.id")
-          .order("count(projects.id) DESC")
-          .limit(number)
+      .select("users.username")
+      .select("users.id")
+      .select("count(projects.id) as nb_projects")
+      .group("users.id")
+      .order("count(projects.id) DESC")
+      .limit(number)
     end
 
     def create_with_omniauth_credentials(omniauth)
@@ -40,6 +40,17 @@ class User < ActiveRecord::Base
       uid = omniauth.uid
 
       User.create(username: name, email: email, provider: provider, uid: uid)
+    end
+
+    def new_with_session(params, session)
+      if session["devise.user_attributes"]
+        new(session["devise.user_attributes"], without_protection: true) do |user|
+          user.attributes = params
+          user.valid?
+        end
+      else
+        super
+      end
     end
   end
 

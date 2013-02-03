@@ -17,6 +17,6 @@ class Authentication
   end
 
   def authenticated?
-    user.present?
+    user.present? && user.valid?
   end
 end

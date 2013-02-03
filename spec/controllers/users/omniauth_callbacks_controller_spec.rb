@@ -11,15 +11,15 @@ describe Users::OmniauthCallbacksController do
     controller.stubs(:render)
   end
 
-  describe "GET 'google'" do
-    subject { get 'google_oauth2' }
+  shared_examples "a omniauth action" do
+    subject { do_get! }
 
     context "when the user is authencated" do
       before { auth.stubs(:authenticated?).returns(true) }
 
       it "sign in and redirect to user" do
         controller.expects(:sign_in_and_redirect).with(user)
-        get 'google_oauth2'
+        do_get!
       end
     end
 
@@ -28,5 +28,17 @@ describe Users::OmniauthCallbacksController do
 
       it { should redirect_to(new_user_registration_url) }
     end
+  end
+
+  describe "GET 'google'" do
+    let(:do_get!) { get 'google_oauth2' }
+
+    it_behaves_like "a omniauth action"
+  end
+
+  describe "GET 'facebook'" do
+    let(:do_get!) { get 'facebook' }
+
+    it_behaves_like "a omniauth action"
   end
 end

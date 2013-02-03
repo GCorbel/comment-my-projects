@@ -85,3 +85,4 @@ gem "gelf"
 gem 'graylog2_exceptions', :git => 'git://github.com/wr0ngway/graylog2_exceptions.git'
 gem 'graylog2-resque'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'

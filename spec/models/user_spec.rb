@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe User do
+
   let(:user1) { create(:user) }
   let(:user2) { create(:user) }
   let(:project1) { create(:project) }
@@ -9,6 +10,7 @@ describe User do
   let(:info) { stub name: 'name', email: 'test@test.com'}
   let(:omniauth) { stub info: info, provider: 'google', uid: 1234  }
 
+  it { should validate_uniqueness_of(:email) }
   it { should have_many(:projects) }
 
   describe :top_project do

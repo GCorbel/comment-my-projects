@@ -89,6 +89,11 @@
                         user_omniauth_authorize_path(:google_oauth2),
                         data: { "no-turbolink" => true } %>
                     </li>
+                    <li>
+                      <%= link_to t('devise.sessionis.new.sign_in_facebook'),
+                        user_omniauth_authorize_path(:facebook),
+                        data: { "no-turbolink" => true } %>
+                    </li>
                   <% end %>
                 </ul>
               </li>

@@ -253,6 +253,8 @@ GEM
     omniauth (1.1.1)
       hashie (~> 1.2)
       rack
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
     omniauth-google-oauth2 (0.1.13)
       omniauth (~> 1.0)
       omniauth-oauth2
@@ -434,6 +436,7 @@ DEPENDENCIES
   minimalist_cms
   mocha
   mysql2
+  omniauth-facebook
   omniauth-google-oauth2
   open4
   pry (= 0.9.8.4)

@@ -209,6 +209,11 @@ Devise.setup do |config|
     ENV['GOOGLE_CONSUMER_SECRET'],
     { access_type: "offline", approval_prompt: "" }
 
+  config.omniauth :facebook,
+    ENV['FACEBOOK_CONSUMER_KEY'],
+    ENV['FACEBOOK_CONSUMER_SECRET'],
+    strategy_class: OmniAuth::Strategies::Facebook
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
