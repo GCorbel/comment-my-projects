@@ -9,11 +9,11 @@ class Authentication
   end
 
   def user
-    model = User.find_by_provider_and_uid(provider, uid)
-    unless model
-      model = User.create_with_omniauth_credentials(omniauth)
+    @user ||=  User.find_by_provider_and_uid(provider, uid)
+    unless @user
+      @user = User.create_with_omniauth_credentials(omniauth)
     end
-    model
+    @user
   end
 
   def authenticated?
