@@ -9,7 +9,7 @@
       <%= f.input :email, required: true %>
       <%= f.input :password, required: true %>
       <%= f.input :password_confirmation, required: true %>
-      <%= f.submit t('.subscription') %>
+      <%= f.submit t('.subscription'), class: 'btn' %>
     <% end %>
     <%= link_to t('devise.links.forgot_password'), new_user_password_path %>
   </div>

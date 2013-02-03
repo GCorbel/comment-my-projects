@@ -3,5 +3,5 @@
                     url: url,
                     html: { method: :post }) do |f| %>
   <%= f.input :login, required: true %>
-  <%= f.submit t('shared.submit') %>
+  <%= f.submit t('shared.submit'), class: 'btn' %>
 <% end %>
