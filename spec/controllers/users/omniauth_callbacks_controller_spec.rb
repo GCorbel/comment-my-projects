@@ -42,6 +42,12 @@ describe Users::OmniauthCallbacksController do
     it_behaves_like "a omniauth action"
   end
 
+  describe "GET 'github'" do
+    let(:do_get!) { get 'github' }
+
+    it_behaves_like "a omniauth action"
+  end
+
   describe "GET 'twitter'" do
     let(:do_get!) { get 'twitter' }
 

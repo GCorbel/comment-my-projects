@@ -14,24 +14,46 @@
         inline_label: t('.remember_me') %>
       <p>
         <%= f.submit t('.connection'), class: 'btn' %>
-        <%= link_to user_omniauth_authorize_path(:facebook),
-          data: { "no-turbolink" => true },
-          class: 'btn small' do %>
-          <i class="icon-facebook icon-large"></i>
-          <%= t('devise.sessions.new.sign_in_facebook') %>
-        <% end %>
-        <%= link_to user_omniauth_authorize_path(:google_oauth2),
-          data: { "no-turbolink" => true },
-          class: 'btn small' do %>
-          <i class="icon-google-plus icon-large"></i>
-          <%= t('devise.sessions.new.sign_in_google') %>
-        <% end %>
-        <%= link_to user_omniauth_authorize_path(:twitter),
-          data: { "no-turbolink" => true },
-          class: 'btn small' do %>
-          <i class="icon-twitter icon-large"></i>
-          <%= t('devise.sessions.new.sign_in_twitter') %>
-        <% end %>
+      </p>
+      <p>
+        <table>
+          <tr>
+            <td>
+              <%= link_to user_omniauth_authorize_path(:facebook),
+                data: { "no-turbolink" => true },
+                class: 'btn small' do %>
+                  <i class="icon-facebook icon-large"></i>
+                  <%= t('devise.sessions.new.sign_in_facebook') %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to user_omniauth_authorize_path(:google_oauth2),
+                data: { "no-turbolink" => true },
+                class: 'btn small' do %>
+                  <i class="icon-google-plus icon-large"></i>
+                  <%= t('devise.sessions.new.sign_in_google') %>
+              <% end %>
+             </td>
+           </tr>
+           <tr>
+             <td>
+               <%= link_to user_omniauth_authorize_path(:twitter),
+                 data: { "no-turbolink" => true },
+                 class: 'btn small' do %>
+                   <i class="icon-twitter icon-large"></i>
+                   <%= t('devise.sessions.new.sign_in_twitter') %>
+               <% end %>
+             </td>
+             <td>
+               <%= link_to user_omniauth_authorize_path(:github),
+                 data: { "no-turbolink" => true },
+                 class: 'btn small' do %>
+                 <i class="icon-github icon-large"></i>
+                 <%= t('devise.sessions.new.sign_in_github') %>
+               <% end %>
+            </td>
+          </tr>
+        </table>
       </p>
     <% end %>
     <%= link_to t('devise.links.forgot_password'), new_user_password_path %>

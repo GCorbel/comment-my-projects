@@ -27,6 +27,7 @@ fr:
         sign_in_google: "Se connecter avec Google"
         sign_in_facebook: "Se connecter avec Facebook"
         sign_in_twitter: "Se connecter avec Twitter"
+        sign_in_github: "Se connecter avec Github"
         remember_me: "Se souvenir de moi"
     passwords:
       send_instructions: 'Vous allez recevoir les instructions de réinitialisation du mot de passe dans quelques instants'

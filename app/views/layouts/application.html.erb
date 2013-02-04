@@ -99,6 +99,11 @@
                         user_omniauth_authorize_path(:twitter),
                         data: { "no-turbolink" => true } %>
                     </li>
+                    <li>
+                      <%= link_to t('devise.sessions.new.sign_in_github'),
+                        user_omniauth_authorize_path(:github),
+                        data: { "no-turbolink" => true } %>
+                    </li>
                   <% end %>
                 </ul>
               </li>

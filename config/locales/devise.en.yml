@@ -31,6 +31,7 @@ en:
         sign_in_google: 'Sign in with google'
         sign_in_facebook: 'Sign in with facebook'
         sign_in_twitter: 'Sign in with twitter'
+        sign_in_github: 'Sign in with github'
         remember_me: "Remember me"
     passwords:
       send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'

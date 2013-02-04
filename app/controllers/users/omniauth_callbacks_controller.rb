@@ -11,6 +11,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     authenticate('Twitter')
   end
 
+  def github
+    authenticate('Github')
+  end
+
   private
 
   def authenticate(kind)
