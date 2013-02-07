@@ -4,6 +4,7 @@ describe Authentication do
 
   let(:info) { stub name: 'name', email: 'test@test.com'}
   let(:omniauth) { stub info: info, provider: 'google', uid: 1234  }
+  let(:user) { build_stubbed(:user) }
   subject { Authentication.new(omniauth) }
 
   describe :user do
@@ -21,7 +22,7 @@ describe Authentication do
 
   describe :authenticated? do
     it 'return true if the user is finded' do
-      subject.stubs(:user).returns(stub)
+      subject.stubs(:user).returns(user)
       expect(subject.authenticated?).to be_true
     end
 
