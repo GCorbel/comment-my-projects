@@ -16,3 +16,4 @@
 *~
 /tags
 .elasticbeanstalk/
+config/config.production.yml

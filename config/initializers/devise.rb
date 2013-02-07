@@ -204,23 +204,23 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :github,
-    ENV['GITHUB_CONSUMER_KEY'],
-    ENV['GITHUB_CONSUMER_SECRET'],
+    SRConfig.github_consumer_key,
+    SRConfig.github_consumer_secret,
     scope: 'user,public_repo'
 
   config.omniauth :google_oauth2,
-    ENV['GOOGLE_CONSUMER_KEY'],
-    ENV['GOOGLE_CONSUMER_SECRET'],
+    SRConfig.google_consumer_key,
+    SRConfig.google_consumer_secret,
     { access_type: "offline", approval_prompt: "" }
 
   config.omniauth :facebook,
-    ENV['FACEBOOK_CONSUMER_KEY'],
-    ENV['FACEBOOK_CONSUMER_SECRET'],
+    SRConfig.facebook_consumer_key,
+    SRConfig.facebook_consumer_secret,
     strategy_class: OmniAuth::Strategies::Facebook
 
   config.omniauth :twitter,
-    ENV["TWITTER_CONSUMER_KEY"],
-    ENV["TWITTER_CONSUMER_SECRET"]
+    SRConfig.twitter_consumer_key,
+    SRConfig.twitter_consumer_secret
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

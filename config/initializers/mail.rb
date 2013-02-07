@@ -1,9 +1,9 @@
 unless Rails.env.test?
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    user_name: ENV['SENDGRID_USERNAME'],
-    password: ENV['SENDGRID_PASSWORD'],
-    domain: 'heroku.com',
+    user_name: SRConfig.sendgrid_username,
+    password: SRConfig.sendgrid_password,
+    domain: SRConfig.domain,
     address: "smtp.sendgrid.net",
     port: 587,
     authentication: :plain,
