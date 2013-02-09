@@ -3,14 +3,12 @@ development:
   encoding: utf8
   database: social_reviewing_development
   username: root
-  password: root
 
 test:
   adapter: mysql2
   encoding: utf8
   database: social_reviewing_test
   username: root
-  password: root
 
 production:
   adapter: mysql2
