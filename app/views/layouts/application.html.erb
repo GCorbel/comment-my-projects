@@ -74,8 +74,10 @@
                       </li>
                       <li>
                         <%= link_to t("shared.delete"),
-                                    cancel_user_registration_path,
-                                    data: { confirm: "Êtes vous sûr?" } %>
+                                    "/users",
+                                    method: :delete,
+                                    data: { confirm: t("shared.are_you_sure") }
+                                  %>
                       </li>
                   <% else %>
                     <li>

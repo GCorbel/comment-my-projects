@@ -13,8 +13,10 @@ module CommentHelper
   def username_for(comment)
     if comment.user
       link_to(comment.user.username, comment.user)
-    else
+    elsif comment.username
       comment.username
+    else
+      "deleted user"
     end
   end
 end

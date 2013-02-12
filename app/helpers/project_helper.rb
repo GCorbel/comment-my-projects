@@ -36,7 +36,7 @@ module ProjectHelper
 
   def added_by
     user = @project.user
-    link = link_to(user.username, user)
+    link = user ? link_to(user.username, user) : "deleted user"
     content_tag(:p) do
       raw(t('project.show.added_by', user: link))
     end

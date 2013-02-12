@@ -19,6 +19,23 @@ describe ProjectHelper do
           "</div>"
       end
     end
+
+    context 'when the project doesn''t have a user' do
+      before do
+        project.stubs(:user).returns(nil)
+        self.stubs(:avatar_url).returns('id')
+      end
+
+      it 'show the title' do
+        should eq "<div class=\"project_header\">" \
+            "<img alt=\"Id\" class=\"avatar\" src=\"/images/id\" />" \
+            "<h1>#{project}</h1>" \
+            "<p>Site : #{link_to(project.url, project.url)}</p>" \
+            "<p>Added by : deleted user</p>" \
+            "<p>Date : #{formatted_now}</p>" \
+          "</div>"
+      end
+    end
   end
 
   describe :tags_for do
