@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   acts_as_taggable
 
-  default_scope where(locale: I18n.locale)
+  default_scope -> { where(locale: I18n.locale) }
 
   has_many :comments, as: :item, dependent: :destroy
   has_many :notes, dependent: :destroy

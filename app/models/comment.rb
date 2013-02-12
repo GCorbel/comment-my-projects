@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
   has_ancestry
 
-  default_scope where(approved: true).where(locale: I18n.locale)
+  default_scope -> { where(approved: true).where(locale: I18n.locale) }
 
   belongs_to :user
   belongs_to :item, polymorphic: true
