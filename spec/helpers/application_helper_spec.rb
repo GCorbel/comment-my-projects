@@ -1,3 +1,4 @@
+#encoding=utf-8
 require 'spec_helper'
 
 describe ApplicationHelper do
@@ -130,6 +131,26 @@ describe ApplicationHelper do
   describe :image_for do
     it "give the gravatar for the user" do
       expect(helper.image_for(user)).to eq '<img alt="Guest" class="avatar" src="http://test.host:80/assets/guest.png" />'
+    end
+  end
+
+  describe :link_to_locales do
+    after do
+      I18n.locale = I18n.default_locale
+    end
+
+    context "when the locale is english" do
+      it "give a link to root with the french locale" do
+        I18n.locale = :en
+        expect(link_to_locales).to eq "<a href=\"/?locale=fr\"><i class='icon-flag'></i> Version Française</a>"
+      end
+    end
+
+    context "when the locale is french" do
+      it "give a link to root with the english locale" do
+        I18n.locale = :fr
+        expect(link_to_locales).to eq "<a href=\"/?locale=en\"><i class='icon-flag'></i> English Version</a>"
+      end
     end
   end
 end

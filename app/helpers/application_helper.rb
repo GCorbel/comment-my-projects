@@ -1,3 +1,4 @@
+#encoding=utf-8
 require "#{Rails.root}/lib/action_view/helpers/text_helper"
 module ApplicationHelper
   extend ActionView::Helpers::TextHelper
@@ -61,5 +62,11 @@ module ApplicationHelper
       excerpt(project.description, "", options)
     end
     highlight(finded_text, text)
+  end
+
+  def link_to_locales
+    text = I18n.locale == :en ? "Version Française" : "English Version"
+    locale = I18n.locale == :en ? :fr : :en
+    link_to raw("<i class='icon-flag'></i> #{text}"), root_path(locale: locale)
   end
 end
