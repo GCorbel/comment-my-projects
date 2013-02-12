@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203070838) do
+ActiveRecord::Schema.define(:version => 20130212085503) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130203070838) do
     t.integer  "project_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "locale"
   end
 
   add_index "actualities", ["project_id"], :name => "index_actualities_on_project_id"
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20130203070838) do
     t.boolean  "approved",    :default => true, :null => false
     t.integer  "item_id"
     t.string   "item_type"
+    t.string   "locale"
   end
 
   add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
@@ -134,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20130203070838) do
     t.datetime "updated_at",  :null => false
     t.integer  "type_id"
     t.text     "description"
+    t.string   "locale"
   end
 
   add_index "projects", ["type_id"], :name => "index_projects_on_type_id"

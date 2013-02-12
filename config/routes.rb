@@ -1,32 +1,35 @@
 SocialReviewing::Application.routes.draw do
   ActiveAdmin.routes(self)
 
-  resources :projects do
-    get 'feed', on: :collection, defaults: { format: 'atom' }
+  scope "(:locale)", locale: /en|fr/ do
+    resources :projects do
+      get 'feed', on: :collection, defaults: { format: 'atom' }
 
-    resources :category_projects
-    resources :comments
-    resources :notes
+      resources :category_projects
+      resources :comments
+      resources :notes
+      resources :actualities do
+        resources :comments
+      end
+    end
+
+    match "projects/:project_id/users/:user_id/follow" => "project_user_followers#create", as: :follow
+    match "projects/:project_id/users/:user_id/unfollow" => "project_user_followers#destroy", as: :unfollow
+
     resources :actualities do
+      get 'feed', on: :collection, defaults: { format: 'atom' }
       resources :comments
     end
+
+    resources :messages, only: [:new, :create]
+
+    devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+
+    resources :users, only: :show
+
+    get "home/index"
   end
 
-  match "projects/:project_id/users/:user_id/follow" => "project_user_followers#create", as: :follow
-  match "projects/:project_id/users/:user_id/unfollow" => "project_user_followers#destroy", as: :unfollow
-
-  resources :actualities do
-    get 'feed', on: :collection, defaults: { format: 'atom' }
-    resources :comments
-  end
-
-  resources :messages, only: [:new, :create]
-
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-
-  resources :users, only: :show
-
-  get "home/index"
 
 
   # The priority is based upon order of creation:
