@@ -15,6 +15,6 @@ production:
   encoding: utf8
   database: <%= SRConfig.rds_db_name %>
   username: <%= SRConfig.rds_username %>
-  password: <%= SRConfig.rds_username %>
+  password: <%= SRConfig.rds_password %>
   host: <%= SRConfig.rds_host %>
   port: <%= SRConfig.rds_port %>
