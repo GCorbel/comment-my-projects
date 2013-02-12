@@ -1,30 +1,32 @@
-class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def google_oauth2
-    authenticate('Google')
-  end
+module Users
+  class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    def google_oauth2
+      authenticate('Google')
+    end
 
-  def facebook
-    authenticate('Facebook')
-  end
+    def facebook
+      authenticate('Facebook')
+    end
 
-  def twitter
-    authenticate('Twitter')
-  end
+    def twitter
+      authenticate('Twitter')
+    end
 
-  def github
-    authenticate('Github')
-  end
+    def github
+      authenticate('Github')
+    end
 
-  private
+    private
 
-  def authenticate(kind)
-    auth = Authentication.new(request.env["omniauth.auth"])
-    if auth.authenticated?
-      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: kind
-      sign_in_and_redirect auth.user
-    else
-      session["devise.user_attributes"] = auth.user.attributes
-      redirect_to new_user_registration_url
+    def authenticate(kind)
+      auth = Authentication.new(request.env["omniauth.auth"])
+      if auth.authenticated?
+        flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: kind
+        sign_in_and_redirect auth.user
+      else
+        session["devise.user_attributes"] = auth.user.attributes
+        redirect_to new_user_registration_url
+      end
     end
   end
 end
