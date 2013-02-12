@@ -1,6 +1,8 @@
 class Actuality < ActiveRecord::Base
   belongs_to :project
 
+  default_scope where(locale: I18n.locale)
+
   has_many :comments, as: :item, dependent: :destroy
 
   attr_accessible :body, :title, :user_id
