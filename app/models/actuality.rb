@@ -1,7 +1,7 @@
 class Actuality < ActiveRecord::Base
   belongs_to :project
 
-  has_many :comments, as: :item
+  has_many :comments, as: :item, dependent: :destroy
 
   attr_accessible :body, :title, :user_id
 

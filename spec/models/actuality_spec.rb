@@ -4,7 +4,7 @@ describe Actuality do
   let(:actuality) { create(:actuality) }
   let(:comment) { create(:comment, item: actuality) }
 
-  it { should have_many(:comments) }
+  it { should have_many(:comments).dependent(:destroy) }
   it { should belong_to(:project) }
 
   it { should validate_presence_of(:title) }

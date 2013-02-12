@@ -10,11 +10,11 @@ describe Project do
   let(:comment) { create(:comment, item: project) }
   let(:tag) { create(:tag) }
 
-  it { should have_many(:comments) }
-  it { should have_many(:notes) }
-  it { should have_many(:followers).through(:project_user_followers) }
-  it { should have_many(:project_user_followers) }
-  it { should have_many(:actualities) }
+  it { should have_many(:comments).dependent(:destroy) }
+  it { should have_many(:notes).dependent(:destroy) }
+  it { should have_many(:followers).through(:project_user_followers).dependent(:destroy) }
+  it { should have_many(:project_user_followers).dependent(:destroy) }
+  it { should have_many(:actualities).dependent(:destroy) }
   it { should belong_to(:user) }
 
   it { should validate_presence_of :title }

@@ -1,11 +1,14 @@
 class Project < ActiveRecord::Base
   acts_as_taggable
 
-  has_many :comments, as: :item
-  has_many :notes
-  has_many(:followers, through: :project_user_followers, source: :user)
-  has_many :project_user_followers
-  has_many :actualities
+  has_many :comments, as: :item, dependent: :destroy
+  has_many :notes, dependent: :destroy
+  has_many :followers,
+    through: :project_user_followers,
+    source: :user,
+    dependent: :destroy
+  has_many :project_user_followers, dependent: :destroy
+  has_many :actualities, dependent: :destroy
   belongs_to :user
 
   attr_accessible :title, :url, :type_id, :description, :tag_ids, :tag_list
