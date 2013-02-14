@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   load_and_authorize_resource
 
   def create
-    MessageMailer.contact(@message.email, @message.body)
+    MessageMailer.contact(@message.email, @message.body).deliver
     create! { root_url }
   end
 end
