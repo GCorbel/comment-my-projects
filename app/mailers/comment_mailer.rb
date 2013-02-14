@@ -15,7 +15,7 @@ class CommentMailer < ActionMailer::Base
   def prepare_mail(user, item)
     @user = user
     @item = item
-    @url = url_for(item)
+    @url = polymorphic_url(item, locale: I18n.locale)
     mail(to: user.email, subject: subject)
   end
 
