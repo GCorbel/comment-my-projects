@@ -7,20 +7,7 @@
   <% end %>
   <div class="row-fluid">
     <div class="span3">
-      <%= render 'actualities/link_index', actualities: @project.actualities %>
-      <% if @project.actualities.any? %>
-        <div class="graybox">
-          <h2><%= t('.list_actuality') %></h2>
-          <% @project.actualities.each do |actuality| %>
-            <p>
-              <%= link_to actuality.title,
-                          project_actuality_path(@project, actuality) %>
-              -
-              <%= actuality.created_at.strftime('%d/%m/%Y %H:%M') %>
-            </p>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'actualities', project: @project %>
       <div id="notes_index_container">
         <%= render 'notes/index', project: @project %>
       </div>

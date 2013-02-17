@@ -1,0 +1,7 @@
+<% if project.actualities.any? %>
+  <div class="graybox">
+    <h2><%= t('.list_actuality') %></h2>
+    <%= render partial: 'actualities/link', collection: project.actualities,
+      as: :actuality, locals: { project: project } %>
+  </div>
+<% end %>
