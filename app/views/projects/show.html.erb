@@ -26,9 +26,8 @@
       <%= render 'notes/new', project: @project %>
     </div>
     <div class="span9">
-      <% @project.root_comments.each do |comment| %>
-        <%= render comment, item: @project, new_comment: @comment %>
-      <% end %>
+      <%= render @project.root_comments,
+                 local: { item: @project, new_comment: @comment } %>
       <%= render 'comments/new', comment: @comment, item: @project %>
     </div>
   </div>
