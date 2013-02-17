@@ -2,11 +2,9 @@
 <% page_description(@project.description) %>
 <div id="project">
   <%= render @project %>
-  <div class="row-fluid">
-    <% if can? :manage, @project %>
-      <%= render 'projects/form_action', project: @project %>
-    <% end %>
-  </div>
+  <% if can? :manage, @project %>
+    <%= render 'projects/form_action', project: @project %>
+  <% end %>
   <div class="row-fluid">
     <div class="span3">
       <% if @project.actualities.any? %>
