@@ -19,17 +19,8 @@
 </div>
 
 <% if @projects.try(:any?) %>
-  <% @projects.each do |project| %>
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="graybox">
-          <h1><%= link_to project, project %></h1>
-          <p><%= markdown(excerpt_for(project, @search.text)) %></p>
-          <%= raw(tags_for(project)) %>
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <%= render partial: 'project_search', collection: @projects,
+                      as: :project, locals: { text: @search.text } %>
 <% else %>
   <div class="row-fluid">
     <div class="span12">
