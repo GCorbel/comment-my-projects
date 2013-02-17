@@ -43,7 +43,6 @@ group :test do
   gem 'capybara-webkit'
   gem 'factory_girl_rails'
   gem 'spork-rails'
-  gem 'rspec-rails'
   gem 'fuubar'
   gem 'mocha'
   gem 'shoulda-matchers'
@@ -62,6 +61,7 @@ group :development, :test do
   gem 'pry-nav', '0.2.0'
 end
 
+gem 'rspec-rails'
 gem 'devise'
 gem 'rb-readline'
 gem 'jquery-turbolinks'
