@@ -67,6 +67,8 @@ GEM
     bourne (1.1.2)
       mocha (= 0.10.5)
     builder (3.0.4)
+    cache_digests (0.2.0)
+      actionpack (>= 3.2)
     cancan (1.6.8)
     capistrano (2.14.1)
       highline
@@ -418,6 +420,7 @@ DEPENDENCIES
   activeadmin-globalize3
   acts-as-taggable-on
   ancestry
+  cache_digests
   cancan
   capybara
   capybara-firebug
