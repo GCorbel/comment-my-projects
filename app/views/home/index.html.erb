@@ -1,6 +1,8 @@
 <div class="row-fluid">
   <div class="span9">
-    <%= editable @page do @page.body end %>
+    <%= cache @page do %>
+      <%= editable @page do @page.body end %>
+    <% end %>
   </div>
   <div class="span3">
     <div class="graybox">
