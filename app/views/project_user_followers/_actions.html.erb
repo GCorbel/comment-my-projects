@@ -1,0 +1,8 @@
+<hr/>
+<div id="project_user_follower_link_container">
+  <% if current_user.follow?(project) %>
+    <%= render 'project_user_followers/link_unfollow', project: project %>
+  <% else %>
+    <%= render 'project_user_followers/link_follow', project: project %>
+  <% end %>
+</div>
