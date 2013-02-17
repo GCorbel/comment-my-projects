@@ -27,8 +27,8 @@
       <%= render 'notes/new', project: @project %>
     </div>
     <div class="span9">
-      <%= render @project.root_comments,
-                 local: { item: @project, new_comment: @comment } %>
+      <%= render partial: 'comments/comment', collection: @project.root_comments,
+                 locals: { item: @project, new_comment: @comment } %>
       <%= render 'comments/new', comment: @comment, item: @project %>
     </div>
   </div>
