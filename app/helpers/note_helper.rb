@@ -17,6 +17,20 @@ module NoteHelper
     end
   end
 
+  def link_and_note_for(project)
+    tag = ActsAsTaggableOn::Tag.new(name: 'General')
+    note = project.note_for(tag)
+    number_of_notes = project.number_of_notes_for(tag)
+    number_of_notes_plural =
+      number_of_notes.to_s + ' vote'.pluralize(number_of_notes)
+
+    link = link_to project,project
+    raw(
+      "#{link} : " +
+      all_stars(note) + " (#{note}/4 - #{number_of_notes_plural})"
+    )
+  end
+
   def stars_for(project, tag)
     number_of_notes = project.number_of_notes_for(tag)
     note = project.note_for(tag)

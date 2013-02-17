@@ -1,0 +1,12 @@
+<div class="graybox">
+  <h3><%= t('.top_projects') %></h3>
+  <div class="notes">
+    <ol>
+      <% ProjectPresenter.top(5).each do |project| %>
+        <li>
+          <%= link_and_note_for(project) %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

@@ -28,6 +28,13 @@ describe NoteHelper do
     end
   end
 
+  describe :link_and_note_for do
+    it "show the note for a project with a link" do
+      expect(link_and_note_for(project)).to eq "" \
+        "<a href=\"/en/projects/#{project.id}-title\">Title</a> : Aucun vote"
+    end
+  end
+
   describe :star_for do
     context 'when there is a vote' do
       it 'show notes with stars' do

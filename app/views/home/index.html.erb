@@ -5,18 +5,7 @@
     <% end %>
   </div>
   <div class="span3">
-    <div class="graybox">
-      <h3><%= t('.top_projects') %></h3>
-      <ol>
-        <% ProjectPresenter.top(5).each do |project| %>
-          <li>
-            <%= link_to project, project_path(project) %>
-            (<%= (project.sum_notes.to_f / project.nb_notes.to_f).round(1) %>/4
-            - <%= project.nb_notes %>)
-          </li>
-        <% end %>
-      </ol>
-    </div>
+    <%= render 'notes/top_projects' %>
     <div class="graybox">
       <h3><%= t('.top_user_projects') %></h3>
       <ol>
