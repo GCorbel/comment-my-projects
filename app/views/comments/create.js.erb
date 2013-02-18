@@ -1,8 +1,16 @@
 comment_partial = '<%= escape_javascript(
   render(@comment, item: @comment.item, new_comment: @comment)
 ) %>'
+
+successBox = '<%= escape_javascript(alert_box("success", flash[:notice])) %>'
 <% if @comment.parent %>
-  $("#answer_<%= @comment.parent.id %>").html(comment_partial);
+  id = "#answer_<%= @comment.parent.id %>"
+  $(id).html(comment_partial);
+  $(id).before(successBox)
 <% else %>
-  $("#new_root_comment").before(comment_partial);
+  id = "#new_root_comment"
+  $(id).before(comment_partial);
+  $(id).before(successBox);
 <% end %>
+
+$(id).find('#wmd-input').val('')
