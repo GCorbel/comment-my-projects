@@ -9,6 +9,8 @@
 $(document).ready ->
   initMarkdown()
   $('.star').on('click', rate)
+  $(document).ajaxStart(showBusyCursor)
+  $(document).ajaxStop(hideBusyCursor)
 
 @initMarkdown = (suffix = '') ->
   identifier = if suffix
@@ -39,3 +41,11 @@ rate = (event) ->
       tag_id: tag
       user_id: user
   ).done( => $(this).parent().parent().html('Your rate has been added<br/><br/>') )
+
+showBusyCursor = (event) ->
+  $('body').css('cursor','wait')
+
+hideBusyCursor = (event) ->
+  $('body').css('cursor','auto')
+
+$(document).on('page:fetch', showBusyCursor)
