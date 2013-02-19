@@ -30,8 +30,16 @@ describe NoteHelper do
 
   describe :link_and_note_for do
     it "show the note for a project with a link" do
-      expect(link_and_note_for(project)).to eq "" \
-        "<a href=\"/en/projects/#{project.id}-title\">Title</a> : Aucun vote"
+      project.expects(:note_for).with(tag).returns(3.3)
+      project.expects(:number_of_notes_for).with(tag).returns(3)
+      ActsAsTaggableOn::Tag.stubs(:new).returns(tag)
+      expect(link_and_note_for(project)).to eq '' \
+        "<a href=\"/en/projects/#{project.id}-title\">Title</a> : " \
+        '<span class="star true"></span>' \
+        '<span class="star true"></span>' \
+        '<span class="star true"></span>' \
+        '<span class="star false"></span>' \
+        ' (3.3/4 - 3 votes)'
     end
   end
 
