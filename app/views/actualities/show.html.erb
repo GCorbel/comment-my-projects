@@ -10,7 +10,7 @@
 <% end %>
 <div class="row-fluid">
   <div class="span12">
-    <%= render partial: 'comments/comment', collection: @project.root_comments,
+    <%= render partial: 'comments/comment', collection: @actuality.root_comments,
                locals: { item: @actuality, new_comment: @comment } %>
     <%= render 'comments/new', comment: @comment, item: @actuality %>
   </div>
