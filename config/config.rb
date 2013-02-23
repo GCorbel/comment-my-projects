@@ -11,7 +11,12 @@ class SRConfig
     end
 
     def config
-      @config ||= YAML.load_file("#{Rails.root}/config/config.#{Rails.env}.yml")
+      return @config if @config
+      @config = YAML.load_file("#{Rails.root}/config/config.#{Rails.env}.yml")
+      if File.exists?('/home/dotcloud/environment.json')
+        @config.merge!(JSON.parse(File.read('/home/dotcloud/environment.json')))
+      end
+      @config
     end
   end
 end

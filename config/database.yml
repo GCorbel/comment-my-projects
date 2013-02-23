@@ -13,8 +13,8 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: <%= SRConfig.rds_db_name %>
-  username: <%= SRConfig.rds_username %>
-  password: <%= SRConfig.rds_password %>
-  host: <%= SRConfig.rds_host %>
-  port: <%= SRConfig.rds_port %>
+  database: social_reviewing_production
+  username: <%= SRConfig.dotcloud_db_mysql_login %>
+  password: <%= SRConfig.dotcloud_db_mysql_password %>
+  host: <%= SRConfig.dotcloud_db_mysql_host %>
+  port: <%= SRConfig.dotcloud_db_mysql_port %>
