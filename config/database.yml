@@ -1,20 +1,21 @@
-development:
+mysql: &mysql
   adapter: mysql2
   encoding: utf8
+  pool: 5
+  username: <%= SRConfig.db_login %>
+  password: <%= SRConfig.db_password %>
+  host: <%= SRConfig.db_host %>
+  port: <%= SRConfig.db_port %>
+  socket: <%= SRConfig.db_socket %>
+
+development:
+  <<: *mysql
   database: social_reviewing_development
-  username: root
 
 test:
-  adapter: mysql2
-  encoding: utf8
+  <<: *mysql
   database: social_reviewing_test
-  username: root
 
 production:
-  adapter: mysql2
-  encoding: utf8
+  <<: *mysql
   database: social_reviewing_production
-  username: <%= SRConfig.dotcloud_db_mysql_login %>
-  password: <%= SRConfig.dotcloud_db_mysql_password %>
-  host: <%= SRConfig.dotcloud_db_mysql_host %>
-  port: <%= SRConfig.dotcloud_db_mysql_port %>

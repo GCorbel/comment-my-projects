@@ -1,2 +1,0 @@
-echo "Rake" && \
-cd /home/dotcloud/current && bundle exec rake db:migrate

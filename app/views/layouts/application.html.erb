@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-      <%= browser_title(yield(:title)) %>
+      <%= raw(browser_title(yield(:title))) %>
     </title>
     <meta name="description" content="<%= browser_description(yield(:description)) %>"/>
     <meta name="author" content="Guirec Corbel"/>

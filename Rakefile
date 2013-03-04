@@ -6,9 +6,3 @@ require File.expand_path('../config/application', __FILE__)
 require "#{Rails.root}/config/config"
 
 SocialReviewing::Application.load_tasks
-
-require 'rspec/core/rake_task'
-
-RSpec::Core::RakeTask.new(:spec)
-
-task default: :spec

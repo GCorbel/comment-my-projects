@@ -4,8 +4,6 @@ set :default_environment, {
   'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
 }
 
-server "198.211.97.198", :web, :app, :db, primary: true
-
 set :application, "social-reviewing"
 set :user, "root"
 set :deploy_to, "/var/www/#{application}"
@@ -13,6 +11,10 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 set :rails_env, "production"
 set :bundle_cmd, "bundle --without development test asset"
+
+set :stages, %w(production staging)
+set :default_stage, "staging"
+require 'capistrano/ext/multistage'
 
 set :scm, :none
 set :repository, "."
@@ -33,7 +35,7 @@ namespace :deploy do
 
   task :update_code, roles: :app do
     run "if [ -d #{current_path} ]; then cp -r #{current_path} #{release_path}; fi"
-    puts `rsync -avz -e ssh "./" "#{user}@198.211.97.198:#{release_path}" --exclude ".git" --exclude "log" --exclude "docs" --exclude "tags" --exclude "tmp" --delete-after -F --group=root --owner=root   --chmod=a+rwx,g+rwx,o+r`
+    `rsync -avz -e ssh "./" "#{user}@#{ip}:#{release_path}" --exclude ".git" --exclude "log" --exclude "docs" --exclude "tags" --exclude "tmp" --delete-after -F --group=root --owner=root   --chmod=a+rwx,g+rwx,o+r`
 
     run <<-CMD
       rm -rf #{release_path}/log &&
